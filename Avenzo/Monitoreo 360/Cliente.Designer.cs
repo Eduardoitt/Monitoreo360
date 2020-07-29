@@ -45,7 +45,7 @@
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CorreoElectronico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metroProgressSpinner = new MetroFramework.Controls.MetroProgressSpinner();
-            this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Clientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,8 +171,8 @@
             // 
             // bunifuElipse
             // 
-            this.bunifuElipse.ElipseRadius = 15;
-            this.bunifuElipse.TargetControl = this;
+            //this.bunifuElipse.ElipseRadius = 15;
+            //this.bunifuElipse.TargetControl = this;
             // 
             // Cliente
             // 
@@ -201,6 +201,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Panel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn CorreoElectronico;
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
+        //private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
+        private System.Windows.Forms.Button bunifuElipse;
     }
 }

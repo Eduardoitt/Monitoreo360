@@ -39,11 +39,16 @@
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.panel_Notificaciones = new System.Windows.Forms.Panel();
-            this.button_Notificaciones = new Bunifu.Framework.UI.BunifuTileButton();
-            this.bunifuElipse_Badge = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.Button_Badge = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.bunifuElipse_Notificaciones = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.bunifuCards1 = new Bunifu.Framework.UI.BunifuCards();
+            //this.button_Notificaciones = new Bunifu.Framework.UI.BunifuTileButton();
+            this.button_Notificaciones = new System.Windows.Forms.Button();
+            //this.bunifuElipse_Badge = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse_Badge = new System.Windows.Forms.Button();
+            //this.Button_Badge = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.Button_Badge = new System.Windows.Forms.Button();
+            //this.bunifuElipse_Notificaciones = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse_Notificaciones = new System.Windows.Forms.Button();
+            //this.bunifuCards1 = new Bunifu.Framework.UI.BunifuCards();
+            this.bunifuCards1 = new System.Windows.Forms.ContainerControl();
             this.menuStrip.SuspendLayout();
             this.panel_Notificaciones.SuspendLayout();
             this.SuspendLayout();
@@ -130,16 +135,16 @@
             // 
             this.button_Notificaciones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_Notificaciones.BackColor = System.Drawing.Color.Transparent;
-            this.button_Notificaciones.color = System.Drawing.Color.Transparent;
-            this.button_Notificaciones.colorActive = System.Drawing.Color.Transparent;
+            //this.button_Notificaciones.color = System.Drawing.Color.Transparent;
+            //this.button_Notificaciones.colorActive = System.Drawing.Color.Transparent;
             this.button_Notificaciones.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_Notificaciones.Font = new System.Drawing.Font("Century Gothic", 15.75F);
             this.button_Notificaciones.ForeColor = System.Drawing.Color.White;
             this.button_Notificaciones.Image = global::Monitoreo_360.Properties.Resources.Notification__Gray_48px;
-            this.button_Notificaciones.ImagePosition = 10;
-            this.button_Notificaciones.ImageZoom = 50;
-            this.button_Notificaciones.LabelPosition = 0;
-            this.button_Notificaciones.LabelText = "";
+            //this.button_Notificaciones.ImagePosition = 10;
+            //this.button_Notificaciones.ImageZoom = 50;
+            //this.button_Notificaciones.LabelPosition = 0;
+            //this.button_Notificaciones.LabelText = "";
             this.button_Notificaciones.Location = new System.Drawing.Point(961, 33);
             this.button_Notificaciones.Margin = new System.Windows.Forms.Padding(6);
             this.button_Notificaciones.Name = "button_Notificaciones";
@@ -151,42 +156,42 @@
             // 
             // bunifuElipse_Badge
             // 
-            this.bunifuElipse_Badge.ElipseRadius = 30;
-            this.bunifuElipse_Badge.TargetControl = this.Button_Badge;
+            //this.bunifuElipse_Badge.ElipseRadius = 30;
+            //this.bunifuElipse_Badge.TargetControl = this.Button_Badge;
             // 
             // Button_Badge
             // 
-            this.Button_Badge.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
+           // this.Button_Badge.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
             this.Button_Badge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Button_Badge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
             this.Button_Badge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Button_Badge.BorderRadius = 0;
-            this.Button_Badge.ButtonText = "";
+            //this.Button_Badge.BorderRadius = 0;
+            //this.Button_Badge.ButtonText = "";
             this.Button_Badge.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Button_Badge.DisabledColor = System.Drawing.Color.Gray;
-            this.Button_Badge.Iconcolor = System.Drawing.Color.Transparent;
-            this.Button_Badge.Iconimage = null;
-            this.Button_Badge.Iconimage_right = null;
-            this.Button_Badge.Iconimage_right_Selected = null;
-            this.Button_Badge.Iconimage_Selected = null;
-            this.Button_Badge.IconMarginLeft = 0;
-            this.Button_Badge.IconMarginRight = 0;
-            this.Button_Badge.IconRightVisible = true;
-            this.Button_Badge.IconRightZoom = 0D;
-            this.Button_Badge.IconVisible = true;
-            this.Button_Badge.IconZoom = 90D;
-            this.Button_Badge.IsTab = false;
+            //this.Button_Badge.DisabledColor = System.Drawing.Color.Gray;
+            //this.Button_Badge.Iconcolor = System.Drawing.Color.Transparent;
+            //this.Button_Badge.Iconimage = null;
+            //this.Button_Badge.Iconimage_right = null;
+            //this.Button_Badge.Iconimage_right_Selected = null;
+            //this.Button_Badge.Iconimage_Selected = null;
+            //this.Button_Badge.IconMarginLeft = 0;
+            //this.Button_Badge.IconMarginRight = 0;
+            //this.Button_Badge.IconRightVisible = true;
+            //this.Button_Badge.IconRightZoom = 0D;
+            //this.Button_Badge.IconVisible = true;
+            //this.Button_Badge.IconZoom = 90D;
+            //this.Button_Badge.IsTab = false;
             this.Button_Badge.Location = new System.Drawing.Point(993, 38);
             this.Button_Badge.Name = "Button_Badge";
-            this.Button_Badge.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
-            this.Button_Badge.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
-            this.Button_Badge.OnHoverTextColor = System.Drawing.Color.White;
-            this.Button_Badge.selected = false;
+            //this.Button_Badge.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
+            //this.Button_Badge.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
+            //this.Button_Badge.OnHoverTextColor = System.Drawing.Color.White;
+            //this.Button_Badge.selected = false;
             this.Button_Badge.Size = new System.Drawing.Size(24, 24);
             this.Button_Badge.TabIndex = 8;
             this.Button_Badge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Button_Badge.Textcolor = System.Drawing.Color.White;
-            this.Button_Badge.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //this.Button_Badge.Textcolor = System.Drawing.Color.White;
+            //this.Button_Badge.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button_Badge.Visible = false;
             this.Button_Badge.Click += new System.EventHandler(this.button_Notificaciones_Click);
             this.Button_Badge.MouseEnter += new System.EventHandler(this.button_Notificaciones_hover);
@@ -194,20 +199,20 @@
             // 
             // bunifuElipse_Notificaciones
             // 
-            this.bunifuElipse_Notificaciones.ElipseRadius = 15;
-            this.bunifuElipse_Notificaciones.TargetControl = this.panel_Notificaciones;
+           // this.bunifuElipse_Notificaciones.ElipseRadius = 15;
+            //this.bunifuElipse_Notificaciones.TargetControl = this.panel_Notificaciones;
             // 
             // bunifuCards1
             // 
             this.bunifuCards1.BackColor = System.Drawing.Color.White;
-            this.bunifuCards1.BorderRadius = 5;
-            this.bunifuCards1.BottomSahddow = true;
-            this.bunifuCards1.color = System.Drawing.Color.IndianRed;
-            this.bunifuCards1.LeftSahddow = false;
+            //this.bunifuCards1.BorderRadius = 5;
+            //this.bunifuCards1.BottomSahddow = true;
+            //this.bunifuCards1.color = System.Drawing.Color.IndianRed;
+            //this.bunifuCards1.LeftSahddow = false;
             this.bunifuCards1.Location = new System.Drawing.Point(3, 471);
             this.bunifuCards1.Name = "bunifuCards1";
-            this.bunifuCards1.RightSahddow = true;
-            this.bunifuCards1.ShadowDepth = 20;
+            //this.bunifuCards1.RightSahddow = true;
+            //this.bunifuCards1.ShadowDepth = 20;
             this.bunifuCards1.Size = new System.Drawing.Size(340, 78);
             this.bunifuCards1.TabIndex = 0;
             // 
@@ -249,11 +254,14 @@
         private System.Windows.Forms.ToolStripMenuItem incidentesToolStripMenuItem;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Panel panel_Notificaciones;
-        private Bunifu.Framework.UI.BunifuTileButton button_Notificaciones;
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse_Badge;
-        private Bunifu.Framework.UI.BunifuFlatButton Button_Badge;
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse_Notificaciones;
-        private Bunifu.Framework.UI.BunifuThinButton2 Notificacion;
-        private Bunifu.Framework.UI.BunifuCards bunifuCards1;
+        private System.Windows.Forms.Button button_Notificaciones;
+        private System.Windows.Forms.Button bunifuElipse_Badge;
+        private System.Windows.Forms.Button Button_Badge;
+        //private Bunifu.Framework.UI.BunifuElipse bunifuElipse_Notificaciones;
+        private System.Windows.Forms.Button bunifuElipse_Notificaciones;
+       // private Bunifu.Framework.UI.BunifuThinButton2 Notificacion;
+        private System.Windows.Forms.Button Notificacion;
+        //private Bunifu.Framework.UI.BunifuCards bunifuCards1;
+        private System.Windows.Forms.ContainerControl bunifuCards1;
     }
 }

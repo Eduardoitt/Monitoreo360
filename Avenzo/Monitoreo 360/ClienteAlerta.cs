@@ -25,7 +25,7 @@ namespace Monitoreo_360
         private SoundPlayer player = new SoundPlayer();
         private Firebase.Auth.User User;
         private FirebaseAuthLink Auth;
-        private Bunifu.Framework.UI.BunifuFlatButton Button;
+        private System.Windows.Forms.Button Button;
         private Guid IdIncidente = Guid.NewGuid();
         Model.Clientes cliente = new Model.Clientes();
         DateTime TiempoInicio;
@@ -86,7 +86,7 @@ namespace Monitoreo_360
                 t.Start();
             }
         }
-        public void setButton(Bunifu.Framework.UI.BunifuFlatButton Button,Panel panel) {
+        public void setButton(System.Windows.Forms.Button Button,Panel panel) {
             this.Button = Button;
             this.panel = panel;
         }

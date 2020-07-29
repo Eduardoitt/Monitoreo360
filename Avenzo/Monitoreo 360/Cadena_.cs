@@ -17,12 +17,12 @@ namespace Monitoreo_360
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         Panel panel;
-        Bunifu.Framework.UI.BunifuFlatButton Button;
+        System.Windows.Forms.Button Button;
         //delegate void setDataList(string log);
         delegate void setVisiblePanel(bool visible);
         delegate void setDataTextBox(string log);
         Guid IdUsuario;
-        public Cadena_(Guid IdUsuario,Panel panel, Bunifu.Framework.UI.BunifuFlatButton Button)
+        public Cadena_(Guid IdUsuario,Panel panel, System.Windows.Forms.Button Button)
         {
             InitializeComponent();
             this.panel = panel;

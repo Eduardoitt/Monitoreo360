@@ -30,12 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Direccion));
-            this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            //this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.Textbox_Calle = new Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.Textbox_NoInterior = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            //this.Textbox_Calle = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            this.Textbox_Calle = new System.Windows.Forms.Button();
+            //this.Textbox_NoInterior = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            this.Textbox_NoInterior = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.Textbox_Color = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            //this.Textbox_Color = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            this.Textbox_Color = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.Textbox_CodigoPostal = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.label4 = new System.Windows.Forms.Label();
