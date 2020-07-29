@@ -1,0 +1,23 @@
+﻿<div class="modal-fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">@ViewBag.TitleModal</h4>
+            </div>
+            <div class="modal-body" style="min-height:150px;">
+                <div class="se-pre-con" id="Cargando"></div>
+               @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        $('.modal-body').empty();
+        $('.modal-body').html('<div class="se-pre-con" id="Cargando"></div>');
+    })
+    $("#myModal").modal({
+        keyboard: false
+    });
+</script>

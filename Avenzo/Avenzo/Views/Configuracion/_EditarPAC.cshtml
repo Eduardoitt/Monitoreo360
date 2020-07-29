@@ -1,0 +1,134 @@
+﻿@model Avenzo.Models.GetPAC_Result
+<div class="modal-fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Editar</h4>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("/Editar", null, new AjaxOptions { UpdateTargetId = "NuevoId" }, new { @id = "EditarPAC" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("id",Model.Id)
+                    <div class="se-pre-con"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" required class="form-control" value="@Model.Nombre" name="Nombre"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label>RFC</label>
+                                    <input class="form-control" required value="@Model.RFC" name="RFC"/>
+                                </div>
+                            </div>                            
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label>CURP</label>
+                                    <input class="form-control" required value="@Model.CURP" name="CURP"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Contraseña de la llave</label>
+                                    <input type="password" class="form-control" value="@Model.ContrasenaLlave" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Regimen Fiscal</label>
+                                    @Html.DropDownList("RegimenFiscal", new SelectList(ViewBag.RegimenFiscal, "c_RegimenFiscal", "Descripcion"), "Seleccione un regimen", new { @class = "form-control", required = (string)null })
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Registro Patronal</label>
+                                    <input class="form-control" value="@Model.RegistroPatronal" name="RegistroPatronal"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Es Persona Moral
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Llave</label>
+                                    <input type="file" accept=".key" name="Llave" id="Llave"/>
+                                    <p class="text-success">@if (Model.Llave != null) { WriteLiteral("Ya se ha sudido una llave anteriormente"); }</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Certificado</label>
+                                    <input type="file" accept=".cer" name="Certificado" id="Certificado"/>
+                                    <p class="text-success">@if (Model.Certificado!=null) { WriteLiteral("Ya se ha sudido un certificado anteriormente"); }</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning btn-xs" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success btn-xs" id="btnGuardar">Guardar cambios</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var File;
+        $('#RegimenFiscal').val('@Model.RegimenFiscal.Trim()');
+        $('#Llave').change(prepareUpload);
+        function prepareUpload(event) {
+            File = event.target.files;
+        }
+        $('form').submit(function (event) {
+            event.stopPropagation(); // Stop stuff happening
+            event.preventDefault(); // Totally stop stuff happening
+            console.log("Aqui");
+
+            var selectedFile = document.getElementById("Llave");
+
+            var formdata = new FormData();
+            for (i = 0; i < selectedFile.files.length; i++) {
+                //Appending each file to FormData object
+                formdata.append(selectedFile.files[i].name, selectedFile.files[i]);
+            }
+
+            console.log(formdata);
+            $(".se-pre-con").fadeIn();
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '@Url.Action("Editar")');
+            xhr.send(formdata);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    //alert(xhr.responseText.length);
+                    if (xhr.responseText.length > 2)    // Por alguna razon el response trae dos comilla dobles (""), en lugar de cadena vacia.
+                    {
+                        alert("Se ha producido un error subir el archivo. Detalles: " + xhr.responseText);
+                    }
+                    else {
+                        $('#myModal').modal('hide');
+                        //window.location.href = '@Url.Content("~/Administracion")';
+                    }
+                }
+            }
+        });
+    });
+</script>

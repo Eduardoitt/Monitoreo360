@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="~/Images/Avenzo_Proteccion_Red.png" alt="" width="100%" style="margin:10px;"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Sabemos que la sensación de tranquilidad es fundamental para gozar de bienestar y calidad de vida, porque lo importante es vivir sin preocupaciones, sabiendo que lo que más queremos está protegido.</p>
+            <br />
+            <p>En Avenzo, nuestro compromiso como tu aliado es diseñar soluciones de seguridad personalizadas que resguarden tu paz y te brinden protección todo el año a través de un servicio cálido, confiable e innovador.</p>
+            <br />
+            <p>Conoce la tecnología alámbrica e inalámbrica  de Avenzo Security System, protege tus momentos y bienes con nuestro servicio de Monitoreo Avenzo y descubre cómo Automatización Avenzo hará de tu hogar un mejor lugar para vivir.</p>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <img src="~/Images/Avenzo_Seg_Gadgets-01.png" alt="" width="100%" />
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("ul.sf-menu li").removeClass("current-menu-item");
+        $("ul.sf-menu li").removeClass("current_page_item");
+        $("#navSeguridad").addClass("current-menu-item");
+        $("#navSeguridad").addClass("current_page_item");
+    });
+</script>

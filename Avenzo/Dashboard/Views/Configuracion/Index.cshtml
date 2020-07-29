@@ -1,0 +1,105 @@
+﻿@model Model.ConfiguracionView
+@{
+    ViewBag.Title = "Index";
+   
+        Layout = null;
+    
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Configuracion
+                        <small class="category">@User.Identity.Name</small>
+                    </h4>
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <ul class="nav nav-pills nav-pills-icons nav-pills-success nav-stacked" role="tablist">
+                                <!--
+                                    color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+                                -->
+                                <li>
+                                    <a href="#Cuenta" role="tab" data-toggle="tab" aria-expanded="true">
+                                        <i><img src="~/Images/Avenzo_Simbolo.png" style="width:100px; filter: grayscale(100%);-webkit-filter: grayscale(100%);-moz-filter: grayscale(100%);-ms-filter: grayscale(100%);-o-filter: grayscale(100%);" /></i>Cuenta
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="#personal" role="tab" data-toggle="tab" aria-expanded="true">
+                                        <i class="fa fa-user" aria-hidden="true"></i>Informacion Personal
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="#direccion" role="tab" data-toggle="tab" aria-expanded="true">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i> Direccion
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="#schedule-2" role="tab" data-toggle="tab" aria-expanded="false">
+                                        <i class="fa fa-comments" aria-hidden="true"></i>Comentarios
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="tab-content">
+                                <div class="tab-pane" id="Cuenta">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Usuario</label>
+                                            <input value="@User.Identity.Name" class="form-control" disabled />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Nueva Contraseña</label>
+                                                <input type="password" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Repetir Contraseña</label>
+                                                <input type="password" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane active" id="personal">
+                                    
+
+                                </div>
+                                <div class="tab-pane" id="schedule-2">
+                                    <div class="row">
+                                        <h2>Comentarios</h2>
+                                        <textarea class="form-control"></textarea>
+                                        <button class="btn btn-info">Enviar Comentarios</button>
+                                    </div>
+                                    <div class="row">
+                                        <br />
+                                        <br />
+                                        <p class="alert alert-info">
+                                            Sus Comentarios se tomaran en cuenta para proximas actualizaciones.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

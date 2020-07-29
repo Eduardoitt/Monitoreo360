@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f2f4144d982e4e79901f0725f5b7bc49" Name="Diagram1" ZoomLevel="101">
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.PACForPanel" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.AdeudosForPanel" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.CFDIForPanel" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClientesForPanel" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.EmpleadosForPanel" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Bancos" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClaveProdServ" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Contratos" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Deducciones" Width="1.5" PointX="5.75" PointY="7.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Estados" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.FormaDePago" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Horas" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Incapacidades" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Jornadas" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.MetodosDePago" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Monedas" Width="1.5" PointX="7.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Nominas" Width="1.5" PointX="9.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.OrigenRecurso" Width="1.5" PointX="4.75" PointY="10.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.OtrosPagos" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.PAC" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Percepciones" Width="1.5" PointX="11.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.PeriodicidadPago" Width="1.5" PointX="11.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Regimen" Width="1.5" PointX="11.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.RegimenFiscal" Width="1.5" PointX="6.75" PointY="12.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.RiesgoPuesto" Width="1.5" PointX="8.75" PointY="12.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.UsoCFDI" Width="1.5" PointX="10.75" PointY="12.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.AdeudosInstalaciones" Width="1.5" PointX="26.875" PointY="23.125" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.CFDI" Width="1.5" PointX="23.875" PointY="28" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.CFDIEnDeuda" Width="1.5" PointX="29.125" PointY="31.375" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.CFDIPorOperacion" Width="1.5" PointX="3.375" PointY="13.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClaveProdServHistorial" Width="1.5" PointX="15.625" PointY="20.25" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClaveProdServPorPAC" Width="1.5" PointX="15.625" PointY="28.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Clientes" Width="1.5" PointX="18.625" PointY="17.875" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Empleados" Width="1.5" PointX="21.625" PointY="14.875" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.LogMonitoreo360" Width="1.5" PointX="15.625" PointY="93.125" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.MonitoreoIngresos" Width="1.5" PointX="29.125" PointY="24.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaDeduccion" Width="1.5" PointX="26.125" PointY="32.375" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaHistorial" Width="1.5" PointX="23.875" PointY="13" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaHorasExtras" Width="1.5" PointX="17.875" PointY="29.875" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaIncapacidad" Width="1.5" PointX="29.125" PointY="21" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaJubilacionPensionRetiro" Width="1.5" PointX="19.375" PointY="7.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaOtrosPago" Width="1.5" PointX="26.125" PointY="17.5" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaPercepcion" Width="1.5" PointX="15.625" PointY="24.125" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaPercepciones" Width="1.5" PointX="21.625" PointY="9.625" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaSeparacionIndemnizacion" Width="1.5" PointX="19.375" PointY="11.25" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ReporteLlamada" Width="1.5" PointX="15.625" PointY="95.875" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Sensores" Width="1.5" PointX="20.875" PointY="31.625" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Usuarios" Width="1.5" PointX="13.375" PointY="42" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Clientes_Bancos" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Empleados_Bancos" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_ClaveProdServHistorial_ClaveProdServ" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Empleados_Contratos" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaDeduccion_Deducciones_Clave" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaDeduccion_Deducciones_Tipo" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_MonitoreoIngresos_FormaDePago" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaHorasExtras_Horas" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaIncapacidad_NominaIncapacidad" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Empleados_Jornadas" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_MonitoreoIngresos_MetodosDePago" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_MonitoreoIngresos_Monedas" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaHistorial_Nominas" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaOtrosPago_OtrosPagos" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaOtrosPago_OtrosPagos_Clave" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_AdeudosInstalaciones_PAC" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CFDI_PAC" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CFDIEnDeuda_PAC" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_ClaveProdServHistorial_PAC" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_ClaveProdServPorPAC_PAC" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Clientes_PAC" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Empleados_PAC" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaHistorial_PAC" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaPercepcion_Percepciones" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaHistorial_PeriodicidadPago" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaHistorial_Regimen" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Empleados_RiesgoPuesto" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_MonitoreoIngresos_UsoCFDI" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_AdeudosInstalaciones_EmpleadosAcessor" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_AdeudosInstalaciones_EmpleadosInstalador" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_AdeudosInstalaciones_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Instalaciones_Clientes" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_MonitoreoIngresos_AdeudosInstalaciones" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CFDI_Clientes" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CFDI_EMPLEADOS" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CFDI_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CFDIEnDeuda_CFDI" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CFDIEnDeuda_Clientes" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CFDIEnDeuda_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_ClaveProdServHistorial_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_ClaveProdServPorPAC_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Clientes_IdUsuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Clientes_UsuarioCreacion" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Sensores_Clientes" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Empleados_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaHistorial_Empleados" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_LogMonitoreo360_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_MonitoreoIngresos_NominaHistorial" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_MonitoreoIngresos_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaDeduccion_NominaHistorial" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaDeduccion_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaHistorial_NominaPercepciones" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaIncapacidad_NominaHistorial" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaOtrosPago_NominaHistorial" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaHorasExtras_NominaPercepcion" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaHorasExtras_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaIncapacidad_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaPercepciones_NominaJubilacionPensionRetiro" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaOtrosPago_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaPercepcion_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaPercepciones_NominaSeparacionIndemnizacion" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_IncidentesComentarios_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Sensores_Usuarios" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Catalogos" Width="1.5" PointX="13.375" PointY="12.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Ciudad" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Pais" Width="1.5" PointX="14.375" PointY="3.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.CodigoEventos" Width="1.5" PointX="14.375" PointY="6.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClienteContactos" Width="1.5" PointX="23.875" PointY="33.5" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_ClienteContactos_Clientes" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_ClienteContactos_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_IncidentesComentarios_ClienteContactos" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.HorarioOperaciones" Width="1.5" PointX="20.875" PointY="35.75" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_HorarioOperaciones_Clientes" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_HorarioOperaciones_Usuarios" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Incidentes" Width="1.5" PointX="20.875" PointY="54.5" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Incidentes_Clientes" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Incidentes_Incidentes" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Incidentes_LogMonitoreo360" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_Incidentes_Usuarios" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_IncidentesComentarios_Incidentes" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Llamadas" Width="1.5" PointX="5.375" PointY="15.75" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.CodigosPostales" Width="1.5" PointX="10" PointY="15.75" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CodigosPostales_Estados" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Model.GetPAC_Result>
+
+@{
+    ViewBag.Title = "Certificados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        $('.sidebar-wrapper >.nav > li').removeClass('active');
+        $("#navCertificado").addClass("active");
+        $("#AppView").load("/Certificados/_PanelCertificados", function () {
+            $("#AppView").fadeIn(500);
+        });
+    });
+</script>

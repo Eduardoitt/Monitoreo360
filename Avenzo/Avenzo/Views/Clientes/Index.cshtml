@@ -1,0 +1,49 @@
+﻿
+@model List<Model.Clientes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="body"></div>
+<div class="container">
+    <h2>Clientes</h2>
+    <div class="row">
+        <table class="table table-hover" id="clientes">
+            <thead>
+                <tr>
+
+                    <th class="col-md-2">Numero de alarma</th>
+                    <th class="col-md-3">Nombre</th>
+                    <th class="col-md-3">Direccion</th>
+                    <th class="col-md-1">Telefono</th>
+                    <th class="col-md-3 text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr id="@item.IdCliente">
+                        <td>@Html.DisplayFor(modelItem => item.NumeroTelefonoAlarma) @Html.Hidden("idProveedor", item.IdProveedor)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Nombres)  @Html.DisplayFor(modelItem => item.ApellidoPaterno)   @Html.DisplayFor(modelItem => item.ApellidoMaterno)  </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Calle)
+                        @Html.DisplayFor(modelItem => item.NoExterior)
+                        @Html.DisplayFor(modelItem => item.NoInterior)
+                        @Html.DisplayFor(modelItem => item.Colonia)
+                        @Html.DisplayFor(modelItem => item.CodigoPostal)
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                    <td class="text-center">
+                        <button class="btn btn-xs btn-info" data-toggle="modal" data-target="#myModal"  onclick="OpenModal('@Url.Content("/Clientes/Editar?TempId=")@item.IdCliente')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Editar</button>
+                        <button class="btn btn-xs btn-info"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Contactos</button>
+                        <!--<button class="btn btn-xs btn-info" data-toggle="modal" data-target="#myModal"  onclick="OpenModal('@Url.Content("/Clientes/Detalles?TempId=")@item.IdCliente')"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp; Detalles</button>-->
+                        <button class="btn btn-xs btn-danger" onclick="DeleteRegister('@item.IdCliente','Deseas eliminar a @item.Nombres @item.ApellidoPaterno @item.ApellidoMaterno','@Url.Content("/Clientes/Eliminar")','#clientes')"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Eliminar</button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    </div>
+<script src="~/Scripts/Tables/Clientes.js"></script>

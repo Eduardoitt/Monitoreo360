@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0060)https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/ -->
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">		
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<script type="text/javascript" src="C:\Users\Ivan\Desktop\qrcode.js"></script>
+	</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row" style="background-color:black;color:white;">
+            <div class="text-center col-md-12"><h3>Recibo de Nomina (CFDI)</h3></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h2><EmisorRazonSocial></h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><img src="<Logo>" style="max-height:100px; width:auto;" /></div>
+            <div class="col-md-4">
+                <br />RFC:<b><EmisorRFC></b>
+                <br /><p>Direccion:<b><EmisorDireccion></b></p>
+                <p><Telefono></p>
+            </div>
+            <div class="col-md-5 text-right">
+                <br />
+                Folio:<b><Folio></b> Serie:<b><Serie></b><br />
+                Folio Fiscal(UUID):<br />
+                <b><UUID></b><br />
+                No. de Serie De Certificado del CSD<br />
+                <b><NoSerie></b><br />
+                Fecha y hora de Emision<br />
+                <b><FechaEmision></b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">Lugar De Expedicion:<b> <LugarExpedicion></b></div>
+        </div>
+        <div class="row" style="background-color:black;color:white;">
+            <div class="col-md-2"></div>
+            <div class="text-center col-md-8"><h5><FechaActual></h5></div>
+            <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <br />
+                    <br />
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-right">Trabajador:</div>
+                    <div class="col-md-6"><b><EmpleadoNombre></b></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-right">RFC:</div>
+                    <div class="col-md-6"><b><EmpleadoRFC></b></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-right">Departamento:</div>
+                    <div class="col-md-6"><b><EmpleadoDepartamento></b></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-right">Puesto:</div>
+                    <div class="col-md-6"><b><EmpleadoPuesto></b></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-right">CURP:</div>
+                    <div class="col-md-6 "><b><EmpleadoCURP></b></div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <br />
+                    <br />
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-right">NSS:</div>
+                    <div class="col-md-6"><b><EmpleadoNSS></b></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-right">Dias Trabajados:</div>
+                    <div class="col-md-6"><b><DiasTrabajados></b></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-right">Fecha de Pago:</div>
+                    <div class="col-md-6"><b><FechaPago></b></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-right">Fecha Inicial de Pago:</div>
+                    <div class="col-md-6"><b><FechaInicialPago></b></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-right">Fecha Final de Pago:</div>
+                    <div class="col-md-6 "><b><FechaFinalPago></b>	</div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:45px;margin-bottom:45px;border:0px solid;">
+            <table class="table">
+                <thead style="background:black;color:white;">
+                    <tr>
+                        <th class="text-center" style="width:10%;">Tipo</th>
+                        <th class="text-center" style="width:15%;">Clave</th>
+                        <th class="text-center" style="width:65%;">Descripcion</th>
+                        <th class="text-center" style="width:15%;">Percepciones</th>
+                        <th class="text-center" style="width:15%;">Deducciones</th>
+                    </tr>
+                <thead>
+                <tbody>
+                    <tr class="alert alert-success">
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr class="alert alert-danger">
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr class="alert alert-warning">
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                    <ListaPercepcion>
+                </tbody>
+
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x300&data=<CodigoQR>" style="width:100%;"/>
+            </div>
+            <div class="col-md-5">
+                <div class="row text-center">
+                    <b style="font-size:10px;"><ImporteLetra></b>
+                    <br />
+                </div>
+                <div class="row">Metodo De pago:<MetodoPago></div>
+                <div class="row">Cuenta Bancaria:<CTABancaria></div>
+                <div class="row">Regimen Fiscal:<RegimenFiscal></div>
+            </div>
+            <div class="col-md-4">
+                <div class="row alert alert-success">
+                    <div class="col-md-6 ml-md-auto">Percepciones:</div>
+                    <div class="col-md-4"><Percepciones></div>
+                </div>
+                <div class="row alert alert-danger">
+                    <div class="col-md-6 ml-md-auto">Deducciones:</div>
+                    <div class="col-md-4"><Deducciones></div>
+                </div>
+                <div class="row alert alert-warning">
+                    <div class="col-md-6 ml-md-auto">ISR:</div>
+                    <div class="col-md-4"><ISR></div>
+                </div>
+                <div class="row alert alert-success">
+                    <div class="col-md-6 ml-md-auto">Neto Resibido:</div>
+                    <div class="col-md-4"><NetoResibido></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:25px;">
+            <div class="col-md-12">
+                <b>Sello Digital del CFDI:</b>
+                <p style="width:100%">
+                    <SelloCFDI>
+                </p>
+
+
+            </div>
+            <div class="col-md-12">
+                <b>Sello SAT:</b>
+                <p style="width:100%">
+                    <SelloSAT>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <b>Cadeba Original del complemento de certificacion digital del SAT:</b>
+                <p style="width:100%;">
+                    <CadenaOriginal>
+                </p>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</body>
+</html>

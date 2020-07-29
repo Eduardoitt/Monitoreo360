@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <br />
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Datos Personales</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" >Datos Fiscales</a></li>
+
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <div class="container-fluid">
+                        <div class="row" style="margin-top:15px;">
+                            <div class="col-sm-2 col-lg-offset-1">
+                                <img src="~/Images/user.png" class="img-thumbnail" />
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Nombre(s)</label>                                            
+                                            <input class="form-control" value="@ViewBag.Nombre" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Apellido Paterno</label>
+                                            <input class="form-control" value="@ViewBag.ApellidoPaterno" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Apellido Materno</label>
+                                            <input class="form-control" value="@ViewBag.ApellidoMaterno" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Correo</label>
+                                            <input class="form-control" value="@User.Identity.Name" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Telefono</label>
+                                            <input class="form-control" value="@ViewBag.Telefono" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Sexo</label>
+                                            <input class="form-control" value="@ViewBag.Sexo" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Pais</label>
+                                            <input class="form-control" value="@ViewBag.Pais" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">...</div>
+                <div role="tabpanel" class="tab-pane" id="messages">...</div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "AutomatizacionAvenzo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AutomatizacionAvenzo</h2>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("ul.sf-menu li").removeClass("current-menu-item");
+        $("ul.sf-menu li").removeClass("current_page_item");
+        $("#navSeguridad").addClass("current-menu-item");
+        $("#navSeguridad").addClass("current_page_item");
+    });
+</script>

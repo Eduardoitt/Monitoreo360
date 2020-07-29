@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Clientes";    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $('.sidebar-wrapper >.nav > li').removeClass('active');
+        $("#navClientes").addClass("active");
+        $("#AppView").load("/Clientes/_PanelClientes", function () {
+            $("#loader").fadeOut("slow", function () {
+                $("#AppView").fadeIn(500);
+            });
+            
+        });
+        //history.pushState(null, "", "/Clientes");
+            
+    });
+</script>

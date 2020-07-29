@@ -1,0 +1,331 @@
+﻿@model List<Model.MonitoreoIngresos>
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = null;
+}
+<style>
+    .chart {
+        width: 100%;
+        /*min-height: 450px;*/
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="orange" data-header-animation="true">
+                    <i class="material-icons">description</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Facturas Emitidas</p>
+                    <div class="progress progress-line-success">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="9" aria-valuemin="0" aria-valuemax="@ViewBag.Contratados" style="width:calc(100% * @ViewBag.Emitidos / @ViewBag.Contratados);">
+                            <span class="sr-only">@ViewBag.Emitidos% Complete</span>
+                        </div>
+                    </div>
+                    <h3 class="title">@ViewBag.Emitidos/@ViewBag.Contratados<small>Facturas</small></h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons text-danger">warning</i> <a href="#pablo">Obtener Mas Facturas.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="green" data-header-animation="true">
+                    <i class="material-icons">attach_money</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Ingresos</p>
+                    <h3 class="title" id="card-tile-Ingresos">@ViewBag.Ingresos<small>MXN</small></h3>
+
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons text-info">info</i> <a href="#" class="text-info">Obtener Mas Informacion.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red" data-header-animation="true">
+                    <i class="material-icons">attach_money</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Egresos</p>
+                    <h3 class="title" id="card-title-Egresos">@ViewBag.Egresos<small>MXN</small></h3>
+
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons text-info">info</i> <a href="#" class="text-info">Obtener Mas Informacion.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="rose" data-header-animation="true">
+                    <i class="material-icons">timeline</i>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">
+                        Ingresos
+                        <small> - @ViewBag.Mes</small>
+                    </h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <br />
+                        <canvas id="monitoreoIngresos" class="chart"></canvas>
+                        <!--<div id="chart_div" class="chart">
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="blue" data-header-animation="true">
+                    <i class="material-icons">timeline</i>
+                </div>
+                <div class="card-content">
+                    <h4 class="card-title">
+                        Facturas
+                        <small> - @ViewBag.Mes</small>
+                    </h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <br />
+                        <canvas id="Facturas" class="chart"></canvas>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/Scripts/Chart.bundle.js"></script>
+<script type="text/javascript" src="~/Scripts/Chart.js"></script>
+
+<script>
+    @{
+        Model.AvenzoSeguridadEntities db = new Model.AvenzoSeguridadEntities();
+        List<Model.CFDI> CFDIs = db.CFDI.Where(x => x.FechaCreacion.Month == DateTime.Now.Month && x.FechaCreacion.Year == DateTime.Now.Year).ToList();
+    }
+    function addCommas(nStr)
+    {
+        nStr += '';
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    }
+    var ctx = document.getElementById("monitoreoIngresos");
+    var chartIngresos = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [ @for (int i = 1; i <= DateTime.Now.Day; i++) { WriteLiteral("" + i + ","); }],
+            datasets: [
+                {
+                    label: 'Egresos',
+                    data: [@for (int i = 1; i <= DateTime.Now.Day; i++) { WriteLiteral("0,"); }],
+                    backgroundColor: ['#F5A9A9'],
+                    borderColor: ['#FF0040'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Ingresos',
+                    data: [ @for (int i = 1; i <= DateTime.Now.Day; i++) { WriteLiteral(Model.Where(x => x.FechaCreacion.Day == i && x.FechaCreacion.Month == DateTime.Now.Month && x.FechaCreacion.Year == DateTime.Now.Year).Sum(x => x.Cargos + (x.CargosUSD * x.TipoCambio)) + ","); }],
+                    backgroundColor: ['#A9D0F5'],
+                    borderColor: ['#6384ff'],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Ingresos Facturados',
+                    data: [ @for (int i = 1; i <= DateTime.Now.Day; i++) { WriteLiteral("0,"); }],
+                    backgroundColor: ['#A9F5BC'],
+                    borderColor: ['#01DF3A'],
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+
+    var ctx = document.getElementById("Facturas");
+    var chartFacturas = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [ @for (int i = 1; i <= DateTime.Now.Day; i++) { WriteLiteral("" + i + ","); }],
+            datasets: [ {
+                label: 'Canceladas',
+                data: [@for (int i = 1; i <= DateTime.Now.Day; i++) { WriteLiteral(CFDIs.Where(x => x.FechaCreacion.Day == i && x.Cancelado == true).Count() + ","); }],
+                backgroundColor: ['#F5A9A9'],
+                borderColor: ['#FF0040'],
+                borderWidth: 1
+            },{
+                label: 'Emitidas',
+                data: [@for (int i = 1; i <= DateTime.Now.Day; i++) { WriteLiteral(CFDIs.Where(x => x.FechaCreacion.Day == i && x.Cancelado == false).Count() + ","); }],
+                backgroundColor: ['#A9D0F5'],
+                borderColor: ['#6384ff'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    $(document).ready(function () {
+        var html = '';
+        @{ var m = 1;}
+        html +='<div class="form-group">';
+        html += '    <select class="form-control" id="navbarFilter">';
+        html += '       @{foreach (var mes in ViewBag.Meses) { WriteLiteral("<option value=\""+m+"/1/" + DateTime.Now.Year + "\">" + mes + "</option>"); m = m + 1; } }'
+        html += '   </select>';
+        html +='</div>';
+        html +='<button class="btn btn-simple" style="padding-left:5px;padding-right:5px;">';
+        html +='    <i class="material-icons">filter_list</i>';
+        html +='</button>';
+        $("#navbarFilterGroup").html(html);
+        $('#navbarFilter').val('@DateTime.Now.Month/1/@DateTime.Now.Year');
+        $('#navbarFilter').change(function () {
+            swal({
+                title: 'Cargando Graficas!',
+                text: 'Cargando informacion',
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                allowOutsideClick:false,
+                onOpen: () => {
+                    swal.showLoading()
+                }
+            })
+            $.get("/Home/Ingresos?Mes=" + $('#navbarFilter').val(), function (data, status, xhr) {
+                var fecha = new Date();
+                var ultimoDia = $('#navbarFilter').val() == '@DateTime.Now.Month/1/@DateTime.Now.Year'?@DateTime.Now.Day:new Date(fecha.getFullYear(), fecha.getMonth() + 1, 0).getDate();
+                console.log(data);
+                chartIngresos.reset();
+                chartIngresos.clear();
+                chartIngresos.data.labels.pop();
+                chartIngresos.data.datasets.forEach((dataset) => {
+                    dataset.data.pop();
+                });
+                chartIngresos.update();
+                chartFacturas.reset();
+                chartFacturas.clear();
+                chartFacturas.data.labels.pop();
+                chartFacturas.data.datasets.forEach((dataset) => {
+                    dataset.data.pop();
+                });
+
+                var ingresos = [];
+                var egresos = [];
+                var CFDIEmitidas = [];
+                var CFDICanceladas=[];
+
+                var dias = [];
+                for (var dia = 1; dia <= ultimoDia ; dia++) {
+                    dias.push(dia);
+                    var ingresoPorDia = [];
+                    var egresoPorDia = [];
+                    var cfdiEmitidasPorDia = [];
+                    var cfdiCanceladasPorDia = [];
+                    data.data.forEach((ingreso)=>{
+                        var fechacreacion = new Date(ingreso.FechaCreacion.match(/\d+/)[0] * 1);
+                        if(fechacreacion.getDate()==dia){
+                            ingresoPorDia.push(ingreso.Cargos + (ingreso.CargosUSD * ingreso.TipoCambio));
+                            egresoPorDia.push((ingreso.AbonosUSD*ingreso.TipoCambio)+ingreso.Abonos);
+                        }
+                    });
+                    console.log("dia: "+dia+",array:"+ingresoPorDia);
+                    ingresos.push(ingresoPorDia.reduce((a, b) =>a + b, 0));
+                    egresos.push(egresoPorDia.reduce((a, b) =>a + b, 0));
+                    //******
+                    data.cfdi.forEach((cfdi) => {
+                        var fechacreacion = new Date(cfdi.FechaCreacion.match(/\d+/)[0] * 1);
+                        
+                        if (fechacreacion.getDate() == dia) {
+                            console.log("fechaCreacion"+fechacreacion);    
+                            if (cfdi.Cancelado == true) {
+                                cfdiCanceladasPorDia.push(1);
+                            }else{
+                                cfdiEmitidasPorDia.push(1)
+                            }
+                        }
+
+                    });
+                    
+                    CFDIEmitidas.push(cfdiEmitidasPorDia.reduce((a, b) =>a + b, 0));
+                    CFDICanceladas.push(cfdiCanceladasPorDia.reduce((a, b) =>a + b, 0));
+                }
+                $('#card-tile-Ingresos').html(ingresos.reduce((a, b) =>a + b, 0).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString()+'<small>MXN</small>');                
+                $('#card-title-Egresos').html(egresos.reduce((a, b) =>a + b, 0).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString()+'<small>MXN</small>');
+                var dataCharIngresos = {
+                    label: 'Ingresos',
+                    data: ingresos,
+                    backgroundColor: ['#A9D0F5'],
+                    borderColor: ['#6384ff'],
+                    borderWidth: 1
+                };
+                var dataCharEgresos={
+                    label: 'Egresos',
+                    data:egresos,
+                    backgroundColor: ['#F5A9A9'],
+                    borderColor: ['#FF0040'],
+                    borderWidth: 1
+                };
+                var dataCharEmitidas = {
+                    label: 'Emitidas',
+                    data: CFDIEmitidas,
+                    backgroundColor: ['#A9D0F5'],
+                    borderColor: ['#6384ff'],
+                    borderWidth: 1
+                };
+                var dataCharCanceladas = {
+                    label: 'Canceladas',
+                    data: CFDICanceladas,
+                    backgroundColor: ['#F5A9A9'],
+                    borderColor: ['#FF0040'],
+                    borderWidth: 1
+                }
+                chartIngresos.data.labels = dias;
+                chartIngresos.data.datasets[1] = dataCharIngresos;
+                chartIngresos.data.datasets[0] = dataCharEgresos;
+                chartFacturas.data.labels = dias;
+                chartFacturas.data.datasets[1] = dataCharEmitidas;
+                chartFacturas.data.datasets[0] = dataCharCanceladas;
+                chartIngresos.update();
+                chartFacturas.update();
+                swal.close()
+            });
+
+        })
+
+    });
+
+</script>

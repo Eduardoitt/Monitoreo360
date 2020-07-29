@@ -1,0 +1,125 @@
+﻿@model List<Model.Usuarios>
+@{
+    ViewBag.Title = "_Panel";
+    Layout = null;
+}
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="green">
+            <i class="material-icons">supervisor_account</i>
+        </div>
+        <div class="card-content">
+            <h4>Administrador de Usuarios</h4>
+            <br />
+            <div class="row">
+                <button class="btn btn-success" id="btnNuevo">Nuevo Usuario</button>
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table" id="datatables" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>Usuarios</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Permisos</th>
+                                <th class="text-center">Timbres Disponibles</th>
+                                <th class="text-center">Timbres Cancelados</th>
+                                <th class="text-center">Activo</th>                                                                
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var usuario in Model)
+                            {
+                                <tr id="@usuario.Id">
+                                    <td>@usuario.Usuario</td>
+                                    <td class="text-center">@usuario.TipoUsuario</td>
+                                    <td class="text-center">@usuario.Roles</td>
+                                    <td class="text-center">
+                                        @if (usuario.Roles.Contains("Admin"))
+                                        {
+                                            <div>100% / &nbsp;<i class="material-icons" style="font-size:medium;">all_inclusive</i></div>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="@usuario.TimbresUsados" aria-valuemin="0" aria-valuemax="@usuario.Timbres" style="width: 100%;">                                                    
+                                                </div>
+
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            var total = ((usuario.Timbres-usuario.TimbresUsados) * 100)/usuario.Timbres;
+                                            <div>@total % / @(usuario.Timbres - usuario.TimbresUsados)</div>
+                                            <div class="progress">
+                                                <div class="progress-bar @if (usuario.Timbres - usuario.TimbresUsados > 0) { WriteLiteral("progress-bar-success"); } else { WriteLiteral("progress-bar-danger"); } progress-bar-striped active" role="progressbar" aria-valuenow="@usuario.TimbresUsados" aria-valuemin="0" aria-valuemax="@usuario.Timbres" style="width: @total%;">
+                                                    <span class="sr-only">@(usuario.TimbresUsados * 100 / usuario.Timbres)% Complete (success)</span>
+                                                </div>
+
+                                            </div>
+                                        }                                       
+                                    </td>
+                                    <td class="text-center">@usuario.TimbresCancelados</td>
+                                    <td class="text-center">
+                                        @if (usuario.Activo)
+                                        {
+                                            <span class="label label-success">Activo</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="label label-danger">Desactivado</span>
+                                        }
+                                    </td>                                    
+                                    <td class="text-center">
+                                        <div class="form-group-sm">
+                                            <button class="btn btn-simple btn-info btn-icon" onclick="OpenModal('/Usuarios/Editar?IdTemp=@usuario.Id')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                            
+                                        </div>
+                                        
+                                    </td>
+                                </tr>
+                            }
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        window.history.pushState('forward', null, '/Usuarios/Index');
+        $('#btnNuevo').click(function () {
+            OpenModal('/Usuarios/Nuevo');
+            $('#myModal').modal('show');
+        });
+        $('#datatables').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+            "bSort": false,
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 col-sm-offset-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            responsive: true,
+            language: {
+                "search": "<div class=\"form-group form-inline\" style=\"margin:0px;\">_INPUT_</div>",
+                "searchPlaceholder": "Buscar en Registros",
+                "lengthMenu": "<div class=\"form-group  form-group-sm\"><label class=\"control-label\">Mostrar</label> _MENU_ <label class=\"control-label\">Registros</label></div>",
+                "zeroRecords": "No hay registros",
+                "info": "Pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros)",                
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sPrevious": "Anterior",
+                    "sNext": "Siguiente",
+                    "sLast": "Ultimo"
+                }
+            }
+        });
+    });
+    
+</script>

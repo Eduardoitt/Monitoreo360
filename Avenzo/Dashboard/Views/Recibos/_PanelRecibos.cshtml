@@ -1,0 +1,265 @@
+﻿@model Model.ReciboView
+@{
+    ViewBag.Title = "Recibos";
+    Layout = null;
+}
+
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">library_books</i>
+            </div>
+            <div class="card-content">
+                <h4>Recibo</h4>
+                @using (Ajax.BeginForm("/Descarga", null, new AjaxOptions { UpdateTargetId = "Login" }, new { @id = "Recibos" }))
+                {
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12" id="NombreCliente">
+                                <div class="form-group">
+                                    @Html.LabelFor(u => u.nombreCompleto,new { @class="control-label"})
+                                    @Html.TextBoxFor(u => u.nombreCompleto, new { @class = "form-control" })
+                                    @Html.HiddenFor(u => u.id)
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(u => u.moneda, new { @class = "control-label" })
+                                    @Html.DropDownListFor(u => u.moneda, new SelectList(Model.moneda), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.Label("Compañia", new { @class = "control-label" })
+                                        @Html.DropDownList("proveedor", new SelectList(Model.pac, "Id", "Nombre"),new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-md-4" id="Mes" style="display:none;">
+                                <div class="form-group">
+                                    @Html.LabelFor(u => u.mes, new { @class = "control-label" })
+                                    @Html.DropDownListFor(u=>u.mes,new SelectList(Model.mes),new {@class="form-control"})
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="leyenda" name="leyenda"><span class="checkbox-material">
+                                                <span class="check"></span>
+                                            </span> Leyenda de Garantia
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="mensualidad" name="mensualidad">
+                                            <span class="checkbox-material"><span class="check"></span></span> Mensualidad de Todos los Clientes
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="btnConcepto">
+                            <div class="col-md-6 col-sm-12">
+                                <button class="btn btn-info" type="button" id="Agregar">Agregar Conceptos</button>
+                            </div>
+                        </div>
+                        <div id="conceptos">                            
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label" for="conceptos_0__cantidad">Cantidad</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="conceptos_0__cantidad" name="conceptos[0].cantidad" type="number">
+                                            <span class="input-group-addon">.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label" for="conceptos_0__unidad">Unidad</label>
+                                        <input class="form-control" id="conceptos_0__unidad" name="conceptos[0].unidad" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group  label-floating is-empty">
+                                        <label class="control-label" for="conceptos_0__descripcion">Descripcion</label>
+                                        <input class="form-control" id="conceptos_0__descripcion" name="conceptos[0].descripcion" type="text">                                       
+                                        <span class="material-input"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group  label-floating is-empty text-center">
+                                        <label class="control-label" for="conceptos_0__precio">Precio</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">$</span>
+                                            <input class="form-control" id="conceptos_0__precio" name="conceptos[0].precio" type="text">
+                                        </div>
+                                        <span class="material-input"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-success" type="submit"><i class="material-icons">create</i>&nbsp; Recibo</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#loader").fadeOut("slow");    
+    var validation = $("#Recibos").validate({
+        debug: true,
+        rules: {
+            "nombreCompleto": {
+                required: true,
+                minlength: 3,
+                maxlength:50
+            },
+            "conceptos[0].cantidad":{
+                required: true,
+                min: 1,
+                max: 999999,
+                digits: true
+            },
+            "conceptos[0].unidad": {
+                required: true,
+                minlength: 1,
+                maxlength: 5
+            },
+            "conceptos[0].descripcion": {
+                required: true,
+                minlength: 3,
+                maxlength: 250
+            },
+            "conceptos[0].precio": {
+                required: true,
+                min: 1,
+                max: 999999,
+                number:true
+            }
+
+        },
+        submitHandler: function (form) {            
+            location.href = "@Url.Content("/Recibos/Descarga")?" + $(form).serialize();
+            showNotification("top", "center", "success", "&#xE2C4", "Se ha descargado el recibo");        
+        }
+    });
+    var i = 0;
+    var Clientes;
+    var input = document.getElementById("nombreCompleto");
+    var AutocompletarNombres = new Awesomplete(input, {
+        minChars: 1,
+        maxItems: 5,
+        autoFirst: true,
+        replace: function (text) {
+            this.input.value = text.label;
+            var input = document.getElementById("id");
+            input.value = text.value;
+        }
+    });
+    $.getJSON('/Clientes/Service', function (result) {
+        Clientes = result;
+        var list = [];
+        for (var k in result.clientes) {
+            list.push({ label: result.clientes[k].Nombres + " " + result.clientes[k].ApellidoPaterno + " " + result.clientes[k].ApellidoMaterno, value: result.clientes[k].IdCliente });
+        }
+        AutocompletarNombres.list = list;
+    });
+
+    $('#mensualidad').change(function () {
+        if ($('#mensualidad').is(':checked') == true) {
+            $('#Mes').fadeIn('slow');
+            $('#NombreCliente').fadeOut('slow');
+            $('#btnConcepto').fadeOut('slow');
+            $('#conceptos').fadeOut('slow');
+
+        }
+        else {
+            $('#Mes').fadeOut('slow');
+            $('#NombreCliente').fadeIn('slow');
+            $('#btnConcepto').fadeIn('slow');
+            $('#conceptos').fadeIn('slow');
+
+
+        }
+    });
+    
+    history.pushState(null, "", "/Recibos");
+    $('#Agregar').click(function () {
+        i = i + 1;
+        var html = "<div class=\"row oculto\" style=\"display:none\">";
+        html += "<div class=\"col-sm-2\">";
+        html += "<div class=\"form-group label-floating is-empty\">";
+        html += "<label class=\"control-label\" for=\"conceptos_"+i+"__cantidad\">Cantidad</label>";
+        html += "<div class=\"input-group\">";
+        html += "<input class=\"form-control\" id=\"conceptos_"+i+"__cantidad\" name=\"conceptos["+i+"].cantidad\" type=\"number\">";
+        html += "<span class=\"input-group-addon\">.00</span>";
+        html += "</div>";
+        html += "</div>";
+        html += "</div>"
+        html += "<div class=\"col-sm-2\">";
+        html += "<div class=\"form-group label-floating is-empty\">";
+        html += "<label class=\"control-label\" for=\"conceptos_"+i+"__unidad\">Unidad</label>";
+        html += "<input class=\"form-control\" id=\"conceptos_"+i+"__unidad\" name=\"conceptos["+i+"].unidad\" type=\"text\">";
+        html += "</div>";
+        html += "</div>";
+        html += "<div class=\"col-sm-6\">";
+        html += "<div class=\"form-group label-floating is-empty\">";
+        html += "<label  class=\"control-label\"> Concepto</label>";
+        html += "<input class=\"form-control\" id=\"conceptos_" + i + "__descripcion\" name=\"conceptos[" + i + "].descripcion\" type=\"text\">";
+        html += "</div>";
+        html += "</div>";
+        html += "<div class=\"col-sm-2 text-center\">";
+        html += "<div class=\"form-group label-floating is-empty\">";
+        html += "<label  class=\"control-label\">Precio</label>";
+        html += "<div class=\"input-group\">";
+        html += "<span class=\"input-group-addon\">$</span>";
+        html += " <input class=\"form-control\" id=\"conceptos_"+i+"__precio\" name=\"conceptos["+i+"].precio\" type=\"text\">";
+        html += "</div>";
+        html += "</div>";
+        html += "</div>";
+        html += "</div>";        
+        $('#conceptos').append(html);
+        $('.oculto').show('slow');
+        $("#conceptos_" + i + "__cantidad").rules("add", {
+            required: true,
+            minlength: 1,
+            maxlength: 50
+        });
+        $("#conceptos_" + i + "__unidad").rules("add", {
+            required: true,
+            minlength: 1,
+            maxlength: 5
+        });
+        $("#conceptos_" + i + "__descripcion").rules("add", {
+            required: true,
+            minlength: 3,
+            maxlength: 250
+        });
+        $("#conceptos_" + i + "__precio").rules("add", {
+            required: true,
+            min: 1,
+            max: 999999,
+            number: true
+        });
+        
+    });
+    $('form').submit(function (event) {
+
+        
+        return false;
+        //
+    });
+</script>

@@ -1,0 +1,153 @@
+﻿@model Model.ContactoView
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row text-center">
+        <h2>Contacto</h2>
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <form action="/Contacto/Enviar" method="post" id="ContactoForm">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nombres, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Nombres, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ApellidoPaterno, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ApellidoMaterno, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Sexo, new { @class = "control-label"})
+                            <select class="form-control" name="Sexo" required><option value="Masculino">Masculino</option><option value="Femenino">Femenino</option></select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Departamento de interes</label>
+                            <select class="form-control" required name="Departamento">
+                                <option value="Seguridad">Seguridad</option>
+                                <option value="Fiscal">Fiscal</option>
+                                <option value="Tecnologia">Tecnologia</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Correo, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Correo, new { @class = "form-control",@type="email" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Telefono, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Mensaje, new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Mensaje, new { @class = "form-control", @rows = "5" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-success" type="submit">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        jQuery.extend(jQuery.validator.messages, {
+            required: "Este campo es obligatorio.",
+            remote: "Por favor, rellena este campo.",
+            email: "Por favor, escribe una dirección de correo válida",
+            url: "Por favor, escribe una URL válida.",
+            date: "Por favor, escribe una fecha válida.",
+            dateISO: "Por favor, escribe una fecha (ISO) válida.",
+            number: "Por favor, escribe un número entero válido.",
+            digits: "Por favor, escribe sólo dígitos.",
+            creditcard: "Por favor, escribe un número de tarjeta válido.",
+            equalTo: "Por favor, escribe el mismo valor de nuevo.",
+            accept: "Por favor, escribe un valor con una extensión aceptada.",
+            maxlength: jQuery.validator.format("Por favor, no escribas más de {0} caracteres."),
+            minlength: jQuery.validator.format("Por favor, no escribas menos de {0} caracteres."),
+            rangelength: jQuery.validator.format("Por favor, escribe un valor entre {0} y {1} caracteres."),
+            range: jQuery.validator.format("Por favor, escribe un valor entre {0} y {1}."),
+            max: jQuery.validator.format("Por favor, escribe un valor menor o igual a {0}."),
+            min: jQuery.validator.format("Por favor, escribe un valor mayor o igual a {0}."),
+            phoneUS: jQuery.validator.format("Por favor, escribe un numero de telefono valido")
+        });
+        $("#ContactoForm").validate ({
+            debug: true,
+            rules: {
+                Nombres: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 15,
+
+                },
+                Mensaje: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 100
+                },
+                Telefono: {
+                    required: true,
+                    phoneUS: true
+                },
+                ApellidoPaterno: {
+                    minlength: 3,
+                    maxlength: 15
+                },
+                ApellidoMaterno: {
+                    minlength: 3,
+                    maxlength: 15
+                }
+
+            },
+            submitHandler: function (form) {
+                // some other code
+                // maybe disabling submit button
+                // then:
+                $(form).submit();
+            }
+            
+        });
+        $("ul.sf-menu li").removeClass("current-menu-item");
+        $("ul.sf-menu li").removeClass("current_page_item");
+        $("#navContacto").addClass("current-menu-item");
+        $("#navContacto").addClass("current_page_item");        
+    });
+</script>

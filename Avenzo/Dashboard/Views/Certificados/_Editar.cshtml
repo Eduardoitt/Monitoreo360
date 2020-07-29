@@ -1,0 +1,740 @@
+﻿@model Model.CertificadosView
+@{
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    ViewBag.TitleModal = "";
+}
+<style>
+    div.dataTables_wrapper div.dataTables_paginate {
+        text-align: center;
+    }
+
+    .voltear {
+        transform: rotateZ(-45deg);
+    }
+
+    .plus {
+        transition: all .5s;
+    }
+</style>
+<div class="container-fluid">
+    <div class="wizard-container">
+        <div class="card wizard-card" data-color="green" id="wizardLlaves">
+            <form action method novalidate="novalidate">
+                <div class="wizard-header">
+                    <h3 class="wizard-title">Editar Certificado y llaves</h3>
+                    <h5>Para facturar se ocupan los datos fiscales.</h5>
+                </div>
+                <div class="wizard-navigation">
+                    <ul class="nav nav-pills">
+                        <li style="width: 50%;" class="active" id="DD">
+                            <a href="#DatosFiscales" data-toggle="tab" aria-expanded="true">Datos Fiscales</a>
+                        </li>
+                        <li style="width: 50%;">
+                            <a href="#Datos" data-toggle="tab" aria-expanded="false">Datos</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="DatosFiscales">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="info-text"> Datos Fiscales</h4>
+                            </div>
+                        </div>
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", Guid.NewGuid())
+                        <div class="row">
+                            <div class="col-sm-5 text-center">
+                                <legend>Logo</legend>
+                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                    <div class="fileinput-new thumbnail">
+                                        <img src="~/Images/image_placeholder.jpg" alt="..." id="wizardPicturePreview">
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                    <div>
+                                        <span class="btn btn-info btn-round btn-file">
+                                            <span class="fileinput-new" id="selecionar">Selecionar Imagen</span>
+                                            <span class="fileinput-exists" id="cambiar">Cambiar</span>
+                                            <input type="hidden" name="A">
+                                            <input type="file" name="logo" id="logo">
+                                            <div class="ripple-container"></div>
+                                        </span>
+                                        <a href="#" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput" id="remove"><i class="fa fa-times"></i> Remover</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <div class="form-group is-empty">
+                                            @Html.LabelFor(model => model.PAC.RFC, htmlAttributes: new { @class = "control-label" })
+                                            @Html.TextBox("RFC", Model.PAC.RFC, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="form-group is-empty">
+                                            @Html.Label("Razon Social", new { @class = "control-label" })
+                                            @Html.TextBox("Nombre",Model.PAC.Nombre, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group is-empty">
+                                            @Html.LabelFor(model => model.PAC.CURP, htmlAttributes: new { @class = "control-label" })
+                                            @Html.TextBox("CURP", Model.PAC.CURP, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group is-empty">
+                                            @Html.Label("Persona", new { @class = "control-label" })
+                                            <select class="form-control" name="PersonaMoral" required id="PersonaMoral">
+                                                <option value disabled selected></option>
+                                                <option value="True">Persona Moral</option>
+                                                <option value="False">Persona Fisica</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group is-empty">
+                                            @Html.Label("Lugar de Expedicion", new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.PAC.LugarExpedicion, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group is-empty">
+                                            @Html.LabelFor(model => model.PAC.RegimenFiscal, htmlAttributes: new { @class = "control-label" })
+                                            <select class="form-control" id="RegimenFiscal" name="RegimenFiscal" required>
+                                                <option selected value disabled></option>
+                                                @foreach (var item in ViewBag.Regimen)
+                                                {
+                                                    <option value="@item.c_RegimenFiscal">@item.Descripcion</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group  is-empty">
+                                            <label class="control-label">Contraseña de la Llave</label>
+                                            <input class="form-control" type="password" name="ContrasenaLlave" id="ContrasenaLlave" value="@Model.PAC.ContrasenaLlave"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group is-empty">
+                                            @Html.LabelFor(model => model.PAC.RegistroPatronal, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.PAC.RegistroPatronal, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group is-empty">
+                                            @Html.LabelFor(model => model.PAC.RfcPatronOrigen, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.PAC.RfcPatronOrigen, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class="control-label">Llave</label>
+                                <input type="file" id="Llave" name="Llave" class="form-control" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="control-label">Certificado</label>
+                                <input type="file" id="Certificado" accept=".cer" name="Certificado" class="form-control" />
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="tab-pane" id="Datos">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="info-text"> Datos de la factura</h4>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom:30px;">
+                            <div class="col-md-12">
+                                <h3>¿A que se dedica tu negocio?</h3>
+
+                            </div>
+                            <div class="col-sm-10 col-sm-offset-1 alert alert-danger" style="display:none;" id="MessageErrorClaveProdServ">
+                                <button type="button" class="close" id="CloseMessageError" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                Elije minimo 5 opciones
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-8">
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Buscar" type="search" id="searchClave" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 table-responsive">
+                                <table id="Claves" class="table" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:80%;" class="text-center"></th>
+                                            <th style="width:20%"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @{
+                                        int tipo = 0, division = 0, grupo = 0;
+                                    }
+                                    @foreach (var Tipo in Model.ClaveProdServPorClase.Where(x => x.Tipo != null).GroupBy(x => x.Tipo))
+                                    {
+                                        <tr class="success">
+                                            <td class="text-center">@Tipo.Key</td>
+                                            <td class="text-center"><i class="material-icons plus" data="T_@tipo" data-activo="0">add</i></td>
+                                        </tr>
+                                        <tr style="display:none;" id="T_@tipo">
+                                            <td colspan="2">
+                                                <table style="width:100%;" class="table">
+                                                    <tbody>
+                                                        @{division = 0;}
+                                                        @foreach (var Division in Model.ClaveProdServPorClase.Where(x => x.Tipo == Tipo.Key).GroupBy(x => x.Division))
+                                                        {
+                                                            <tr class="info">
+                                                                <td class="text-center">@Division.Key</td>
+                                                                <td><i class="material-icons plus" data="T_@tipo@("_")D_@division" data-activo="0">add</i></td>
+                                                            </tr>
+                                                            <tr style="display:none;" id="T_@tipo@("_")D_@division">
+                                                                <td colspan="2">
+                                                                    <table class="table" style="width:100%;">
+                                                                        <tbody>
+                                                                            @{grupo = 0; }
+                                                                            @foreach (var Grupo in Model.ClaveProdServPorClase.Where(x => x.Division == Division.Key).GroupBy(x => x.Grupo))
+                                                                            {
+                                                                                <tr class="warning">
+                                                                                    <td class="text-center">
+                                                                                        <div class="checkbox">
+                                                                                            <label>
+                                                                                                <input type="checkbox" name="ClaveProdServ[]" value="@Model.ClaveProdServPorClase.Where(x => x.Grupo == Grupo.Key).First().c_ClaveProdServ.Substring(0,4)">
+                                                                                                <span class="checkbox-material">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">@Grupo.Key</td>
+                                                    <td><i class="material-icons plus" data="T_@tipo@("_")D_@division@("_")_G_@grupo" data-activo="0">add</i></td>
+                                                </tr>
+                                                <tr style="display:none;" id="T_@tipo@("_")D_@division@("_")_G_@grupo">
+                                                    <td colspan="3">
+                                                        <table class="table" style="width:100%;">
+                                                            <tbody>
+                                                                @foreach (var clase in Model.ClaveProdServPorClase.Where(x => x.Grupo == Grupo.Key))
+                                                                {
+                                                                    <tr class="danger">
+                                                                        <td>@clase.Clase</td>
+                                                                        <td>@clase.Cantidad</td>
+                                                                        <td><i class="material-icons plus" data="C_@clase.c_ClaveProdServ" data-activo="0">add</i></td>
+                                                                    </tr>
+                                                                    <tr style="display:none;" id="C_@clase.c_ClaveProdServ">
+                                                                        <td colspan="3">
+                                                                            <table style="width:100%" class="table" id="C_@clase.c_ClaveProdServ">
+                                                                                <tbody>
+                                                                                    @foreach (var Clave in Model.ClaveProdServ.Where(x => x.c_ClaveProdServ.Contains(clase.c_ClaveProdServ)))
+                                                                                    {
+                                                                                        <tr class="">
+                                                                                            <td>@Clave.c_ClaveProdServ</td>
+                                                                                            <td>@Clave.Descripcion</td>
+                                                                                        </tr>
+                                                                                    }
+                                                                                </tbody>
+
+
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                grupo++;
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </td>
+                            </tr>
+                                                    division++;
+                                                }
+                    </tbody>
+
+                </table>
+            </td>
+        </tr>
+                                                }
+                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wizard-footer">
+                    <div class="pull-right">
+                        <input type="button" class="btn btn-next btn-fill btn-success btn-wd" name="next" value="Siguinete">
+                        <button type="button" class="btn btn-finish btn-fill btn-success btn-wd" name="finish" style="display: none;"><i class="material-icons">save</i>&nbsp;Guardar</button>
+                        <input type="button" class="btn btn-success btn-fill" name="Terminar" value="Terminar" style="display:none;" />
+                    </div>
+                    <div class="pull-left">
+                        <input type="button" class="btn btn-previous btn-fill btn-default btn-wd" name="previous" value="Anterior">
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var $Certificado, $Data = new FormData(), $Id = $('#id').val(), $Imagen, $Llave, $Logo, $this;
+    function format($data) {
+        console.log($data);
+        var $table = '<div class="table-responsive"><table class="table table-hover">';
+        $.ajax({
+            url: '/Certificados/ClaveProdServ?data='+$data+'&Opcion=1',
+            method: "GET",
+            async: false,
+            success: function (data, xhr) {
+                console.log(data);
+                for (var k in data.ClaveProdServ) {
+                    tr += '<tr>';
+                    tr += '<td class="text-center" style="width:10%;">' + data.ClaveProdServ.Division + '</td>';
+                    tr += '</tr>';
+                }
+            }
+        });
+        $table += '</div></table>'
+        return $table;
+    }
+    function refreshAnimation($wizard, index) {
+        total_steps = $wizard.find('.nav-pills li').length;
+        move_distance = $wizard.width() / total_steps;
+        step_width = move_distance;
+        move_distance *= index;
+        $current = index + 1;
+        if ($current == 1) {
+            move_distance -= 8;
+        } else if ($current == total_steps) {
+            move_distance += 8;
+        }
+        $wizard.find('.moving-tab').css('width', $('#DD').width());
+        $('.moving-tab').css({
+            'transform': 'translate3d(' + move_distance + 'px, 0, 0)',
+            'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'
+        });
+    }
+    $(document).ready(function () {
+        $('#PersonaMoral').val('@Model.PAC.PersonaMoral');
+        $('#RegimenFiscal').val('@Model.PAC.RegimenFiscal.Trim()');
+        $('').val('');
+        $('').val('');
+        $('').val('');
+        $(window).resize(function () {
+            $('.wizard-card').each(function () {
+                $wizard = $(this);
+                index = $wizard.bootstrapWizard('currentIndex');
+                refreshAnimation($wizard, index);
+                $('.moving-tab').css({
+                    'transition': 'transform 0s'
+                });
+            });
+        });
+
+       /* var table = $('#Claves').DataTable({
+            "bSort": false,
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, 100],
+                [10, 25, 50, 100]
+            ],
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 col-sm-offset-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-10 col-md-offset-1 text-center'p>>",
+            responsive: true,
+            language: {
+                search: "<div class=\"form-group form-inline\" style=\"margin:0px;\" id=\"Search\">_INPUT_</div>",
+                searchPlaceholder: "Buscar en Registros",
+                "lengthMenu": "Mostrar _MENU_ Registros",
+                "zeroRecords": "No hay registros",
+                //"info": "Registros _START_  al  _END_  de _TOTAL_",
+                "infoEmpty": "No hay registros disponibles",
+                //"infoFiltered": "(filtrado de _MAX_ registros)",
+                //"sSearch": "Buscar",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sPrevious": "Anterior",
+                    "sNext": "Siguiente",
+                    "sLast": "Ultimo"
+                }
+            },
+            fnDrawCallback: function () {
+                $(".plus").click(function () {
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr);
+                    if (row.child.isShown()) {
+                        // This row is already open - close it
+                        console.log("Closet");
+                        row.child.hide();
+                    }
+                    else {
+                        // Open this row
+                        console.log("HGOLA");
+                        row.child(format($(tr).attr("data"))).show();
+
+                        //return false;
+                    }
+                });
+            }
+        });*/
+        $.validator.setDefaults({ ignore: [".ignoreThisClass"] });
+        $.validator.addMethod("RfcValido", function (value, element, params) {
+            var isValid = false;
+            $.ajax({
+                url: '/Certificados/VerificarRFC?RFC=' + value,
+                async: false,
+                success: function (data, status, xhr) {
+                    console.log(data.Valido);
+                    isValid = data.Valido;
+                    return isValid;
+                },
+            });
+        }, $.validator.format("RFC no es valido.{0}"));
+        var validar = $(".wizard-card form").validate({
+            debug: true,
+            rules: {
+                'RFC': {
+                    required: true,
+                    remote: {
+                        url: '/Certificados/VerificarRFC?RFC=' + $('#RFC').val(),
+                        type: 'GET',
+                        success: function (data, status) {
+                            if (status == 'success') {
+                                console.log('success');
+                                console.log(data.Valido);
+                                return data.Valido;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                },
+                'PersonaMoral': {
+                    required: true
+                },
+                'Nombre': {
+                    required: true
+                },
+                'ContrasenaLlave': {
+                    required: true
+                },
+                'RegimenFiscal': {
+                    required: true
+                },
+                'LugarExpedicion': {
+                    required: true
+                },
+                /*'Certificado': {
+                    required: true,
+                    accept: "application/x-x509-ca-cert"
+                },
+                'Llave': {
+                    required: true,
+                }*/
+            }
+        });
+        $('.wizard-card').bootstrapWizard({
+            'tabClass': 'nav nav-pills',
+            'nextSelector': '.btn-next',
+            'previousSelector': '.btn-previous',
+            onNext: function (tab, navigation, index) {
+                var $valid = $('.wizard-card form').valid();
+                console.log('next');
+                console.log($valid);
+                if (!$valid) {
+                    validar.focusInvalid();
+                    return false;
+                }
+            },
+            onInit: function (tab, navigation, index) {
+                //check number of tabs and fill the entire row
+                var $total = navigation.find('li').length;
+                $width = 100 / $total;
+                var $wizard = navigation.closest('.wizard-card');
+                $display_width = $(document).width();
+                if ($display_width < 600 && $total > 3) {
+                    $width = 50;
+                }
+                navigation.find('li').css('width', $width + '%');
+                $first_li = navigation.find('li:first-child a').html();
+                $moving_div = $('<div class="moving-tab">' + $first_li + '</div>');
+                $('.wizard-card .wizard-navigation').append($moving_div);
+                refreshAnimation($wizard, index);
+                $('.moving-tab').css('transition', 'transform 0s');
+            },
+            onTabClick: function (tab, navigation, index) {
+                var $valid = $('.wizard-card form').valid();
+                if (!$valid) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $wizard = navigation.closest('.wizard-card');
+                // If it's the last tab then hide the last button and show the finish instead
+                if ($current >= $total) {
+                    $($wizard).find('.btn-next').hide();
+                    $($wizard).find('.btn-finish').show();
+                } else {
+                    $($wizard).find('.btn-next').show();
+                    $($wizard).find('.btn-finish').hide();
+                }
+                button_text = navigation.find('li:nth-child(' + $current + ') a').html();
+                setTimeout(function () {
+                    $('.moving-tab').text(button_text);
+                }, 150);
+                var checkbox = $('.footer-checkbox');
+                if (!index == 0) {
+                    $(checkbox).css({
+                        'opacity': '0',
+                        'visibility': 'hidden',
+                        'position': 'absolute'
+                    });
+                } else {
+                    $(checkbox).css({
+                        'opacity': '1',
+                        'visibility': 'visible'
+                    });
+                }
+                refreshAnimation($wizard, index);
+            }
+        });
+        /*var validatorClave = $("#FormClaves").validate({
+            debug: true,
+            rules: {
+                'ClaveProdServ[]': {
+                    required: true,
+                    minlength: 5
+                }
+            },
+            messages: {
+                'ClaveProdServ[]': {
+                    minlength:"Debe selecionar minimo 5 opciones."
+                },
+            }
+        });*/
+
+        var $SubirArchivos = function () {
+            if ($Certificado.length > 0 || $Llave.length > 0 || $Logo.length > 0) {
+                var Nombre = $('#Nombre').val();
+                var RFC = $('#RFC').val();
+                var CURP = $('#CURP').val();
+                var Regimen = $('#RegimenFiscal').val();
+                var Persona = $('#PersonaMoral').val();
+                var Pass = $('#ContrasenaLlave').val();
+                var RegistroPatronal = $('#RegistroPatronal').val();
+                var RfcPatronOrigen = $('#RfcPatronOrigen').val();
+
+                var val = [];
+                $(':checkbox:checked').each(function (i) {
+                    val[i] = $(this).val();
+                })
+                console.log("Val");
+                console.log(val);
+                var URL = '/Certificados/Nuevo?id=' + $Id + '&RFC=' + RFC + '&RazonSocial=' + Nombre + '&CURP=' + CURP + '&Persona=' + Persona + '&RegimenFiscal=' + Regimen + '&contraseña=' + Pass + '&RegistroPatronal=' + RegistroPatronal + '&RfcPatronOrigen=' + RfcPatronOrigen + '&ClaveProdServs=' + val;
+                console.log(val);
+                $.ajax({
+                    type: "POST",
+                    url: URL,
+                    contentType: false,
+                    processData: false,
+                    data: $Data,
+                    success: function (result) {
+                        $('#myModal').modal('hide');
+                        if (result.error == "none") {
+                            var Image = '<div class="img-container"><img src="' + $('#wizardPicturePreview').attr('src') + '"/></div>';
+                            var Action = '<button class="btn btn-simple btn-success btn-icon" rel="tooltip" data-original-title="Descargar" onclick="DeleteRegister(\'' + result.id + '\',\'@Url.Content("/Certificados/Eliminar")\',\'#datatables\')"><i class="material-icons">file_download</i></button>';
+                            Action += '<button class="btn btn-info btn-simple" data-toggle="modal" data-target="#myModal" onclick="OpenModal(\'@Url.Content("/Certificados/Editar?TempId=")' + result.id + '\')" rel="tooltip" data-original-title="Editar"><i class="material-icons">edit</i></button>';
+                            Action += '<button class="btn btn-simple btn-danger btn-icon remove" rel="tooltip" data-original-title="Eliminar" onclick="DeleteRegister(\'' + result.id + '\',\'@Url.Content("/Certificados/Eliminar")\',\'#datatables\')"><i class="material-icons">close</i></button>';
+                            var array = [Image, Nombre, RFC, CURP, Regimen, Action];
+                            var table = $("#datatables").DataTable();
+                            var rowIndex = table.row.add(array).draw(false);
+                            var row = $('#datatables').dataTable().fnGetNodes(rowIndex);
+                            $(row).attr('id', result.id);
+                            var rowNode = rowIndex.node();
+                            $(rowNode).find('td').eq(5).addClass('text-center');
+                            $(rowNode).find('td').eq(4).addClass('text-center');
+                            swal({
+                                title: 'Ultimo Paso!',
+                                text: 'Se esta comprobando tu llave y certificado son validos!',
+                                type: 'info',
+                                confirmButtonClass: "btn btn-success",
+                                buttonsStyling: false
+                            }).then(function () {
+
+                                $.ajax({
+                                    url: '/Certificados/ComprobarLlave',
+                                    type: 'GET',
+                                    data: { id: result.id },
+                                    success: function (result) {
+                                        if (result.error == "none") {
+                                            swal({
+                                                title: 'Excelente!',
+                                                text: 'Ya puedes empezar a facturar.',
+                                                type: 'success',
+                                                confirmButtonClass: "btn btn-success",
+                                                buttonsStyling: false
+                                            });
+                                        } else {
+                                            swal({
+                                                title: 'Ocurrio un Error!',
+                                                text: result.Message,
+                                                type: 'error',
+                                                confirmButtonClass: "btn btn-success",
+                                                buttonsStyling: false
+                                            });
+                                        }
+                                    }
+                                });
+                            });
+                        } else {
+                            swal({
+                                title: 'Ocurrio un Error!',
+                                text: result.Message,
+                                type: 'error',
+                                confirmButtonClass: "btn btn-success",
+                                buttonsStyling: false
+                            });
+                        }
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        var err = "Error " + " " + status + " " + p3 + " " + p4;
+                        if (xhr.responseText && xhr.responseText[0] == "{")
+                            err = JSON.parse(xhr.responseText).Message;
+                        swal({
+                            title: 'Ocurrio un Error!',
+                            text: err,
+                            type: 'error',
+                            confirmButtonClass: "btn btn-success",
+                            buttonsStyling: false
+                        });
+
+                    }
+                });
+            }
+            else {
+                alert("No hay Archivos");
+            }
+        }
+        $('#CloseMessageError').click(function () {
+            $('#MessageErrorClaveProdServ').fadeOut();
+        });
+        $('[name=finish]').click(function () {
+            var isValid = $('[name="ClaveProdServ[]"]:checked').length;
+            if (isValid < 5) {
+                $('#MessageErrorClaveProdServ').fadeIn(500);
+            } else {
+                $("#Cargando").fadeIn();
+                $this = this;
+                console.log($this);
+                var files = $("#logo").get(0).files;
+                for (i = 0; i < files.length; i++) {
+                    $Data.append("logo" + i, files[i]);
+                }
+                try {
+                    if ($Llave.length > 0)
+                        if (window.FormData != undefined)
+                            for (var x = 0; x < $Llave.length; x++)
+                                $Data.append("llave" + x, $Llave[x]);
+                    if ($Certificado.length > 0)
+                        if (window.FormData != undefined)
+                            for (var x = 0; x < $Certificado.length; x++)
+                                $Data.append("certificado" + x, $Certificado[x]);
+                }
+                catch (err) {
+                    console.log(err.message);
+                }
+                $SubirArchivos();
+            }
+            console.log(isValid);
+        });
+        $("#Search>input").addClass("ignoreThisClass");
+        $("#Search>input").attr("name", "busquedad");
+        $('#remove').click(function (e) {
+            $('#wizardPicturePreview').attr('src', '/Images/image_placeholder.jpg');
+            $('#logo').val('');
+            $('#remove').hide();
+            $('#selecionar').show();
+            $('#cambiar').hide();
+
+        });
+        $('#logo').change(function (e) {
+            readURL(this, '#wizardPicturePreview');
+            $('#remove').show();
+            $('#selecionar').hide();
+            $('#cambiar').show();
+            $Logo = e.target.files;
+
+        });
+        $('#Llave').on('change', function (e) {
+            $Llave = e.target.files;
+        });
+        $('#Certificado').on('change', function (e) {
+            $Certificado = e.target.files;
+        });
+        $('.plus').click(function () {
+            var activo = $(this).attr('data-activo');
+            var tipo = $(this).attr('data');
+            console.log(activo);
+            console.log(tipo);
+            if (activo == 0) {
+                $(this).addClass('voltear');
+                $('tr#' + tipo).fadeIn(1000);
+                $(this).attr('data-activo',1);
+            } else{
+                $(this).attr('data-activo', 0);
+                $('tr#'+tipo).fadeOut(1000);
+                $(this).removeClass('voltear');
+            }
+        });
+        $('#NuevoPAC').submit(function (event) {
+            var isValid = $("#NuevoPAC").valid();
+            if (isValid) {
+                $("#Cargando").fadeIn();
+                $this = this;
+                console.log($this);
+                var files = $("#logo").get(0).files;
+                for (i = 0; i < files.length; i++) {
+                    $Data.append("logo" + i, files[i]);
+                }
+                try {
+                    if ($Llave.length > 0)
+                        if (window.FormData != undefined)
+                            for (var x = 0; x < $Llave.length; x++)
+                                $Data.append("llave" + x, $Llave[x]);
+                    if ($Certificado.length > 0)
+                        if (window.FormData != undefined)
+                            for (var x = 0; x < $Certificado.length; x++)
+                                $Data.append("certificado" + x, $Certificado[x]);
+                }
+                catch (err) {
+                    console.log(err.message);
+                }
+                $SubirArchivos();
+            }
+            return false;
+        });
+       // var tabla = $('#Claves').DataTable();
+    });
+</script>

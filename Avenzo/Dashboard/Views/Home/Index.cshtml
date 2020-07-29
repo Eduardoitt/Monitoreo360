@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {        
+        $("#AppView").load("/Home/_PanelDashboard", function () {
+            $("#AppView").fadeIn(500);
+        });       
+         $('.sidebar-wrapper >.nav > li').removeClass('active');
+         $('#navDashboard').addClass('active');
+         if ("@ViewBag.PrimeraVez" == "True") {
+            $("#myModal").load("/Home/_Wizard", function () {
+                 $('#myModal').modal({ keyboard:false}, 'show');
+            });
+        }
+    });
+</script>

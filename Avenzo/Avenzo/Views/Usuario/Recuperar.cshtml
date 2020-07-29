@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="body"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Recuperar contraseña</h2>
+        </div>
+        
+    </div>
+    @using (Ajax.BeginForm("/Recuperar", null, new AjaxOptions { UpdateTargetId = "Login" }, new { @id = "Recuperar" }))
+    {
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="form-group">
+                    <label>Correo Electronico</label>
+                    <input type="text" placeholder="correo@ejemplo.com" name="Correo" pattern="^[a-z0-9._%+-]+@("@")[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" required />
+
+                </div>
+                <button type="submit" class="btn btn-info" id="enviar">Enviar</button>
+
+            </div>
+
+        </div>
+    }
+    <div class="row" style="display:none;" id="Enviado">
+        <div class="Col-md-12">
+            <h1>Se ha Enviado tu Contraseña a tu correo</h1>
+        </div>
+    </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $.extend($.validator.messages, {
+                equalTo: "Por favor, escribe la misma contraseña.",
+                minlength: jQuery.validator.format("Por favor, no escribas menos de {0} caracteres."),
+                required: "Este campo es obligatorio.",
+                email: "Por favor, escribe una dirección de correo válida",
+            });
+            $.validator.addMethod("correoValido", function (value, element, params) {
+                var disponible = false;
+                $.ajax({
+                    url: "/Usuario/VerificarCorreo?correo=" + value,
+                    method: "POST",
+                    async: false,
+                    success: function ($Data) {
+                        disponible = !$Data.Disponible;
+                    }
+                });
+                return disponible;
+            }, $.validator.format("Este correo no esta registrado {0}"));
+            var validarRecuperar = $("#Recuperar").validate({
+                debug: true,
+                rules: {
+                    Correo: {
+                        required: true,
+                        email: true,
+                        correoValido: ""
+                    }
+                },
+                submitHandler: function (form) {
+                    $(form).Submit();
+                }
+            });
+            
+        });
+        
+    </script>

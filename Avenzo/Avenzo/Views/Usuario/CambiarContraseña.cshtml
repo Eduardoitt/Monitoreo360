@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h3>Cambio de Contraseña</h3>
+    @using (Ajax.BeginForm("/CambiarContraseña", null, new AjaxOptions { UpdateTargetId = "Login" }, new { @id = "Recuperar" }))
+    {
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <input value="@ViewBag.Id" type="hidden" name="id" id="id"/>
+                    <label>Contraseña</label>
+                    <input type="password" class="form-control" name="Contraseña" required id="Contraseña"/>
+                    <label>Repetir Contraseña</label>
+                    <input type="password" class="form-control" name="Contraseña2" required />
+
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" type="submit">Cambiar Contraseña</button>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-md-12">
+                    <label class="control-label">&nbsp;</label>
+                    <ul>
+                        <li>Haz tu contraseña 8 caracteres o más</li>
+                        <li>Use letras mayúsculas y minúsculas</li>
+                        <li>Utilizar más de un número</li>
+                        <li>Utilice caracteres especiales (!, @@, #, $,%, ^, &, *,?, _, ~)</li>
+                    </ul>
+                </div>
+                <div class="col-md-12 text-center" id="PassworddMeter" style="background:#d9534f;color:white;border-radius:5px;">Muy débil</div>
+            </div>
+        </div>
+    }
+</div>
+<script src="~/Scripts/passwordmeter.js"></script>
+<script>
+    $(document).ready(function () {
+        $.extend($.validator.messages, {
+            equalTo: "Por favor, escribe la misma contraseña.",
+            minlength: jQuery.validator.format("Por favor, no escribas menos de {0} caracteres."),
+            required: "Este campo es obligatorio.",
+            email: "Por favor, escribe una dirección de correo válida",
+        });
+        $.validator.addMethod("passwordValido", function (value, element, params) {
+            var object = testPassword(value);
+            if (object.score > 24)
+                return true;
+            else
+                return false
+        }, $.validator.format("La Contraseña es muy débil {0}"));
+        $.validator.addMethod("passwordIgual", function (value, element, params) {
+            var disponible = false;
+            $.ajax({
+                url: "/Usuario/VerficarContraseña?IdTemp="+$("#id").val()+"&Q=" + value,
+                method: "POST",
+                async: false,
+                success: function ($Data) {
+                    disponible = $Data.valido;
+                }
+            });
+            return disponible;
+        }, $.validator.format("La contraseña es igual al anterior, intente otra nueva {0}"));
+        var validatorUsuario = $("#Recuperar").validate({
+            debug: true,
+            rules: {
+                Contraseña: {
+                    required: true,
+                    minlength: 8,
+                    passwordIgual:"",
+                    passwordValido: "",
+                    
+
+                },
+                Contraseña2: {
+                    required: true,
+                    equalTo: "#Contraseña",
+                    minlength: 8,
+                }
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+        $("#Contraseña").keyup(function () {
+            var object = testPassword($(this).val());
+            $("#PassworddMeter").text(object.Verdict);
+            if (object.Verdict == "D\u00E9bil")
+                $("#PassworddMeter").css({ "background": "orange", "color": "white" });
+            if (object.Verdict == "Muy d\u00E9bil")
+                $("#PassworddMeter").css({ "background": "#d9534f", "color": "white" });
+            if (object.Verdict == "Normal")
+                $("#PassworddMeter").css({ "background": "yellow", "color": "black" });
+            if (object.Verdict == "Fuerte")
+                $("#PassworddMeter").css({ "background": "#99ff33", "color": "black" });
+            if (object.Verdict == "Muy Fuerte")
+                $("#PassworddMeter").css({ "background": "#449d44", "color": "white" });
+        });
+    });
+</script>

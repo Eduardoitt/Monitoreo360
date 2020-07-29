@@ -1,0 +1,743 @@
+﻿@model Dashboard.Models.NominaView
+@using (Ajax.BeginForm("/Guardar","Nomina", null, new AjaxOptions { UpdateTargetId = "NuevoId" }, new { @id = "NuevoEgreso" })) {
+@Html.Hidden("IdNominaHistorial", Guid.NewGuid())
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Compañia</label>
+            @Html.DropDownList("PAC",new SelectList(Model.PAC,"Id","Nombre"),new {@class="form-control" })
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Empleado</label>
+            <input class="form-control" id="Empleado"/>
+            @Html.Hidden("IdEmpleado","")
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de Nomina</label>
+            <select class="form-control" name="TipoNomina">
+                <option value="O">Ordinaria</option>
+                <option value="E">Extradorniaria</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Fecha de Pago</label>
+            <input class="form-control datepicker" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Fecha Inicial de pago</label>
+            <input class="form-control datepicker" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Fecha Final de Pago</label>
+            <input class="form-control datepicker" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Numero de Dias pagados</label>
+            <input class="form-control" type="number" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <center><b>Datos del Empleado</b></center><br />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>RFC</label>
+            <input class="form-control" name="RFC" id="RFC"/>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>CURP</label>
+            <input class="form-control" name="CURP" id="CURP"/>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Numero de seguro Social</label>
+            <input class="form-control" name="NSS" id="NSS"/>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Fecha De inicio Laboral</label>
+            <input class="form-control" name="FechaInicioLaboral" id="FechaInicioLaboral"/>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Antiguedad</label>
+            <input class="form-control" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Numero de Empleado</label>
+            <input class="form-control" name="NoEmpleado" id="NoEmpleado" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Departamento</label>
+            <input class="form-control" name="Departamento" id="Departamento" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Puesto</label>
+            <input class="form-control" name="Puesto" id="Puesto" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Riesgo del Puesto</label>
+            @Html.DropDownList("RiesgoPuesto",new SelectList(Model.RiesgoPuesto,"c_RiesgoPuesto", "Descripcion"),new { @class="form-control"})
+            
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de Contrato</label>
+            <select class="form-control" id="TipoContrato" name="TipoContrato">
+                @foreach (var item in Model.Contratos)
+                {
+                    <option value="@item.c_TipoContrato.Trim()">@item.Descripcion</option>
+                }
+            </select>            
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Tipo de Jornada</label>
+            @Html.DropDownList("TipoJornada", new SelectList(Model.Jornadas, "c_TipoJornada", "Descripcion"), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Periodicidad del pago</label>
+            <select class="form-control" id="PeriodicidadPago" name="PeriodicidadPago">
+                @foreach (var item in Model.PeriodicidadPago)
+                {
+                    <option value="@item.c_PeriodicidadPago.Trim()">@item.Descripcion</option>
+                }                
+            </select>            
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Cuenta Bancaria</label>
+            <input class="form-control" id="CuentaBancaria" name="CuentaBancaria"/>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>SalarioBaseCotApor</label>
+            <input class="form-control" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Salario Diario Integrado</label>
+            <input class="form-control" name="SalarioDiario" id="SalarioDiario" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>ClaveEntFed</label>
+            <input class="form-control" name="ClaveEntFed" id="ClaveEntFed"/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <center><b>Percepciones</b></center><br />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="checkJubilacionPensionRetiro"><span class="checkbox-material"><span class="check"></span></span> Jubilacion Pension Retiro
+            </label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="checkSeparacionIndenmizacion"><span class="checkbox-material"><span class="check"></span></span> Separacion Indenmizacion
+            </label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-info btn-simple"  rel="tooltip" data-original-title="Agregar Percepcion" onclick="AddPercepcion()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+    </div>
+</div>
+<div id="JubilacionPensionRetiro" style="display:none;">
+    <div class="row">
+        <br />
+        <center>Jubilacion Pension Retiro</center>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Total Una Exhibicion</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Total Parcialidad</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>MontoDiario</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Ingreso Acumulable</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Ingreso No Acumulable</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+</div>
+<div id="SeparacionIndemnizacion" style="display:none;">
+    <div class="row">
+        <br />
+        <center>Separacion Indemnizacion</center>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Total Pagado</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Numero de Años de Servicio</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Ultimo Sueldo Mensual ordinario</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Ingreso  Acumulable</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Ingreso No Acumulable</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="Percepciones">
+    <div class="col-md-12" id="Percepcion1">
+        <div class="row">
+            <br />
+            <center>Percepcion</center>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Tipo de Percepcion</label>
+                    <select class="form-control">
+                        @foreach (var item in Model.PeriodicidadPago) { }
+                        <option>Tipo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Clave</label>
+                    <input class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Concepto</label>
+                    <input class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Importe Gravado</label>
+                    <input class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Importe Excento</label>
+                    <input class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-info btn-xs" onclick="AddHorasExtras(1,1)">Agregar Horas Extras</button>
+            </div>
+            <div class="col-md-3">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" onclick="ChangeAccionesOTitulos(1)" id="checkAccionesOTitulos1"><span class="checkbox-material"><span class="check"></span></span> Acciones o Titulos
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div id="AccionesOTitulos1" style="display:none">
+            <div class="row">
+                <br />
+                <center>Acciones O Titulos</center>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Valor de Mercado</label>
+                        <input class="form-control" name="ValorMercado1" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Precio Al Otorgarse</label>
+                        <input class="form-control" name="PrecioAlOtorgarse1" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="HorasExtras1" style="display:none;">
+            <div class="row">
+                <br />
+                <center>Horas Extras</center>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Dias</label>
+                        <input class="form-control" name="P1HE1_Dias"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Tipos de Horas</label>
+                        <select class="form-control">
+                            @foreach (var item in Model.Horas)
+                            {
+                                <option value="@item.c_TiposHoras.Trim()">@item.Descripcion</option>
+                            }
+                            
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Horas Extras</label>
+                        <input class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Importe Pagado</label>
+                        <input class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-2 text-center">
+                    <button class="btn btn-danger btn-xs btn-simple" rel="tooltip" data-original-title="Eliminar" id="deleteHR0">X</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <br />
+    <center><b>Deducciones</b></center>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <button class="btn btn-info btn-simple" rel="tooltip" data-original-title="Agregar Deduccion" id="addDeduccion"><span class="glyphicon glyphicon-plus"></span></button>
+    </div>
+</div>
+<div class="row">
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <center>Deduccion</center>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Tipo de Deduccion</label>
+                <select class="form-control">
+                    @foreach (var item in Model.Deducciones)
+                    {
+                        <option value="@item.c_TipoDeduccion.Trim()">@item.Descripcion</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Clave</label>
+                <input class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Concepto</label>
+                <input class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Importe</label>
+                <input class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-simple btn-danger" rel="tooltip" data-original-title="Eliminar Deduccion"><span class="glyphicon glyphicon-remove"></span></button>
+        </div>
+    </div>    
+</div>
+<div class="row">
+    <br />
+    <center><b>Otros Pagos</b></center>
+</div>
+<div class="row">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Tipo de Otro pago</label>
+                <select class="form-control">
+                    @foreach (var item in Model.OtrosPagos) {
+                        <option value="@item.c_TipoOtroPago">@item.Descripcion</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Clave</label>
+                <input class="form-control"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Concepto</label>
+                <input class="form-control"/>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Importe</label>
+                <input class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-simple btn-danger" rel="tooltip" data-original-title="Eliminar Otro pago"><span class="glyphicon glyphicon-remove"></span></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="checkSubsidioAlEmpleo"><span class="checkbox-material"><span class="check"></span></span> Subsidio al Empleo
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="checkCompesacionSaldoAFavor"><span class="checkbox-material"><span class="check"></span></span> Compesacion Saldo a favor
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <center>Subsidio al Empleo</center>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Subsidio al Empleo</label>
+                <input class="form-control"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <center>Compesacion Saldo a favor</center>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Saldo a favor</label>
+                <input class="form-control"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Año</label>
+                <input class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Remanente Saldo A Favor</label>
+                <input class="form-control" />
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-info">Save changes</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
+}
+
+<script>
+    var $Empleados;
+    var $Percepciones = 1;
+    var AddHorasExtras= function ($Percepcion,$HorasExtras) {
+        if ($HorasExtras == 1) {
+            $("#HorasExtras" + $Percepcion).fadeIn(500);
+            $("#P"+$Percepcion+"HE"+$HorasExtras+"_Dias").prop('required', true);
+            $("#P" + $Percepcion + "HE" + $HorasExtras + "_Dias").prop('required', true);
+        }
+        $HorasExtras++;
+    }
+    var ChangeAccionesOTitulos=function ($Id) {
+        
+        if ($("#checkAccionesOTitulos"+$Id).is(':checked')) {
+            $("#AccionesOTitulos" + $Id).fadeIn(500);
+            $("[name=ValorMercado" + $Id + "]").prop('required', true);
+            $("[name=PrecioAlOtorgarse" + $Id + "]").prop('required', false);
+        } else {
+            $("#AccionesOTitulos" + $Id).fadeOut(500);
+            $("[name=ValorMercado" + $Id + "]").prop('required', false);
+            $("[name=PrecioAlOtorgarse" + $Id + "]").prop('required', false);
+        }
+    }
+    function AddPercepcion($ads) {
+        $Percepciones = $Percepciones + 1;
+        var $Html = '<div class="col-md-12" id="Percepcion' + $Percepciones + '">';
+        //-----------------------------------------------
+        $Html += '<div class="row"><br/><center>Percepcion</center></div >';
+        //-------------------------------------
+        $Html += '<div class="row" >';
+        $Html += '<div class="col-md-4">';
+        $Html += '<div class="form-group"><label>Tipo de Percepcion</label><select class="form-control">@foreach(var item in Model.PeriodicidadPago){<option>Tipo</option>}</select></div>';
+        $Html += '</div >';
+        $Html += '<div class="col-md-4">';
+        $Html += '<div class="form-group"><label>Clave</label><input class="form-control" /></div>';
+        $Html += '</div >';
+        $Html += '<div class="col-md-4">';
+        $Html += '<div class="form-group"><label>Concepto</label><input class="form-control" /></div>';
+        $Html += '</div>';
+        $Html += '</div>';
+        //----------------------------------------------
+        $Html += '<div class="row">';
+        $Html += '<div class="col-md-3">';
+        $Html += '<div class="form-group"><label>Importe Gravado</label><input class="form-control" /></div>';
+        $Html += '</div>';
+        $Html += '<div class="col-md-3">';
+        $Html += ' <div class="form-group"><label>Importe Excento</label><input class="form-control" /></div>';
+        $Html += '</div>';
+        $Html += '<div class="col-md-3">';
+        $Html += '<button class="btn btn-info btn-xs" id="addHR0">Agregar Horas Extras</button>';
+        $Html += '</div>';
+        $Html += '<div class="col-md-3">';
+        $Html += '<div class="checkbox" ><label><input type="checkbox" onchange="ChangeAccionesOTitulos(' + $Percepciones + ')" id="checkAccionesOTitulos' + $Percepciones + '"><span class="checkbox-material"><span class="check"></span></span> Acciones o Titulos  </label></div>';
+        $Html += '</div>';
+        $Html += '</div >';
+        //----------------------------------------------------
+        $Html += '<div id="AccionesOTitulos' + $Percepciones + '" style="display:none">';
+        $Html += '<div class="row" ><br /><center>Acciones O Titulos</center></div >';
+        //********************************
+        $Html += '<div class="row">';
+        $Html += '<div class="col-md-4">';
+        $Html += '<div class="form-group"><label>Valor de Mercado</label><input class="form-control" name="ValorMercado' + $Percepciones + '" /></div>';
+        $Html += '</div >';
+        $Html += '<div class="col-md-4">';
+        $Html += '<div class="form-group"><label>Precio Al Otorgarse</label><input class="form-control" name="PrecioAlOtorgarse' + $Percepciones + '" /></div>';
+        $Html += '</div >';
+        $Html += '</div>';
+        //*******************************
+        $Html += '</div >';
+        //---------------------------------------------------
+        $Html += '<div id="HorasExtras' + $Percepciones + '" style="display:none;">';
+        $Html += '<div class="row" ><br /><center>Horas Extras</center></div>';
+        $Html += '<div class="row">';
+        $Html += '<div class="col-md-2">';
+        $Html += '<div class="form-group"><label>Dias</label><input class="form-control" /></div>';
+        $Html += '</div>';
+        $Html += '<div class="col-md-2">';
+        $Html += '<div class="form-group"><label>Tipos de Horas</label><select class="form-control">@foreach (var item in Model.Horas) {<option value="@item.c_TiposHoras">@item.Descripcion</option>}</select></div>';
+        $Html += '</div>';
+        $Html += '<div class="col-md-3" >';
+        $Html += '<div class="form-group" ><label>Horas Extras</label><input class="form-control" /></div>';
+        $Html += '</div >';
+        $Html += '<div class="col-md-3" >';
+        $Html += '<div class="form-group" ><label>Importe Pagado</label><input class="form-control" /></div>';
+        $Html += '</div >';
+        $Html += '<div class="col-md-2 text-center" >';
+        $Html += '<button class="btn btn-danger btn-xs btn-simple" rel= "tooltip" data- original - title="Eliminar" id= "deleteHR0" > X</button >';
+        $Html += '</div>';
+        $Html += '</div >';
+        $Html += '</div>';
+        //-------------------------------------------------------------
+        $("#Percepciones").append($Html);
+
+    }
+    $(function () {
+        $('.datepicker').datetimepicker({
+            format: 'MM/DD/YYYY',
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove',
+                inline: false
+            }
+        });
+        var inputNombre = document.getElementById("Empleado");
+        var AutocompletarNombres = new Awesomplete(inputNombre, {
+            minChars: 1,
+            maxItems: 5,
+            autoFirst: true,
+            replace: function (text) {
+                this.input.value = text.label;
+                var input = document.getElementById("IdEmpleado");
+                input.value = text.value;
+                for (var k in $Empleados.Empleados) {
+                    if ($Empleados.Empleados[k].Id == text.value) {
+                        $("#RFC").val($Empleados.Empleados[k].RFC);
+                        $("#CURP").val($Empleados.Empleados[k].CURP);
+                        $("#NSS").val($Empleados.Empleados[k].NumeroSeguridadSocial);
+                        $("#NoEmpleado").val($Empleados.Empleados[k].NoEmpleado);
+                        $("#ClaveEntFed").val($Empleados.Empleados[k].ClaveEntFed);
+                        $("#Banco").val($Empleados.Empleados[k].Banco);
+                        $("#CuentaBancaria").val($Empleados.Empleados[k].CuentaBancaria);
+                        $("#CUIP").val($Empleados.Empleados[k].CUIP);
+                        $("#Departamento").val($Empleados.Empleados[k].Departamento);
+                        $("#Puesto").val($Empleados.Empleados[k].Puesto);
+                        $("#RiesgoPuesto").val($Empleados.Empleados[k].RiesgoPuesto);
+                        $("#SalarioDiario").val($Empleados.Empleados[k].SalarioDiario);
+                        $("#TipoContrato").val($Empleados.Empleados[k].TipoContrato);
+                        $("#TipoJornada").val($Empleados.Empleados[k].TipoJornada);
+                        console.log("HOLA");
+                        console.log($Empleados.Empleados[k].FechaInicioRelLaboral);
+                        $('#FechaInicioLaboral').datetimepicker({
+                            defaultDate: ''+$Empleados.Empleados[k].FechaInicioRelLaboral,
+                            format: 'MM/DD/YYYY',
+                            icons: {
+                                time: "fa fa-clock-o",
+                                date: "fa fa-calendar",
+                                up: "fa fa-chevron-up",
+                                down: "fa fa-chevron-down",
+                                previous: 'fa fa-chevron-left',
+                                next: 'fa fa-chevron-right',
+                                today: 'fa fa-screenshot',
+                                clear: 'fa fa-trash',
+                                close: 'fa fa-remove',
+                                inline: false
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        $.getJSON('/Empleados/Service', function (result) {
+            $Empleados = result;
+            console.log($Empleados)
+            var list = [];
+            for (var k in result.Empleados) {
+                list.push({ label: result.Empleados[k].Nombre + " " + result.Empleados[k].ApellidoPaterno + " " + result.Empleados[k].ApellidoMaterno, value: result.Empleados[k].Id});
+            }
+            AutocompletarNombres.list = list;
+        });
+        $('[rel="tooltip"]').tooltip();
+        $("#checkJubilacionPensionRetiro").change(function () {
+            if ($("#checkJubilacionPensionRetiro").is(':checked')) {
+                $("#JubilacionPensionRetiro").fadeIn(500);
+            } else {
+                $("#JubilacionPensionRetiro").fadeOut(500);
+            }
+        });
+        $("#checkSeparacionIndenmizacion").change(function () {
+            if ($("#checkSeparacionIndenmizacion").is(':checked')) {
+                $("#SeparacionIndemnizacion").fadeIn(500);
+            } else {
+                $("#SeparacionIndemnizacion").fadeOut(500);
+            }
+        });
+        $("#checkAccionesOTitulos").change(function () {
+            if ($("#checkAccionesOTitulos").is(':checked')) {
+                $("#AccionesOTitulos").fadeIn(500);
+            } else {
+                $("#AccionesOTitulos").fadeOut(500);
+            }
+        });
+        $("#checkAccionesOTitulos").change(function () {
+            if ($("#checkAccionesOTitulos").is(':checked')) {
+                $("#AccionesOTitulos").fadeIn(500);
+            } else {
+                $("#AccionesOTitulos").fadeOut(500);
+            }
+        });
+        $("#checkAccionesOTitulos").change(function () {
+            if ($("#checkAccionesOTitulos").is(':checked')) {
+                $("#AccionesOTitulos").fadeIn(500);
+            } else {
+                $("#AccionesOTitulos").fadeOut(500);
+            }
+        });
+        $("#addHR0").click(function () {
+            $("#HorasExtras").fadeIn(500);
+        });
+        $("#deleteHR0").click(function () {
+            $("#HorasExtras").fadeOut();
+        });
+    })
+</script>

@@ -1,0 +1,254 @@
+﻿@*@model List<Avenzo.Models.getClientes_Result>*@
+@model List<Model.Clientes>
+
+<div class="modal-fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Crear Recibo</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Cliente</label>
+                            <input id="NombreCliente" class="form-control" onchange="clienteTextChanged()">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Tipo de Moneda</label>
+                            <select class="form-control" id="Moneda">
+                                <option disabled selected value>Seleccione Moneda</option>
+                                <option value="true">USD</option>
+                                <option value="false">MXN</option>
+                            </select>
+                        </div>                        
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="Leyenda"> Leyenda de Garantia
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <button class="btn btn-info" id="Agregar">Agregar conceptos</button>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="Mensualidad"> Mensualidad
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="conceptos">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label>Cantidad</label>
+                                <div class="input-group">                                    
+                                    <input class="form-control" type="number" placeholder="Cantidad" id="cantidad0" />
+                                    <span class="input-group-addon">.00</span>
+                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label>Unidad</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"></span>
+                                    <input class="form-control" placeholder="Unidad" id="unidad0" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Concepto</label>
+                                <input class="form-control" placeholder="Concepto" id="concepto0" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label>Precio</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input class="form-control" placeholder="Precio" id="precio0" type="number" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning btn-xs" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success btn-xs" id="btnGuardar">Crear Recibo</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var i = 0;
+        var opcion = 0;
+        var input = document.getElementById("NombreCliente");
+        var awesomplete = new Awesomplete(input, {
+            minChars: 1,
+            maxItems: 3,
+            autoFirst: true
+        });
+        awesomplete.list = [ @foreach (var item in Model) { WriteLiteral("\"" + item.Nombres + " " + item.ApellidoPaterno + " " + item.ApellidoMaterno + "\","); } "TODOS"];
+        @*awesomplete.list = [ @foreach (var item in Model) { WriteLiteral("\"" + item.NombreCompletoCliente.Replace("-", " ") + "\","); } "TODOS"];*@
+                   
+        $("#Mensualidad").change(function () {
+            if ($("#Mensualidad").is(':checked')) {
+                $("#conceptos").hide(1000);
+            }
+            else {
+                $("#conceptos").show(1000);
+            }
+        });
+
+        $('#Agregar').click(function () {
+            i = i + 1;
+            var html = "<div class=\"row oculto\" style=\"display:none\">";
+            html += "<div class=\"col-sm-2\">";
+            html += "<div class=\"form-group\">";
+            html += "<label>Cantidad</label>";
+            html += "<div class=\"input-group\">";
+            html += "<input class=\"form-control\" type=\"number\" placeholder=\"Cantidad\" id=\"cantidad" + i + "\" />";
+            html += "<span class=\"input-group-addon\">.00</span>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>"
+            html += "<div class=\"col-sm-2\">";
+            html += "<div class=\"form-group\">";
+            html += "<label>Unidad</label>";
+            html += "<div class=\"input-group\">";
+            html += "<span class=\"input-group-addon\"></span>";
+            html += "<input class=\"form-control\" placeholder=\"Unidad\" id=\"unidad" + i + "\" />";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+            html += "<div class=\"col-sm-6\">";
+            html += "<div class=\"form-group\">";
+            html += "<label> Concepto</label>";
+            html += "<input class=\"form-control\" placeholder=\"Concepto\" id=\"concepto" + i + "\" />";
+            html += "</div>";
+            html += "</div>";
+            html += "<div class=\"col-sm-2\">";
+            html += "<div class=\"form-group\">";
+            html += "<label>Precio</label>";
+            html += "<div class=\"input-group\">";
+            html += "<span class=\"input-group-addon\">$</span>";
+            html += "<input class=\"form-control\" placeholder=\"Precio\" id=\"precio" + i + "\" type=\"number\" />";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+            $('#conceptos').append(html);
+            $('.oculto').show('slow');
+        });
+        $('#btnGuardar').click(function () {
+            var unidad = new Array();
+            var cantidad = new Array();
+            var conceptos = new Array();
+            var precio = new Array();
+            var Cliente = $('#NombreCliente').val();
+            var RequiereLeyenda = null;
+            var Moneda = null;
+            var idCliente = null;
+            if ($("#Leyenda").is(':checked'))
+                RequiereLeyenda = true;
+            else
+                RequiereLeyenda = false;
+            if ($("#Moneda").val() == "true")
+                Moneda = true;
+            else
+                Moneda = false;
+            var bool = 0;
+            ///------------------
+            @*console.log("Cliente:" + Cliente);
+            var list = [ @foreach (var item in Model) { WriteLiteral("\"" + item.IdCliente + "\","); } "TODOS"];
+            var nombres = [ @foreach (var item in Model) { WriteLiteral("\"" + item.NombreCompletoCliente.Replace("-", " ") + "\","); } "TODOS"];
+            for (var i = 0; i < nombres.length; i++) {
+                if (Cliente == nombres[i])
+                    Cliente = list[i];
+            }*@
+
+            //-----------------------
+            var clnt = document.getElementById("NombreCliente");
+            if (clnt.hasAttribute('name'))
+            {
+                idCliente = $('#NombreCliente').attr("name");
+            }
+            if (RequiereLeyenda == null)
+                bool = bool + 1;
+            if ($("#Mensualidad").is(':checked')) {
+            }
+            else {
+                for (var j = 0; j <= i; j++) {
+                    if ($('#unidad' + j).val() == "")
+                        bool = bool + 1;
+                    if ($('#cantidad' + j).val() == "")
+                        bool = bool + 1;
+                    if ($('#precio' + j).val() == "")
+                        bool = bool + 1;
+                    if ($('#concepto' + j).val() == "")
+                        bool = bool + 1;
+                    conceptos[j] = $('#concepto' + j).val();
+                    precio[j] = $('#precio' + j).val();
+                    unidad[j] = $('#unidad' + j).val();
+                    cantidad[j] = $('#cantidad' + j).val();
+                }
+            }
+            if (bool > 0) {
+                console.log("Revisar Codigo");
+                alert('Faltan Campos por llenar');
+            } else {
+                if ($("#Mensualidad").is(':checked')) {
+                    @foreach (var item in Model)
+                    {
+                        WriteLiteral("\nwindow.open('/Administracion/DownloadRecibo?NombreCliente=" + (item.Nombres + " " + item.ApellidoPaterno + " " + item.ApellidoMaterno) + "&Cantidad='+JSON.stringify(cantidad)+'&Unidad='+JSON.stringify(unidad)+'&Concepto='+JSON.stringify(conceptos)+'&Precio='+JSON.stringify(precio)+'&Leyenda='+RequiereLeyenda+'&CantidadConceptos='+i+'&Moneda='+Moneda+'&Mensualidad=true');");
+                    }
+                } else {
+                    window.open('@Url.Content("~/Administracion/DownloadRecibo")' + "?NombreCliente=" + Cliente + "&Cantidad=" + JSON.stringify(cantidad) + "&Unidad=" + JSON.stringify(unidad) + "&Concepto=" + JSON.stringify(conceptos) + "&Precio=" + JSON.stringify(precio) + "&Leyenda=" + RequiereLeyenda + "&CantidadConceptos=" + i + "&Moneda=" + Moneda + "&Mensualidad=false" + "&IdCliente=" + idCliente);
+                }
+                $('#myModal').modal('hide');
+            }
+        });
+    });
+    @{
+        List<string> nombres = new List<string>();
+        List<string> identificadores = new List<string>();
+        foreach (var item in Model)
+        {
+            nombres.Add(item.Nombres + " " + item.ApellidoPaterno + " " + item.ApellidoMaterno);
+            identificadores.Add(item.IdCliente.ToString());
+        }
+        ViewBag.Nombres = nombres;
+        ViewBag.Identificadores = identificadores;
+
+    }
+    function clienteTextChanged()
+    {
+        var textoIngresado = document.getElementById("NombreCliente").value;
+        var clienteElement = document.getElementById("NombreCliente");
+        var nombres = @Html.Raw(Json.Encode(@ViewBag.Nombres));
+        var identificadores = @Html.Raw(Json.Encode(@ViewBag.Identificadores));
+        clienteElement.removeAttribute("name");
+        for (var itemIndex = 0; itemIndex < nombres.length ; itemIndex++)
+        {
+            if (textoIngresado == nombres[itemIndex]){ 
+                //alert("entro if");            
+                console.log("Max set to Cliente: ", identificadores[itemIndex]);
+                clienteElement.setAttribute("name","" + identificadores[itemIndex]);
+            }
+        }
+    }
+</script>

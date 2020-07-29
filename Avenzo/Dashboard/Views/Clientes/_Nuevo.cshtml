@@ -1,0 +1,375 @@
+﻿@model Model.Clientes
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    ViewBag.TitleModal = "Nuevo Cliente";
+}
+@using (Ajax.BeginForm(null, null, new AjaxOptions { UpdateTargetId = "NuevoId" }, new { @id = "NuevoCliente" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="checkNumeroCuentaPago" onclick="$('.NA').fadeToggle(250);"><span class="checkbox-material"><span class="check"></span></span> No Aplica
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row NA">
+            @Html.Hidden("idCliente", Guid.NewGuid())
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="tipoAfilacion">Tipo de Afiliación</label>
+                    @Html.DropDownList("TipoAfilacion", new SelectList(ViewBag.TipoAfiliacion, "IdCatalogo", "Descripcion"),"No Aplica", new { @id = "tipoAfilacion", @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Precio Afiliacion</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">$</span>
+                        <input class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Correo Patrocinador</label>
+                     @Html.TextBoxFor(model => model.NumeroPatrocinador, new { @class = "form-control"})                    
+                </div>
+            </div>
+            
+        </div>        
+        <div class="row NA">
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label" for="numeroTelefonoAlarma">Teléfono Alarma</label>
+                    @Html.TextBoxFor(model => model.NumeroTelefonoAlarma, new { @class = "form-control",@maxlength = "20" })
+                    
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label" for="palabraClave">Palabra Clave</label>
+                    @Html.TextBoxFor(model => model.PalabraClave, new { @class = "form-control", @maxlength = "50" })
+                    
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label" for="palabraClaveSilenciosa">Palabra Clave Silenciosa</label>
+                    @Html.TextBoxFor(model=>model.PalabraClaveSilenciosa,new { @class = "form-control", @maxlength = "50" })                    
+                </div>
+            </div>
+        </div>
+        <div class="row NA">            
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Numero de Cuenta</label>
+                    @Html.TextBoxFor(model => model.NumeroDeCuenta, new { @class = "form-control", @maxlength = "10" })
+                    
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-12">
+                <center><b>Información Personal</b></center><br />
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Nombre(s)</label>
+                    @Html.TextBoxFor(model => model.Nombres, new { @class = "form-control"})
+                    
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Apellido Paterno</label>
+                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control" })                    
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Apellido Materno</label>
+                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control" })                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Fecha de nacimiento</label>
+                    @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control datepicker", @maxlength = "50", @type = "text" })                                        
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Lugar de Nacimiento</label>
+                    @Html.TextBoxFor(model => model.LugarNacimiento, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Correo Electronico</label>
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @type = "email" })
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Telefono Casa</label>
+                    @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control" })                    
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Telefono Trabajo</label>
+                    @Html.TextBoxFor(model => model.TelefonoTrabajo, new { @class = "form-control" })
+                    
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Telefono Celular</label>
+                    @Html.TextBoxFor(model => model.TelefonoCelular, new { @class = "form-control" })
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Sexo</label>
+                    <select class="form-control" name="Sexo" required>
+                        <option disabled selected></option>
+                        <option value="N/A">N/A</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Estado Civil</label>
+                    @Html.TextBoxFor(model => model.EstadoCivil, new { @class = "form-control" })
+                    
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Profecion o Ocupacion</label>
+                    @Html.TextBoxFor(model => model.Profesion, new { @class = "form-control" })
+                    
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-12">
+                <center><b>Datos de Facturación</b></center><br />
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    @Html.Label("Calle", new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Calle, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    @Html.Label("No. Exterior", new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.NoExterior, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    @Html.Label("No. Interior", new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.NoInterior, new { @class = "form-control" })
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Colonia</label>
+                    @Html.TextBoxFor(model => model.Colonia, new { @class = "form-control" })
+                    
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Codigo Postal</label>
+                    @Html.TextBoxFor(model => model.CodigoPostal, new { @class = "form-control" })
+                    
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    @Html.Label("Compañia", new { @class = "control-label" })
+                    @Html.DropDownList("IdProveedor", new SelectList(ViewBag.PAC, "Id", "Nombre"), "", new { @class = "form-control", required = (string)null })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Pais</label>
+                    @Html.DropDownList("Pais", new SelectList(ViewBag.Pais, "Pais1", "Pais1"), "", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Estado</label>
+                    @Html.DropDownList("Estado", new SelectList(ViewBag.Estado, "NombreEstado", "NombreEstado"), "", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Ciudad</label>
+                    @Html.DropDownList("Ciudad", new SelectList(ViewBag.Ciudad, "Ciudad1", "Ciudad1"), "", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-12">
+                <center><b>Datos Fiscales</b></center>
+                <br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">CURP</label>
+                    @Html.TextBoxFor(model => model.CURP, new { @class = "form-control", @pattern = "^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$" })
+                    
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">RFC</label>
+                    @Html.TextBoxFor(model => model.RFC, new { @class = "form-control",@pattern = "^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\\d]{3})?$" })
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Beneficiario</label>
+                    @Html.TextBoxFor(model => model.Beneficiario, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Banco</label>
+                    @Html.DropDownList("banco", new SelectList(ViewBag.Bancos, "c_Banco", "Descripcion"), "", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">CLABE Interbancaria</label>
+                    @Html.TextBoxFor(model => model.NumeroCLABE, new { @class = "form-control" })
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">Cuenta Bancaria</label>
+                    @Html.TextBoxFor(model => model.ClaveBancaria, new { @class = "form-control" })
+                    
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label">NumCtaPago</label>
+                    @Html.TextBoxFor(model => model.NumCtaPago, new { @class = "form-control" })
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning btn-simple" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success btn-simple">Guardar cambios</button>
+                    </div>
+}
+<script>
+    $(function () {
+
+        $("#NumeroDeCuenta").mask("99999-999");
+        $("input[name=TelefonoCelular]").mask("(999) 999-9999");
+        $("input[name=TelefonoTrabajo]").mask("(999) 999-9999");
+        $("input[name=Telefono]").mask("(999) 999-9999");
+        demo.initFormExtendedDatetimepickers();
+        $('form').submit(function (event) {            
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    $("#myModal").modal('hide');
+                    if (result.error == "none") {
+                        var NumeroAlarma = $('#numeroTelefonoAlarma').val();
+                        var NombreCliente = $('input[name^=Nombres]').val();
+                        var AMaterno = $('input[name^=ApellidoMaterno]').val();
+                        var APaterno = $('input[name^=ApellidoPaterno]').val();
+                        var Direccion = $('input[name^=Calle]').val() + ' ' + $('input[name^=Colonia]').val() + ' ' + $('input[name^=NoExterior]').val();
+                        var Telefono = $('input[name^=TelefonoCasa]').val();
+                        var idCliente = $('#idCliente').val();
+                        var table = $("#clientes").DataTable();
+                        var btnEditar = '<button class="btn btn-xs btn-info"   data-toggle="modal" data-target="#myModal"  onclick="OpenModal(\'@Url.Content("/Clientes/Editar?TempId=")' + idCliente + '\')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Editar</button>';
+                        var btnContactos = '&nbsp;<button class="btn btn-xs btn-info"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Contactos</button>';
+                        var btnEliminar = '&nbsp;<button class="btn btn-xs btn-danger" onclick="DeleteRegister(\'' + idCliente + '\',\'Deseas eliminar a ' + NombreCliente + ' ' + APaterno + ' ' + AMaterno + '\',\'@Url.Content("/Clientes/Eliminar")\',\'#datatables\')"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Eliminar</button>';
+                        var Array = [NumeroAlarma, NombreCliente + ' ' + APaterno + ' ' + AMaterno, Direccion, Telefono, btnEditar + btnContactos + btnEliminar];
+                        var rowIndex = table.row.add(Array).draw(false);
+                        var row = $('#datatables').dataTable().fnGetNodes(rowIndex);
+                        $(row).attr('id', idCliente);
+                        var rowNode = rowIndex.node();
+                        $(rowNode).find('td').eq(5).addClass('text-center');
+                        $(rowNode).find('td').eq(6).addClass('text-center');
+                        swal({
+                            title: "Listo!",
+                            text: "Se agrego el cliente",
+                            buttonsStyling: false,
+                            confirmButtonClass: "btn btn-success",
+                            type: "success"
+                        });
+
+                    }
+                    else {
+                        swal({
+                            title: "Hubo un error!",
+                            text: "error:" + result.Message,
+                            buttonsStyling: false,
+                            confirmButtonClass: "btn btn-success",
+                            type: "error"
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    ViewBag.TitleModal = "";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Hola, @ViewBag.Nombre!</h3>
+            <p>Te pasastes del limite de timbres,compra mas o cada timbre te <b style="color:#02a94f">costara $20.00</b> hasta que se renueve otra vez o hasta que compres timbres.</p>
+            <p><b>¿Aún así quieres continuar?</b></p>
+            <p>
+                <button class="btn btn-success" id="Continuar">Si, Continuar</button>
+                <button class="btn btn-danger" data-dismiss="modal">No, Cancelar</button>
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#Continuar").click(function () {
+            OpenModal('@Url.Content("/Operaciones/Nuevo")');
+        });
+    });
+</script>

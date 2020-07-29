@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="AgregarUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RfcAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CuentaAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClaveAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RfcUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CuentaUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClaveUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RazonSocialUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CorreoUsuario" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TipoUsuario" type="tns:TipoUsuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="TipoUsuario">
+        <s:restriction base="s:string">
+          <s:enumeration value="ClienteConAcceso" />
+          <s:enumeration value="Cliente" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AgregarUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarUsuarioResult" type="tns:WSEnrolaResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WSEnrolaResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Estado" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MensajeDeError" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AsignarTimbres">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RfcAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UsuarioAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClaveAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RfcUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CuentaUsuario" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Timbres" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AsignarTimbresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AsignarTimbresResult" type="tns:WSEnrolaResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarTimbres">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RfcAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UsuarioAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClaveAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RfcUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CuentaUsuario" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Timbres" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarTimbresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgregarTimbresResult" type="tns:WSEnrolaResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QuitarTimbres">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RfcAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UsuarioAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClaveAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RfcUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CuentaUsuario" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Timbres" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QuitarTimbresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QuitarTimbresResult" type="tns:WSEnrolaResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CambiarClave">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RfcUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CuentaUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClaveActual" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClaveNueva" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CambiarClaveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CambiarClaveResult" type="tns:WSEnrolaResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InhabilitarUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RfcAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CuentaAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClaveAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RfcUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CuentaUsuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InhabilitarUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InhabilitarUsuarioResult" type="tns:WSEnrolaResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearUsuarioRV">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RfcAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CuentaAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClaveAdmin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RfcUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CuentaUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClaveUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CorreoUsuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearUsuarioRVResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CrearUsuarioRVResult" type="tns:WSEnrolaResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AgregarUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarUsuario" />
+  </wsdl:message>
+  <wsdl:message name="AgregarUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="AsignarTimbresSoapIn">
+    <wsdl:part name="parameters" element="tns:AsignarTimbres" />
+  </wsdl:message>
+  <wsdl:message name="AsignarTimbresSoapOut">
+    <wsdl:part name="parameters" element="tns:AsignarTimbresResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgregarTimbresSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarTimbres" />
+  </wsdl:message>
+  <wsdl:message name="AgregarTimbresSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarTimbresResponse" />
+  </wsdl:message>
+  <wsdl:message name="QuitarTimbresSoapIn">
+    <wsdl:part name="parameters" element="tns:QuitarTimbres" />
+  </wsdl:message>
+  <wsdl:message name="QuitarTimbresSoapOut">
+    <wsdl:part name="parameters" element="tns:QuitarTimbresResponse" />
+  </wsdl:message>
+  <wsdl:message name="CambiarClaveSoapIn">
+    <wsdl:part name="parameters" element="tns:CambiarClave" />
+  </wsdl:message>
+  <wsdl:message name="CambiarClaveSoapOut">
+    <wsdl:part name="parameters" element="tns:CambiarClaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="InhabilitarUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:InhabilitarUsuario" />
+  </wsdl:message>
+  <wsdl:message name="InhabilitarUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:InhabilitarUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrearUsuarioRVSoapIn">
+    <wsdl:part name="parameters" element="tns:CrearUsuarioRV" />
+  </wsdl:message>
+  <wsdl:message name="CrearUsuarioRVSoapOut">
+    <wsdl:part name="parameters" element="tns:CrearUsuarioRVResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service1Soap">
+    <wsdl:operation name="AgregarUsuario">
+      <wsdl:input message="tns:AgregarUsuarioSoapIn" />
+      <wsdl:output message="tns:AgregarUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AsignarTimbres">
+      <wsdl:input message="tns:AsignarTimbresSoapIn" />
+      <wsdl:output message="tns:AsignarTimbresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarTimbres">
+      <wsdl:input message="tns:AgregarTimbresSoapIn" />
+      <wsdl:output message="tns:AgregarTimbresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QuitarTimbres">
+      <wsdl:input message="tns:QuitarTimbresSoapIn" />
+      <wsdl:output message="tns:QuitarTimbresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CambiarClave">
+      <wsdl:input message="tns:CambiarClaveSoapIn" />
+      <wsdl:output message="tns:CambiarClaveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InhabilitarUsuario">
+      <wsdl:input message="tns:InhabilitarUsuarioSoapIn" />
+      <wsdl:output message="tns:InhabilitarUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearUsuarioRV">
+      <wsdl:input message="tns:CrearUsuarioRVSoapIn" />
+      <wsdl:output message="tns:CrearUsuarioRVSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AgregarUsuario">
+      <soap:operation soapAction="http://tempuri.org/AgregarUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AsignarTimbres">
+      <soap:operation soapAction="http://tempuri.org/AsignarTimbres" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarTimbres">
+      <soap:operation soapAction="http://tempuri.org/AgregarTimbres" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QuitarTimbres">
+      <soap:operation soapAction="http://tempuri.org/QuitarTimbres" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambiarClave">
+      <soap:operation soapAction="http://tempuri.org/CambiarClave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InhabilitarUsuario">
+      <soap:operation soapAction="http://tempuri.org/InhabilitarUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearUsuarioRV">
+      <soap:operation soapAction="http://tempuri.org/CrearUsuarioRV" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AgregarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/AgregarUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AsignarTimbres">
+      <soap12:operation soapAction="http://tempuri.org/AsignarTimbres" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarTimbres">
+      <soap12:operation soapAction="http://tempuri.org/AgregarTimbres" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QuitarTimbres">
+      <soap12:operation soapAction="http://tempuri.org/QuitarTimbres" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambiarClave">
+      <soap12:operation soapAction="http://tempuri.org/CambiarClave" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InhabilitarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/InhabilitarUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearUsuarioRV">
+      <soap12:operation soapAction="http://tempuri.org/CrearUsuarioRV" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
+      <soap:address location="http://generacfdi.com.mx/wsenrola/service1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
+      <soap12:address location="http://generacfdi.com.mx/wsenrola/service1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

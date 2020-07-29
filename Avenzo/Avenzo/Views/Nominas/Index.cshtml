@@ -1,0 +1,62 @@
+﻿@model Avenzo.Models.Nomina
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+
+
+    <h2>Nominas</h2>
+    <div class="row">
+        <table class="table table-hover" id="Nominas">
+            <thead>
+                <tr>
+                    <th>PAC</th>
+                    <th>Empleado</th>
+                    <th>Folio</th>
+                    <th>Serie</th>
+                    <th>Fecha</th>
+
+                    <th class="text-center">Nomina</th>
+                    <th class="text-center">Acciones </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Nomina in Model.Nominas)
+                {
+                    <tr id="@Nomina.IdNominaHistorial">
+                        @foreach (var Proveedor in Model.PAC)
+                {
+                    if (Nomina.IdProveedor == Proveedor.Id)
+                    {
+                                <td>@Proveedor.Nombre</td>
+                            }
+                        }
+                        @foreach (var Empleado in Model.Empleados)
+                        {
+                            if (Empleado.NoEmpleado == Nomina.NoEmpleado)
+                            {
+                                <td>@Empleado.Nombre @Empleado.ApellidoPaterno @Empleado.ApellidoMaterno</td>
+                            }
+                        }
+                        <td>@Nomina.Folio</td>
+                        <td>@Nomina.Serie</td>
+                        <td>@Nomina.Fecha.Value.ToString("dd/MM/yyyy")</td>
+                        <td class="text-center"><button class="btn btn-success btn-xs">Descargar XML</button>&nbsp;<button class="btn btn-success btn-xs"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp; PDF</button></td>
+                        <td class="text-center"><button class="btn btn-info btn-xs"><i class="fa fa-info" aria-hidden="true"></i>&nbsp;&nbsp;Detalles</button>&nbsp;<button class="btn btn-info btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar</button>&nbsp;<button class="btn btn-danger btn-xs" onclick="DeleteRegister('@Nomina.IdNominaHistorial', 'Deseas Eliminar El registro', '@Url.Content("/Nominas/Eliminar")','#Nominas')"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Eliminar</button></td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/Tables/Nomina.js"></script>
+<script>
+            $(document).ready(function () {
+                $("#Nominas_length").addClass("text-center");
+                $("div.toolbar").append('<div class="col-sm-12 col-md-4 text-center"><div class="form-inline"><label class="control-label">PAC</label>&nbsp;<select id="PACS" class="form-control"><option value selected>Todos</option>@foreach (var proveedor in Model.PAC) { WriteLiteral("<option value=\""+ proveedor.Nombre+ "\">"+proveedor.Nombre+"</option>"); }</select></div></div>');
+                $("div.toolbar").append('<div class="col-sm-12 col-md-4 text-center"><button class="btn btn-info" onclick="OpenModal(\'/Nominas/Nuevo\')"  data-toggle="modal" data-target="#myModal"> <i class="fa fa-id-card-o" aria-hidden="true"></i> &nbsp;Nueva Nomina</button ></div>');
+                $("div.toolbar").append('</br>');
+            });
+</script>

@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "AvenzoSecuritySystem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="owl-carousel owl-theme" style="height:450px;min-height:450px;max-height:450px;">
+            <img class="owl-lazy" data-src="\Images\shutterstock_75178804-min.jpg" style="width:auto;height:450px;">
+            <img class="owl-lazy" data-src="\Images\shutterstock_89578807-min.jpg" style="width:auto;height:450px;">
+            <img class="owl-lazy" data-src="\Images\shutterstock_100369856-min.jpg" style="width:auto;height:450px;">
+            <img class="owl-lazy" data-src="\Images\shutterstock_160166114-min.jpg" style="width:auto;height:450px;">
+            <img class="owl-lazy" data-src="\Images\shutterstock_175215416-min.jpg" style="width:auto;height:450px;">
+            <img class="owl-lazy" data-src="\Images\shutterstock_188319986-min.jpg" style="width:auto;height:450px;">
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h2>Avenzo Security System</h2>
+            <p>Protege tus bienes y a sus ocupantes con la más alta tecnología en seguridad residencial y comercial. Nuestros dispositivos electrónicos inalámbricos se instalan en puntos estratégicos del inmueble para detectar a tiempo cualquier intrusión o emergencia.</p>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <h1>¿Buscas agregar valor a tu desarrollo inmobiliario?</h1>
+        <p>Juntos podemos ofrecer una experiencia integradora de protección con la más alta tecnología en seguridad residencial y comercial. Conoce más sobre nuestras soluciones de seguridad para empresas del sector inmobiliario.</p>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h1>Tecnología Inalámbrica</h1>
+        </div>
+        <div class="col-md-2 text-center">
+            <img src="~/Images/Icons/Actualizaciones_Azul.png" style="width:150px" />
+        </div>
+        <div class="col-md-10"><p>Nuestros sistemas son inalámbricos  utilizan tecnología celular para garantizar su funcionamiento independientemente de la conexión telefónica o la corriente eléctrica. Asimismo los dispositivos cuentan con baterías de respaldo para responder en caso de una contingencia.</p></div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h1>Capacitación</h1>
+        </div>
+        <div class="col-md-2 text-center">
+            <img src="~/Images/Icons/Capacitación_Azul.png" style="width:150px" />
+        </div>
+        <div class="col-md-10"><p>Te enseñamos a aprovechar al máximo tu Avenzo Security System, incluye un manual de usuario que te guiará paso a paso.</p></div>
+
+    </div>
+   
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h1>Proveedores de Confianza</h1>
+            <p>Contamos con una cartera de proveedores que te ayudaran durante el proceso de mejoras de tu hogar o negocio para prevenir incidentes de intrusión.</p>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <p>El Avenzo Security System se compone de los siguientes dispositivos para garantizar tu protección:</p>
+        <ul>
+            <li>
+                <h3>Panel</h3>
+                <p>
+                    Pieza central y fundamental, te permite activar y desactivar el sistema . En caso de que active uno de los dispositivos de monitoreo, es la que recibe la señal inalámbrica y emite el mensaje de alerta.
+                </p>
+            </li>
+            <li>
+                <h3>Control Remoto para Llavero</h3>
+                <p>Activa y desactiva tu sistema desde la palma de tus manos. El control remoto portátil es fácil de usar e incluye un botón de pánico. </p>
+            </li>
+            <li>
+                <h3>Sensor de Contacto</h3>
+                <p>El sensor inalámbrico detecta cuando una ventana o puerta se abre. </p>
+            </li>
+            <li>
+                <h3>Sensor de Movimiento</h3>
+                <p>Los sensores inalámbricos detectan a tiempo movimientos en zonas cerradas y activadas. </p>
+            </li>
+            <li>
+                <h3>Sirena Interna</h3>
+                <p>Se conecta a la corriente eléctrica y cuando recibe la señal inalámbrica de parte de los sensores, emite sonidos y luz de alerta. </p>
+            </li>
+            <li>
+                <h3>Sirena Externa</h3>
+                <p>La sirena externa emite sonidos y luz en caso de que un sensor se active. </p>
+            </li>
+            <li>
+                <h3>Botón de Pánico</h3>
+                <p>Situado cerca de tu cama u otro lugar estratégico para que en caso de emergencia, lo presiones, se activará la señal de la sirena y emitirá la señal de intrusión o emergencia a la Central Avenzo. </p>
+            </li>
+            <li>
+                <h3>Sensor de Humo</h3>
+                <p>El sensor de humo se activa cuando detecta humo para poder actuar de manera rápida ante un incendio.</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.owl-carousel').owlCarousel({
+            items: 1,
+            lazyLoad: false,
+            loop: true,
+            margin: 10,
+            autoWidth: true,
+            dotData: true,
+            autoplay: true
+        });
+        $("ul.sf-menu li").removeClass("current-menu-item");
+        $("ul.sf-menu li").removeClass("current_page_item");
+        $("#navSeguridad").addClass("current-menu-item");
+        $("#navSeguridad").addClass("current_page_item");
+    });
+</script>

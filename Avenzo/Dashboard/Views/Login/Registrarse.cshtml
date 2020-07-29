@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Registrar";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<div class="container-fluid">
+    <div class="row" id="Card" style="display:none;">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        
+        $($("#navRegister").parent()).addClass("active");
+        $("#Card").load("/Login/FormularioRegistrar", function (data, status) {
+            console.log("Anterior" + history.forward());
+            $("#Card").fadeIn(500);
+        });
+        if (window.history && window.history.pushState) {            
+            $(window).on('popstate', function () {
+                if (location.href.includes("Login/Registrarse")) {
+                    $("#Card").fadeOut(500, function () {
+                        $("#Card").load("/Login/FormularioRegistrar", function () {
+                            $("#Card").fadeIn(500);
+                        });
+                    });
+
+                }
+                else if (location.href.includes("/Login/Index") || location.href.includes("/Login")) {
+                    $("#Card").fadeOut(500, function () {
+                        $("#Card").load("/Login/FormularioLogin", function () {
+                            $("#Card").fadeIn(500);
+                        });
+                    });
+                } else if (location.href.includes("/Cuenta/Recuperar")) {
+                    $("#Card").fadeOut(500, function () {
+                        $("#Card").load("/Cuenta/FormularioRecuperar", function () {
+                            $("#Card").fadeIn(500);
+                        });
+                    });
+                }
+
+            });
+        }
+
+    });
+</script>

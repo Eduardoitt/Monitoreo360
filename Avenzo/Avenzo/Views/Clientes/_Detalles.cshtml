@@ -1,0 +1,235 @@
+﻿
+@model List<Avenzo.Models.GetCliente_ALT_Result>
+<div class="modal-fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Editar Cliente</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Ajax.BeginForm(null, null, new AjaxOptions { UpdateTargetId = "NuevoId" }, new { @id = "DetallesCliente" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="IdCliente" value="@Model.First().IdCliente" />
+                    <div class="se-pre-con"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Tipo de Afiliacion</label>
+                                    <input class="form-control" value="@Model.First().TipoAfilacion" name="TipoAfiliacion" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Correo Patrocinador</label>
+                                    <input class="form-control" value="@Model.First().UsuarioCreacion" disabled name="CorreoPatrocinador" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Mensualidad</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">$</span>
+                                        <input class="form-control" value="@Model.First().Mensualidad" type="number" name="Mensualidad" disabled/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Nombre(s)</label>
+                                    <input value="@Model.First().NombreCompletoCliente.Split('-')[0]" class="col-sm-12 form-control" name="Nombre" type="text" disabled />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Apellido Paterno</label>
+                                    <input value="@Model.First().NombreCompletoCliente.Split('-')[1]" class="form-control" name="APaterno" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Apellido Materno</label>
+                                    <input value="@Model.First().NombreCompletoCliente.Split('-')[2]" class="form-control" name="AMaterno" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Fecha de Nacimiento</label>
+                                    <input value="@Model.First().FechaNacimiento" class="form-control" type="date" name="FechaNacimiento" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Lugar de Nacimiento</label>
+                                    <input value="@Model.First().LugarNacimiento" class="form-control" name="LugarNacimiento" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Direccion</label>
+                                    <input value="@Model.First().DireccionCliente.Replace('|',' ')" class="form-control" name="Direccion" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Colonia</label>
+                                    <input value="@Model.First().ColoniaCliente" class="form-control" name="Colonia" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>Codigo Postal</label>
+                                    <input value="@Model.First().CodigoPostal" class="form-control" name="CodigoPostal" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Pais</label>
+                                    <input value="@Model.First().Pais" class="form-control" name="Pais" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Estado</label>
+                                    <input value="@Model.First().Estado" class="form-control" name="Estado" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Ciudad</label>
+                                    <input value="@Model.First().Ciudad" class="form-control" name="Ciudad" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Telefono Casa</label>
+                                    <input value="@Model.First().TelefonoCliente" class="form-control" name="TelefonoCasa" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Telefono Trabajo</label>
+                                    <input value="@Model.First().TelefonoTrabajoCliente" class="form-control" name="TelefonoTrabajo" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Telefono Celular</label>
+                                    <input value="@Model.First().TelefonoCelularCliente" class="form-control" name="TelefonoCelular" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Sexo</label>
+                                    <select class="form-control" name="Sexo" disabled>
+                                        <option disabled selected>Selecione Una Opcion</option>
+                                        <option value="N/A">N/A</option>
+                                        <option value="Femenino">Femenino</option>
+                                        <option value="Masculino">Masculino</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Estado Civil</label>
+                                    <input class="form-control" value="@Model.First().EstadoCivilCliente" name="EstadoCivilCliente" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Profecion o Ocupacion</label>
+                                    <input class="form-control" value="@Model.First().ProfesionCliente" name="ProfesionCliente" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Correo Electronico</label>
+                                    <input class="form-control" value="@Model.First().Email" name="Correo" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Telefono Alarma</label>
+                                    <input class="form-control" type="tel" value="@Model.First().NumeroTelefonoAlarma" name="NumeroTelefonoAlarma" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Palabra Clave</label>
+                                    <input class="form-control" type="text" value="@Model.First().PalabraClave" name="PalabraClave" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Palabra Silenciosa</label>
+                                    <input class="form-control" type="text" value="@Model.First().PalabraClaveSilenciosa" name="PalabraClaveSilenciosa" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>CURP</label>
+                                    <input class="form-control" type="text" value="@Model.First().CURP" name="CURP" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>RFC</label>
+                                    <input class="form-control" type="text" value="@Model.First().RFC" name="RFC" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Beneficiario</label>
+                                    <input class="form-control" type="text" value="@Model.First().Beneficiario" name="Beneficiario" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>#Tarjeta de Debito</label>
+                                    <input class="form-control" type="text" value="@Model.First().NumeroTarjetaDebito" name="NumeroTarjetaDebito" disabled/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Clave Interbancaria</label>
+                                    <input class="form-control" type="text" value="@Model.First().NumeroCLABE" name="NumeroClabe" disabled/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                   
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success btn-xs" data-dismiss="modal">cerrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>

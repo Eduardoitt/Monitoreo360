@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Adeudos";   
+    Layout = "~/Views/Shared/_Layout.cshtml";   
+}
+
+<script type="text/javascript">    
+    $(document).ready(function () {
+        $('.sidebar-wrapper >.nav > li').removeClass('active');
+        $("#navAdeudos").addClass("active");
+        $("#AppView").load("/Adeudos/_PanelAdeudos", function () {
+            $("#loader").fadeOut("slow", function () {
+                $("#AppView").fadeIn(500);
+            });
+
+        });
+    });
+</script>

@@ -1,0 +1,242 @@
+﻿@model Avenzo.Models.Ingresos
+
+
+<div>
+    <div class="row">
+        <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+                <label>Facturar Desde</label>                
+                @Html.DropDownList("PAC", new SelectList(Model.Proveedores, "id", "Nombre"), "Seleccione un proveedor", new { @class = "form-control", required = (string)null })
+                
+                
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+                <label>Moneda</label>
+                <select class="form-control " required name="Moneda"><option selected value disabled>Seleccione Tipo de Moneda</option><option value="USD">USD</option><option value="MXN">MXN</option></select>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+                <label>Nombre Completo</label>
+                <input type="text" class="form-control" name="Nombres" id="Nombres" required />
+            </div>
+            @Html.Hidden("id","")
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+                <label>Metodo de Pago</label>
+                @Html.DropDownList("MetodoPago", new SelectList(ViewBag.MetodoDePago, "c_MetodoPago", "Descripcion"),"Seleccione un Metodo de Pago", new { @class = "form-control", required = (string)null })
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+                <label>Tipo de Cambio</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input class="form-control"  name="TipoCambio"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="form-group">
+                <label>RFC</label>
+                <input pattern="^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$" name="RFC" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <div class="form-group">
+                <label>Pais</label>
+                <input class="form-control" value="México" name="Pais" required/>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <div class="form-group">
+                <label>Estado</label>
+                @Html.DropDownList("Estado", new SelectList(ViewBag.Estados, "Estado1", "Estado1"), new { @class = "form-control", required = (string)null })
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <div class="form-group">
+                <label>Ciudad</label>
+                <input class="form-control" type="text" name="Ciudad" />
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <div class="form-group">
+                <label>Colonia</label>
+                <input class="form-control" name="Colonia" />
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-2">
+            <div class="form-group">
+                <label>Codigo Postal</label>
+                <input class="form-control" name="CodigoPostal" type="number" />
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-3">
+            <div class="form-group">
+                <label>Calle</label>
+                <input class="form-control" type="text" name="Calle" />
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-2">
+            <div class="form-group">
+                <label>No. Interior</label>
+                <input class="form-control" type="text" name="NoInterior" />
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-2">
+            <div class="form-group">
+                <label>No. Exterior</label>
+                <input class="form-control" type="text" name="NoExterior" />
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <div class="form-group">
+                <label>Telefono</label>
+                <input class="form-control" type="number" name="Telefono" />
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-2">
+            <div class="form-group">
+                <label>NumCtaPago</label>
+                <input class="form-control" type="number" name="NumCtaPago" />
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="Facturar"> Requiere Factura
+                    @Html.Hidden("Factura",false)
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-12  col-md-3">
+            <div class="form-group">
+                <button class="btn btn-info form-control" id="btnAgregarConceptos" type="button">Agregar conceptos</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="Conceptos">
+    @Html.Hidden("CantidadConceptos","1")
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label> Concepto</label>
+                <input class="form-control" placeholder="Concepto" id="Concepto0" name="Concepto0" required/>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label> Descripción</label>
+                <input class="form-control" placeholder="Descripcion" id="Descripcion0" name="Descripcion0" required/>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label>Cantidad</label>
+                <input class="form-control" type="text" id="Cantidad0" name="Cantidad0" required/>                
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label>Unidad</label>
+                <input class="form-control" type="text" id="Unidad0" name="Unidad0" required/>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label>Cargo</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input class="form-control" type="number" min="0" step="1" placeholder="Cargo" id="Cargo0" name="Cargo0" required/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var input = document.getElementById("Nombres");
+        var AutocompletarNombres = new Awesomplete(input, {
+            minChars: 1,
+            maxItems: 5,
+            autoFirst: true
+        });
+        AutocompletarNombres.list = [
+            @foreach (var item in Model.clientes) {
+                WriteLiteral("{label:\"" + item.Nombres + " " + item.ApellidoPaterno + " " + item.ApellidoMaterno +"\",value:\""+item.IdCliente+"\"},"); } 
+            { label: "", value:"" }
+        ];
+        $('input[name=Nombres]').change(function () {
+            console.log($('#id').val())
+            var listaNombres = {
+                Clientes:[
+                    @foreach (var item in Model.clientes) {
+                        WriteLiteral("{\"Nombre\":\""+item.Nombres+" "+item.ApellidoPaterno+" "+item.ApellidoMaterno +"\",\"RFC\":\""+item.RFC+"\",\"id\":\""+item.IdCliente+"\",\"Pais\":\""+item.Pais+"\",\"Estado\":\""+item.Estado+"\",\"Colonia\":\""+item.Colonia+"\",\"CodigoPostal\":\""+item.CodigoPostal+"\",\"Ciudad\":\""+item.Ciudad+"\",\"Calle\":\""+item.Calle+"\",\"NoInterior\":\""+item.NoInterior+"\",\"NoExterior\":\""+item.NoExterior+"\",\"Telefono\":\""+item.Telefono+"\",\"NumCtaPago\":\""+item.ClaveBancaria+"\"},");
+                    }                   
+                ]
+            }            
+            for (var k in listaNombres.Clientes) {                
+                if (listaNombres.Clientes[k].id == $('#id').val()) {
+                    $('#idCliente').val(listaNombres.Clientes[k].id)
+                    $(this).val(listaNombres.Clientes[k].Nombre);
+                    $('input[name=RFC]').val(listaNombres.Clientes[k].RFC);
+                    $('input[name=Pais]').val(listaNombres.Clientes[k].Pais);
+                    $('input[name=Estado]').val(listaNombres.Clientes[k].Estado);
+                    $('input[name=Colonia]').val(listaNombres.Clientes[k].Colonia);
+                    $('input[name=CodigoPostal]').val(listaNombres.Clientes[k].CodigoPostal);
+                    $('input[name=Ciudad]').val(listaNombres.Clientes[k].Ciudad);
+                    $('input[name=Calle]').val(listaNombres.Clientes[k].Calle);
+                    $('input[name=NoInterior]').val(listaNombres.Clientes[k].NoInterior);
+                    $('input[name=NoExterior]').val(listaNombres.Clientes[k].NoExterior);
+                    $('input[name=Telefono]').val(listaNombres.Clientes[k].Telefono);
+                    $('input[name=NumCtaPago]').val(listaNombres.Clientes[k].NumCtaPago);
+                    break;                    
+                }                
+            }          
+        });
+        $('[name=Moneda]').change(function () {
+            if ($(this).val() == "MXN") {
+                $('input[name=TipoCambio]').prop('required', false);
+            } else {
+                $('input[name=TipoCambio]').prop('required', true);
+            }
+        });
+        $('[name=Facturar]').change(function () {
+            if ($('[name=Facturar]').is(":checked")) {
+                console.log("Requiere Factura");
+                $('input[name=RFC]').prop('required', true);
+                $('input[name=CodigoPostal]').prop('required', true);
+                $('input[name=Municipio]').prop('required', true);                
+                $('input[name=Factura]').val(true);
+            }
+            else {
+                console.log("No Requiere Factura");
+                $('input[name=RFC]').prop('required', false);
+                $('input[name=CodigoPostal]').prop('required', false);
+                $('input[name=Municipio]').prop('required', false);
+                $('input[name=Factura]').val(false);
+                
+            }
+        });
+        $('#btnAgregarConceptos').click(function () {
+            var cantidad = parseInt($('#CantidadConceptos').val()) + 1;
+            $('#CantidadConceptos').val(cantidad);
+            var row = '<div class="row row'+cantidad+'" style="display:none">';
+            row += '<div class="col-sm-3"><div class="form-group"><label> Concepto</label><input class="form-control" placeholder="Concepto" id="Concepto' + (cantidad - 1) + '" name="Concepto' + (cantidad - 1) + '" required/></div></div>';
+            row += '<div class="col-sm-3"><div class="form-group"><label> Descripción</label><input class="form-control" placeholder="Descripcion" id="Descripcion' + cantidad + '" name="Descripcion' + (cantidad - 1) + '" required/></div></div>';
+            row += '<div class="col-sm-2"><div class="form-group"><label>Cantidad</label><input class="form-control" type="text" id="Cantidad' + (cantidad - 1) + '" name="Cantidad' + (cantidad - 1) + '" required/></div></div>';
+            row += '<div class="col-sm-2"><div class="form-group"><label>Unidad</label><input class="form-control" type="text" id="Unidad' + (cantidad - 1) + '" name="Unidad' + (cantidad - 1) + '" required/></div></div>';
+            row += '<div class="col-sm-2"><div class="form-group"><label>Cargo</label><div class="input-group"><span class="input-group-addon">$</span><input class="form-control" type="number" min="0" step="1" placeholder="Cargo" id="Cargo' + (cantidad - 1) + '" name="Cargo' + (cantidad - 1) + '" required/></div></div></div>';
+            row +='</div>'
+            $('#Conceptos').append(row);
+            $('.row'+cantidad).fadeIn(500);
+        });
+    });
+</script>

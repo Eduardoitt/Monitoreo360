@@ -1,0 +1,145 @@
+﻿@model Model.Login
+<style>
+    .alert-dismissable .close, .alert-dismissible .close {
+        position: initial;
+    }
+</style>
+<div class="col-md-4 col-sm-4 col-md-offset-4 col-sm-offset-4" style="min-width:358px;">
+    @using (Ajax.BeginForm("/Login", null, new AjaxOptions { UpdateTargetId = "Login" }, new { @id = "Login" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("ReturnUrl", Request["ReturnUrl"])
+        <div class="card card-login">
+            <div class="card-header text-center" data-background-color="green">                
+                <img src="~/Images/Avenzo Fiscal Blanco.png" style="width:100%;height:auto;max-width:200px;"/>
+            </div>
+            <p class="category text-center">
+                Iniciar Sesion
+            </p>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">email</i>
+                            </span>
+                            <div class="form-group label-floating is-empty">
+                                @Html.LabelFor(u => u.UserName, new { @class = "control-label" })
+                                @Html.TextBoxFor(u => u.UserName, new { @class = "form-control", required = (string)null })
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">lock_outline</i>
+                            </span>
+                            <div class="form-group label-floating is-empty">
+                                @Html.LabelFor(u => u.Password, new { @class = "control-label" })
+                                @Html.TextBoxFor(u => u.Password, new { @class = "form-control", required = (string)null, @type = "password" })
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                <div class="row" id="ErrorMessage" style="display:none;">
+                    <div class="col-sm-12">
+                        <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                            <button type="button" class="close" aria-label="Close" id="CloseAlert"><span aria-hidden="true">&times;</span></button>
+                            <p id="Message">Hubo un error con tu correo o contrase&ntilde;a</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <button type="button" class="btn btn-success btn-simple btn-wd btn-lg" id="btnEntrar">Entrar</button>
+                <a class="btn btn-info btn-simple" id="btnRegistrar">Registrarse</a>
+                <a id="btnRecuperar" class="btn btn-warning btn-simple btn-wd btn-lg">Recuperar Contraseña</a>
+            </div>
+            <div class="row text-center" id="spinner" style="display:none;">
+                <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    $(document).ready(function () {        
+        $.extend($.validator.messages, {
+            equalTo: "Por favor, escribe la misma contraseña.",
+            minlength: jQuery.validator.format("Por favor, no escribas menos de {0} caracteres."),
+            required: "Este campo es obligatorio.",
+            email: "Por favor, escribe una dirección de correo válida",
+        });
+        var validarRecuperar = $("#Login").validate({
+            debug: true,
+            rules: {
+                UserName: {
+                    required: true,
+                    email: true,
+                },               
+                Password: {
+                    required: true,
+                    minlength:8
+                }
+            },
+
+        });
+
+        $("#btnRecuperar").click(function () {
+            $(".nav li").removeClass("active");
+            $("#Card").fadeOut(500, function () {
+                $("#Card").load("/Cuenta/FormularioRecuperar", function () {
+                    window.history.pushState('forward', null, '/Cuenta/Recuperar');
+                    $("#Card").fadeIn(500);
+                });
+            });
+        });
+        $("#CloseAlert").click(function () {
+            $("#ErrorMessage").fadeOut(500);
+        });
+        $("#btnRegistrar").click(function () {
+            $(".nav li").removeClass("active");
+            $($("#navRegister").parent()).addClass("active");
+            console.log("EntrarRegistro");
+            $("#Card").fadeOut(500, function () {
+                $("#Card").load("/Login/FormularioRegistrar", function () {
+                    window.history.pushState('forward', null, '/Login/Registrarse');
+                    $("#Card").fadeIn(500);
+                });
+            });
+        });
+        $("#btnEntrar").click(function (e) {
+            var isValid = $("#Login").valid();
+            if (isValid) {
+                $('#spinner').fadeIn(500, function () {
+                    $.ajax({
+                        url: '/Login/LogIn',
+                        type: 'post',
+                        data: { UserName: $("#UserName").val(), Password: $("#Password").val(), ReturnUrl:'@Request.Params["ReturnUrl"]' },
+                        async: false,
+                        success: function (result) {
+                            if (result.error == true) {
+                                $('#spinner').fadeOut(500);
+                                $("#Message").text("Hubo un error con tu correo o contraseña");
+                                $("#ErrorMessage").fadeIn(500);
+
+                            } else {
+                                location.href = "/";
+                            }
+                        },
+                        error: function (data, xhr, status) {
+                            $('#spinner').fadeOut(500);
+                            $("#Message").text(data.statusText);
+                            $("#ErrorMessage").fadeIn(500);
+                        }
+                    });
+                });
+            }            
+            return false;
+        });
+    });
+</script>

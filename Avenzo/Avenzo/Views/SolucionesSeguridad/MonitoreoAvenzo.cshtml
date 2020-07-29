@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "MonitoreoAvenzo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Monitoreo Avenzo</h2>
+            <p>Tu seguridad en manos profesionales. Vigilamos tu tranquilidad las 24 horas de cada uno de los 365 días del año desde nuestra Central Avenzo. En caso de incidentes un Agente Avenzo estará disponible para acompañarte y asesorarte ante cualquier situación. </p>
+        </div>
+        <div class="col-md-12">
+            <img src="~/Images/Avenzo_Seg_Monitoreo-01.png" style="width:100%;"/>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Los garantías del Monitoreo Avenzo son:</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h3>Protección 360</h3>
+        </div>
+        <div class="col-md-2 text-center">
+            <img src="~/Images/Icons/Avenzo_Proteccion360_Rojo-01.png" style="width:150px" />
+        </div>
+        <div class="col-md-10"><p>Vigilamos tu tranquilidad las 24 horas de cada uno de los 365 días del año para que goces de lo que más quieres día tras día. </p></div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h3>Agentes Avenzo</h3>
+        </div>
+        <div class="col-md-2 text-center">
+            <img src="~/Images/Icons/Avenzo_Agentes_Rojo-01.png" style="width:150px" />
+        </div>
+        <div class="col-md-10"><p>Nuestro personal está capacitado para manejar cualquier tipo de situación, dándote un acompañamiento amigable y personalizado durante todo el proceso. </p></div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h3>Mantenimiento</h3>
+        </div>
+        <div class="col-md-2 text-center">
+            <img src="~/Images/Icons/Avenzo_Mantenimiento_Rojo-01.png" style="width:150px" />
+        </div>
+        <div class="col-md-10"><p>Nos encargamos de mantener el equipo de monitoreo en óptimas condiciones para asegurar su funcionamiento y que siempre estés protegido. Incluimos el cambio de baterías. </p></div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h3>Asesoría ante Incidentes</h3>
+        </div>
+        <div class="col-md-2 text-center">
+            <img src="~/Images/Icons/Avenzo_ServiciosClientes_Rojo-01.png" style="width:150px" />
+        </div>
+        <div class="col-md-10"><p>Asesoría en prevención y manejo de incidentes a través de sencillos consejos o charlas comunitarias que tienen como prioridad tu seguridad y la de tu familia/colaboradores. </p></div>
+
+    </div>
+    
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("ul.sf-menu li").removeClass("current-menu-item");
+        $("ul.sf-menu li").removeClass("current_page_item");
+        $("#navSeguridad").addClass("current-menu-item");
+        $("#navSeguridad").addClass("current_page_item");
+    });
+</script>

@@ -1,0 +1,38 @@
+﻿@model List<Model.Empleados>
+@{    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <h2>Empleados</h2>    
+<table class="table table-hover" id="Empleados">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Usuario</th>
+                    <th>Puesto</th>
+                    <th>Telefono</th>
+                    <th>Telefono Emergencia</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.NoEmpleado)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Nombre) @Html.DisplayFor(modelItem => item.ApellidoPaterno) @Html.DisplayFor(modelItem => item.ApellidoMaterno) </td>
+                        <td>@Html.DisplayFor(modelItem => item.IdUsuario)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Puesto)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TelefonoEmergencia)</td>
+                        <td class="text-center"><button class="btn btn-xs btn-info">Detalles</button>&nbsp;<button class="btn btn-xs btn-info">Editar</button>&nbsp;<button class="btn btn-xs btn-danger">Eliminar</button></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/Scripts/Tables/Empleado.js"></script>

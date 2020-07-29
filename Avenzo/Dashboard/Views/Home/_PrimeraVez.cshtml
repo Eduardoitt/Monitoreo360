@@ -1,0 +1,121 @@
+﻿@model Model.PrimeraConfig
+    <style>
+        .puntos {
+            color: #808080;
+            cursor: pointer;
+        }
+
+            .puntos:hover {
+                color: #3C4858;
+            }
+
+            .puntos:active {
+                color: black;
+            }
+
+            .puntos.active {
+                color: #02a94f;
+            }
+    </style>
+    <div class="modal-fade" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <div class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-2 text-center">
+                                    <img src="~/Images/globos.png" style="width:50px;" />
+                                </div>
+                                <div class="col-sm-8 text-center">
+                                    <h3 class="wizard-title">Te damos la bienvenida a <br /> Avenzo Fiscal</h3>
+                                </div>
+                                <div class="col-sm-2 text-center">
+                                    <img src="~/Images/globos.png" style="width:50px;" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <p style="font-size:18px;"><br />Con la nueva pantalla de inicio, podrás acceder a tus Facturas con mayor facilidad.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <br />
+                                    <br />
+                                    <button class="btn btn-success" id="Final">Empezar a facturar</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="display:none;">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            
+                            <i class="material-icons puntos active">fiber_manual_record</i>
+                            <i class="material-icons puntos">fiber_manual_record</i>
+                            <i class="material-icons puntos">fiber_manual_record</i>
+                            <i class="material-icons puntos">fiber_manual_record</i>
+                            <i class="material-icons puntos">fiber_manual_record</i>
+                            <i class="material-icons puntos" id="Final">fiber_manual_record</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            var table = $('#datatables').DataTable({
+                "bSort": false,
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, 100],
+                    [10, 25, 50, 100]
+                ],
+                dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'><'col-sm-4'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-10 col-md-offset-1'p>>",               
+                responsive: true,
+                language: {
+                    search: "<div class=\"form-group form-inline\" style=\"margin:0px;\">_INPUT_</div>",
+                    searchPlaceholder: "Buscar en Registros",
+                    "lengthMenu": "Mostrar _MENU_ Registros",
+                    "zeroRecords": "No hay Adeudos",
+                    //"info": "Registros _START_  al  _END_  de _TOTAL_",
+                    "infoEmpty": "No hay registros disponibles",
+                    //"infoFiltered": "(filtrado de _MAX_ registros)",
+                    //"sSearch": "Buscar",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sPrevious": "Anterior",
+                        "sNext": "Siguiente",
+                        "sLast": "Ultimo"
+                    }
+                },
+                fnDrawCallback: function () {
+                    
+                }
+            });
+            $(".dataTables_paginate").css({"text-align":"center"});
+            $("#Guardar").click(function () {
+                var val = [];
+                $(':checkbox:checked').each(function (i) {
+                    val[i] = $(this).val();
+                })
+                console.log(val);
+                $.get("/Usuarios/GuardarClaveProdServ?ClaveProdServ=" + val, function () {
+                    
+                });
+            });
+            $("#Final").click(function () {
+                $("#myModal").html('');
+                $('#myModal').modal('hide');
+                $.get("/Home/actualizarUsuario");
+            });
+        });
+    </script>

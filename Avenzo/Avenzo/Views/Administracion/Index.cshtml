@@ -1,0 +1,170 @@
+﻿@model Avenzo.Models.Ingresos
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="body"></div>
+<div class="container">
+
+
+    <h2>Administración</h2>
+    <div class="row">
+        <div class="col-sm-12 col-md-3">
+            <div class="form-group">
+                <label>Metodo De Pago</label>
+                @Html.DropDownList("MetodoPago", new SelectList(ViewBag.MetodosDePago, "c_MetodoPago", "Descripcion"), "Todos", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <div>
+                <label>Mes</label>
+                <input class="form-control" type="month" id="dateSelector">
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-2">
+            <div class="form-group">
+                <label>USD</label>
+                <div class="input-group">
+                    <div class="input-group-addon">$</div>
+                    <input class="form-control" disabled="" value="@ViewBag.USD">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-2">
+            <div class="form-group">
+                <label>USD</label>
+                <div class="input-group">
+                    <div class="input-group-addon">$</div>
+                    <input class="form-control" disabled="" value="@ViewBag.MXN">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-2 text-center">
+            <div class="form-group">
+                <label></label>
+                <button class="btn btn-info" id="btnNuevoIngreso" data-toggle="modal" data-target="#myModal" onclick="OpenModal('/Administracion/Nuevo')">Nuevo Ingreso</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover" id="MonitoreoIngresos">
+                <thead>
+                    <tr>
+                        <th class="text-center">Fecha</th>
+                        <th style="width:133px;">Facturado Como</th>
+                        <th style="width:134px;">Cliente</th>
+                        <th>Concepto</th>
+                        <th>Metodo de Pago</th>
+                        <th class="text-center">Egresos MXN</th>
+                        <th class="text-center">Egresos USD</th>
+                        <th class="text-center">Ingresos MXN</th>
+                        <th class="text-center">Ingresos USD</th>
+                        <th><div style="width:100%" class="text-center">Factura</div></th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ingresos)
+                    {
+
+                        var cargos = Model.ingresos.Where(x => x.MismaFactura == item.MismaFactura).Sum(x => x.Cargos);
+                        var cargosUSD = Model.ingresos.Where(x => x.MismaFactura == item.MismaFactura).Sum(x => x.CargosUSD);
+                        bool c = false;
+                        <tr id="@item.IdIngreso">
+                            <td class="text-center">@item.Fecha.Day/@item.Fecha.Month.ToString("d2")/@item.Fecha.Year</td>
+                            <td style="width:133px;">@Model.Proveedores.Where(x => x.Id == item.IdProveedor).First().Nombre</td>
+                            @if (cargos == 0 && cargosUSD == 0)
+                            {
+                                c = false;
+
+                            }
+                            else if (item.Abonos == 0 && item.AbonosUSD == 0)
+                            {
+                                c = true;
+
+                            }
+                            @if (item.IdCliente == null)
+                            {
+                                <td class="text-center" style="width:134px;">N/A</td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @if (Model.clientes.Where(x => x.IdCliente == item.IdCliente).Count() > 0)
+                                    {
+                                        @Model.clientes.Where(x => x.IdCliente == item.IdCliente).First().Nombres WriteLiteral("&nbsp;"); @Model.clientes.Where(x => x.IdCliente == item.IdCliente).First().ApellidoPaterno WriteLiteral("&nbsp;"); @Model.clientes.Where(x => x.IdCliente == item.IdCliente).First().ApellidoMaterno
+                                    }
+                                </td>
+                            }
+                            <td>@item.Concepto</td>
+                            <td>@item.MetodoDePago.Replace("-", " ")</td>
+                            <td class="text-center">@item.Abonos</td>
+                            <td class="text-center">@item.AbonosUSD</td>
+                            <td class="text-center">@item.Cargos</td>
+                            <td class="text-center">@item.CargosUSD</td>
+                            @if (c)
+                            {
+
+                                <td class="text-center">
+                                    @if (item.Folio != null)
+                                    {
+                                    <!--window.open('@Url.Content("~/Administracion/DownloadRecibo")' + "?IdCliente=" + Cliente + "&Cantidad=" + JSON.stringify(cantidad) + "&Unidad=" + JSON.stringify(unidad) + "&Concepto=" + JSON.stringify(conceptos) + "&Precio=" + JSON.stringify(precio) + "&Leyenda=" + RequiereLeyenda + "&CantidadConceptos=" + i + "&Moneda=" + Moneda);-->
+                                        <button class="btn btn-success btn-xs btnEditar" onclick="window.location.href='/Administracion/Download?Folio=@item.Folio&Opcion=0'">Descargar PDF</button>
+                                        <button class="btn btn-success btn-xs btnEditar" onclick="window.location.href='/Administracion/Download?Folio=@item.Folio&Opcion=1'">Descargar XML</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-primary btn-xs btnEditar" onclick="SubirArchivo('@item.IdIngreso')">No Hay PDF</button>
+                                        <button class="btn btn-primary btn-xs btnEditar" onclick="SubirArchivo('@item.IdIngreso')">No Hay XML</button>
+                                        @*<button class="btn btn-primary btn-xs btnEditar" disabled onclick="SubirArchivo('@item.IdIngreso')">No Hay PDF</button>
+                                            <button class="btn btn-primary btn-xs btnEditar" disabled onclick="SubirArchivo('@item.IdIngreso')">No Hay XML</button>*@
+                                    }
+                                </td>
+                            }
+                            else
+                            {
+
+                                <td class="text-center">@item.Folio</td>
+                                <td class="text-center">
+                                    @if (item.FacturaPDF != null)
+                                    {
+                                        <button class="btn btn-success btn-xs btnEditar" onclick="window.location.href='@Url.Content("~/Administracion/CreateFileFromDB")?idIngreso=@item.IdIngreso&tipoArchivo=0'">Descargar PDF</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-primary btn-xs btnEditar" onclick="SubirArchivo('@item.IdIngreso')">Subir PDF</button>
+                                        @*<button class="btn btn-primary btn-xs btnEditar" disabled>Subir PDF</button>*@
+                                    }
+                                    @if (item.FacturaXML != null)
+                                    {
+                                        <button class="btn btn-success btn-xs btnEditar" onclick="window.location.href='@Url.Content("~/Administracion/CreateFileFromDB")?idIngreso=@item.IdIngreso&tipoArchivo=1'">Descargar XML</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-primary btn-xs btnEditar" onclick="SubirArchivo('@item.IdIngreso')">Subir XML</button>
+                                        @*<button class="btn btn-primary btn-xs btnEditar" disabled>Subir XML</button>*@
+                                    }
+                                </td>
+                            }
+                            <td class="text-center">
+                                <button class="btn btn-primary btn-xs btnEditar" @if (item.Folio != null || item.FacturaPDF != null || item.FacturaXML != null) { WriteLiteral("disabled"); }>Editar</button>
+                                <button class="btn btn-danger btn-xs" onclick="DeleteRegister('@item.IdIngreso','Deseas Eliminar el registro?','/Administracion/Eliminar','#MonitoreoIngresos')" @if (item.Folio != null || item.FacturaPDF != null || item.FacturaXML != null) { WriteLiteral("disabled"); }>Eliminar</button>
+                                @if (item.Folio != null)
+                                {
+                                    <button class="btn btn-xs btn-danger" onclick="Cancelar(@item.Folio,'@item.MismaFactura')">Cancelar Factura</button>
+                                }
+                                @if (item.RevisoRoboT == true && item.Folio == null || item.RequiereFactura == false)
+                                {
+                                    <button class="btn btn-xs btn-success" onclick="Facturar('@item.IdIngreso')">&nbsp;&nbsp;&nbsp;Crear Factura&nbsp;&nbsp;&nbsp;</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<script src="~/Scripts/Tables/Ingresos.js"></script>

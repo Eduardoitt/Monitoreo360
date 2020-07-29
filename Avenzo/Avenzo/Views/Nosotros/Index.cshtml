@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>Nosotros</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <p>Somos un equipo experto y comprometido, preocupado por la eficiencia y tranquilidad de las empresas y los hogares mexicanos, por lo que nos hemos especializado en brindar soluciones personalizadas de seguridad y tecnología que agregan valor y protección a través de un servicio cálido, confiable e innovador.</p>
+            <p>Nuestra capacidad tecnológica y experiencia nos permite analizar, diagnosticar y diseñar soluciones a la medida de las necesidades de los usuarios. </p>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <img src="~/Images/nosotros.jpg" class="img-rounded" width="100%"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center"><h1>Nuestros Valores</h1></div>
+        <div class="col-md-6 col-sm-12">
+            <ul>
+                <li>
+                    <h2>Confianza</h2>
+                    <p>Vigilamos tu tranquilidad las 24 horas de cada uno de los 365 días del año para que goces de lo que más quieres día tras día.</p>
+                </li>
+                <li>
+                    <h2>Honestidad</h2>
+                    <p>Nuestro personal está capacitado para manejar cualquier tipo de situación, dándote un acompañamiento amigable y personalizado durante todo el proceso. </p>
+                </li>
+            </ul>
+             
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <ul>
+                <li>
+                    <h2>Responsabilidad</h2>
+                    <p>Nos encargamos de mantener el equipo de monitoreo en óptimas condiciones para asegurar su funcionamiento y que siempre estés protegido. Incluimos el cambio de baterías. </p>
+                </li>
+                <li>
+                    <h2>Compromiso</h2>
+                    <p>Asesoría en prevención y manejo de incidentes a través de sencillos consejos o charlas comunitarias que tienen como prioridad tu seguridad y la de tu familia/colaboradores. </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("ul.sf-menu li").removeClass("current-menu-item");
+        $("ul.sf-menu li").removeClass("current_page_item");
+        $("#navNosotros").addClass("current-menu-item");
+        $("#navNosotros").addClass("current_page_item");
+    });
+</script>

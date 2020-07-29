@@ -1,0 +1,614 @@
+﻿<!doctype html>
+<html lang="es-mx">
+<head>
+    <meta charset="utf-8" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!--     Fonts and icons     -->
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/awesomplete.css" rel="stylesheet" type="text/css" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+    <link href="~/Content/sweetalert2.css" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/_core.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.bootstrap-wizard.js" type="text/javascript"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+    <script src="~/Scripts/select2.js" type="text/javascript"></script>
+    <script src="~/Scripts/select2.full.js" type="text/javascript"></script>
+   
+</head>
+<body>
+    <div class="se-pre-con" id="CargandoGeneral"></div>
+    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-fade" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-body" style="min-height:150px;">
+                        <div class="se-pre-con" id="Cargando"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="sidebar" data-active-color="green" data-color="green" data-background-color="black" data-image="/Images/sidebar-1.jpg">
+            <!--
+                Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+                Tip 2: you can also add an image using data-image tag
+            -->
+            <div class="logo">
+                <a href="/" class="simple-text">
+                    <img src="~/Images/Avenzo Fiscal Blanco.png" style="width:150px" />
+                </a>
+            </div>
+            <div class="logo logo-mini">
+                <a href="/" class="simple-text">
+                    A <span style="color:#02a94f;">F</span>
+                </a>
+            </div>
+
+            <div class="sidebar-wrapper" id="navLeft">
+                <div class="user">
+                    <div class="photo">
+                        <img src="@Url.Content("/Images/user.png")">
+                    </div>
+                    <div class="info">
+                        <a data-toggle="collapse" href="#collapseExample" class="collapsed">
+                            @{
+                                Model.AvenzoSeguridadEntities db = new Model.AvenzoSeguridadEntities();
+                                Model.Usuarios usuario = db.Usuarios.Where(x => x.Usuario == User.Identity.Name).FirstOrDefault();
+                                Model.Clientes cliente = db.Clientes.Where(x => x.IdUsuario == usuario.Id).FirstOrDefault();
+                                if (cliente != null)
+                                {
+                                    WriteLiteral(cliente.Nombres + " " + cliente.ApellidoPaterno + " " + cliente.ApellidoMaterno);
+                                }
+                                else
+                                {
+                                    Model.Empleados empleado = db.Empleados.Where(x => x.IdUsuario == usuario.Id).FirstOrDefault();
+                                    WriteLiteral(empleado.Nombre + " " + empleado.ApellidoPaterno + " " + empleado.ApellidoMaterno);
+                                }
+
+
+                            }
+                            <b class="caret"></b>
+                        </a>
+                        <div class="collapse" id="collapseExample">
+                            <ul class="nav">
+                                <li>
+                                    <a href="#">Mi Perfil</a>
+                                </li>
+                                <li>
+                                    <a href="#">Editar Perfil</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav" style="transition:all .5s; ">
+                    <li id="navDashboard" style="cursor:pointer;">
+                        <a>
+                            <i class="material-icons">dashboard</i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li id="navCertificado" style="cursor:pointer;">
+                        <a>
+                            <i class="material-icons">vpn_key</i>
+                            <p>Llave y Certificado</p>
+                        </a>
+                    </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <!--<li>
+                            <a href="#">
+                                <i class="material-icons">content_paste</i>
+                                <p>Inventario</p>
+                            </a>
+                        </li>-->
+                    }
+                    <li>
+                        <a data-toggle="collapse" href="#formsExamples">
+                            <i class="material-icons"><img src="~/Images/SAT-logo-350x324.png" style="height:30px;position:relative;top:-5px;" /></i>
+                            <p>
+                                CFDI
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="formsExamples" aria-expanded="false">
+                            <ul class="nav">
+                                <li id="navNominas"><a><p>Nominas 1.2</p></a></li>
+                                <li  id="navFacturas"><a><p>Facturas 3.3</p></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="navRecibos" style="cursor:pointer;">
+                        <a href="#">
+                            <i class="material-icons">library_books</i>
+                            <p>Recibos</p>
+                        </a>
+                    </li>
+                    <li id="navClientes" style="cursor:pointer;">
+                        <a>
+                            <i class="material-icons">person</i>
+                            <p>Clientes</p>
+                        </a>
+                    </li>
+                    <li style="cursor:pointer;" id="navEmpleados">
+                        <a>
+                            <i class="material-icons">people</i>
+                            <p>Empleados</p>
+                        </a>
+                    </li>
+
+                    <li style="cursor:pointer;" id="navOperaciones">
+                        <a>
+                            <i class="material-icons">monetization_on</i>
+                            <p>Operaciones</p>
+                        </a>
+                    </li>
+                    <li style="cursor:pointer;" id="navTienda">
+                        <a>
+                            <i class="material-icons"><img src="~/Images/coins1600.png" width="30" /></i>
+                            <p>Creditos</p>
+                        </a>
+                    </li>
+                    <li style="cursor:pointer;" id="navAdeudos">
+                        <a>
+                            <i class="material-icons">money_off</i>
+                            <p>Adeudos</p>
+                        </a>
+                    </li>                    
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-panel">
+            <nav class="navbar navbar-transparent navbar-absolute" id="NavBar" data-active-color="green" data-color="green" data-background-color="black" data-image="/Images/sidebar-1.jpg">
+                <div class="container-fluid">
+                    <div class="navbar-minimize">
+                        <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
+                            <i class="material-icons visible-on-sidebar-regular">more_vert</i>
+                            <i class="material-icons visible-on-sidebar-mini">view_list</i>
+                            <div class="ripple-container"></div>
+                        </button>
+                    </div>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Dashboard</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">                          
+                            <li>
+                                <a href="#a" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="material-icons">shopping_cart</i>
+                                    <p class="hidden-lg hidden-md">Dashboard</p>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="material-icons">notifications</i>
+                                    <!-- <span class="notification"></span>-->
+                                    <p class="hidden-lg hidden-md">Notificaciones</p>
+                                </a>
+                                <!--<ul class="dropdown-menu">
+                                    <li><a href="#">Mike John responded to your email</a></li>
+                                    <li><a href="#">You have 5 new tasks</a></li>
+                                    <li><a href="#">You're now friend with Andrew</a></li>
+                                    <li><a href="#">Another Notification</a></li>
+                                    <li><a href="#">Another One</a></li>
+                                </ul>-->
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="material-icons">person</i>
+                                    <p class="hidden-lg hidden-md">Cuenta</p>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li onclick="OpenPage('/Configuracion?i=0')" style="cursor:pointer;"><a><i class="material-icons">settings</i>&nbsp; Configuración</a></li>
+                                    <li onclick="OpenPage('/Usuarios/_Panel')" style="cursor:pointer;"><a><i class="material-icons">supervisor_account</i>&nbsp;Administrador de Usuarios</a></li>
+                                    <li><a href="/Login/Logout"><i class="material-icons">power_settings_new</i>&nbsp;Salir</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="navbar-form navbar-right" role="search" id="navbarFilterGroup">
+                           
+                            
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="content">
+                <div class="container-fluid" style="display:none;" id="loader">
+                    <div class="se-pre-con"></div>
+                </div>
+                <div id="AppView" style="display:none;">
+                    @RenderBody()
+                </div>
+
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                        <ul>
+                            <li><a href="#">Inicio</a></li>
+                            <li><a href="#">Avenzo</a></li>
+                            <li><a href="#">Portfolio</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy;
+                        <script>document.write(new Date().getFullYear())</script> <a href="http://www.avenzo.mx">Avenzo</a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/jquery.sharrre.js"></script>
+    <script src="~/Scripts/jquery.select-bootstrap.js"></script>
+    <script src="~/Scripts/jquery.tagsinput.js"></script>
+    <script src="~/Scripts/jquery.datatables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.4.2/js/buttons.flash.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>
+    <script src="~/Scripts/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap-notify.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="~/Scripts/sweetalert2.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="~/Scripts/nouislider.min.js"></script>
+    <script src="~/Scripts/material-dashboard.js"></script>
+    <script src="~/Scripts/awesomplete.js"></script>
+    <script src="~/Scripts/demo.js"></script>
+    <script src="~/Scripts/core.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('.modal').css("top", "0");
+            $("#navLeft").perfectScrollbar();
+            $("#CargandoGeneral").delay(500).fadeOut();
+            $("#navDashboard").click(function () {
+                $('.sidebar-wrapper >.nav > li').removeClass('active');
+                $(this).addClass("active");
+                window.history.pushState('forward', null, '/Home/Index');
+                document.title = 'Dashboard';
+                $("#NavBar").fadeOut("slow", function () {
+                    $("#AppView").fadeOut("slow", function () {
+                        $("#AppView").empty();
+                        var ps = $('.main-panel').animate({ scrollTop: 0 }, 500).perfectScrollbar();
+                        $('.main-panel').delay(500).css({ 'overflow': 'hidden' });
+                        $('.main-panel').perfectScrollbar('destroy');
+                        $("#loader").fadeIn("slow", function () {
+                            $("#AppView").load("/Home/_PanelDashboard", function (result, status) {
+                                $("#loader").delay(500).fadeOut(500, function () {
+                                    $("#NavBar").fadeIn("slow", function () {
+                                        $("#AppView").fadeIn("slow");
+                                    });
+                                    $('.main-panel').perfectScrollbar();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+            $("#navFacturas").click(function () {
+                $('.sidebar-wrapper >.nav > li').removeClass('active');
+                //$(this).addClass("active");
+                window.history.pushState('forward', null, '/Facturas/Index');
+                document.title = 'Facturas';
+                $("#NavBar").fadeOut("slow", function () {
+                    $("#AppView").fadeOut("slow", function () {
+                        $("#AppView").empty();
+                        var ps = $('.main-panel').animate({ scrollTop: 0 }, 500).perfectScrollbar();
+                        $('.main-panel').delay(500).css({ 'overflow': 'hidden' });
+                        $('.main-panel').perfectScrollbar('destroy');
+                        $("#loader").fadeIn("slow", function () {
+                            $("#AppView").load("/Facturas/_Panel", function (result, status) {
+                                $("#loader").delay(500).fadeOut(500, function () {
+                                    $("#NavBar").fadeIn("slow", function () {
+                                        $("#AppView").fadeIn("slow");
+                                    });
+                                    $('.main-panel').perfectScrollbar();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+            $("#navNominas").click(function () {
+                $('.sidebar-wrapper >.nav > li').removeClass('active');
+               // $(this).addClass("active");
+                window.history.pushState('forward', null, '/Nominas/Index');
+                document.title = 'Nominas';
+                $("#NavBar").fadeOut("slow", function () {
+                    $("#AppView").fadeOut("slow", function () {
+                        $("#AppView").empty();
+                        var ps = $('.main-panel').animate({ scrollTop: 0 }, 500).perfectScrollbar();
+                        $('.main-panel').delay(500).css({ 'overflow': 'hidden' });
+                        $('.main-panel').perfectScrollbar('destroy');
+                        $("#loader").fadeIn("slow", function () {
+                            $("#AppView").load("/Nominas/_Panel", function (result, status) {
+                                $("#loader").delay(500).fadeOut(500, function () {
+                                    $("#NavBar").fadeIn("slow", function () {
+                                        $("#AppView").fadeIn("slow");
+                                    });
+                                    $('.main-panel').perfectScrollbar();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+            $("#navClientes").click(function () {
+                $('.sidebar-wrapper >.nav > li').removeClass('active');
+                $(this).addClass("active");
+                window.history.pushState('forward', null, '/Clientes/Index');
+                document.title = 'Clientes';
+                $("#NavBar").fadeOut("slow", function () {
+                    $("#AppView").fadeOut("slow", function () {
+                        $("#AppView").empty();
+                        var ps = $('.main-panel').animate({ scrollTop: 0 }, 500).perfectScrollbar();
+                        $('.main-panel').delay(500).css({ 'overflow': 'hidden' });
+                        $('.main-panel').perfectScrollbar('destroy');
+                        $("#loader").fadeIn("slow", function () {
+                            $("#AppView").load("/Clientes/_PanelClientes", function (result, status) {
+                                $("#loader").delay(500).fadeOut(500, function () {
+                                    $("#NavBar").fadeIn("slow", function () {
+                                        $("#AppView").fadeIn("slow");
+                                    });
+                                    $('.main-panel').perfectScrollbar();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+            $("#navCertificado").click(function () {
+                $('.sidebar-wrapper >.nav > li').removeClass('active');
+                $(this).addClass("active");
+                window.history.pushState('forward', null, '/Certificados/Index');
+                document.title = 'Certificados';
+                $("#NavBar").fadeOut("slow", function () {
+                    $("#AppView").fadeOut("slow", function () {
+                        $("#AppView").empty();
+                        var ps = $('.main-panel').animate({ scrollTop: 0 }, "slow").perfectScrollbar();
+                        $('.main-panel').delay(500).css({ 'overflow': 'hidden' });
+                        $('.main-panel').perfectScrollbar('destroy');
+                        $("#loader").fadeIn("slow", function () {
+                            $("#AppView").load("/Certificados/_PanelCertificados", function (result, status) {
+                                $("#loader").delay(500).fadeOut(500, function () {
+                                    $("#NavBar").fadeIn("slow", function () {
+                                        $("#AppView").fadeIn("slow");
+                                    });
+
+                                    $('.main-panel').perfectScrollbar();
+                                });
+                            });
+                        });
+                    });
+                });
+
+            });
+            $("#navRecibos").click(function () {
+                $('.sidebar-wrapper >.nav > li').removeClass('active');
+                $(this).addClass("active");
+                window.history.pushState('forward', null, '/Recibos/Index');
+                document.title = 'Recibos';
+                $("#NavBar").fadeOut("slow", function () {
+                    $("#AppView").fadeOut("slow", function () {
+                        $("#AppView").empty();
+                        var ps = $('.main-panel').animate({ scrollTop: 0 }).perfectScrollbar();
+                        $('.main-panel').delay(500).css({ 'overflow': 'hidden' });
+                        $('.main-panel').perfectScrollbar('destroy');
+                        $("#loader").fadeIn("slow", function () {
+                            $("#AppView").load("/Recibos/_PanelRecibos", function (result, status) {
+                                $("#loader").delay(500).fadeOut(500, function () {
+                                    $("#NavBar").fadeIn("slow", function () {
+                                        $("#AppView").fadeIn("slow");
+                                    });
+                                    $('.main-panel').perfectScrollbar();
+                                });
+                            });
+                        });
+                    });
+                });
+
+            });
+            $("#navOperaciones").click(function () {
+                $('.sidebar-wrapper >.nav > li').removeClass('active');
+                $(this).addClass("active");
+                window.history.pushState('forward', null, '/Operaciones/Index');
+                document.title = 'Operaciones';
+                $("#NavBar").fadeOut("slow", function () {
+                    $("#AppView").fadeOut("slow", function () {
+                        $("#AppView").empty();
+                        var ps = $('.main-panel').animate({ scrollTop: 0 }).perfectScrollbar();
+                        $('.main-panel').delay(500).css({ 'overflow': 'hidden' });
+                        $('.main-panel').perfectScrollbar('destroy');
+                        $("#loader").fadeIn("slow", function () {
+                            $("#AppView").load("/Operaciones/_PanelOperaciones", function (result, status) {
+                                $("#loader").delay(500).fadeOut(500, function () {
+                                    $("#NavBar").fadeIn("slow", function () {
+                                        $("#AppView").fadeIn("slow");
+                                    });
+                                    $('.main-panel').perfectScrollbar();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+            $("#navAdeudos").click(function () {
+                $('.sidebar-wrapper >.nav > li').removeClass('active');
+                $(this).addClass("active");
+                window.history.pushState('forward', null, '/Adeudos/Index');
+                document.title = 'Adeudos';
+                $("#NavBar").fadeOut("slow", function () {
+                    $("#AppView").fadeOut("slow", function () {
+                        $("#AppView").empty();
+                        var ps = $('.sidebar .sidebar-wrapper, .main-panel').animate({ scrollTop: 0 }).perfectScrollbar();
+                        $('.sidebar .sidebar-wrapper, .main-panel').delay(500).css({ 'overflow': 'hidden' });
+                        $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+                        $("#loader").fadeIn("slow", function () {
+                            $("#AppView").load("/Adeudos/_PanelAdeudos", function (result, status) {
+                                $("#loader").delay(500).fadeOut(500, function () {
+                                    $("#NavBar").fadeIn("slow", function () {
+                                        $("#AppView").fadeIn("slow");
+                                    });
+                                    $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+            $("#navTienda").click(function () {
+                $('.sidebar-wrapper >.nav > li').removeClass('active');
+                $(this).addClass("active");
+                window.history.pushState('forward', null, '/Tienda/Index');
+                document.title = 'Adeudos';
+                $("#NavBar").fadeOut("slow", function () {
+                    $("#AppView").fadeOut("slow", function () {
+                        $("#AppView").empty();
+                        var ps = $('.sidebar .sidebar-wrapper, .main-panel').animate({ scrollTop: 0 }).perfectScrollbar();
+                        $('.sidebar .sidebar-wrapper, .main-panel').delay(500).css({ 'overflow': 'hidden' });
+                        $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+                        $("#loader").fadeIn("slow", function () {
+                            $("html").load("/Tienda/Index", function (result, status) {
+                                $("#loader").delay(500).fadeOut(500, function () {
+                                    $("#NavBar").fadeIn("slow", function () {
+                                        $("#AppView").fadeIn("slow");
+                                    });
+                                    $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+            $("#navEmpleados").click(function () {
+                $('.sidebar-wrapper >.nav > li').removeClass('active');
+                $(this).addClass("active");
+                window.history.pushState('forward', null, '/Empleados/Index');
+                document.title = 'Empleados';
+                $("#NavBar").fadeOut("slow", function () {
+                    $("#AppView").fadeOut("slow", function () {
+                        $("#AppView").empty();
+                        var ps = $('.sidebar .sidebar-wrapper, .main-panel').animate({ scrollTop: 0 }).perfectScrollbar();
+                        $('.sidebar .sidebar-wrapper, .main-panel').delay(500).css({ 'overflow': 'hidden' });
+                        $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+                        $("#loader").fadeIn("slow", function () {
+                            $("#AppView").load("/Empleados/_PanelEmpleados", function (result, status) {
+                                $("#loader").delay(500).fadeOut(500, function () {
+                                    $("#NavBar").fadeIn("slow", function () {
+                                        $("#AppView").fadeIn("slow");
+                                    });
+                                    $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+            if (window.history && window.history.pushState) {
+                $(window).on('popstate', function () {
+                    if (location.href.includes("/Clientes")) {
+                        $("#NavBar").fadeOut("slow", function () {
+                            $("#AppView").fadeOut("slow", function () {
+                                $("#AppView").empty();
+                                var ps = $('.sidebar .sidebar-wrapper, .main-panel').animate({ scrollTop: 0 }, 500).perfectScrollbar();
+                                $('.sidebar .sidebar-wrapper, .main-panel').delay(500).css({ 'overflow': 'hidden' });
+                                $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+                                $("#loader").fadeIn("slow", function () {
+                                    $("#AppView").load("/Clientes/_PanelClientes", function (result, status) {
+                                        $("#loader").delay(500).fadeOut(500, function () {
+                                            $("#NavBar").fadeIn("slow", function () {
+                                                $("#AppView").fadeIn("slow");
+                                            });
+                                            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    } else if (location.href.includes("/Certificados")) {
+                        $("#NavBar").fadeOut("slow", function () {
+                            $("#AppView").fadeOut("slow", function () {
+                                $("#AppView").empty();
+                                var ps = $('.sidebar .sidebar-wrapper, .main-panel').animate({ scrollTop: 0 }, "slow").perfectScrollbar();
+                                $('.sidebar .sidebar-wrapper, .main-panel').delay(500).css({ 'overflow': 'hidden' });
+                                $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+                                $("#loader").fadeIn("slow", function () {
+                                    $("#AppView").load("/Certificados/_PanelCertificados", function (result, status) {
+                                        $("#loader").delay(500).fadeOut(500, function () {
+                                            $("#NavBar").fadeIn("slow", function () {
+                                                $("#AppView").fadeIn("slow");
+                                            });
+
+                                            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    } else if (location.href.includes("/Recibos")) {
+                        $("#NavBar").fadeOut("slow", function () {
+                            $("#AppView").fadeOut("slow", function () {
+                                $("#AppView").empty();
+                                var ps = $('.sidebar .sidebar-wrapper, .main-panel').animate({ scrollTop: 0 }).perfectScrollbar();
+                                $('.sidebar .sidebar-wrapper, .main-panel').delay(500).css({ 'overflow': 'hidden' });
+                                $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+                                $("#loader").fadeIn("slow", function () {
+                                    $("#AppView").load("/Recibos/_PanelRecibos", function (result, status) {
+                                        $("#loader").delay(500).fadeOut(500, function () {
+                                            $("#NavBar").fadeIn("slow", function () {
+                                                $("#AppView").fadeIn("slow");
+                                            });
+                                            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+

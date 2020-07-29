@@ -1,0 +1,268 @@
+﻿@model List<Model.Empleados>
+@{
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    ViewBag.TitleModal = "Nuevas Nominas";
+}
+<style>
+    .detalles {
+        transition: all .5s;
+    }
+
+    .voltear {
+        transform: rotate(180deg);
+    }
+
+    .btn {
+        margin: 0;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label class="control-label">Compañia</label>
+            @Html.DropDownList("PAC",new SelectList(Model,"Id","Nombre"),"Seleccione una compañia",new { @class="form-control"})
+        </div>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-hover table-striped" id="Colaboradores" style="width:100%;">
+        <thead>
+            <tr>
+                <th class="col-sm-3">Nombre</th>
+                <th></th>
+                
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var empleado in Model)
+        {
+            <tr id="@empleado.Id">
+                <td>                   
+                    <div class="form-group" style="width:100%;">
+                        <div class="checkbox"  style="width:100%;">
+                            <label>
+                                <input type="checkbox" name="empleados[]" value="@empleado.IdPlantilla">
+                                <span class="checkbox-material">
+                                    <span class="check"></span>
+                                </span> @empleado.Nombre @empleado.ApellidoPaterno @empleado.ApellidoMaterno
+                            </label>
+                        </div>
+                    </div>                   
+                </td>
+                <td>
+                    <button class="btn btn-success btn-xs">Agregar Percepciones</button>
+                    <button class="btn btn-success btn-xs">Agregar Deducciones</button>
+                    <button class="btn btn-success btn-xs">Agregar Incapacidades</button>
+                    <button class="btn btn-success btn-xs">Agregar Otros Pagos</button>
+                </td>
+                <td>
+                    <button class="btn btn-info btn-simple detalles btn-icon" rel="tooltip" data-original-title="Detalles"><i class="material-icons">details</i></button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+   
+    
+
+</div>
+
+<script>
+    function format($Id) {
+        var tr = '';
+        var $ImporteGravado = 0;
+        var $ImporteExcento = 0;
+        var $ImporteDeducciones = 0;
+        $.ajax({
+            url: "/Nominas/Service?Id=" + $Id,
+            method: "GET",
+            async: false,
+            success: function (result) {
+                tr += '<div class="row">';
+                tr += ' <div class="col-sm-12">';
+                tr += '     <div class="col-sm-12 text-center text-success"><h4><b>Percepciones</b></h4></div>';
+                tr += ' </div>';
+                tr += ' <div class="col-sm-12">'
+                tr += '     <div class="col-sm-3 text-success"><b>Concepto</b></div>';
+                tr += '     <div class="col-sm-3 text-success"><b>Clave</b></div>';
+                tr += '     <div class="col-sm-3 text-success"><b>Importe Excento</b></div>';
+                tr += '     <div class="col-sm-3 text-success"><b>Importe Gravado</b></div>';
+                tr += ' </div>'
+                for (var k in result.Percepciones) {
+                    tr += '<div class="col-sm-12">';
+                    tr += ' <div class="col-sm-3 text-success"> ' + result.Percepciones[k].Concepto + '</div>';
+                    tr += ' <div class="col-sm-3 text-success"> ' + result.Percepciones[k].Clave + '</div>';
+                    tr += ' <div class="col-sm-3 text-success"> $' + result.Percepciones[k].ImporteExcento + '</div>';
+                    tr += ' <div class="col-sm-3 text-success"> $' + result.Percepciones[k].ImporteGravado + '</div>';
+                    tr += '</div>';
+                    $ImporteGravado += result.Percepciones[k].ImporteGravado;
+                    $ImporteExcento+= result.Percepciones[k].ImporteExcento;
+                    if (result.Percepciones[k].ValorMercado || result.Percepciones[k].PrecioOrtorgarse) {
+                        tr += '<div class="col-sm-12">';
+                        tr += ' <div class="col-sm-4 col-sm-offset-4 text-center">';
+                        tr += '     <b>Acciones o Titulos</b>';
+                        tr += ' </div>';
+                        tr += '</div>';
+                        tr += '<div class="col-sm-12">';
+                        tr += ' <div class="col-sm-3 col-sm-offset-3"><b>Valor Mercado: </b></div>';
+                        tr += ' <div class="col-sm-6"> $' + result.Percepciones[k].ValorMercado + '</div>';
+                        tr += '</div>';
+                        tr += '<div class="col-sm-12">';
+                        tr += ' <div class="col-sm-3 col-sm-offset-3"><b>Precio Ortorgarse: </b></div>';
+                        tr += ' <div class="col-sm-6"> $' + result.Percepciones[k].PrecioOrtorgarse + '</div>';
+                        tr += '</div>';
+                    }
+                    var horasextras=false;
+                    for (var i in result.HorasExtras) {
+                        if (result.HorasExtras[i].IdPercepcion == result.Percepciones[k].Id)
+                            horasextras=true;
+                    }
+                    if(horasextras){
+                        tr += '<div class="col-sm-4 col-sm-offset-4 text-center"><b>Horas Extras</b></div>';
+                        tr += '<div class="col-sm-12">';
+                        tr += ' <div class="col-sm-3"><b>Tipo</b></div>';
+                        tr += ' <div class="col-sm-3"><b>Dias</b></div>';
+                        tr += ' <div class="col-sm-3"><b>HorasExtras</b></div>';
+                        tr += ' <div class="col-sm-3"><b>Importe Pagado</b></div>';
+                        tr += '</div>';
+                        for (var i in result.HorasExtras) {
+                            if (result.HorasExtras[i].Id == result.Percepciones[k].Id) {
+                                tr += '<div class="col-sm-12">';
+                                tr += ' <div class="col-sm-3">' + result.HorasExtras[k].Tipo + '</div>';
+                                tr += ' <div class="col-sm-3">' + result.HorasExtras[k].Dias + '</div>';
+                                tr += ' <div class="col-sm-3">' + result.HorasExtras[k].HorasExtras + '</div>';
+                                tr += ' <div class="col-sm-3">' + result.HorasExtras[k].ImportePagado + '</div>';
+                                tr += '</div>';
+                            }
+                        }
+                    }                    
+                }               
+                tr += '</div>';
+                //--------
+                var count = Object.keys(result.Deduccion).length;
+                if (count > 0) {
+                    tr += '<div class="row">';
+                    tr += ' <div class="col-sm-12"><div class="col-sm-12 text-center text-danger"><h4><b>Deducciones</b></h4></div></div>';
+                    tr += ' <div class="col-sm-12">';
+                    tr += '     <div class="col-sm-4 text-danger"><b>Concepto</b></div>';
+                    tr += '     <div class="col-sm-4 text-danger"><b>Tipo</b></div>';
+                    tr += '     <div class="col-sm-4 text-danger"><b>Importe</b></div>';
+                    tr += ' </div>';
+                    for (var k in result.Deduccion) {
+                        tr += '<div class="col-sm-12">';
+                        tr += ' <div class="col-sm-4 text-danger"> ' + result.Deduccion[k].Concepto + '</div>';
+                        tr += ' <div class="col-sm-4 text-danger"> ' + result.Deduccion[k].Clave + '</div>';
+                        tr += ' <div class="col-sm-4 text-danger"> $' + result.Deduccion[k].Importe + '</div>';
+                        tr += '</div>';
+                        $ImporteDeducciones += result.Deduccion[k].Importe;
+                    }
+                    tr += '</div>';
+                }
+                count = Object.keys(result.Incapacidad).length;
+                if (count > 0) {
+                    tr += '<div class="row">';
+                    tr += ' <div class="col-sm-12"><div class="col-sm-12 text-center text-info"><h4><b>Incapacidades</b></h4></div></div>';
+                    tr += '<div class="col-sm-12">';
+                    tr += '     <div class="col-sm-4 text-info"><b>Tipo</b></div>';
+                    tr += '     <div class="col-sm-4 text-info"><b>Dias de Incapacidad</b></div>';
+                    tr += '     <div class="col-sm-4 text-info"><b>Importe</b></div>';
+                    tr += '</div>';
+                    for (var k in result.Incapacidad) {
+                        tr += '<div class="col-sm-12">';
+                        tr += ' <div class="col-sm-4 text-info">' + result.Incapacidad[k].Tipo + '</div>';
+                        tr += ' <div class="col-sm-4 text-info">' + result.Incapacidad[k].DiasIncapacidad + '</div>';
+                        tr += ' <div class="col-sm-4 text-info"> $' + result.Incapacidad[k].Importe + '</div>';
+                        tr += '</div>';
+                    }
+                    tr += '</div>';
+                }
+                count = Object.keys(result.OtrosPagos).length;
+                if(count>0){
+                    tr += '<div class="row">';
+                    tr += ' <div class="col-sm-12"><div class="col-sm-12 text-center text-primary"><h4><b>Otros Pagos</b></h4></div></div>';
+                    tr += ' <div class="col-sm-12">';
+                    tr += '     <div class="col-sm-3 text-primary"><b>Tipo</b></div>';
+                    tr += '     <div class="col-sm-3 text-primary"><b>Clave</b></div>';
+                    tr += '     <div class="col-sm-3 text-primary"><b>Concepto</b></div>';
+                    tr += '     <div class="col-sm-3 text-primary"><b>Importe</b></div>';
+                    tr += ' </div>';
+                    for (var k in result.OtrosPagos) {
+                        tr += '<div class="col-sm-12">';
+                        tr += ' <div class="col-sm-3 text-primary">' + result.OtrosPagos[k].Tipo + '</div>';
+                        tr += ' <div class="col-sm-3 text-primary">' + result.OtrosPagos[k].Clave + '</div>';
+                        tr += ' <div class="col-sm-3 text-primary">' + result.OtrosPagos[k].Concepto + '</div>';
+                        tr += ' <div class="col-sm-3 text-primary"> $' + result.OtrosPagos[k].Importe + '</div>';
+                        tr += '</div>';
+                        if (result.OtrosPagos[k].SubsidioCausado) {
+                            tr += '<div class="col-sm-12">';
+                            tr += ' <div class="col-sm-4 col-sm-offset-4 text-center"><b>Subsidio Al Empleo</b></div>';
+                            tr += '</div>';
+                            tr += '<div class="col-sm-12">';
+                            tr += ' <div class="col-sm-4"><b>SubsidioCausado: </b>$' + result.OtrosPagos[k].SubsidioCausado + '</div>';
+                            tr += '</div>';
+                        }
+                        if (result.OtrosPagos[k].SaldoAFavor) {
+                            tr += '<div class="col-sm-12">';
+                            tr += ' <div class="col-sm-4 col-sm-offset-4 text-center"><b>Compensacion Saldos A Favor</b></div>';
+                            tr += '</div>';
+                            tr += '<div class="col-sm-12">';
+                            tr += ' <div class="col-sm-4"><b>Saldo A Favor:</b> $' + result.OtrosPagos[k].SaldoAFavor + '</div><div class="col-sm-4"><b>Año:</b>' + result.OtrosPagos[k].Año + '</div><div class="col-sm-4"><b>Remanente Saldo a Favor:</b> $' + result.OtrosPagos[k].RemanenteSalFav + '</div>';
+                            tr += '</div>';
+                        }
+                    }
+                    tr += '</div>';
+                }
+            }
+        });  
+        return tr;
+    }
+
+    $(document).ready(function () {
+       var table= $('#Colaboradores').DataTable({
+            pagingType: "full_numbers",
+            lengthMenu: [
+                [5, 25, 50, -1],
+                [5, 25, 50, "Todos"]
+            ],
+            fnDrawCallback: function () {
+                /*$(".detalles").click(function () {
+                    console.log("detallles");
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr);
+                    if (row.child.isShown()) {
+                        // This row is already open - close it
+                        if ($(this).attr("class").includes("voltear")) {
+                            console.log("Closet");
+                            row.child.hide();
+                            $(this).removeClass("voltear");
+                        }
+                    }
+                    else {
+                        // Open this row
+                        console.log("Open");
+                        $(this).addClass("voltear");
+                        row.child(format($(tr).attr("id"))).show();
+                        //return false; 
+                    }
+                });*/
+            }
+       });
+       $('#Colaboradores tbody').on('click', 'td .detalles', function () {
+           var tr = $(this).closest('tr');
+           var row = table.row(tr);
+
+           if (row.child.isShown()) {
+               // This row is already open - close it
+               row.child.hide();
+               $(this).removeClass('voltear');
+           }
+           else {
+               // Open this row
+               row.child(format($(tr).attr("id"))).show();
+               $(this).addClass('voltear');
+           }
+       });
+        $('[rel="tooltip"]').tooltip();
+    });
+</script>

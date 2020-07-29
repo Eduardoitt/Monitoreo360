@@ -1,0 +1,392 @@
+﻿@model Model.Adeudos
+@{
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    ViewBag.TitleModal = "";
+}
+<div class="row" id="FormConfirmation">
+    <div class="col-md-12">
+        <div class="wizard-container">
+            <div class="card wizard-card" data-color="blue" id="wizardProfile">
+                <form action="" method="" novalidate="novalidate">
+                    <!--        You can switch " data-color="purple" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+                    <div class="wizard-header">
+                        <h3 class="wizard-title">
+                            Creando factura
+                        </h3>
+                        <h5>Confirmacion de informacion para la factura.</h5>
+                    </div>
+                    <div class="wizard-navigation">
+                        <ul class="nav nav-pills">
+                            <li style="width: 25%;" class="active">
+                                <a href="#about" data-toggle="tab" aria-expanded="true">Cliente</a>
+                            </li>
+                            <li style="width: 25%;" class="">
+                                <a href="#account" data-toggle="tab" aria-expanded="false">Factura</a>
+                            </li>
+                            <li style="width: 25%;">
+                                <a href="#address" data-toggle="tab">Datos Fiscales</a>
+                            </li>
+                        </ul>
+                        <div class="moving-tab" style="width: 345.552px; transform: translate3d(345.552px, 0px, 0px); transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1);">Account</div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="about">
+                            <div class="row">
+                                <h4 class="info-text"> Informacion del cliente</h4>
+                                <div class="col-sm-4 col-sm-offset-1">
+                                    <div class="picture-container">
+                                        <div class="picture">
+                                            <img src="~/Images/user.png" class="picture-src" id="wizardPicturePreview" title="">
+
+                                        </div>
+                                        <h6>Foto</h6>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">face</i>
+                                        </span>
+                                        <div class="form-group label-floating">
+                                            @Html.Hidden("IdFactura",Model.adeudos.First().Id)
+                                            <label class="control-label">
+                                                Nombre
+                                                <small>(obligatorio)</small>
+                                            </label>
+                                            <input name="firstname" type="text" class="form-control valid" aria-required="true" aria-invalid="false" value="@Model.Clientes.First().Nombres" disabled>
+                                            <span class="material-input"></span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">record_voice_over</i>
+                                        </span>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">
+                                                Apellido Paterno
+                                                <small></small>
+                                            </label>
+                                            <input name="lastname" type="text" class="form-control" aria-required="false" aria-invalid="false" value="@Model.Clientes.First().ApellidoPaterno" disabled>
+                                            <span class="material-input"></span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">email</i>
+                                        </span>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">
+                                                Apellido Materno
+                                                <small></small>
+                                            </label>
+                                            <input name="lastname" type="text" class="form-control" value="@Model.Clientes.First().ApellidoMaterno" disabled>
+                                            <span class="material-input"></span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">email</i>
+                                        </span>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">
+                                                Correo electronico
+                                                <small></small>
+                                            </label>
+                                            <input name="lastname" type="text" class="form-control" value="@Model.Clientes.First().RFC" disabled>
+                                            <span class="material-input"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-right">
+                                <button class="btn btn-warning btn-simple" type="button">Editar Cliente</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane " id="account">
+                            <h4 class="info-text"> Datos de la factura</h4>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Metodo de Pago</label>
+                                        <input class="form-control" value="Efectivo" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label">Folio</label>
+                                        <input class="form-control" value="1" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Moneda</label>
+                                        <input class="form-control" value="MXN" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-3 text-right">
+                                    <img src="~/Images/2factura.v.png" class="img-rounded" style="width:100px;height:auto;" />
+                                </div>
+                            </div>
+                            @foreach (var adeudo in Model.adeudos)
+                            {
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Concepto</label>
+                                            <input value="@adeudo.Concepto" class="form-control" disabled />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Unidad</label>
+                                            <input class="form-control" value="@adeudo.Unidad" disabled />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Cantidad</label>
+                                            <input class="form-control" value="@adeudo.Cantidad" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Total</label>
+                                            <input class="form-control" value="@adeudo.Total.ToString("f2")" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 text-center">
+                                        <div class="form-group">
+                                            <label>&nbsp;</label>
+                                            <button class="btn btn-info btn-danger btn-simple" type="button" rel="tooltip" data-original-title="Eliminar de la factura" style="display:none;"><i class="material-icons">close</i></button>
+                                            <button class="btn btn-warning btn-simple" type="button" rel="tooltip" data-original-title="Editar Concepto"><i class="material-icons">mode_edit</i></button>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                               
+                            }
+                            <div id="Conceptos">
+
+                            </div>
+                            <div class="row text-right">
+                                <button class="btn btn-info btn-info btn-simple" type="button" rel="tooltip" data-original-title="Agregar Conceptos" id="AddFactura"><i class="material-icons">add</i></button>
+                            </div>
+                            <div id="addLista" style="display:none;">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Concepto</label>
+                                            <select class="form-control">
+                                                <option>Otro Xbox</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>&nbsp;</label>                                            
+                                            <button class="btn btn-info btn-simple" id="Add" type="button"><i class="material-icons" rel="tooltip" data-original-title="Agregar ala factura">add</i></button>  
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>&nbsp;</label>
+                                            <button class="btn btn-danger btn-simple" id="Cancel" type="button" rel="tooltip" data-original-title="Canelar"><i class="material-icons">cancel</i></button>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Impuesto</label>
+                                        <input class="form-control" value="IVA" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Monto</label>
+                                        @{
+                                            var Monto = Model.adeudos.First().Total;
+                                            var Total = Monto - (Monto / 1.16);
+                                        }
+                                        <input class="form-control" value="@Total.ToString("f2")" disabled id="IVA"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Porcentaje</label>
+                                        <input class="form-control" value="16%" disabled />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="address">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 class="info-text">Cliente</h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Direccion</label>
+                                        <input class="form-control" value="@Model.Clientes.First().Colonia, @Model.Clientes.First().Calle @Model.Clientes.First().NoExterior @Model.Clientes.First().NoInterior,@Model.Clientes.First().Ciudad @Model.Clientes.First().Estado" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Numero De Cuenta Pago</label>
+                                        <input class="form-control" value="@Model.Clientes.First().NumCtaPago" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h4 class="info-text">Emisor</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Razon Social</label>
+                                        <input class="form-control" value="@Model.Proveedores.First().Nombre" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Lugar de Expedicion</label>
+                                        <input class="form-control" value="22210" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Regimen Fiscal</label>
+                                        <input class="form-control" value="@ViewBag.RegimenFiscal" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wizard-footer">
+                        <div class="pull-right">
+                            <input type="button" class="btn btn-next btn-fill btn-info btn-wd" name="next" value="Siguinete">
+                            <input type="button" class="btn btn-finish btn-fill btn-success btn-wd" name="finish" value="Facturar" style="display: none;">
+                            <input type="button" class="btn btn-success btn-fill" name="Terminar" value="Terminar" style="display:none;"/>
+                        </div>
+                        <div class="pull-left">
+                            <input type="button" class="btn btn-previous btn-fill btn-default btn-wd" name="previous" value="Anterior">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display:none;" id="success">
+
+
+    <div class="row">
+        <div class="swal2-icon swal2-success animate"><span class="line tip animate-success-tip"></span> <span class="line long animate-success-long"></span><div class="placeholder"></div> <div class="fix"></div></div>
+        
+    </div>
+    <div class="row text-center">
+        <h3 class="wizard-title">
+            Se ha Creado La Factura!
+        </h3>
+        <h5>Se ha creado la factura con exito, se le envio una copia al correo</h5>
+    </div>
+</div>
+<div  id="error" style="display:none">
+    <div class="row">
+        <div class="swal2-icon swal2-error swal2-animate-error-icon"><span class="swal2-x-mark swal2-animate-x-mark"><span class="swal2-x-mark-line-left"></span><span class="swal2-x-mark-line-right"></span></span></div>
+    </div>
+    <div class="row text-center">
+        <h3 class="wizard-title">
+            Ha ocurrido un error!
+        </h3>
+        <h5 id="MensajeErrorSAT">Ha ocurrido un erro con el servidor. Intentelo mas Tarde</h5>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+         $('[rel="tooltip"]').tooltip();
+            demo.initMaterialWizard();
+            $('[name=finish]').click(function () {
+                $.get('/Facturas/Facturar?IdFactura=' + $('#IdFactura').val(), function (data, status) {
+                    if (data.error == "none") {
+                        window.open("/Facturas/Descargar?Id=" + data.IdFactura);
+                        
+                        $('#FormConfirmation').fadeOut('slow', function () {
+                            $('#success').fadeIn('slow');
+                            $('[name=finish]').fadeOut();
+                            $('[name=Terminar]').fadeIn();
+
+                        });
+                    }
+                    else {
+                        $('#FormConfirmation').fadeOut('slow', function () {
+                            $('#error').fadeIn('slow');
+                            $("#MensajeErrorSAT").html(data.Message);
+                        });
+                    }
+                });
+            });
+            $('[name=Terminar]').click(function () {
+                $('#myModal').modal('hide');
+                $('#datatables').dataTable().fnUpdate('Zebra', $('tr#3692')[0], 1);
+
+            });
+            $('#AddFactura').click(function () {
+                $('#addLista').fadeIn();
+            });
+            $('#Cancel').click(function () {
+                $('#addLista').fadeOut();
+            });
+            $('#Add').click(function () {
+                var row=' <div class="row">';
+                row+='<div class="col-md-3">';
+                row+='<div class="form-group">';
+                row+='<label class="control-label">Concepto</label>';
+                row+='<input value="s" class="form-control" disabled />';
+                row+='</div>';
+                row+='</div>';
+                row+='<div class="col-md-2">';
+                row+='<div class="form-group">';
+                row+='<label class="control-label">Unidad</label>';
+                row+='<input class="form-control" value="" disabled />';
+                row+='</div>';
+                row+='</div>';
+                row+='<div class="col-md-2">';
+                row+='<div class="form-group">';
+                row+='<label class="control-label">Cantidad</label>';
+                row+='<input class="form-control" value="" disabled />';
+                row+='</div>';
+                row+='</div>';
+                row+='<div class="col-md-3">';
+                row += '<div class="form-group">';
+                row += '<label class="control-label">Total</label>';
+                row += '<input class="form-control" value="100.00" disabled />';
+                row += '</div>';
+                row += '</div>';
+                row+='<div class="col-md-2">';
+                row+='<div class="form-group">';
+                row += '<label>&nbsp;</label>';
+                row += '<button class="btn btn-info btn-danger btn-simple" style="width:40%;" type="button" rel="tooltip" data-original-title="Eliminar"><i class="material-icons">close</i></button>';
+
+                row+='</div>';
+                row+='</div>';
+                row+='</div>';
+                $('#Conceptos').append(row);
+                $('#IVA').val((parseInt($('#IVA').val()) + (100-(100 / 1.16))).toFixed(2));
+                $('[rel="tooltip"]').tooltip();
+                $('#addLista').fadeOut();
+            });
+    });
+</script>

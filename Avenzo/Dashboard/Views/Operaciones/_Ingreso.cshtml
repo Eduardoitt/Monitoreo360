@@ -1,0 +1,807 @@
+﻿@model Model.Ingresos
+<style>
+    .select2-results__option{
+        transition:all .5s;
+    }
+    .select2-results__option:hover{
+        background-color:#02A94F;
+        color:white;
+    }
+    .select2-results{
+        display:block;
+        height:200px;
+        overflow-y:scroll;
+        min-height:33px;
+        max-height:200px;
+    }
+</style>
+@using (Ajax.BeginForm("/_Ingreso", null, new AjaxOptions { UpdateTargetId = "NuevoId" }, new { @id = "NuevoIngreso" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-sm-3 col-md-3">
+            <div class="form-group">
+                <label class="control-label">Facturar Como</label>
+                @Html.DropDownList("PAC", new SelectList(Model.Proveedores, "id", "Nombre"), "Selecione una Persona", new { @class = "form-control", required = (string)null })
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3">
+            <div class="form-group">
+                <label class="control-label">Nombre Completo</label>
+                <input type="text" class="form-control" name="Nombres" id="Nombres" required />
+
+            </div>
+            @Html.Hidden("id", "")
+        </div>
+        <div class="col-sm-3 col-md-3" id="AdeudosDelCliente">
+            <div class="form-group">
+                <label class="control-label">Adeudo</label>
+                <select class="form-control" name="Adeudo" id="Adeudo">
+                    <option value="0" selected>Nuevo Adeudo</option>
+                </select>
+            </div>
+        </div>
+        @Html.Hidden("IdFactura", Guid.NewGuid())
+        <div class="col-sm-3 col-md-3">
+            <div class="form-group">
+                <label class="control-label">Acesor</label>
+                <select class="form-control" name="Asesor" id="Asesor">
+                    @foreach (var item in ViewBag.Acesores)
+                    {
+                        <option value="@item.Id">@item.Nombre @item.ApellidoMaterno @item.ApellidoPaterno</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 col-md-4">
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="Facturar" name="Facturar"><span class="checkbox-material">
+                            <span class="check"></span>
+                        </span> Requiere Factura
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="Envio" name="Envio"><span class="checkbox-material">
+                            <span class="check"></span>
+                        </span> Enviar Factura
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Moneda</label>
+                <select class="form-control " required name="Moneda"><option selected  disabled>Selecione una Moneda</option><option value="USD">USD</option><option value="MXN">MXN</option></select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Metodo de Pago</label>
+                @Html.DropDownList("MetodoPago", new SelectList(ViewBag.MetodoDePago, "c_MetodoPago", "Descripcion"), "Selecione un metodo de pago", new { @class = "form-control", required = (string)null })
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Forma de Pago</label>
+                @Html.DropDownList("FormaPago", new SelectList(ViewBag.FormaDePago, "c_FormaPago", "Descripcion"), "Selecciona Forma de pago", new { @class = "form-control", required = (string)null })
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Tipo de Cambio</label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input class="form-control" name="TipoCambio" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Uso CFDI</label>
+                @Html.DropDownList("UsoCFDI", new SelectList(ViewBag.UsoCFDI, "c_UsoCFDI", "Descripcion"), "Selecione un Uso CFDI", new { @class = "form-control", required = (string)null })
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">RFC</label>
+                <input pattern="^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$" name="RFC" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">NumCtaPago</label>
+                <input class="form-control" type="number" name="NumCtaPago" />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input class="form-control" name="Email" type="email" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Pais</label>
+                <input class="form-control" value="México" name="Pais" required />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Estado</label>
+                @Html.DropDownList("Estado", new SelectList(ViewBag.Estados, "NombreEstado", "NombreEstado"), "Selecione un estado", new { @class = "form-control", required = (string)null })
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Ciudad</label>
+                <input class="form-control" type="text" name="Ciudad" />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Colonia</label>
+                <input class="form-control" name="Colonia" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Codigo Postal</label>
+                <input class="form-control" name="CodigoPostal" type="number" />
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Calle</label>
+                <input class="form-control" type="text" name="Calle" />
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">No. Interior</label>
+                <input class="form-control" type="text" name="NoInterior" />
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">No. Exterior</label>
+                <input class="form-control" type="text" name="NoExterior" />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label class="control-label">Telefono</label>
+                <input class="form-control" type="number" name="Telefono" />
+            </div>
+        </div>
+    </div>
+    <div id="Cargos" style="display:none">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <div class="form-group">
+                    <label class="control-label">Cargo</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$</span>
+                        <input class="form-control" type="text" id="Cargos" name="Cargos" />
+                        @Html.Hidden("IdCargo", Guid.NewGuid())
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center">
+                <div class="form-group">
+                    <input class="btn btn-danger" href="#" id="Debe" type="button" value="Debe $00,00.00" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Conceptos">
+        <div class="row">
+            <div class="col-sm-9 text-center">
+                <h4>Conceptos</h4>
+            </div>
+            <div class="co-md-3 text-center">
+                <button class="btn btn-info btn-xs" id="btnAgregarConceptos" type="button">Agregar Concepto</button>
+            </div>
+        </div>
+        @Html.Hidden("CantidadConceptos", "1")
+        <div class="row ConceptoRow0">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label">Clave de Producto y Servicios &nbsp;<small class="text-warning" id="AgregarClaves">*</small></label>
+                        <select class="ClaveProdServ form-control" name="ClaveProdServ0" id="ClaveProdServ0"></select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label"> Concepto</label>
+                        <input class="form-control" id="Concepto0" name="Concepto0" required />
+                        @Html.Hidden("IdConcepto0", "")
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label"> Descripción</label>
+                        <input class="form-control" id="Descripcion0" name="Descripcion0" required />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label">Cantidad</label>
+                        <input class="form-control" type="text" id="Cantidad0" name="Cantidad0" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label">Unidad</label>
+                        <input class="form-control" type="text" id="Unidad0" name="Unidad0" required />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label">Cargo <small class="badge" style="font-size: 8px;background-color: orange;color:black;">Con IVA (16%)</small></label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input class="form-control" type="text" id="Cargo0" name="Cargo0" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label">Valor Unitario <small class="badge" style="font-size: 8px;background-color: orange;color:black;">Con IVA (16%)</small></label>
+                        <input class="form-control" type="text" id="ValorUnitario0" name="ValorUnitario0" required />
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </div>
+    <div class="row" id="ComplementoPago">
+        <h4>Complemento de pago</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Comentarios</label>
+                <textarea class="form-control" name="Comentario"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-warning btn-simple" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success btn-simple"><i class="material-icons">save</i> &nbsp;Guardar cambios</button>
+    </div>
+}
+<script>
+    var Indice = 2;
+    var Inventario;
+    var Clientes;
+    var Adeudos;
+    var Instalaciones;
+    var ClaveProdServ;
+    function Delete($row, $indice) {
+        //var id = $row.children('#IdInventarioNombre' + $indice).val();
+        $row.remove();
+    }
+    function redondeo(numero, decimales) {
+        var flotante = parseFloat(numero);
+        var resultado = Math.round(flotante * Math.pow(10, decimales)) / Math.pow(10, decimales);
+        return resultado;
+    }
+    $(document).ready(function () {
+        $('.ClaveProdServ').select2({
+            theme: "bootstrap",
+            placeholder: '',
+            maximumInputLength:10
+        });
+        var InputInventarioNombre = document.getElementById("Concepto0");
+        var inputNombre = document.getElementById("Nombres");
+        var AutocompletarConcepto = new Awesomplete(InputInventarioNombre, {
+            minChars: 1,
+            maxItems: 5,
+            autoFirst: true,
+            replace: function (text) {
+                this.input.value = text.label;
+                var input = document.getElementById("IdConcepto0");
+                input.value = text.value;
+                for (var k in Inventario.Item) {
+                    if (Inventario.Item[k].Id == text.value) {
+                        $('#IdConcepto' + (Indice - 1)).val(Inventario.Item[k].PrecioCompra);
+                        $('#Cantidad0').val(1);
+                        $('#Cantidad0').attr('min', '1');
+                        $('#Cantidad0').attr('max', Inventario.Item[k].Cantidad);
+                    }
+                }
+            }
+        });
+        var NuevoIngreso = $("#NuevoIngreso").validate({
+            debug: true,
+            rules: {
+                PAC: {
+                    required: true
+                },
+                Nombres: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 254
+
+                },
+                Moneda: {
+                    required: true
+                },
+                MetodoPago: {
+                    required: true
+                },
+                TipoCambio: {
+                    number: true,
+                    min: 0.000001
+                },
+                Pais: {
+                    required: true
+                },
+                Email: {
+                    email: true
+                },
+                Unidad0: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 20
+                },
+                Cantidad0: {
+                    required: true,
+                    number: true,
+                    min: 0.000001
+                },
+                ClaveProdServ0: {
+                    required: true,
+
+                },
+                Descripcion0: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 1000
+                }
+            }
+        });
+        var AutocompletarNombres = new Awesomplete(inputNombre, {
+            minChars: 1,
+            maxItems: 5,
+            autoFirst: true,
+            replace: function (text) {
+                this.input.value = text.label;
+                var input = document.getElementById("id");
+                input.value = text.value;
+                $.getJSON('/Adeudos/Service?IdCliente=' + text.value, function (result) {
+                    Adeudos = result;
+                    console.log(result);
+                    var select = '<div class="form-group">';
+                    select += '<label class="control-label">Adeudo</label>';
+                    select += '<select class="form-control" name="Adeudo" id="Adeudo" >';
+                    var count = 0;
+                    if (result.Adeudos.lenght > 0) {
+                        for (var i in result.Adeudos) {
+                            select += '<option value="' + result.Adeudos[i].Id + '">' + result.Adeudos[i].Concepto + '</option>';
+                            count++;
+                        }
+                    }
+                    select += '<option value="0" selected>Nuevo Adeudo</option>';
+                    select += '</select>';
+                    select += '</div>';
+                    $('#AdeudosDelCliente').html(select);
+                    $('[id=Adeudo]').change(function () {
+                        var CantidadConceptos = parseInt($('#CantidadConceptos').val());
+                        if ($(this).val() == "0") {
+                            for (var i = 0; i < CantidadConceptos; i++) {
+                                $('#Concepto' + i).prop('required', true);
+                                $('#Descripcion' + i).prop('required', true);
+                                $('#Cantidad' + i).prop('required', true);
+                                $('#Unidad' + i).prop('required', true);
+                                $('#Cargo' + i).prop('required', true);
+                                $('#Cargos').removeAttr('required');
+                                console.log("Conceptos Require:" + i);
+                            }
+                            $('#Conceptos').fadeIn(500);
+                            $('#Cargos').fadeOut(500);
+                            $('#IdFactura').val('@Guid.NewGuid()');
+                        } else {
+                            for (var i = 0; i < CantidadConceptos; i++) {
+                                $('#Concepto' + i).removeAttr('required');
+                                $('#Descripcion' + i).removeAttr('required');
+                                $('#Cantidad' + i).removeAttr('required');
+                                $('#Unidad' + i).removeAttr('required');
+                                $('#Cargo' + i).removeAttr('required');
+                                $('#Total' + i).removeAttr('required');
+                                $('#Cargos').prop('required', true);
+                                console.log("Conceptos:" + i);
+                            }
+                            console.log(result);
+                            var Ingresos = 0, Total = 0, IdFactura = "";
+                            for (var i in result.Adeudos) {
+                                if (result.Adeudos[i].Id == $(this).val()) {
+                                    Total = result.Adeudos[i].Total;
+                                    IdFactura = result.Adeudos[i].IdFactura;
+                                    for (var k in result.Ingresos) {
+                                        if (result.Ingresos[k].IdAdeudo == result.Adeudos[i].Id) {
+                                            Ingresos = Ingresos + result.Ingresos[k].Cargos + (result.Ingresos[k].CargosUSD * result.Ingresos[k].TipoCambio);
+
+                                        }
+                                    }
+
+                                }
+                            }
+                            $("#IdFactura").val(IdFactura);
+                            console.log("Ingresos:" + Ingresos);
+                            console.log("Total:" + Total);
+                            console.log("IdFactura:" + IdFactura);
+                            $("#Debe").val("Debe $" + (Total - Ingresos));
+                            $('#Cargos').fadeIn(500);
+                            $('#Conceptos').fadeOut(500);
+                        }
+                    });
+                });
+            }
+        });
+      
+        $.getJSON('/Inventario/Service', function (result) {
+            Inventario = result;
+            var list = [];
+            for (var k in result.Item) {
+                list.push({ label: result.Item[k].Dispositivo + " " + result.Item[k].Marca + " " + result.Item[k].Modelo, value: result.Item[k].Id });
+            }
+            AutocompletarConcepto.list = list;
+        });
+
+        $.getJSON('/Clientes/Service', function (result) {
+            Clientes = result;
+            console.log(Clientes)
+            var list = [];
+            for (var k in result.clientes) {
+                list.push({ label: result.clientes[k].Nombres + " " + result.clientes[k].ApellidoPaterno + " " + result.clientes[k].ApellidoMaterno, value: result.clientes[k].IdCliente });
+            }
+            AutocompletarNombres.list = list;
+        });
+        
+        $('input[name=Nombres]').change(function () {
+            for (var k in Clientes.clientes) {
+                if (Clientes.clientes[k].IdCliente == $('#id').val()) {
+                    $('input[name=RFC]').val(Clientes.clientes[k].RFC);
+                    $('input[name=Pais]').val(Clientes.clientes[k].Pais);
+                    $('select[name=Estado]').val(Clientes.clientes[k].Estado);
+                    $('input[name=Colonia]').val(Clientes.clientes[k].Colonia);
+                    $('input[name=CodigoPostal]').val(Clientes.clientes[k].CodigoPostal);
+                    $('input[name=Ciudad]').val(Clientes.clientes[k].Ciudad);
+                    $('input[name=Calle]').val(Clientes.clientes[k].Calle);
+                    $('input[name=NoInterior]').val(Clientes.clientes[k].NoInterior);
+                    $('input[name=NoExterior]').val(Clientes.clientes[k].NoExterior);
+                    $('input[name=Telefono]').val(Clientes.clientes[k].Telefono);
+                    $('input[name=Email]').val(Clientes.clientes[k].Email);
+                    $('input[name=NumCtaPago]').val(Clientes.clientes[k].NumCtaPago);
+                    break;
+                }
+            }
+        });
+        $('#InventarioNombre1').change(function () {
+            for (var k in Inventario.Item) {
+                if (Inventario.Item[k].Id == $('#IdInventarioNombre1').val()) {
+                    $('#InventarioPrecioCompra1').val(Inventario.Item[k].PrecioCompra);
+                    Inventario.Item[k].Cantidad--;
+                    $("#InventarioCantidad1").val(1);
+                    $("#InventarioCantidad1").attr('min', '1');
+                    $("#InventarioCantidad1").attr('max', Inventario.Item[k].Cantidad);
+                }
+            }
+        });
+        $('[name=Moneda]').change(function () {
+            if ($(this).val() == "MXN") {
+                $('input[name=TipoCambio]').prop('required', false);
+            } else {
+                $('input[name=TipoCambio]').prop('required', true);
+            }
+        });
+        $('[name=Facturar]').change(function () {
+            if ($('[name=Facturar]').is(":checked")) {
+                console.log("Requiere Factura");
+                $('input[name=RFC]').prop('required', true);
+                $('input[name=CodigoPostal]').prop('required', true);
+                $('input[name=Municipio]').prop('required', true);
+                $('input[name=Factura]').val(true);
+            }
+            else {
+                console.log("No Requiere Factura");
+                $('input[name=RFC]').prop('required', false);
+                $('input[name=CodigoPostal]').prop('required', false);
+                $('input[name=Municipio]').prop('required', false);
+                $('input[name=Factura]').val(false);
+            }
+        });
+        $('[name=Envio]').change(function () {
+            if ($('[name=Envio]').is(":checked")) {
+                console.log("Requiere Envio");
+                $('input[name=Email]').prop('required', true);
+            }
+            else {
+                console.log("No Requiere Envio");
+                $('input[name=Email]').prop('required', false);
+            }
+        });
+        $('#btnAgregarConceptos').click(function () {
+            var cantidad = parseInt($('#CantidadConceptos').val()) + 1;
+            $('#CantidadConceptos').val(cantidad);
+            var row = '<div class="row ConceptoRow' + (cantidad - 1) + '" style="display:none">';
+            row += '<div class="row">';
+            row += '<div class="col-sm-3"><div class="form-group"><label class="control-label">Clave de Producto y Servicios</label><select class="ClaveProdServ form-control" id="ClaveProdServ' + (cantidad - 1) + '" name="ClaveProdServ' + (cantidad - 1) + '" required></select></div></div>';
+            row += '<div class="col-sm-3"><div class="form-group"><label class="control-label"> Concepto</label><input class="form-control" " id="Concepto' + (cantidad - 1) + '" name="Concepto' + (cantidad - 1) + '" required/><input id="IdConcepto' + (cantidad - 1) + '"  type="hidden" value=""/></div></div>';
+            row += '<div class="col-sm-3"><div class="form-group"><label class="control-label"> Descripción</label><input class="form-control"  id="Descripcion' + (cantidad - 1) + '" name="Descripcion' + (cantidad - 1) + '" required/></div></div>';
+            row += '<div class="col-sm-3"><div class="form-group"><label class="control-label">Cantidad</label><input class="form-control" type="text" id="Cantidad' + (cantidad - 1) + '" name="Cantidad' + (cantidad - 1) + '" required/></div></div>';
+            row += '</div>';
+            row += '<div class="row">';
+            row += '<div class="col-sm-3"><div class="form-group"><label class="control-label">Unidad</label><input class="form-control" type="text" id="Unidad' + (cantidad - 1) + '" name="Unidad' + (cantidad - 1) + '" required/></div></div>';
+            row += '<div class="col-sm-3"><div class="form-group"><label class="control-label">Cargo</label><div class="input-group"><span class="input-group-addon">$</span><input class="form-control" type="number" min="0" step="1"  id="Cargo' + (cantidad - 1) + '" name="Cargo' + (cantidad - 1) + '" required/></div></div></div>';
+            row += '<div class="col-sm-3"><div class="form-group"><label class="control-label">Precio del Producto</label><input class="form-control" type="text" id="ValorUnitario' + (cantidad - 1) + '" name="ValorUnitario' + (cantidad - 1) + '" required /></div></div>'
+            row += '<div class="col-md-3 text-center"><div class="form-group"><button type="button" rel="tooltip" class="btn btn-danger btn-simple" onclick="Delete($(\'.ConceptoRow' + (cantidad - 1) + '\'), 0)" data-original-title="Eliminar de la lista" title="Eliminar"><i class="material-icons">close</i></button></div></div>';
+            row += '</div>';
+            row += '</div>';
+            $('#Conceptos').append(row);
+            $('.ConceptoRow' + (cantidad - 1)).fadeIn(500);
+            var option = '';
+            console.log(ClaveProdServ);
+            for (var k in ClaveProdServ) {
+                option+='<option value="'+ClaveProdServ[k].value+'">'+ClaveProdServ[k].label+'</option>';
+            }
+            $('#ClaveProdServ' + (cantidad - 1)).html(option);
+
+            console.log(option);
+            var InputTemp = document.getElementById("Concepto" + (cantidad - 1));
+            $('#ClaveProdServ' + (cantidad - 1)).select2({
+                tags: true,
+                language: "es",
+                theme: "bootstrap",
+                placeholder: '',
+            });
+            $(".select2-selection__rendered").addClass("form-control");
+            $(".select2-search select2-search--dropdown").css("margin-top", "0px");
+            var AutocompletarInventarioTemp = new Awesomplete(InputTemp, {
+                minChars: 1,
+                maxItems: 5,
+                autoFirst: true,
+                replace: function (text) {
+                    this.input.value = text.label;
+                    $("#IdConcepto" + (cantidad - 1)).val(text.value);
+                    for (var k in Inventario.Item) {
+                        if (Inventario.Item[k].Id == text.value) {
+                            //$('#IdConcepto' + (Indice - 1)).val(Inventario.Item[k].PrecioCompra);
+                            $('#Cantidad' + (Indice - 1)).val(1);
+                            $('#Cantidad' + (Indice - 1)).attr('min', '1');
+                            $('#Cantidad' + (Indice - 1)).attr('max', Inventario.Item[k].Cantidad);
+                        }
+                    }
+                }
+            });
+            var listTemp = [];
+            for (var k in Inventario.Item) {
+                listTemp.push({ label: Inventario.Item[k].Dispositivo + " " + Inventario.Item[k].Marca + " " + Inventario.Item[k].Modelo, value: Inventario.Item[k].Id });
+            }
+            AutocompletarInventarioTemp.list = listTemp;
+            $('[rel="tooltip"]').tooltip();
+        });
+        $("#PAC").change(function () {
+            var pac = $(this).val();           
+            if(pac==""){
+                $('.ClaveProdServ').html("");
+            } else {
+                var option = "";
+                $.getJSON('/Operaciones/ClaveProdServ?IdPac=' + pac, function (result) {
+                    console.log(result);
+                    var list = [];                    
+                    for (var k in result.ClaveProdServ) {
+                        list.push({ label: result.ClaveProdServ[k].Descripcion, value: result.ClaveProdServ[k].c_ClaveProdServ });
+                        option += '<option value="' + result.ClaveProdServ[k].c_ClaveProdServ + '">' + result.ClaveProdServ[k].Descripcion + '</option>';
+                    }                    
+                    $('.ClaveProdServ').html(option);
+                    ClaveProdServ = list;
+                });
+            }
+        });
+        $('form').submit(function (event) {
+            var Total = 0,SubtotalRedondeado=0;
+            for (var i = 0; i < parseInt($('#CantidadConceptos').val());i++){
+                Total += parseFloat($('input[name=Cargo' + i + ']').val());
+                var sub = parseFloat($('input[name=Cargo' + i + ']').val()) / 1.16;
+                SubtotalRedondeado += parseFloat(redondeo(sub, 2));
+            }
+            var SubTotal = Total / 1.16;
+            var isValidConceptos = true;
+            if ("" + redondeo(SubTotal, 2) != SubtotalRedondeado + "") {
+                isValidConceptos = false;
+                swal({
+                    title: 'No se puede Guardar',
+                    type: 'info',
+                    html: '<p>No se puede guardar estos conceptos por el motivo del redondeo</p><p>El sistema del <b>SAT</b> solamente soporta 2 decimales despues del punto, Se tiene que redondear y calcular el <b>IVA</b> para  cada concepto por separado</p><p> Al final tienen que coincidir la suma de los impuestos y la suma de los cargos sin IVA</p><p>Se recomienda <b>Agregar otro concepto o cambiar el cargo de algun concepto</b>  para que no haya fallos con el redondeo</p>',
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonText:
+                    '<i class="fa fa-thumbs-up"></i> Gracias!',                   
+                    cancelButtonText:
+                    '<i class="fa fa-thumbs-down"></i>'                    
+                })
+            }
+            var isValid =$("#NuevoIngreso").valid();
+            if (isValid) {
+                $("#Cargando").fadeIn();
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        console.log($(this).serialize());
+                        if (result.error == "none") {
+                            $('#selecionDeOpereacion').fadeOut();
+                            for (var i = 0; i < parseInt($('#CantidadConceptos').val()) ; i++) {
+                                var fecha = '@DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year';
+                                var proveedor = $('#PAC option:selected').text();
+                                var Cliente = $('input[name=Nombres]').val();
+                                var concepto = $('input[name=Concepto' + i + ']').val();
+                                var MetodoPago = $('#MetodoPago').val();
+                                var AbonoMXN = 0;
+                                var AbonoUSD = 0;
+                                var CargosMXN = 0;
+                                var CargosUSD = 0;
+                                if ($('[name=Moneda]').val() == "MXN")
+                                    CargosMXN = $('input[name=Cargo' + i + ']').val();
+                                else
+                                    CargosUSD = $('input[name=Cargo' + i + ']').val();
+                                var Acciones = '<button class="btn btn-simple btn-info btn-icon" rel="tooltip" data-original-title="Editar"><i class="material-icons">mode_edit</i></button><button class="btn btn-danger btn-simple btn-icon" onclick="DeleteRegister(\'' + $('#idIngreso').val() + '\',\'Deseas Eliminar el registro?\',\'@Url.Content("/Administracion/Eliminar")\',\'#datatables\')"); }><i class="material-icons">close</i></button>';
+                                //if (!$('[name=Facturar]').is(":checked"))
+                                //Acciones += '<button class="btn btn-simple btn-success" onclick="Facturar(\'\')">&nbsp;&nbsp;&nbsp;Crear Factura&nbsp;&nbsp;&nbsp;</button>';
+                                var array = [fecha, proveedor, Cliente, concepto, MetodoPago, AbonoMXN, AbonoUSD, CargosMXN, CargosUSD, Acciones];
+                                var table = $("#datatables").DataTable();
+                                var rowIndex = table.row.add(array).draw(false);
+                                var row = $('#datatables').dataTable().fnGetNodes(rowIndex);
+                                // $(row).attr('id', idCliente);
+                                var rowNode = rowIndex.node();
+                                $(rowNode).find('td').eq(0).addClass('text-center');
+                                $(rowNode).find('td').eq(9).addClass('text-center');
+                                showNotification("top", "center", "success", "done", "Se elaboro la Operacion Correctamente");
+                                if ($('input[name=Facturar]').is(":checked")) {
+                                    $.get('/Facturas/Facturar?IdFactura=' + result.UUID, function (data, status) {
+                                        if (data.error == "none")
+                                            window.open("/Facturas/Descargar?Id=" + data.IdFactura);
+                                        else
+                                            alert(data.Message);
+                                    });
+                                }
+
+                            }
+                        } else {
+                            showNotification("top", "center", "error", "error", "Ocurrio un error con el servidor\nError:" + result.Message)
+                        }
+                        $("#myModal").modal('hide');
+                    }
+                });
+            }
+            return false;
+        });
+        $('#AgregarClaves').click(function () {
+            swal({
+                title: 'Seleciona las Clave Prod Serv',
+                type: 'info',
+                html: '<div class="col-md-12 table-responsive"><table id="Claves" class="" style="width:100%;"><thead><tr><th style="width:20%;"></th><th style="width:20%;"></th><th style="width:20%;"></th><th style="width:20%;"></th><th style="width:20%;"></th></tr></thead><tbody><tr><td><div class="checkbox"><label><input type="checkbox" id="Facturar" name="Facturar"><span class="checkbox-material"><span class="check"></span></span> Requiere Factura</label></div></td><td>a</td><td>a</td></tr></tbody></table></div>',
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                  '<i class="fa fa-thumbs-up"></i> Great!',
+                confirmButtonAriaLabel: 'Thumbs up, great!',
+                cancelButtonText:
+                '<i class="fa fa-thumbs-down"></i>',
+                cancelButtonAriaLabel: 'Thumbs down',
+            })
+            $('#Claves').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "Todos"]
+                ],
+                "bSort": false,
+                dom: "<'row buttons'B>" +
+                    "<'row'<'col-sm-3'l><'col-sm-3 fechas text-center'><'col-sm-4 metodoDePago text-center' ><'col-sm-2 text-right  buscar'>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: '<i class="material-icons text-info" rel="tooltip" data-original-title="Copiar">content_copy</i>',
+                        exportOptions: {
+                            modifier: {
+                                page: 'current'
+                            },
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        },
+                    },
+                    {
+                        extend: 'csv',
+                        text: '<i class="fa fa-file-text-o fa-lg text-primary" aria-hidden="true" rel="tooltip" data-original-title="Exportar CSV"></i>',
+                        exportOptions: {
+                            modifier: {
+                                page: 'current'
+                            },
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        text: '<i class="fa fa-file-excel-o fa-lg" aria-hidden="true" rel="tooltip" data-original-title="Exportar excel"></i>',
+                        exportOptions: {
+                            modifier: {
+                                page: 'current'
+                            },
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="material-icons text-danger" rel="tooltip" data-original-title="Exportar PDF">picture_as_pdf</i>',
+                        exportOptions: {
+                            modifier: {
+                                page: 'current'
+                            },
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        autoPrint: true,
+                        text: '<i class="material-icons text-warning" rel="tooltip" data-original-title="Imprimir">print</i>',
+                        exportOptions: {
+                            modifier: {
+                                page: 'current'
+                            },
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        },
+
+                    }
+                ],
+                responsive: true,
+                language: {
+                    "search": "<div class=\"form-group form-inline\" style=\"margin:0px;\">_INPUT_</div>",
+                    "searchPlaceholder": "Buscar en Registros",
+                    "lengthMenu": "<div class=\"form-group  form-group-sm\"><label class=\"control-label\">Mostrar</label> _MENU_ <label class=\"control-label\">Registros</label></div>",
+                    "zeroRecords": "No hay registros",
+                    "info": "Pagina _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros)",
+                    "sSearch": "<label class=\"control-label\">Buscar</label>",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sPrevious": "Anterior",
+                        "sNext": "Siguiente",
+                        "sLast": "Ultimo"
+                    }
+                }
+            });
+        });
+        $('#Pais').val('México');
+        $('[rel="tooltip"]').tooltip();
+        $(".select2-selection__rendered").addClass("form-control");
+        $(".select2-search select2-search--dropdown").css("margin-top", "0px");
+    });
+</script>

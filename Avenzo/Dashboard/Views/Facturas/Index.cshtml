@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Facturas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        $('.sidebar-wrapper >.nav > li').removeClass('active');
+        //$("#navFacturas").addClass("active");
+        $("#AppView").load("/Facturas/_Panel", function () {
+            $("#loader").fadeOut("slow", function () {
+                $("#AppView").fadeIn(500);
+            });
+
+        });
+    });
+</script>

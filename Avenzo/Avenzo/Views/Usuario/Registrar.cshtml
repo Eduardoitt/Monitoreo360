@@ -1,0 +1,375 @@
+﻿
+@{
+    ViewBag.Title = "Registrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <h2>Registrarse</h2>
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <div class="form-group">
+                <label></label>
+                <select class="form-control" id="TipoCliente" name="TipoCliente">
+                    <option selected disabled>---Selecione una opcion---</option>
+                    <option value="1">Ya soy cliente</option>
+                    <option value="0">Soy nuevo cliente</option>
+                </select>
+            </div>
+        </div>
+        <form id="VerificarUsuario" name="VerificarUsuario" style="display:none;">
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                    <label>Correo Electronico<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                    <input class="form-control" name="correo" id="correo" />
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <input class="form-control btn btn-success btn-xs" type="submit" value="Siguiente" id="Siguiente"/>
+                </div>
+            </div>
+        </form>
+    </div>
+    <form name="NuevoUsuario" id="NuevoUsuario" style="display:none;" method="post" action="/Usuario/RegistrarUsuario">
+        @Html.AntiForgeryToken()
+        @Html.Hidden("correo", "")
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Contraseña<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                            <input type="password" class="form-control" name="password" id="password" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Repetir contraseña<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                            <input type="password" class="form-control" name="repeatPassword" id="repeatPassword" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="col-md-12">
+                    <ul>
+                        <li>Haz tu contraseña 8 caracteres o más</li>
+                        <li>Use letras mayúsculas y minúsculas</li>
+                        <li>Utilizar más de un número</li>
+                        <li>Utilice caracteres especiales (!, @@, #, $,%, ^, &, *,?, _, ~)</li>
+                    </ul>
+                </div>
+                <div class="col-md-12 text-center" id="PassworddMeter" style="background:#d9534f;color:white;border-radius:5px;">Muy débil</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Guardar</button>
+            </div>
+
+        </div>
+    </form>
+    @using (Ajax.BeginForm("/RegistrarCliente", null, new AjaxOptions { UpdateTargetId = "NuevoId" }, new { @id = "NuevoCliente", @style = "display:none;" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("idCliente", Guid.NewGuid())
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label">Nombre(s)<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                    <input class="col-sm-12 form-control" type="text" placeholder="Nombre(s)" name="Nombres" required id="Nombres"/>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Apellido Paterno</label>
+                    <input class="form-control" placeholder="Apellido Paterno" name="ApellidoPaterno" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Apellido Materno</label>
+                    <input class="form-control" placeholder="Apellido Materno" name="ApellidoMaterno" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Fecha de Nacimiento</label>
+                    <input class="form-control" type="date" name="FechaNacimiento" />
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Sexo<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                    <select class="form-control" name="Sexo" required>
+                        <option disabled selected>Selecione Una Opcion</option>
+                        <option value="N/A">N/A</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Correo Electronico<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                    <input class="form-control" placeholder="correo@ejemplo.com" name="Correo" id="Correo" pattern="^[a-z0-9._%+-]+@("@")[a-z0-9.-]+\.[a-z]{2,4}$" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Contraseña<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                            <input type="password" class="form-control" name="contraseña" id="contraseña" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Repetir contraseña<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                            <input type="password" class="form-control" name="repeatContraseña" id="repeatContraseña" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="col-md-12">
+                    <ul>
+                        <li>Haz tu contraseña 8 caracteres o más</li>
+                        <li>Use letras mayúsculas y minúsculas</li>
+                        <li>Utilizar más de un número</li>
+                        <li>Utilice caracteres especiales (!, @@, #, $,%, ^, &, *,?, _, ~)</li>
+                    </ul>
+                </div>
+                <div class="col-md-12 text-center" id="MedidorContraseña" style="background:#d9534f;color:white;border-radius:5px;">Muy débil</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Telefono<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                    <input class="form-control" name="Telefono" placeholder="(###) ###-####" id="Telefono"/>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Pais<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                    @Html.DropDownList("Pais", new SelectList(ViewBag.Pais, "Pais1", "Pais1"), "Seleccione un pais", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Estado<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                    @Html.DropDownList("Estado", new SelectList(ViewBag.Estado, "NombreEstado", "NombreEstado"), "Selecciona una estado", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Ciudad<span rel="tooltip" data-toggle="tooltip" data-placement="right" title="Campo obligatorio" class="text-danger">*</span></label>
+                    @Html.DropDownList("Ciudad", new SelectList(ViewBag.Ciudad, "Ciudad1", "Ciudad1"), "Seleciona una ciudad", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success btn-xs" id="btnRegistro"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Registrarse</button>
+            </div>
+        </div>
+        <br />
+    }
+</div>
+<script src="~/Scripts/passwordmeter.js"></script>
+<script>
+    $(document).ready(function () {
+        $('[rel="tooltip"]').tooltip();
+        $.extend($.validator.messages, {
+            equalTo: "Por favor, escribe la misma contraseña.",
+            minlength: jQuery.validator.format("Por favor, no escribas menos de {0} caracteres."),
+            required: "Este campo es obligatorio.",
+            email: "Por favor, escribe una dirección de correo válida",
+        });
+        $("#TipoCliente").change(function () {
+            var val = $('#TipoCliente').find(":selected").val();
+            if (val == "1") {
+                $("#NuevoUsuario").fadeOut(500, function () {
+                    $("#VerificarUsuario").fadeIn(1000);
+                    $("#NuevoCliente").fadeOut(500);
+                    $("#Siguiente").attr("disabled", false);
+                });
+            } else {
+                $("#VerificarUsuario").fadeOut(500, function () {
+                    $("#NuevoUsuario").fadeOut(500);
+                    $("#VerificarUsuario #correo").val("");
+                    $("#NuevoCliente").fadeIn(1000);
+                });
+            }
+        });
+        $("#VerificarUsuario #correo").change(function () {
+            $("#NuevoUsuario #correo").val($(this).val());
+        });
+        $("#password").keyup(function () {
+            var object = testPassword($(this).val());
+            $("#PassworddMeter").text(object.Verdict);
+            if (object.Verdict == "D\u00E9bil")
+                $("#PassworddMeter").css({ "background": "orange", "color": "white" });
+            if (object.Verdict == "Muy d\u00E9bil")
+                $("#PassworddMeter").css({ "background": "#d9534f", "color": "white" });
+            if (object.Verdict == "Normal")
+                $("#PassworddMeter").css({ "background": "yellow", "color": "black" });
+            if (object.Verdict == "Fuerte")
+                $("#PassworddMeter").css({ "background": "#99ff33", "color": "black" });
+            if (object.Verdict == "Muy Fuerte")
+                $("#PassworddMeter").css({ "background": "#449d44", "color": "white" });
+        });
+        $.validator.addMethod("passwordValido", function (value, element, params) {
+
+            var object = testPassword(value);
+            if (object.score > 24)
+                return true;
+            else
+                return false
+        }, $.validator.format("La Contraseña es muy débil {0}"));
+
+
+        $.validator.addMethod("correoValido", function (value, element, params) {
+            var disponible = false;
+            $.ajax({
+                url: "/Usuario/VerificarCorreo?correo=" + value,
+                method: "POST",
+                async: false,
+                success: function ($Data) {
+                    disponible = $Data.Disponible;
+                }
+            });
+            return disponible;
+        }, $.validator.format("Este correo ya esta registrado {0}"));
+        $.validator.addMethod("clienteValido", function (value, element, params) {
+            var disponible = false;
+            $.ajax({
+                url: "/Usuario/VerificarCliente?correo=" + value,
+                method: "POST",
+                async: false,
+                success: function ($Data) {
+                    disponible = $Data.Existe;
+                }
+            });
+            return disponible;
+        }, $.validator.format("No existe el cliente {0}"));
+        var validarCliente = $("#VerificarUsuario").validate({
+            debug: true,
+            rules: {
+                correo: {
+                    required: true,
+                    email: true,
+                    clienteValido: "",
+                    correoValido: ""
+                }
+            }
+        });
+        var validatorUsuario = $("#NuevoUsuario").validate({
+            debug: true,
+            rules: {
+                repeatPassword: {
+                    required: true,
+                    equalTo: "#password",
+                    minlength: 8,
+                },
+                password: {
+                    required: true,
+                    minlength: 8,
+                    passwordValido: ""
+
+                },
+                correo: {
+                    required: true,
+                    email: true,
+                    correoValido: "."
+                },
+                Telefono: {
+                    required:true
+                }
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+        
+        $("#contraseña").keyup(function () {
+            var object = testPassword($(this).val());
+            $("#MedidorContraseña").text(object.Verdict);
+            if (object.Verdict == "D\u00E9bil")
+                $("#MedidorContraseña").css({ "background": "orange", "color": "white" });
+            if (object.Verdict == "Muy d\u00E9bil")
+                $("#MedidorContraseña").css({ "background": "#d9534f", "color": "white" });
+            if (object.Verdict == "Normal")
+                $("#MedidorContraseña").css({ "background": "yellow", "color": "black" });
+            if (object.Verdict == "Fuerte")
+                $("#MedidorContraseña").css({ "background": "#99ff33", "color": "black" });
+            if (object.Verdict == "Muy Fuerte")
+                $("#MedidorContraseña").css({ "background": "#449d44", "color": "white" });
+        });
+        var validarCliente = $("#NuevoCliente").validate({
+            debug: true,
+            rules: {
+                Nombres: {
+                    required:true
+                },
+                Correo: {
+                    required: true,
+                    email: true,
+                    correoValido: ""
+                },
+                Sexo: {
+                    required:true
+                },
+                contraseña: {
+                    required: true,
+                    minlength: 8,
+                    passwordValido:""
+
+                },
+                repeatContraseña: {
+                    required: true,
+                    minlength: 8,
+                    equalTo: "#contraseña",
+                },
+                Pais: {
+                    required:true
+                },
+                Estado: {
+                    required:true
+
+                },
+                Ciudad: {
+                    required:true
+                },
+                Telefono: {
+                    required:true
+                }
+
+
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+        $("#VerificarUsuario").on("submit", function (e) {
+            var isValid = $("#VerificarUsuario").valid();
+            console.log("valor de:" + isValid);
+            if (isValid) {
+                $("#Siguiente").attr("disabled",true);
+                $("#NuevoUsuario").fadeIn(1000);
+            }
+            return false;
+        });
+        $("input[name=Telefono]").mask("(999) 999-9999");
+    });
+</script>

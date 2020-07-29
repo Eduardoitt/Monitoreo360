@@ -1,0 +1,434 @@
+﻿@model Avenzo.Models.Nomina
+<div class="modal-fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Nueva Nomina</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Ajax.BeginForm(null, null, new AjaxOptions { UpdateTargetId = "NuevoId" }, new { @id = "NuevaNomina" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" value="@Guid.NewGuid()" name="IdNominaHistorial" id="IdNominaHistorial"/>
+                    <div class="se-pre-con"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="control-label">Usuario </label>
+                                    <input value="@User.Identity.Name" disabled class="form-control"/>
+                                </div>  
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="control-label">Fecha</label>
+                                    <input value="@DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year" disabled class="form-control" id="Fecha"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="control-label">Folio</label>
+                                    <input value="1" disabled class="form-control" id="Folio"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="control-label">Serie</label>
+                                    <input value="A" disabled class="form-control" id="Serie"/>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">PAC</label>
+                                    @Html.DropDownListFor(model=>model.PAC,new SelectList(Model.PAC,"Id","Nombre"),"Selecione un PAC",new {@class="form-control", required = (string)null })
+                                </div>                                
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label">Empleado</label>
+                                    @Html.DropDownListFor(model => model.Empleados, new SelectList(Model.Empleados,"NoEmpleado", "Nombre"), "Seleccione un empleado", new { @class = "form-control",required=(string)null})
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label">Regimen</label>
+                                    @Html.DropDownList("Regimen", new SelectList(ViewBag.TipoRegimenList, "c_TipoRegimen", "Descripcion"), "Seleccione un tipo de Regimen", new { @class = "form-control", required = (string)null })
+                                </div>
+                                
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label">Periodicidad de Pago</label>
+                                    @Html.DropDownList("PeriodicidadDePago", new SelectList(ViewBag.PeriodicidadPagoList, "c_PeriodicidadPago", "Descripcion"), "Seleccione Periodicidad de Pago", new { @class = "form-control", required = (string)null })
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label">Tipo de Nomina</label>
+                                    @Html.DropDownList("TipoNomina", new SelectList(ViewBag.NominasList, "c_TipoNomina", "Descripcion"), "Seleccione Periodicidad de Pago", new { @class = "form-control", required = (string)null })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label">Codigo Postal</label>
+                                    <input class="form-control" required value="22235" id="CodigoPostal" name="CodigoPostal"/>                                                                                
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label">Moneda</label>
+                                    <input value="MXN" disabled id="Moneda" class="form-control" required name="Moneda"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    @Html.Label("Fecha Inicio de Pago")
+                                    <input type="date" class="form-control" required/> 
+                                </div>
+                            </div>      
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    @Html.Label("Fecha Final de Pago")
+                                    <input type="date" class="form-control" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row" id="Percepciones">
+                            <div class="row">
+                                <div class="col-sm-12 text-center"><h3>Percepciones</h3></div>
+                                <div class="col-sm-8 col-sm-offset-2 text-center">
+                                    <input class="btn btn-primary btn-xs" id="JubilacionPensionRetiro" value="Agregar Jubilacion Pension Retiro" /> 
+                                    <input class="btn btn-primary btn-xs" id="SeparacionIndemnizacion" value="Agregar Separacion de Indemnizacion" />   
+                                    <input class="btn btn-info btn-xs" id="btnPercepcion" value="Agregar Percepcion"/>
+                                </div>
+                            </div>
+                            @Html.Hidden("CantidadPercepciones",0)
+                            <div class="row" id="Percepcion">
+                                @*//Boton TipoPercepcion*@
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        @Html.Label("Tipo de Percepcion")
+                                        @Html.DropDownList("TipoPercepcion0", new SelectList(ViewBag.PercepcionesList, "c_TipoPercepcion", "Descripcion"), new { @class = "form-control", required = (string)null })
+                                    </div>
+                                </div>
+                                @*//Boton Concepto*@
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                       
+                                        @Html.Label("Concepto")
+                                        <input type="text" class="form-control" name="PercepcionConcepto0" required />
+                                    </div>
+                                </div>
+                                @*//Boton ImporteExcento*@
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        @Html.Label("Importe Excento")
+                                        <div class="input-group">
+                                            <div class="input-group-addon">$</div>
+                                            <input type="number" class="form-control" required name="PercepcionImporteExcento0"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*//Boton ImporteGravado*@
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        @Html.Label("Importe Gravado")
+                                        <div class="input-group">
+                                            <div class="input-group-addon">$</div>
+                                            <input type="number" class="form-control" required name="PercepcionImporteGravado0"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*//Boton Agregar Acciones o Titulos m Horas Extras*@
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-xs btn-primary" id="btnHorasExtras0" onclick="addHorasExtras(0,'#btnHorasExtras0','#HorasExtrasRow0')">Agregar Horas Extras</button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button id="btnAccionesOTitulos0" class="btn btn-xs btn-primary" type="button" onclick="addAccionesOTitulos(0, '#btnAccionesOTitulos0', '#AccionesOTitulosRow0')">Agregar Acciones o Titulos</button>
+                                </div>
+                                @*//Acciones O Titulos*@
+                                <div class="col-sm-12" style="display:none;" id="AccionesOTitulosRow0">
+                                    <div class="col-sm-12 text-center"><h4>Acciones o Titulos</h4></div>
+                                </div>
+                                @*//Horas Extras*@
+                                <div class="col-sm-12" id="HorasExtrasRow0" style="display:none;">
+                                    <div class="col-sm-12 text-center"><h4>Horas Extras</h4></div>
+                                    @Html.Hidden("HorasExtrasPercepcion0","0")
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                        <div class="row" id="SeparacionIndemnizacionRow" style="display:none;">
+                            <div class="col-sm-12 text-center"><h4>Separacion Indenmizacion</h4></div>
+                        </div>
+                        <div class="row" id="JubilacionPensionRetiroRow" style="display:none;">
+                            <div class="col-sm-12 text-center"><h4>Jubilacion Pension Retiro</h4></div>
+                            <!--<div class="col-sm-4">
+                                <div class="form-group">
+                                    @Html.Label("Total una Parcialidad")
+                                    <input class="form-control"/>
+                                </div>
+                            </div>-->
+                        </div>
+                        <hr />
+                        <div class="row" id="Deducciones">                           
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <h3 onclick="$('.Deduccion').fadeToggle(1000); $('#btnAgregarDeduccion').fadeToggle(1000)">Deducciones</h3>
+                                </div>        
+                                @Html.Hidden("CantidadDeducciones",0)                        
+                                <div class="col-sm-offset-4 col-sm-4 text-center">
+                                    <button class="btn btn-xs btn-info"  id="btnAgregarDeduccion" type="button" style="display:none">Agregar Deduccion</button>                                    
+                                </div> 
+                            </div>
+                            <div class="row Deduccion" style="display:none">
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        @Html.Label("Tipo de Deduccion")
+                                        @Html.DropDownList("TipoDeduccion0", new SelectList(ViewBag.TipoDeduccionList, "c_TipoDeduccion", "Descripcion"),"Seleccione Tipo de Deduccion", new { @class = "form-control", required = (string)null })
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        @Html.Label("Concepto")
+                                        <input type="text" class="form-control" id="DeduccionConcepto0" name="DeduccionConcepto0"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        @Html.Label("Importe")
+                                        <input type="number" class="form-control" id="DeduccionImporte0" name="DeduccionImporte0"/>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row" id="OtrosPagos">
+                            <div class="row">
+                                <div class="col-sm-12 text-center" onclick="$('.OtroPago').fadeToggle(1000); $('#btnAgregarOtroPago').fadeToggle(1000)"><h3>Otros Pagos</h3></div>
+                                <div class="col-sm-4 col-sm-offset-4 text-center"><button class="btn btn-xs btn-info" type="button" id="btnAgregarOtroPago" style="display:none">Agregar Otros Pagos</button></div>
+                            </div>
+                            <div class="row OtroPago" style="display:none">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.Label("Tipo de Otro Pago")
+                                            @Html.DropDownList("TipoOtroPago0", new SelectList(ViewBag.TipoOtroPagoList, "c_TipoOtroPago", "Descripcion"), "Seleccione Tipo de Otro Pago", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.Label("Concepto")
+                                            <input type="text" class="form-control" name="OtroPagoConcepto0" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            @Html.Label("Importe")
+                                            <input type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-primary btn-xs" type="button" id="btnSubsidioAlEmpleo0" onclick="AddSubsidioAlEmpleo(0, '#btnSubsidioAlEmpleo0', '#SubsidioAlEmpleo0')">Subsidio al Empleo</button>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-primary btn-xs" type="button" id="btnCompesacionSaldoAFavor0" onclick="addCompesacionSaldoAFavor(0, '#btnCompesacionSaldoAFavor0', '#CompesacionSaldoAFavor0')">Compesacion saldo a favor</button>
+                                    </div>
+                                </div>                                
+                                <div class="col-sm-12" id="SubsidioAlEmpleo0" style="display:none">
+                                    <div class="col-sm-12 text-center">
+                                        <h4>Subsio al empleo</h4>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12" id="CompesacionSaldoAFavor0" style="display:none">
+                                    <div class="col-sm-12 text-center">
+                                        <h4>Compesacion Saldo A favor</h4>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-sm-12 text-center"><h3>Incapacidades</h3></div>    
+                                <div class="col-sm-4 col-sm-offset-4 text-center"><button class="btn btn-xs btn-info" type="button">Agregar Incapacidades</button></div>
+                            </div>                            
+                            <div class="row" >
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        @Html.Label("Dias de Incapacidad")
+                                        <input class="form-control" type="number" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.Label("Tipos de Incapacidad")
+                                        @Html.DropDownList("TipoIncapacidad",new SelectList(ViewBag.TipoIncapacidadList, "c_TipoIncapacidad","Descripcion"),"Selecciona Tipo de Incapacidad",new {@class="form-control"})
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        @Html.Label("Importe Monetario")
+                                        <input class="form-control" type="number"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning btn-xs" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success btn-xs" id="btnGuardar">Guardar cambios</button>
+                    </div>
+                }
+            </div>            
+        </div>
+    </div>
+</div>
+<script>
+    var Percepciones = 0;
+    var Deduccion = 0;
+    var OtrosPagos = 0;
+    function addCompesacionSaldoAFavor(OtroPago, IdBoton, IdCompesacionSaldoAFavor) {
+        $(IdBoton).attr('disabled',true);
+        var CompesacionSaldoAFavor = '<div class="col-sm-4"><div class="form-group">@Html.Label("Saldo a favor")<input type="text" class="form-control" name="SaldoAFavor' + OtroPago + '" required/></div></div>';
+        CompesacionSaldoAFavor += '<div class="col-sm-4"><div class="form-group">@Html.Label("Año")<input type="number" class="form-control" name="Año' + OtroPago + '" required/></div></div>';
+        CompesacionSaldoAFavor += '<div class="col-sm-4"><div class="form-group">@Html.Label("Remanente Saldo A Favor")<input type="text" class="form-control"  name="RemanenteSaldoAFavor'+OtroPago+'" required/></div></div>';
+        $(IdCompesacionSaldoAFavor).append(CompesacionSaldoAFavor);
+        $(IdCompesacionSaldoAFavor).fadeIn(1000);
+    }
+    function AddSubsidioAlEmpleo(OtroPago, IdBoton, IdSubsidioAlEmpleado) {
+        $(IdBoton).attr('disabled', true);
+        var SubsidioAlEmpleo = '<div class="col-sm-6"><div class="form-group">@Html.Label("Subsidio Causado")<input type="text" class="form-control" name="SubsidioCausado' + OtroPago + '" required/></div></div>';
+        $(IdSubsidioAlEmpleado).append(SubsidioAlEmpleo);
+        $(IdSubsidioAlEmpleado).fadeIn(1000);
+    }
+    function addAccionesOTitulos(Percepcion, IdBoton, IdAccionesOTitulos) {
+        $(IdBoton).attr('disabled', true);
+        var AccionesOTitulos = '<div class="col-sm-6"><div class="form-group"><label>Valor de Mercado</label><input class="form-control" type="number" name="ValorMercado' + Percepcion + '" required/></div></div>';
+        AccionesOTitulos += '<div class="col-sm-6"><div class="form-group"><label>Precio al ortorgarse</label><input class="form-control" type="number" name="PrecioOrtorgarse' + Percepcion + '" required/></div></div>';
+        $(IdAccionesOTitulos).append(AccionesOTitulos);
+        $(IdAccionesOTitulos).fadeIn(1000);
+    }
+    function addHorasExtras(Percepcion, IdBoton, IdHorasExtras) {
+        var HE=$('#HorasExtrasPercepcion'+Percepcion).val();
+        $(IdHorasExtras).append('<div class="col-sm-3"><div class="form-group">@Html.Label("Dias")<input class="form-control" type="number" requried min="1" name="Dias' + Percepcion + '_' + HE + '"/></div></div>');
+        $(IdHorasExtras).append('<div class="col-sm-3"><div class="form-group">@Html.Label("Tipos de Horas")<select class="form-control" name="TipoHoras' + Percepcion + '_' + HE + '" required><option value>Seleccione tipo de horas</option>@foreach (var item in ViewBag.TipoHorasList) {<option value="@item.c_TiposHoras">@item.Descripcion</option> }</div></div>');
+        $(IdHorasExtras).append('<div class="col-sm-3"><div class="form-group">@Html.Label("Horas extras")<input class="form-control" type="number" required min="1" name="HorasExtras'+Percepcion+'_'+HE+'"/></div></div>');
+        $(IdHorasExtras).append('<div class="col-sm-3"><div class="form-group">@Html.Label("Importe Pagado")<input class="form-control" type="number" required name="ImportePagado' + Percepcion + '_' + HE + '"/></div></div>');
+        $(IdHorasExtras).fadeIn(1000);
+        $('#HorasExtrasPercepcion' + Percepcion).val(parseInt(HE) + 1);
+    }
+    $(function () {
+
+        $('#btnCompesacionSaldoAFavor').click(function () {
+            $('#btnCompesacionSaldoAFavor').attr('disabled', true);
+            $('#CompesacionSaldoAFavor').fadeIn(1000);
+        });
+        $('#btnAgregarDeduccion').click(function () {
+            Deduccion++;
+            var D = $('#CantidadDeducciones').val(Deduccion);
+            var rowDeduccion ='<div class="row Deduccion">';
+            rowDeduccion += '<div class="col-sm-5"><div class="form-group">@Html.Label("Tipo de Deduccion")<select class="form-control" id="TipoDeduccion' + Deduccion + '" name="TipoDeduccion' + Deduccion + '" required><option selected value>Seleccione Tipo de Deduccion</option>@foreach (var item in ViewBag.TipoDeduccionList) {<option value="@item.c_TipoDeduccion">@item.Descripcion</option> }</select></div></div>';
+            rowDeduccion += '<div class="col-sm-4"><div class="form-group">@Html.Label("Concepto")<input type="text" class="form-control" id="DeduccionConcepto' + Deduccion + '" name="DeduccionConcepto' + Deduccion + '" required/></div></div>';
+            rowDeduccion += '<div class="col-sm-3"><div class="form-group">@Html.Label("Importe")<input type="number" class="form-control" id="DeduccionImporte' + Deduccion + '" name="DeduccionImporte' + Deduccion + '"required/></div></div>';
+            rowDeduccion += '</div>';
+            $('#Deducciones').append(rowDeduccion);
+        });
+        $('#btnPercepcion').click(function () {
+            Percepciones++;
+            var P = $('#CantidadPercepciones').val(Percepciones);
+            var rowPercepcion = '<div class="row">';
+            rowPercepcion += '<div class="col-sm-3"><div class="form-group"><label>Tipo de Percepcion</label><select class="form-control" name="TipoPercepcion' + Percepciones + '" id="TipoPercepcion' + Percepciones + '" required>@foreach(var item in ViewBag.PercepcionesList) {<option value="@item.c_TipoPercepcion">@item.Descripcion</option> }</select></div></div>';
+            rowPercepcion += '<div class="col-sm-3"><div class="form-group">@Html.Label("Concepto")<input type="text" class="form-control" required name="PercepcionConcepto' + Percepciones + '" id="Concepto' + Percepciones + '" required /></div></div>';
+            rowPercepcion += '<div class="col-sm-3"><div class="form-group">@Html.Label("Importe Excento")<div class="input-group"><div class="input-group-addon">$</div><input type="number" class="form-control" name="PercepcionImporteExcento' + Percepciones + '" id="ImporteExcento' + Percepciones + '" required /></div></div></div>';
+            rowPercepcion += '<div class="col-sm-3"><div class="form-group">@Html.Label("Importe Gravado")<div class="input-group"><div class="input-group-addon">$</div><input type="number" class="form-control" name="PercepcionImporteGravado' + Percepciones + '" id="ImporteGravado' + Percepciones + '" required /></div></div></div>';
+            rowPercepcion += '<div class="col-sm-4"><button id="btnHorasExtras'+Percepciones+'" type="button" class="btn btn-xs btn-primary" onclick="addHorasExtras('+Percepciones+', \'#btnHorasExtras'+Percepciones+'\', \'#HorasExtrasRow' + Percepciones + '\')">Agregar Horas Extras</button></div><div class="col-sm-4"><button id="btnAccionesOTitulos' + Percepciones + '" class="btn btn-xs btn-primary" type="button" onclick="addAccionesOTitulos('+Percepciones+', \'#btnAccionesOTitulos' + Percepciones + '\', \'#AccionesOTitulosRow'+Percepciones+'\')">Agregar Acciones o Titulos</button></div>';
+            rowPercepcion += '<div class="col-sm-12" id="HorasExtrasRow' + Percepciones + '" style="display:none;"><div class="col-sm-12 text-center"><h4>Horas Extras</h4><input type="hidden" name="HorasExtrasPercepcion' + Percepciones + '" value="0" id="HorasExtrasPercepcion' + Percepciones + '" /></div> </div>';
+            rowPercepcion += '<div class="col-sm-12" id="AccionesOTitulosRow'+Percepciones+'" style="display:none;"><div class="col-sm-12 text-center"><h4>Acciones o Titulos</h4></div> </div>';
+            rowPercepcion += '</div>';
+            rowPercepcion += '<br/>';
+            $('#Percepciones').append(rowPercepcion);
+        });
+
+        $('#JubilacionPensionRetiro').click(function () {
+            $('#JubilacionPensionRetiro').attr('disabled', true);
+            var JubilacionPensionRetiro = '<div class="col-sm-4"><div class="form-group"><label>Ingreso Acumulable</label><input class="form-control" name="JubilacionPensionRetiroIngresoAcumulable"/></div></div>';
+            JubilacionPensionRetiro += '<div class="col-sm-4"><div class="form-group"><label>Ingreso no Acumulable</label><input class="form-control" name="JubilacionPensionRetiroIngresoNoAcumulable"/></div></div>';
+            JubilacionPensionRetiro += '<div class="col-sm-4"><div class="form-group">@Html.Label("Total una Exhibicion")<input class="form-control" name="JubilacionPensionRetiroTotalUnaExhibicion"/></div></div>';
+            JubilacionPensionRetiro += '<div class="col-sm-4"><div class="form-group">@Html.Label("Monto Diario")<input class="form-control" name="JubilacionPensionRetiroMontoDiario" /></div></div>';
+            $('#JubilacionPensionRetiroRow').append(JubilacionPensionRetiro);
+            $('#JubilacionPensionRetiroRow').fadeIn(1000);
+        });
+        $('#SeparacionIndemnizacion').click(function () {
+            $('#SeparacionIndemnizacion').attr('disabled', true);
+            var SeparacionIndemnizacion = '<div class="col-sm-3"><div class="form-group"><label>Numero de años de Servicio</label><input class="form-control" name="SeparacionIndemnisacionNAS"/></div></div>';
+            SeparacionIndemnizacion += '<div class="col-sm-3"><div class="form-group"><label>Ultimo sueldo mensual ordinario</label><input class="form-control" name="UltimoSueldoMensual" /></div></div>';
+            SeparacionIndemnizacion += '<div class="col-sm-3"><div class="form-group"><label>Ingreso Acumulable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input class="form-control" name="SeparacionIndemnisacionIngresoAcumulable"/></div></div>';
+            SeparacionIndemnizacion += '<div class="col-sm-3"><div class="form-group"><label>Ingreso no Acumulable&nbsp;&nbsp;&nbsp;</label><input class="form-control" name="SeparacionIndemnisacionIngresoNoAcumulable"/></div></div> ';
+            $('#SeparacionIndemnizacionRow').append(SeparacionIndemnizacion);
+            $('#SeparacionIndemnizacionRow').fadeIn(1000);
+        });
+        $('#btnAgregarOtroPago').click(function () {
+            OtrosPagos++;
+            var OtroPago = '<div class="row OtroPago">';
+            OtroPago += '<div class="col-sm-12">';
+            OtroPago += '<div class="col-sm-4"><div class="form-group">@Html.Label("Tipo de Otro Pago")<select class="form-control">@foreach (var item in ViewBag.TipoOtroPagoList) {<option value="@item.c_TipoOtroPago">@item.Descripcion</option> }</select></div></div>';
+            OtroPago += '<div class="col-sm-4"><div class="form-group">@Html.Label("Concepto")<input type="text" class="form-control" name="OtroPagoConcepto0"/></div></div>';
+            OtroPago += '<div class="col-sm-4"><div class="form-group">@Html.Label("Importe")<input type="text" class="form-control"/></div></div>';
+            OtroPago += '<div class="col-sm-4"><button class="btn btn-primary btn-xs" type="button" id="btnSubsidioAlEmpleo' + OtrosPagos + '" onclick="AddSubsidioAlEmpleo(' + OtrosPagos + ', \'#btnSubsidioAlEmpleo' + OtrosPagos + '\', \'#SubsidioAlEmpleo' + OtrosPagos + '\')">Subsidio al Empleo</button></div>';
+            OtroPago += '<div class="col-sm-4"><button class="btn btn-primary btn-xs" type="button" id="btnCompesacionSaldoAFavor'+OtrosPagos+'" onclick="addCompesacionSaldoAFavor('+OtrosPagos+', \'#btnCompesacionSaldoAFavor'+OtrosPagos+'\', \'#CompesacionSaldoAFavor'+OtrosPagos+'\')">Compesacion saldo a favor</button></div>';
+            OtroPago += '</div>';
+            OtroPago += '<div class="col-sm-12" id="SubsidioAlEmpleo'+OtrosPagos+'"></div>'
+            OtroPago += '<div class="col-sm-12" id="CompesacionSaldoAFavor'+OtrosPagos+'"></div>'
+            OtroPago += '</div>';
+            OtroPago +='<br/>'
+            $('#OtrosPagos').append(OtroPago);
+        });
+
+        $('form').submit(function (event) {
+            $(".se-pre-con").fadeIn();
+            var PAC = $("#PAC option:selected").text();
+            var Empleado = $("#Empleados option:selected").text();
+            var Fecha = $("#Fecha").val();
+            var Folio = $("#Folio").val();
+            var Serie = $("#Serie").val();
+            var IdNominaHistorial = $("#IdNominaHistorial").val();
+
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    $("#myModal").modal('hide');
+                    if (result.error == "none") {
+                        var table = $("#Nominas").DataTable();
+                        var botonDetalles = "<button class=\"btn btn-info btn-xs\"><i class=\"fa fa-info\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Detalles</button>";
+                        var botonEditar = "&nbsp;<button class=\"btn btn-info btn-xs\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>Editar</button>";
+                        var botonEliminar = "&nbsp;<button class=\"btn btn-danger btn-xs\" onclick=\"DeleteRegister('" + IdNominaHistorial + "', 'Deseas Eliminar El registro', '@Url.Content("/Nominas/Eliminar")','#Nominas')\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i>&nbsp;Eliminar</button>";
+                        var Array = [PAC, Empleado, Folio, Serie, Fecha, "<button class=\"btn btn-success btn-xs\">Descargar XML</button>&nbsp;<button class=\"btn btn-success btn-xs\"><i class=\"fa fa-file-pdf-o\" aria-hidden=\"true\"></i>&nbsp; PDF</button>", botonDetalles + botonEditar + botonEliminar];
+                        var rowIndex = table.row.add(Array).draw(false);
+                        var row = $('#Nominas').dataTable().fnGetNodes(rowIndex);
+                        $(row).attr('id', IdNominaHistorial);
+                        var rowNode = rowIndex.node();
+                        $(rowNode).find('td').eq(5).addClass('text-center');
+                        $(rowNode).find('td').eq(6).addClass('text-center');
+
+                    }
+                    else { alert(result.error + " - " + result.Message); }
+                }
+            });
+            return false;
+        });
+    });
+</script>

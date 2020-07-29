@@ -1,0 +1,96 @@
+﻿
+@{
+    Layout = null;
+}
+<style>
+    #Correo-error{
+        color: #cc0000;
+    }
+</style>
+<div class="col-sm-6 col-sm-offset-3">
+    @using (Ajax.BeginForm("/Login", null, new AjaxOptions { UpdateTargetId = "Login" }, new { @id = "Recuperar" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="card card-login">
+            <div class="card-header text-center" data-background-color="green">
+                <img src="~/Images/Avenzo Fiscal Blanco.png" style="width:100%;height:auto;max-width:200px;" />
+            </div>
+            <p class="category text-center">
+                Recuperar
+            </p>
+            <div class="card-content">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="material-icons">email</i>
+                    </span>
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Dirección de correo electrónico</label>
+                        <input class="form-control" required name="Correo" id="Correo"/>
+                        <span class="material-input"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer text-center">
+                <button type="submit" class="btn btn-success btn-simple btn-wd btn-lg">Enviar &nbsp; <i class="material-icons">send</i></button>
+            </div>
+        </div>
+    }
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $.extend($.validator.messages, {
+            equalTo: "Por favor, escribe la misma contraseña.",
+            minlength: jQuery.validator.format("Por favor, no escribas menos de {0} caracteres."),
+            required: "Este campo es obligatorio.",
+            email: "Por favor, escribe una dirección de correo válida",
+        });
+        $.validator.addMethod("correoValido", function (value, element, params) {
+            var disponible = false;
+            $.ajax({
+                url: "/Cuenta/VerificarCorreo?correo=" + value,
+                method: "POST",
+                async: false,
+                success: function ($Data) {
+                    disponible = !$Data.Disponible;
+                }
+            });
+            return disponible;
+        }, $.validator.format("Este correo no esta registrado {0}"));
+        var validarRecuperar = $("#Recuperar").validate({
+            debug: true,
+            rules: {
+                Correo: {
+                    required: true,
+                    email: true,
+                    correoValido:""
+                }
+            }
+        });
+        $('#Recuperar').submit(function (event) {
+            var isValid = $("#Recuperar").valid();
+            var Error = false;
+            if (isValid) {                
+                $.ajax({
+                    url: "/Cuenta/Recuperar?correo=" + $("#Correo").val(),
+                    method: "POST",
+                    async: false,
+                    success: function ($Data,status) {
+                        console.log($Data);
+                        console.log(status);
+                        $("#Card").fadeOut(500, function () {
+                            if ($Data.error == false)
+                                $("#success").fadeIn(500);
+                            else {
+                                $("#MessageError").text($Data.Messages);
+                                $("#error").fadeIn(500);
+                            }
+                        }); 
+                    }
+                });
+            }            
+            return false;
+        });
+    });
+</script>

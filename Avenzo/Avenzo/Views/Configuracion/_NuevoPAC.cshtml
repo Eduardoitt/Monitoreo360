@@ -1,0 +1,108 @@
+﻿
+<div class="modal-fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Nuevo</h4>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("/Configuracion/Nuevo", null, new AjaxOptions { UpdateTargetId = "NuevoId" }, new { @id = "NuevoPAC" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="se-pre-con"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" required class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label>RFC</label>
+                                    <input class="form-control" required/>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label>CURP</label>
+                                    <input class="form-control" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Contraseña de la llave</label>
+                                    <input type="password" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Regimen Fiscal</label>
+                                    @Html.DropDownList("RegimenFiscal", new SelectList(ViewBag.RegimenFiscal, "c_RegimenFiscal", "Descripcion"), "Seleccione un regimen", new { @class = "form-control", required = (string)null })
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Registro Patronal</label>
+                                    <input class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Es Persona Moral
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Llave</label>
+                                    <input type="file" accept=".key" name="Llave" id="Llave" />
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Certificado</label>
+                                    <input type="file" accept=".cer" name="Certificado" id="Certificado" />
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning btn-xs" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success btn-xs">Guardar cambios</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('form').submit(function (event) {
+            $(".se-pre-con").fadeIn();
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    $("#myModal").modal('hide');
+                    if (result.error == "none") { }
+                }
+            });
+        });
+
+    });
+</script>

@@ -1,0 +1,253 @@
+﻿@model Model.Usuarios
+@{
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    ViewBag.TitleModal = "Editar Usuario";
+}
+<style>
+    .noUi-base {
+        background-color: #02a94f;
+    }
+</style>
+<div class="container-fluid">
+    <form action="/Usuarios/Editar" method="post">
+        <div class="row">
+            @{
+                if (Model.TipoUsuario.Contains("Cliente"))
+                {
+                    Model.AvenzoSeguridadEntities db = new Model.AvenzoSeguridadEntities();
+                    Model.Clientes cliente = db.Clientes.Where(x => x.IdUsuario == Model.Id).FirstOrDefault();
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Este Usuario Le Pertenece a:</label>
+                            <input class="form-control" readonly value="@cliente.Nombres @cliente.ApellidoPaterno @cliente.ApellidoMaterno" disabled />
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    Model.AvenzoSeguridadEntities db = new Model.AvenzoSeguridadEntities();
+                    Model.Empleados cliente = db.Empleados.Where(x => x.IdUsuario == Model.Id).FirstOrDefault();
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Este Usuario Le Pertenece a:</label>
+                            <input class="form-control" readonly value="@cliente.Nombre @cliente.ApellidoPaterno @cliente.ApellidoMaterno" disabled />
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label">Usuario</label>
+                    @Html.Hidden("Id", Model.Id)
+                    @Html.TextBox("Usuario", Model.Usuario, new { @class = "form-control", @type = "email" })
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label">Tipo de Usuario</label>
+                    @Html.DropDownList("TipoUsuario", new SelectList(Enum.GetValues(typeof(Model.TipoUsuario))), "Seleccionar Tipo de Usuario", new { @class = "form-control", @disabled = (string)null })
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label">Tipo de Permiso</label>
+                    @Html.DropDownList("Roles", new SelectList(Enum.GetValues(typeof(Model.Roles))), "Seleccionar Tipo de Permiso", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="togglebutton">
+                        <label>
+                            <input type="checkbox" @if (Model.Activo) { WriteLiteral("checked"); } id="Activo"><span class="toggle"></span> Activo
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div id="slider-text">Timbres Disponibles: &nbsp;<i class='material-icons' style='font-size:medium;'>all_inclusive</i></div>
+                    <div id="slider"></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <span class="badge">@Model.TimbresCancelados</span> Timbres Cancelados<br />
+                    <span class="badge">@Model.TimbresUsados</span> Timbres Usados
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="checkCambiarContraseña" name="checkCambiarContraseña">
+                            <span class="checkbox-material">
+                                <span class="check"></span>
+                            </span> Cambiar Contraseña
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="display:none;" id="CambiarContraseña">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">Nueva Contraseña</label>
+                            <input class="form-control" type="password" id="Contraseña" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">Repetir Contraseña</label>
+                            <input class="form-control" type="password" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" style="bottom:-36px;">
+                <div class="col-sm-12">
+                    <ul>
+                        <li>Haz tu contraseña 8 caracteres o más.</li>
+                        <li>Use letras mayúsculas y minúsculas.</li>
+                        <li>Utilizar más de un número.</li>
+                        <li>Utilice caracteres especiales (!, @@, #, $,%, ^, &, *,?, _, ~).</li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 text-center" style="background:#d9534f;color:white;border-radius:5px;" id="PasswordMeter">Muy Debíl</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-warning btn-simple" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success btn-simple"><i class="material-icons">save</i> &nbsp;Guardar cambios</button>
+        </div>
+    </form>
+</div>
+
+<script src="http://avenzo.mx/avenzo.mx/Scripts/passwordmeter.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var slider = document.getElementById('slider');
+        var start=@if (Model.Roles.Contains("Admin")) { WriteLiteral(100); } else { WriteLiteral(Model.Timbres-Model.TimbresUsados); };
+        noUiSlider.create(slider, {
+            start: start,
+            step:1,
+            connect: "lower",
+            range: {
+                min: 0,
+                max: 100
+            }
+        });
+        slider.noUiSlider.on('update', function (values, handle) { $('#slider-text').text("Timbres Disponibles: " + Math.trunc(values));  });
+        @if (Model.Roles.Contains("Admin"))
+            {
+                WriteLiteral("$(\"#slider-text\").html(\"Timbres Disponibles:  <i class='material-icons' style='font-size:medium;'>all_inclusive</i>\");");
+                WriteLiteral("slider.setAttribute('disabled', true);");
+            }
+
+
+        $.validator.addMethod("passwordValido", function (value, element, params) {
+
+            var object = testPassword(value);
+            if (object.score > 24)
+                return true;
+            else
+                return false
+        }, $.validator.format("La Contraseña es muy débil {0}"));
+        $("#Contraseña").keyup(function () {
+            var object = testPassword($(this).val());
+            $("#PasswordMeter").text(object.Verdict);
+            if (object.Verdict == "D\u00E9bil")
+                $("#PasswordMeter").css({ "background": "orange", "color": "white" });
+            if (object.Verdict == "Muy d\u00E9bil")
+                $("#PasswordMeter").css({ "background": "#d9534f", "color": "white" });
+            if (object.Verdict == "Normal")
+                $("#PasswordMeter").css({ "background": "yellow", "color": "black" });
+            if (object.Verdict == "Fuerte")
+                $("#PasswordMeter").css({ "background": "#99ff33", "color": "black" });
+            if (object.Verdict == "Muy Fuerte")
+                $("#PasswordMeter").css({ "background": "#449d44", "color": "white" });
+        });
+        $('#checkCambiarContraseña').change(function(){
+            if($('#checkCambiarContraseña').is(':checked')){
+                $('#CambiarContraseña').fadeIn();
+            }else{
+                $('#CambiarContraseña').fadeOut();
+            }
+
+        });
+        $('#Roles').change(function(){
+            if($('#Roles option:selected').text()=="Cliente"){
+                slider.noUiSlider.set(10);
+                slider.removeAttribute('disabled');
+
+            }else{
+                slider.noUiSlider.set(100);
+                slider.setAttribute('disabled', true);
+                $("#slider-text").html("Timbres Disponibles: <i class='material-icons' style='font-size:medium;'>all_inclusive</i>");
+            }
+        });
+        $('form').submit(function (event) {
+            var btnActivo=' <span class="label label-danger">Desactivado</span>';
+            var Activo=false;
+            if($('#Activo').is(':checked')){
+                Activo=true;
+                btnActivo='<span class="label label-success">Activo</span>';
+            }
+
+
+            var data={Id:$('#Id').val(),Usuario:$('#Usuario').val(),Timbres:Math.abs(slider.noUiSlider.get()),Contraseña:$('#Contraseña').val(),Permisos:$('#Roles option:selected').text(),Activo:Activo};
+            try{
+                $.ajax({
+                    url: '/Usuarios/Editar',
+                    method : 'POST',
+                    async:false,
+                    data:data,
+                    //dataType:'json',
+                    success: function (result,status,xhr) {
+                        var TimbresDisponibles='';
+                        TimbresDisponibles+='<div>100% / &nbsp;<i class="material-icons" style="font-size:medium;">all_inclusive</i></div>';
+                        TimbresDisponibles +='  <div class="progress">';
+                        TimbresDisponibles +='      <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="'+data.Timbres+'" aria-valuemin="0" aria-valuemax="'+data.Timbres+'" style="width: '+(((data.Timbres-@Model.TimbresUsados) * 100)/data.Timbres)+'%;">';
+                        TimbresDisponibles +='  </div>';
+                        TimbresDisponibles +='</div>'
+
+                        var columns = [data.Usuario, $('#TipoUsuario option:selected').text(), data.Permisos,TimbresDisponibles, @Model.TimbresCancelados,btnActivo,'<div class="form-group-sm"><button class="btn btn-simple btn-info btn-icon" onclick="OpenModal(\'/Usuarios/Editar?IdTemp='+data.Id+'\')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></div>'];
+                        var TRNode = document.getElementById(data.Id);
+                        $('#datatables').dataTable().fnUpdate(columns, TRNode, undefined);
+                        if(result.error==true){
+                            swal({
+                                title: "Error!",
+                                text: result.Message,
+                                buttonsStyling: false,
+                                confirmButtonClass: "btn btn-success",
+                                type: "error"
+                            })
+                            
+                        }else{
+                            swal({
+                                title: "Listo!",
+                                text: "Se guardo Correctamente",
+                                buttonsStyling: false,
+                                confirmButtonClass: "btn btn-success",
+                                type: "success"
+                            });
+                        }
+                    }
+                });
+            }catch(ex){
+                console.log(ex);
+            }
+            $('#myModal').modal('hide');
+            return false;
+        });
+    });
+</script>

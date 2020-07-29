@@ -1,0 +1,18 @@
+﻿@model Model.ReciboView
+@{
+    ViewBag.Title = "Recibos";    
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+<script>
+    $(document).ready(function () {
+        $('.sidebar-wrapper >.nav > li').removeClass('active');
+        $("#navRecibos").addClass("active");
+        $("#AppView").load("/Recibos/_PanelRecibos", function () {
+            $("#AppView").fadeIn(500);
+        });
+    });
+</script>
+@*if (ViewBag.Type == "GET")
+    {
+        <script src="~/Scripts/awesomplete.js"></script>
+    }*@

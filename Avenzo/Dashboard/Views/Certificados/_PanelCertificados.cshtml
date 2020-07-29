@@ -1,0 +1,161 @@
+﻿@model IEnumerable<Model.PACForPanel>
+@{
+    ViewBag.Title = "Certificados";
+    Layout =null;    
+}
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">vpn_key</i>
+            </div>
+            <div class="card-content">
+                <h4>Llaves y Certificados</h4>
+                <div class="material-datatables">
+                    <table class="table table-striped table-no-bordered table-hover dataTable dtr-inline table-shopping" id="datatables" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th class="disabled-sorting"></th>
+                                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                                <th>@Html.DisplayNameFor(model => model.RFC)</th>
+                                <th>@Html.DisplayNameFor(model => model.CURP)</th>
+                                <th class="text-center">@Html.DisplayNameFor(model => model.RegimenFiscal)</th>
+                                <th class="disabled-sorting text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="@item.Id">
+                                    <td>
+                                        <div class="img-container">
+                                            @if (item.Logo != null)
+                                            {                                                
+                                                <img src="@item.Logo" />
+                                            }
+                                            else
+                                            {
+                                                <img src="@Url.Content("/Images/image_placeholder.jpg")" />
+                                            }
+                                        </div>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.RFC)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CURP)</td>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.RegimenFiscal)</td>
+                                    <td class="disabled-sorting text-center">
+                                        <a class="btn btn-simple btn-success btn-icon" rel="tooltip" data-original-title="Descargar" href="@Url.Content("/Certificados/Descargar")?id=@item.Id"><i class="material-icons">file_download</i></a>
+                                        <button class="btn btn-info btn-simple btn-icon" data-toggle="modal" data-target="#myModal" onclick="OpenModal('@Url.Content("/Certificados/Editar?TempId=")@item.Id')" rel="tooltip" data-original-title="Editar"><i class="material-icons">edit</i></button>
+                                        <button class="btn btn-simple btn-danger btn-icon remove" rel="tooltip" data-original-title="Eliminar" onclick="DeleteRegister('@item.Id','@Url.Content("/Certificados/Eliminar")','#datatables')"><i class="material-icons">close</i></button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#loader").fadeOut();
+        $('[rel="tooltip"]').tooltip();
+        $('#datatables').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            buttons: [
+               {
+                   extend: 'copy',
+                   text: '<i class="material-icons text-info" rel="tooltip" data-original-title="Copiar">content_copy</i>',
+                   exportOptions: {
+                       modifier: {
+                           page: 'current'
+                       },
+                       columns: [0, 1, 2, 3, 4]
+                   },
+               },
+               {
+                   extend: 'csv',
+                   text: '<i class="fa fa-file-text-o fa-lg text-primary" aria-hidden="true" rel="tooltip" data-original-title="Exportar CSV"></i>',
+                   exportOptions: {
+                       modifier: {
+                           page: 'current'
+                       },
+                       columns: [0, 1, 2, 3, 4]
+                   }
+               },
+               {
+                   extend: 'excel',
+                   text: '<i class="fa fa-file-excel-o fa-lg" aria-hidden="true" rel="tooltip" data-original-title="Exportar excel"></i>',
+                   exportOptions: {
+                       modifier: {
+                           page: 'current'
+                       },
+                       columns: [0, 1, 2, 3, 4]
+                   }
+               },
+               {
+                   extend: 'pdf',
+                   text: '<i class="material-icons text-danger" rel="tooltip" data-original-title="Exportar PDF">picture_as_pdf</i>',
+                   exportOptions: {
+                       modifier: {
+                           page: 'current'
+                       },
+                       columns: [0, 1, 2, 3, 4]
+                   }
+               },
+               {
+                   extend: 'print',
+                   text: '<i class="material-icons text-warning" rel="tooltip" data-original-title="Imprimir">print</i>',
+                   exportOptions: {
+                       modifier: {
+                           page: 'current'
+                       },
+                       columns: [0, 1, 2, 3, 4]
+                   },
+                   autoPrint: true
+               }
+            ],
+            responsive: true,
+            language: {
+                search: "<div class=\"form-group\"> _INPUT_ </div>",
+                searchPlaceholder: "Buscar en Registros",
+                "lengthMenu": "<div class=\"form-group\"><label class=\"control-label\">Mostrar</label>_MENU_ <label class=\"control-label\">Registros</label></div>",
+                "zeroRecords": "No hay Llaves",
+                "info": "Registros _START_  al  _END_  de _TOTAL_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros)",
+                //"sSearch": "",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sPrevious": "Anterior",
+                    "sNext": "Siguiente",
+                    "sLast": "Ultimo"
+                }
+            }, fnDrawCallback: function () {
+                $('[rel="tooltip"]').tooltip();
+            }
+        });
+        $(".dt-buttons").append('<button class="btn btn-info btn-simple" data-toggle="modal" data-target="#myModal" onclick="OpenModal(\'@Url.Content("/Certificados/Nuevo")\')" style="margin:0;padding:0;" ><i class="material-icons">add</i></button>');
+        $(".buttons-copy").click(function () {
+            showNotification('top', 'center', 'info', '<i class="material-icons">content_copy</i>', 'Se ha Copiado correctamente');
+        });
+        $(".buttons-csv").click(function () {
+            showNotification('top', 'center', 'primary', '<i class="fa fa-file-text-o fa-lg text-primary" aria-hidden="true"></i>', 'Se descargado el cvs correctamente');
+        });
+        $(".buttons-excel").click(function () {
+            showNotification('top', 'center', 'success', '<i class="fa fa-file-excel-o fa-lg" aria-hidden="true"></i>', 'Se descargado el excel correctamente');
+        });
+        $(".buttons-pdf").click(function () {
+            showNotification('top', 'center', 'danger', '<i class="material-icons">picture_as_pdf</i>', 'Se descargado el PDF correctamente');
+        });
+
+    });
+</script>

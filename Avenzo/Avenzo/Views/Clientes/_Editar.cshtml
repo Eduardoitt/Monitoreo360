@@ -1,0 +1,332 @@
+﻿@model Avenzo.Models.GetCliente_ALT_Result
+<div class="modal-fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Editar Cliente</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Ajax.BeginForm("/Editar", null, new AjaxOptions { UpdateTargetId = "NuevoId" }, new { @id = "NuevoCliente" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="se-pre-con"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            @Html.Hidden("idCliente", Model.IdCliente)
+                            @Html.Hidden("UsuarioCreacion",Model.UsuarioCreacion)
+                            @Html.Hidden("FechaCreacion", Model.FechaCreacion)
+                            @Html.Hidden("Usuario",Model.Usuario)
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="tipoAfilacion">Tipo de Afiliación @{try { Guid.Parse(Model.TipoAfilacion); } catch (Exception ex) { WriteLiteral(Model.TipoAfilacion); } }</label>
+                                    @Html.DropDownList("TipoAfilacion", new SelectList(ViewBag.TipoAfiliacion, "IdCatalogo", "Descripcion",Model.TipoAfilacion), "Seleccion un Tipo de Afiliacion", new { @id = "tipoAfilacion", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <label>Precio Afiliacion</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">$</span>
+                                        <input class="form-control" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <label>Correo Patrocinador</label>
+                                    <input class="form-control" value="@Model.NumeroPatrocinador" name="CorreoPatrocinador" @if (!User.IsInRole("Admin")) { WriteLiteral("disabled"); } />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="numeroTelefonoAlarma">Teléfono Alarma</label>
+                                    <input type="text" maxlength="20" class="form-control phone_us" id="numeroTelefonoAlarma" placeholder="(xxx) xxx-xxxx" value="@Model.NumeroTelefonoAlarma" name="TelefonoAlarma" />
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="palabraClave">Palabra Clave</label>
+                                    <input type="text"  maxlength="50" class="form-control" id="palabraClave" name="PalabraClave" placeholder="Palabra Clave" value="@Model.PalabraClave"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="palabraClaveSilenciosa">Palabra Clave Silenciosa</label>
+                                    <input type="text" maxlength="50" class="form-control" id="palabraClaveSilenciosa" name="PalabraClaveSilenciosa" placeholder="Palabra Clave Silenciosa" value="@Model.PalabraClaveSilenciosa"/>
+                                </div>
+                            </div>
+                        </div>                        
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <center><b>Información Personal</b></center><br />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label">Nombre(s)</label>
+                                    <input class="col-sm-12 form-control" type="text" placeholder="Nombre(s)" name="Nombres" required  value="@Model.Nombres"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Apellido Paterno</label>
+                                    <input class="form-control" placeholder="Apellido Paterno" name="ApellidoPaterno" value="@Model.ApellidoPaterno"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Apellido Materno</label>
+                                    <input class="form-control" placeholder="Apellido Materno" name="ApellidoMaterno" value="@Model.ApellidoMaterno"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Fecha de Nacimiento</label>
+                                    <input class="form-control" type="date" name="FechaNacimiento"  value="@Model.FechaNacimiento"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Lugar de Nacimiento</label>
+                                    <input class="form-control" name="LugarNacimiento" placeholder="Lugar de Nacimiento" value="@Model.LugarNacimiento"/>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Correo Electronico</label>
+                                    <input class="form-control" placeholder="correo@ejemplo.com" name="Correo" pattern="^[a-z0-9._%+-]+@("@")[a-z0-9.-]+\.[a-z]{2,4}$" value="@Model.Email"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Telefono Casa</label>
+                                    <input class="form-control" name="TelefonoCasa" placeholder="(###) ###-####" value="@Model.Telefono"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Telefono Trabajo</label>
+                                    <input class="form-control" name="TelefonoTrabajo" placeholder="(###) ###-####" value="@Model.TelefonoTrabajo"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Telefono Celular</label>
+                                    <input class="form-control" name="TelefonoCelular" placeholder="(###) ###-####" value="@Model.TelefonoCelular"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Sexo</label>
+                                    <select class="form-control" name="Sexo" required>
+                                        <option disabled selected>Selecione Una Opcion</option>
+                                        <option value="N/A">N/A</option>
+                                        <option value="Femenino">Femenino</option>
+                                        <option value="Masculino">Masculino</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Estado Civil</label>
+                                    <input class="form-control" name="EstadoCivil" placeholder="Estado Civil" value="@Model.EstadoCivil"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Profecion o Ocupacion</label>
+                                    <input class="form-control" name="Profecion" placeholder="Prefecion o Ocupacion" value="@Model.Profesion"/>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <center><b>Datos de Facturación</b></center><br />
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    @Html.Label("Calle")
+                                    <input class="form-control" placeholder="Calle" name="Calle" value="@Model.Calle"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    @Html.Label("No. Exterior")
+                                    <input class="form-control" placeholder="No. Exterior" name="NoExterior" value="@Model.NoExterior"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    @Html.Label("No. Interior")
+                                    <input class="form-control" placeholder="No. Interior" name="NoInterior" value="@Model.NoInterior"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Colonia</label>
+                                    <input class="form-control" name="Colonia" placeholder="Colonia" value="@Model.Colonia"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Codigo Postal</label>
+                                    <input class="form-control" name="CodigoPostal" placeholder="Ejemplo 22235" value="@Model.CodigoPostal"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    @Html.Label("Compañia", new { @class = "control-label" })
+                                    @Html.DropDownList("PAC", new SelectList(ViewBag.PAC, "Id", "Nombre"), "Seleccione una Compañia", new { @class = "form-control", required = (string)null })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Pais</label>
+                                    @Html.DropDownList("Pais", new SelectList(ViewBag.Pais, "Pais1", "Pais1"), "Seleccione un pais", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Estado</label>
+                                    @Html.DropDownList("Estado", new SelectList(ViewBag.Estados, "NombreEstado", "NombreEstado"), "Selecciona una estado", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Ciudad</label>
+                                    @Html.DropDownList("Ciudad", new SelectList(ViewBag.Ciudad, "Ciudad1", "Ciudad1"), "Seleciona una ciudad", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <center><b>Datos Fiscales</b></center>
+                                <br />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>CURP</label>
+                                    <input class="form-control" type="text" placeholder="CURP" name="CURP" pattern="^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$" value="@Model.CURP"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>RFC</label>
+                                    <input class="form-control" type="text" placeholder="RFC" name="RFC" pattern="^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))([A-Z\d]{3})?$" value="@Model.RFC"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Beneficiario</label>
+                                    <input class="form-control" type="text" placeholder="Beneficiario" name="Beneficiario" value="@Model.Beneficiario"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Banco</label>
+                                    @Html.DropDownList("banco", new SelectList(ViewBag.Bancos, "c_Banco", "Descripcion"), "Selecione un Banco", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>CLABE Interbancaria</label>
+                                    <input class="form-control" type="text" name="CLABE" placeholder="CLABE Interbancaria" value="@Model.NumeroCLABE"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Cuenta Bancaria</label>
+                                    <input class="form-control" type="text" name="CuentaBancaria" placeholder="CuentaBancaria" value="@Model.ClaveBancaria"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning btn-xs" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success btn-xs">Guardar cambios</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('[name=PAC]').val('@Model.IdProveedor');
+        $('[name=TipoAfilacion]').val('@Model.TipoAfilacion');
+        $('[name=banco]').val('@Model.Banco');
+        $('[name=Ciudad]').val('@Model.Ciudad');
+        $('[name=Estado]').val('@Model.Estado');var Pais ='@Model.Pais'
+        $('[name=Pais]').val(Pais.replace("&#233;","é"));
+        $('[name=Sexo]').val('@Model.Sexo');
+
+    });
+    $(function () {
+
+        $('form').submit(function (event) {
+            $(".se-pre-con").fadeIn();
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    $("#myModal").modal('hide');
+                    if (result.error == "none") {
+                        var idCliente = $('#idCliente').val();
+                        var NumeroTelefonoAlarma = $('[name=TelefonoAlarma]').val();
+                        var Telefono = $('[name=TelefonoCasa]').val();
+                        var Nombre = $('[name=Nombres]').val() + ' ' + $('[name=ApellidoPaterno]').val() + ' ' + $('[name=ApellidoMaterno]').val();
+                        var Direccion = $('[name=Colonia]').val() + ' ' + $('[name=Calle]').val() + ' ' + $('[name=NoExterior]').val() + ' ' + $('[name=NoInterior]').val();;
+                        var btnEditar = '<button class="btn btn-xs btn-info"   data-toggle="modal" data-target="#myModal"  onclick="OpenModal(\'@Url.Content("/Clientes/Editar?TempId=")' + idCliente+'\')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Editar</button>';
+                        var btnContactos = '&nbsp;<button class="btn btn-xs btn-info"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Contactos</button>';
+                        var btnEliminar = '&nbsp;<button class="btn btn-xs btn-danger" onclick="DeleteRegister(\'' + idCliente + '\',\'Deseas eliminar a ' + Nombre+'\',\'@Url.Content("/Clientes/Eliminar")\',\'#clientes\')"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Eliminar</button>';
+                        var columns = [NumeroTelefonoAlarma, Nombre, Direccion, Telefono,btnEditar+btnContactos+btnEliminar ];
+                        
+                        var TRNode = document.getElementById(idCliente);
+                        $('#clientes').dataTable().fnUpdate(columns, TRNode,undefined);
+                    }
+                    else {
+                        console.log("AQUI " + this.action);
+                        alert(result.error + ": " + result.Message);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+    //onclick="SubmitForm('EditarCliente')"
+    /*function SubmitForm(Form) {
+        $('form').submit();
+    } */
+</script>

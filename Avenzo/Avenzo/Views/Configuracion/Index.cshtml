@@ -1,0 +1,66 @@
+﻿@model List<Avenzo.Models.GetPAC_Result>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+
+
+    <h2>configuracion</h2>
+    <h3>Llaves</h3>
+    <div class="table-responsive">
+        <table class="table table-hover" id="PAC">
+            <thead>
+                <tr>
+                    <th class="text-center">Llave</th>
+                    <th class="text-center">Certificado</th>
+                    <th class="text-center">Contraseña</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Regimen Fiscal</th>
+                    <th class="text-center">RFC</th>
+                    <th class="text-center">Acciones</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td class="text-center">
+                            @if (item.Llave != null)
+                            {
+                                <a class="btn btn-success btn-xs" href="@Url.Action("key")?id=@item.Id">Descargar</a>
+                            }
+                            else
+                            {
+                                <button class="btn btn-warning btn-xs" disabled>No hay Llave</button>
+                            }
+                        </td>
+                        <td class="text-center">
+                            @if (item.Certificado != null)
+                            {
+                                <a class="btn btn-success btn-xs" href="@Url.Action("cer")?id=@item.Id">Descargar</a>
+                            }
+                            else
+                            {
+                                <button class="btn btn-warning btn-xs" disabled>No hay Certificado</button>
+                            }
+                        </td>
+                        <td class="text-center">
+                            <input type="password" value="@item.Contrasena" class="@item.Id" disabled style="background-color:transparent; border:solid 0px;" />
+                            <i class="fa fa-eye" aria-hidden="true" onclick="passUnmask( '.@item.Id' );"></i>
+                        </td>
+                        <td class="text-center">@item.Nombre</td>
+                        <td class="text-center">@item.RegimenFiscal</td>
+                        <td class="text-center">@item.RFC</td>
+                        <td class="text-center"><button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="OpenModal('@Url.Action("Editar")?id=@item.Id')">Editar</button></td>
+                        <td></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/Tables/PAC.js"></script>

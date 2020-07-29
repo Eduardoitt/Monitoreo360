@@ -1,0 +1,115 @@
+﻿<div class="modal-fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Registrar Ingreso</h4>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("/_Ingreso", null, new AjaxOptions { UpdateTargetId = "NuevoId" }, new { @id = "NuevoIngreso" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="se-pre-con"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Tipo de Ingreso</label>
+                                    <select class="form-control" id="CargoAbono">
+                                        <option disabled selected value>Seleccione una Opcion</option>
+                                        <option value="0">Egreso</option>
+                                        <option value="1">Ingreso</option>
+                                    </select>
+                                    @Html.Hidden("idIngreso",Guid.NewGuid())
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="Ingreso" style="display:none;">
+                        </div>
+                        <div class="row" id="Egreso" style="display:none;">
+                        </div>
+                    </div>
+                    
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning btn-xs" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success btn-xs">Guardar cambios</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+
+        $('#CargoAbono').change(function () {
+            var tipo = $(this).val();
+
+            if (tipo == "1") {
+                $("#Egreso").fadeOut(500, function () {
+                    $("#Egreso").empty();
+                });
+
+                $('#Ingreso').load('@Url.Action("_Ingreso")', function () {
+                    $('#Ingreso').fadeIn(1000);
+                    $("#NuevoIngreso").attr("action", "/Administracion/_Ingreso");
+                });
+            }
+            else if (tipo == "0") {
+                $("#Ingreso").fadeOut(500, function () {
+                    $("#Ingreso").empty();
+                });
+                $('#Egreso').load('@Url.Action("_Egreso")', function () {
+                    $('#Egreso').fadeIn(1000);
+                    $("#NuevoIngreso").attr("action", "/Administracion/_Egreso");
+                });
+            }
+
+        });
+        $('form').submit(function (event) {
+            $(".se-pre-con").fadeIn();
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    if (result.error == "none") {
+                        for (var i = 0; i < parseInt($('#CantidadConceptos').val()) ; i++) {
+                            var fecha = '@DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year';
+                            var proveedor = $('#PAC option:selected').text();
+                            var Cliente = $('input[name=Nombres]').val();
+                            var concepto = $('input[name=Concepto'+i+']').val();
+                            var MetodoPago = $('#MetodoPago').val();
+                            var AbonoMXN = 0;
+                            var AbonoUSD = 0;
+                            var CargosMXN=0;
+                            var CargosUSD=0;
+                            if ($('[name=Moneda]').val() == "MXN")
+                                CargosMXN = $('input[name=Cargo' + i + ']').val();
+                            else
+                                CargosUSD = $('input[name=Cargo'+i+']').val();
+                            var Factura = '<button class="btn btn-primary btn-xs btnEditar">No Hay PDF</button><button class="btn btn-primary btn-xs btnEditar">No Hay XML</button>';
+                            var Acciones = '<button class="btn btn-primary btn-xs btnEditar" disabled>Editar</button><button class="btn btn-danger btn-xs" onclick="DeleteRegister(\''+$('#idIngreso').val()+'\',\'Deseas Eliminar el registro?\',\'@Url.Content("/Administracion/Eliminar")\',\'#MonitoreoIngresos\')" disabled); }>Eliminar</button>';
+                            if (!$('[name=Facturar]').is(":checked"))
+                                Acciones+='<button class="btn btn-xs btn-success" onclick="Facturar(\'\')">&nbsp;&nbsp;&nbsp;Crear Factura&nbsp;&nbsp;&nbsp;</button>';
+                            var array = [fecha, proveedor, Cliente, concepto, MetodoPago, AbonoMXN, AbonoUSD, CargosMXN, CargosUSD, Factura, Acciones];
+                            var table = $("#MonitoreoIngresos").DataTable();
+                            var rowIndex = table.row.add(array).draw(false);
+                            var row = $('#MonitoreoIngresos').dataTable().fnGetNodes(rowIndex);
+                           // $(row).attr('id', idCliente);
+                            var rowNode = rowIndex.node();
+                            //$(rowNode).find('td').eq(5).addClass('text-center');
+                            //$(rowNode).find('td').eq(6).addClass('text-center');
+                        }
+                        alert("Ningun Error");
+                    } else {
+                        alert("ERROR:"+result.error+",Message:"+result.Message);
+                    }
+                    $("#myModal").modal('hide');
+                }
+            });
+            return false;
+        });
+    });
+</script>

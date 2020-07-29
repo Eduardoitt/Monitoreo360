@@ -1,0 +1,113 @@
+﻿@model List<Model.EmpleadosForPanel>
+@{ 
+    Layout = null;
+}
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">people</i>
+            </div>
+            <div class="card-content">
+                <div class="row" style="margin-bottom:10px;margin-top:10px;">
+                    <div class="col-sm-6"  style='font-family:"Roboto", "Helvetica", "Arial",sans-serif; font-weight: 300; line-height: 1.5em;font-size:20px'>
+                        Empleados
+                    </div>
+                    <div class="col-sm-4 text-right">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="OpenModal('@Url.Content("/Empleados/Nuevo")')">Agregar Empleado</button>
+                </div>                
+                <table class="table table-striped table-no-bordered table-hover dataTable dtr-inline table-shopping" id="datatables" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="no-sort"></th>
+                            <th>Nombre</th>
+                            <th>Departamento</th>
+                            <th>Puesto</th>
+                            <th>RFC</th>
+                            <th class="no-sort"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var empleado in Model)
+                    {
+                        <tr id="@empleado.Id">
+                            <td class="text-center">
+                            @if (empleado.Foto != null)
+                            {
+                                <img src="@empleado.Foto" class="img-thumbnail" style="width:70px; height:auto;min-width:70px;" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("/Images/user.png")" class="img-thumbnail" style="width:70px; height:auto;" />
+                            }
+                            </td>
+                            <td>@empleado.Nombre</td>
+                            <td>@empleado.Departamento</td>
+                            <td>@empleado.Puesto</td>
+                            <td>@empleado.RFC</td>
+                            <td class="text-center">
+                                <button class="btn btn-simple  btn-info btn-icon" data-toggle="modal" data-target="#myModal" onclick="OpenModal('@Url.Content("/Empleados/Editar?IdTemp=")@empleado.Id')" rel="tooltip" data-original-title="Editar"><i class="material-icons">edit</i></button>
+                                <button class="btn btn-simple btn-danger btn-icon remove" rel="tooltip" data-original-title="Eliminar" onclick="DeleteRegister('@empleado.Id','@Url.Content("/Empleados/Eliminar")','#datatables')"><i class="material-icons">close</i></button>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+            $(document).ready(function () {
+                $('.sidebar-wrapper >.nav > li').removeClass('active');
+                $('.sidebar-wrapper >.nav > li#navEmpleados').addClass('active');
+                history.pushState(null, "", "/Empleados/Index");
+                $('[rel="tooltip"]').tooltip();
+                $('#datatables').DataTable({
+                    pagingType: "full_numbers",
+                    lengthMenu: [
+                        [10, 25, 50, -1],
+                        [10, 25, 50, "Todos"]
+                    ],
+                    dom: "<'row'<'col-sm-4'l><'col-sm-4 nuevo text-center'><'col-sm-4'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                    responsive: true,
+                    language: {
+                        search: "<div class='form-group'>_INPUT_</div>",
+                        searchPlaceholder: "Buscar en Registros",
+                        lengthMenu: "<div class='form-group'>Mostrar _MENU_ Registros</div>",
+                        zeroRecords: "No hay Empleados",
+                        info: "Registros _START_  al  _END_  de _TOTAL_",
+                        infoEmpty: "No hay registros disponibles",
+                        infoFiltered: "(filtrado de _MAX_ registros)",
+                        //"sSearch": "Buscar",
+                        oPaginate: {
+                            "sFirst": "Primero",
+                            "sPrevious": "Anterior",
+                            "sNext": "Siguiente",
+                            "sLast": "Ultimo"
+                        }
+                    },
+                    columnDefs: [{
+                        "targets": 'no-sort',
+                        "orderable": false,
+                    }],
+                    fnDrawCallback:function(){
+                        /*$(".paginate_button").click(function(){                    
+                            var css= $(this).attr("class");
+                            console.log($('.sidebar .sidebar-wrapper, .main-panel').scrollTop())
+                            if(!css.includes("disabled")&&$('.sidebar .sidebar-wrapper, .main-panel').scrollTop()!=0)
+                                var ps = $('.sidebar .sidebar-wrapper, .main-panel').animate({ scrollTop: 0 }).perfectScrollbar();
+                        });*/
+                    }
+                });
+                
+                //$(".nuevo").html('<button class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="OpenModal(\'@Url.Content("/Empleados/Nuevo")\')" >Nuevo Empleado<i class="material-icons">add</i></button>');
+            });
+</script>
+

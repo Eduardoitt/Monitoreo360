@@ -1,0 +1,1327 @@
+﻿@model Model.EmpleadoView
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+<div id="Cargando"></div>
+<div class="wizard-container">
+    <div class="card wizard-card active" data-color="green" id="wizardProfile">
+        <form id="NuevoEmpleado">
+            <div class="wizard-header">
+                <h3 class="wizard-title">Nuevo</h3>
+                <h5>Ingresando un nuevo Empleado.</h5>
+            </div>
+            <div class="wizard-navigation">
+                <ul class="nav nav-pills">
+                    <li class="active" style="width:50%;">
+                        <a href="#DatosPersonales" data-toggle="tab" aria-expanded="true">Datos Personales</a>
+                    </li>
+                    <li style="width:50%;">
+                        <a href="#DatosNomina" data-toggle="tab" aria-expanded="false">Datos de Nomina</a>
+                    </li>
+                </ul>
+                <div class="moving-tab" style="width: 50%; transform: translate3d(-8px, 0px, 0px); transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1);">Datos Personales</div>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane active" id="DatosPersonales">
+                    <div class="row">
+                        <h4 class="info-text"> Datos Personales</h4>
+                    </div>
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("Empleado.Empleado.Id", Guid.NewGuid())
+                    <div class="row">
+                        <div class="col-md-4">
+                            <legend class="text-center">Foto</legend>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <img src="~/Images/image_placeholder.jpg" alt="..." id="wizardPicturePreview">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-success btn-round btn-file">
+                                        <span class="fileinput-new" id="selecionar">Selecionar Imagen</span>
+                                        <span class="fileinput-exists" id="cambiar">Cambiar</span>
+                                        <input type="hidden" name="afasdf">
+                                        <input type="file" name="Foto" id="logo">
+                                        <div class="ripple-container"></div>
+                                    </span>
+                                    <a href="#" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput" id="remove"><i class="fa fa-times"></i> Remover</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Nombre(s)</label>
+                                        @Html.TextBox("Empleado.Empleado.Nombre", "", new { @class = "form-control", @required = (string)null })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Apellido Paterno</label>
+                                        @Html.TextBox("Empleado.Empleado.ApellidoPaterno", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Apellido Materno</label>
+                                        @Html.TextBox("Empleado.Empleado.ApellidoMaterno", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Compañia</label>
+                                        @Html.DropDownList("Empleado.Empleado.IdProveedor", new SelectList(Model.PAC, "Id", "Nombre"), "Seleccione una compañia", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">CURP</label>
+                                        @Html.TextBox("Empleado.Empleado.CURP", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">INE</label>
+                                        @Html.TextBox("Empleado.Empleado.INE", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">RFC</label>
+                                        @Html.TextBox("Empleado.Empleado.RFC", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">No. Seguridad Social</label>
+                                        @Html.TextBox("Empleado.Empleado.NumeroSeguridadSocial", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">No. Autorizacion</label>
+                                        @Html.TextBox("Empleado.Empleado.NumeroDeAutorizacion", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">No. Licencia</label>
+                                        @Html.TextBox("Empleado.Empleado.NumeroDeLicencia", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Departamento</label>
+                                @Html.TextBox("Empleado.Empleado.Departamento", "", new { @class = "form-control", @required = (string)null })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Puesto</label>
+                                @Html.TextBox("Empleado.Empleado.Puesto", "", new { @class = "form-control", @required = (string)null })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de jornada</label>
+                                @Html.DropDownList("Empleado.Empleado.TipoJornada", new SelectList(Model.Jornadas, "c_TipoJornada", "Descripcion"), "Seleccione una Jornada", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de Contrato</label>
+                                @Html.DropDownList("Empleado.Empleado.TipoContrato", new SelectList(Model.Contratos, "c_TipoContrato", "Descripcion"), "Seleccione un tipo de contrato", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de sangre</label>
+                                <select class="form-control" name="Empleado.Empleado.TipoSangre" id="Empleado.Empleado.TipoSangre">
+                                    <option selected value disabled>Selecione un tipo de sangre</option>
+                                    <option value="Tipo A positivo">Tipo A positivo</option>
+                                    <option value="Tipo B positivo">Tipo B positivo</option>
+                                    <option value="Tipo AB positivo">Tipo AB positivo</option>
+                                    <option value="Tipo O positivo">Tipo O positivo</option>
+                                    <option value="Tipo A negativo">Tipo A negativo</option>
+                                    <option value="Tipo B negativo">Tipo B negativo</option>
+                                    <option value="Tipo AB negativo">Tipo AB negativo </option>
+                                    <option value="Tipo O negativo">Tipo O negativo</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Salario Diario</label>
+                                @Html.TextBox("Empleado.Empleado.SalarioDiario", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Riesgo del Puesto</label>
+                                @Html.DropDownList("Empleado.Empleado.RiesgoPuesto", new SelectList(Model.RiesgoPuesto, "c_RiesgoPuesto", "Descripcion"), "Seleccione tipo de riesgo", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Grado de Estudios</label>
+                                @Html.TextBox("Empleado.Empleado.GradoEstudios", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Telefono</label>
+                                @Html.TextBox("Empleado.Empleado.Telefono", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Telefono Emergencia</label>
+                                @Html.TextBox("Empleado.Empleado.TelefonoEmergencia", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Banco</label>
+                                @Html.DropDownList("Empleado.Empleado.Banco", new SelectList(Model.Bancos, "c_Banco", "Descripcion"), "Selecione un Banco", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Cuenta Bancaria</label>
+                                @Html.TextBox("Empleado.Empleado.CuentaBancaria", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">ClaveEntFed</label>
+                                @Html.TextBox("Empleado.Empleado.ClaveEntFed", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Fecha Inicio Rel Laboral</label>
+                                <input class="form-control" id="FechaInicioRelLaboral" name="Empleado.Empleado.FechaInicioRelLaboral" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">CUIP</label>
+                                @Html.TextBox("Empleado.Empleado.CUIP", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Fecha de nacimiento</label>
+                                <input class="form-control" name="Empleado.Empleado.FechaNacimiento" id="FechaNacimiento" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Correo</label>
+                                @Html.TextBox("Empleado.Empleado.Email", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="DatosNomina">
+                    <div class="row">
+                        <h4 class="info-text">Plantilla</h4>
+                    </div>
+                    <div class="row">
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="left: 5px;"><span aria-hidden="true">&times;</span></button>
+                            <strong>Nota!</strong>
+                            <br /> Todos los importes son en <strong>Moneda Mexicana (MXN)</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de Nomina</label>
+                                @Html.DropDownList("Empleado.NominaHistorial.TipoNomina", new SelectList(Model.Nomina, "c_TipoNomina", "Descripcion"), "Seleccione tipo de Nomina", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Periocidad de Pago</label>
+                                @Html.DropDownList("Empleado.NominaHistorial.PeriodicidadPago", new SelectList(Model.PeriodicidadPago, "c_PeriodicidadPago", "Descripcion"), "Seleccione tipo de Pago", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Numero de dias pagados</label>
+                                <input class="form-control" name="Empleado.NominaHistorial.NumeroDiasPagados" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label"> <button type="button" class="btn btn-xs btn-simple" style="margin:0px;padding:0px;padding-right: 5px;color:black;margin-top: -4px;" data-toggle="popover" data-content="Se debe registrar el código postal del lugar de expedición del comprobante (domicilio de la matriz o de la sucursal)"><i class="fa fa-question-circle" aria-hidden="true"></i></button>Lugar de Expedicion</label>
+                                <input class="form-control" name="Empleado.NominaHistorial.LugarExpedicion" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de Regimen</label>
+                                @Html.DropDownList("Empleado.NominaHistorial.TipoRegimen", new SelectList(Model.Regimen, "c_TipoRegimen", "Descripcion"), "Selecciona Regimen", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-success" type="button" id="AddDeducciones">Agregar Deducciones</button>
+                            <button class="btn btn-success" type="button" id="AddIncapacidades">Agregar Incapacidades</button>
+                            <button class="btn btn-success" type="button" id="AddOtrosPagos">Agregar Otros Pagos</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <br />
+                        <center><b>Percepciones</b></center>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="checkJubilacionPensionRetiro" name="checkJubilacionPensionRetiro"><span class="checkbox-material"><span class="check"></span></span> Jubilacion Pension Retiro
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="checkSeparacionIndenmizacion" name="chcekSeparacionINdenmizacion"><span class="checkbox-material"><span class="check"></span></span> Separacion Indenmizacion
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-success btn-xs" onclick="AddPercepcion()" type="button">Agregar Percepcion</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-danger btn-xs" id="DeletePercepcion" type="button">Eliminar Percepciones</button>
+                        </div>
+                    </div>
+                    <div id="JubilacionPensionRetiro" style="display:none;">
+                       
+                    </div>
+                    <div id="SeparacionIndemnizacion" style="display:none;">
+                        
+                    </div>
+                    <div class="row" id="Percepciones">
+                        <div class="col-md-12" id="Percepcion0">
+                            <div class="row">
+                                <br />
+                                <center>Percepcion</center>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    @{
+                                        Guid IdPercepcion = Guid.NewGuid();
+                                    }
+                                    @Html.Hidden("Empleado.NominaPercepcion[0].Id", IdPercepcion)
+                                    <div class="form-group">
+                                        <label class="control-label">Tipos De Percepcion </label>
+                                        @Html.DropDownList("Empleado.NominaPercepcion[0].Tipo", new SelectList(Model.Percepciones, "c_TipoPercepcion", "Descripcion"), "Seleccione Percepcion", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label"><button type="button" class="btn btn-xs btn-simple" style="margin:0px;padding:0px;padding-right: 5px;color:black;margin-top: -4px;" data-toggle="popover" data-content="Se debe registrar la clave de control interno que asigna el patrón a cada percepción de nómina propia de su contabilidad, puede conformarse desde 3 hasta 15 caracteres"><i class="fa fa-question-circle" aria-hidden="true"></i></button>Clave</label>
+                                        @Html.TextBox("Empleado.NominaPercepcion[0].Clave", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Concepto</label>
+                                        @Html.TextBox("Empleado.NominaPercepcion[0].Concepto", "", new { @class = "form-control" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Importe Gravado</label>
+                                        @Html.TextBox("Empleado.NominaPercepcion[0].ImporteGravado", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Importe Excento</label>
+                                        @Html.TextBox("Empleado.NominaPercepcion[0].ImporteExcento", "", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">&nbsp;</label>
+                                        <button class="btn btn-success btn-xs" onclick="AddHorasExtras(0,0)" type="button" id="PercepcionHorasExtras0">Agregar Horas Extras</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label></label>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" onchange="ChangeAccionesOTitulos(0)" id="checkAccionesOTitulos0" name="ChangeAccionesOTitulos0"><span class="checkbox-material"><span class="check"></span></span> Acciones o Titulos
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="AccionesOTitulos0" style="display:none">
+                                <div class="row">
+                                    <br />
+                                    <center>Acciones O Titulos</center>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Valor de Mercado</label>
+                                            <input class="form-control" name="Empleado.NominaPercepcion[0].ValorMercado" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Precio Al Otorgarse</label>
+                                            <input class="form-control" name="Empleado.NominaPercepcion[0].PrecioOrtorgarse" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="HorasExtras0" style="display:none">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <center>Horas Extras</center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="Deducciones" style="display:none;">
+
+                    </div>
+
+                    <div id="Incapacidades" style="display:none;">
+
+                    </div>
+                    <div id="OtrosPagos" style="display:none;">
+
+                    </div>
+                </div>
+            </div>
+            <div class="wizard-footer">
+                <div class="pull-right">
+                    <input type="button" class="btn btn-next btn-fill btn-success btn-wd" name="next" value="Siguiente">
+                    <button type="submit" class="btn btn-finish btn-fill btn-success btn-wd" name="finish" style="display: none;"><i class="material-icons">save</i>&nbsp;Guardar</button>
+                    <input type="button" class="btn btn-success btn-fill" name="Terminar" value="Terminar" style="display:none;" />
+                </div>
+                <div class="pull-left">
+                    <input type="button" class="btn btn-previous btn-fill btn-default btn-wd" name="previous" value="Anterior">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    var $Percepciones = 0,$Deducciones=0,$Incapacidades=0,$OtrosPagos=0;
+    var $Data = new FormData();
+    function guid() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+              .toString(16)
+              .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+          s4() + '-' + s4() + s4() + s4();
+    }
+    var ChangeAccionesOTitulos = function ($Id) {
+        if ($("#checkAccionesOTitulos" + $Id).is(':checked')) {
+            $
+            $("#AccionesOTitulos" + $Id).fadeIn(500);
+            $("[name=ValorMercado" + $Id + "]").prop('required', true);
+            $("[name=PrecioAlOtorgarse" + $Id + "]").prop('required', false);
+        } else {
+            $("#AccionesOTitulos" + $Id).fadeOut(500);
+            $("[name=ValorMercado" + $Id + "]").prop('required', false);
+            $("[name=PrecioAlOtorgarse" + $Id + "]").prop('required', false);
+        }
+    }
+
+    var checkSubsidioAlEmpleo = function (OtrosPagos) {
+        if ($('#checkSubsidioAlEmpleo' + OtrosPagos).is(':checked')) {
+            var html = '<div class="row"><br><center>Subsidio Al Empleo</center></div>';
+            html += '<div class="row">';
+            html += ' <div class="col-sm-4">';
+            html += '     <div class="form-group">';
+            html += '         <label class="control-label">Subsidio Causado</label>';
+            html += '         <input class="form-control" required name="Empleado.NominaOtroPago[' + OtrosPagos + '].SubsidioCausado"/>';
+            html += '     </div>';
+            html += ' </div>';
+            html += '</div>';
+            $('#SubsidioAlEmpleo' + OtrosPagos).append(html);
+            $('#SubsidioAlEmpleo' + OtrosPagos).fadeIn("slow");
+            console.log("Checked");
+
+        } else {
+            console.log("UnChecked");
+            $('#SubsidioAlEmpleo' + OtrosPagos).fadeOut("slow", function () {
+                $('#SubsidioAlEmpleo' + OtrosPagos).empty();
+            });
+        }
+    }
+    var checkCompensacionSaldoAFavor = function (OtrosPagos) {
+        if ($('#checkCompensacionSaldoAFavor' + OtrosPagos).is(':checked')) {
+            var html = '';
+            html += '<div class="row"><br><center>Compensacion Saldo A Favor</center></div>';
+            html += '<div class="row">';
+            html += '   <div class="col-sm-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Saldo A Favor</label>';
+            html += '           <input class="form-control" name="Empleado.NominaOtroPago[' + OtrosPagos + '].SaldoAFavor"/>';
+            html += '       </div>';
+            html += '   </div>';
+            html += '   <div class="col-sm-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Año</label>';
+            html += '           <input class="form-control" name="Empleado.NominaOtroPago[' + OtrosPagos + '].Año" />';
+            html += '       </div>';
+            html += '   </div>';
+            html += '   <div class="col-sm-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Remanente Saldo a Favor</label>';
+            html += '           <input class="form-control" name="Empleado.NominaOtroPago[' + OtrosPagos + '].RemanenteSalFav"/>';
+            html += '       </div>';
+            html += '   </div>';
+            html += '</div>';
+            $('#CompensacionSaldoAFavor' + OtrosPagos).append(html);
+            $('#CompensacionSaldoAFavor' + OtrosPagos).fadeIn("slow");
+
+        } else {
+            $('#CompensacionSaldoAFavor' + OtrosPagos).fadeOut("slow", function () {
+                $('#CompensacionSaldoAFavor' + OtrosPagos).empty();
+            });
+        }
+    }
+    var AddHorasExtras = function ($Percepcion, $HorasExtras) {
+        var $row = '';
+        console.log($Percepcion);
+        $('#PercepcionHorasExtras'+$Percepcion).attr('onclick', 'AddHorasExtras('+$Percepcion+','+($HorasExtras+1)+')');
+        var IdPercepcion = $('#Empleado_NominaPercepcion_'+$Percepcion+'__Id').val();
+        $row +='<div class="row">'
+        $row +='    <input type="hidden" name="Empleado.NominaHorasExtras[' + $HorasExtras + '].IdPercepcion" value="'+IdPercepcion+'"/>';
+        $row +='    <input type="hidden" name="Empleado.NominaHorasExtras[' + $HorasExtras + '].Id" value="'+guid()+'"/>';
+        $row +='    <div class="col-md-2">';
+        $row +='        <div class="form-group">';
+        $row +='            <label class="control-label">Dias</label>';
+        $row +='            <input class="form-control" name="Empleado.NominaHorasExtras['+$HorasExtras+'].Dias" />';
+        $row +='        </div>'
+        $row +='    </div>'
+        $row +='    <div class="col-md-2">';
+        $row +='        <div class="form-group">';
+        $row +='            <label class="control-label">Tipos de Horas</label>';
+        $row += '           <select class="form-control" name="Empleado.NominaHorasExtras[' + $HorasExtras + '].Tipos">@foreach (var item in Model.Horas) { WriteLiteral("<option value=\""+item.c_TiposHoras+"\">"+item.Descripcion+"</option>"); }</select>';
+        $row +='        </div>';
+        $row +='    </div>';
+        $row +='    <div class="col-md-3">';
+        $row +='        <div class="form-group">';
+        $row +='            <label class="control-label">Horas Extras</label>';
+        $row +='            <input class="form-control" name="Empleado.NominaHorasExtras[' + $HorasExtras + '].HorasExtras" />';
+        $row +='        </div>'
+        $row +='    </div>'
+        $row +='    <div class="col-md-3">'
+        $row +='        <div class="form-group">'
+        $row +='            <label class="control-label">Importe Pagado</label>'
+        $row +='            <input class="form-control" name="Empleado.NominaHorasExtras[' + $HorasExtras + '].ImportePagado"/>'
+        $row +='        </div>'
+        $row +='    </div>'
+        $row +='    <div class="col-md-2 text-center">'
+        $row +='        <button class="btn btn-danger btn-simple" rel="tooltip" data-original-title="Eliminar Horas Extras" type="button"><span class="glyphicon glyphicon-remove"></span></button>'
+        $row +='    </div>';
+        $row +='</div>';
+        $('#HorasExtras' + $Percepcion).append($row);
+
+        if ($HorasExtras == 0)
+            $('#HorasExtras' + $Percepcion).fadeIn();
+        $('[rel="tooltip"]').tooltip();
+    }
+    var AddPercepcion = function () {
+        $Percepciones = $Percepciones + 1;
+        var IdPercepcion = guid();
+        var $Html = '';
+        $Html += '<div class="col-md-12" id="Percepcion' + $Percepciones + '">';
+        $Html += '  <div class="row"><br/><center>Percepcion</center></div >';
+        $Html += '  <div class="row" >';
+        $Html += '      <div class="col-md-4">';
+        $Html += '          <input id="Empleado_NominaPercepcion_' + $Percepciones + '__Id" name="Empleado.NominaPercepcion[' + $Percepciones + '].Id" type="hidden" value="' + IdPercepcion + '">'
+        $Html += '          <div class="form-group"><label class="control-label">Tipo de Percepcion</label><select class="form-control" name="Empleado.NominaPercepcion['+$Percepciones+'].Tipo">@foreach (var Percepcion in Model.Percepciones) { WriteLiteral("<option id=\""+Percepcion.c_TipoPercepcion+"\">"+Percepcion.Descripcion+"</option>"); }</select></div>';
+        $Html += '      </div >';
+        $Html += '      <div class="col-md-4">';
+        $Html += '          <div class="form-group"><label class="control-label"><button type="button" class="btn btn-xs btn-simple" style="margin:0px;padding:0px;padding-right: 5px;color:black;margin-top: -4px;" data-toggle="popover" data-content="Se debe registrar la clave de control interno que asigna el patrón a cada percepción de nómina propia de su contabilidad, puede conformarse desde 3 hasta 15 caracteres"><i class="fa fa-question-circle" aria-hidden="true"></i></button>Clave</label><input class="form-control" name="Empleado.NominaPercepcion[' + $Percepciones + '].Clave"/></div>';
+        $Html += '      </div >';
+        $Html += '      <div class="col-md-4">';
+        $Html += '          <div class="form-group"><label class="control-label">Concepto</label><input class="form-control" name="Empleado.NominaPercepcion[' + $Percepciones + '].Concepto"/></div>';
+        $Html += '      </div>';
+        $Html += '  </div>';
+        $Html += '  <div class="row">';
+        $Html += '      <div class="col-md-3">';
+        $Html += '          <div class="form-group"><label class="control-label">Importe Gravado</label><input class="form-control" name="Empleado.NominaPercepcion[' + $Percepciones + '].ImporteGravado" /></div>';
+        $Html += '      </div>';
+        $Html += '      <div class="col-md-3">';
+        $Html += '          <div class="form-group"><label class="control-label">Importe Excento</label><input class="form-control"  name="Empleado.NominaPercepcion[' + $Percepciones + '].ImporteExcento"/></div>';
+        $Html += '      </div>';
+        $Html += '      <div class="col-md-3">';
+        $Html += '          <div class="form-group">';
+        $Html += '              <label class="control-label"></label>';
+        $Html += '              <button class="btn btn-success btn-xs" id="PercepcionHorasExtras' + $Percepciones + '" type="button" onclick="AddHorasExtras(' + $Percepciones + ',0)">Agregar Horas Extras</button>';
+        $Html += '          </div>';
+        $Html += '      </div>';
+        $Html += '      <div class="col-md-3">';
+        $Html += '          <div class="form-group">';
+        $Html += '              <label class="control-label"></label>';
+        $Html += '              <div class="checkbox" ><label><input type="checkbox" onchange="ChangeAccionesOTitulos(' + $Percepciones + ')" id="checkAccionesOTitulos' + $Percepciones + '"><span class="checkbox-material"><span class="check"></span></span> Acciones o Titulos  </label></div>';
+        $Html += '          </div>';
+        $Html += '      </div>';
+        $Html += '  </div >';
+        $Html += '  <div id="AccionesOTitulos' + $Percepciones + '" style="display:none">';
+        $Html += '      <div class="row" ><br /><center>Acciones O Titulos</center></div >';
+        $Html += '      <div class="row">';
+        $Html += '          <div class="col-md-4">';
+        $Html += '              <div class="form-group"><label class="control-label">Valor de Mercado</label><input class="form-control" name="Empleado.NominaPercepcion['+$Percepciones+'].ValorMercado" /></div>';
+        $Html += '          </div >';
+        $Html += '          <div class="col-md-4">';//<input class="form-control" name="Empleado.NominaPercepcion[0].PrecioOrtorgarse" />
+        $Html += '              <div class="form-group"><label class="control-label">Precio Al Otorgarse</label><input class="form-control" name="Empleado.NominaPercepcion[' + $Percepciones + '].PrecioOrtorgarse" /></div>';
+        $Html += '          </div >';
+        $Html += '      </div>';
+        $Html += '  </div >';
+        $Html += '  <div id="HorasExtras'+$Percepciones+'" style="display:none">';
+        $Html += '      <div class="row"><div class="col-md-12"><center>Horas Extras</center></div></div>';
+        $Html += '  </div>';
+        $Html += '</div>';
+        $("#Percepciones").append($Html);
+        $('[data-toggle="popover"]').popover();
+    }
+    function refreshAnimation($wizard, index) {
+        total_steps = $wizard.find('.nav-pills li').length;
+        move_distance = $wizard.width() / total_steps;
+        step_width = move_distance;
+        move_distance *= index;
+        $current = index + 1;
+        if ($current == 1) {
+            move_distance -= 8;
+        } else if ($current == total_steps) {
+            move_distance += 8;
+        }
+        $wizard.find('.moving-tab').css('width', $('#DD').width());
+        $('.moving-tab').css({
+            'transform': 'translate3d(' + move_distance + 'px, 0, 0)',
+            'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'
+        });
+    }
+
+    $(document).ready(function () {
+
+        $(window).resize(function () {
+            $('.wizard-card').each(function () {
+                $wizard = $(this);
+                index = $wizard.bootstrapWizard('currentIndex');
+                refreshAnimation($wizard, index);
+                $('.moving-tab').css({
+                    'transition': 'transform 0s'
+                });
+            });
+        });
+        $("#AddOtrosPagos").click(function () {
+            $("#AddOtrosPagos").attr('disabled', true);
+            var html = '';
+            html+='<div class="row">';
+            html+=' <br />';
+            html+=' <center><b>Otros Pagos</b></center>';
+            html+='</div>';
+            html+='<div class="row">';
+            html+=' <br />';
+            html+=' <center>Otro Pago</center>';
+            html+='</div>';
+            html+= '<div class="row"><div class="col-sm-3"><button class="btn btn-success btn-xs" type="button" id="AddOtroPago">Agregar Otro Pago</button></div><div class="col-sm-3"><button class="btn btn-danger btn-xs" type="button" id="DeleteOtrosPagos">Eliminar Otros Pagos</button></div></div>';
+            html+='<div class="row" id="OtrosPagos'+$OtrosPagos+'">';
+            html+=' <div class="col-md-3">';
+            html+='     <div class="form-group">';
+            html+='         <label class="control-label">Tipo</label>';
+            html+='         <select name="Empleado.NominaOtroPago['+$OtrosPagos+'].Tipo" class="form-control">@foreach (var item in Model.OtrosPagos) { WriteLiteral("<option value=\""+item.c_TipoOtroPago.Trim()+"\">"+item.Descripcion+"</option>"); }</select>';
+            html+='     </div>';
+            html+=' </div>';
+            html+=' <div class="col-md-3">';
+            html+='     <div class="form-group">';
+            html+='         <label class="control-label">Clave</label>';
+            html+='         <input class="form-control" name="Empleado.NominaOtroPago['+$OtrosPagos+'].Clave"/>';
+            html+='     </div>';
+            html+=' </div>';
+            html+=' <div class="col-md-3">';
+            html+='     <div class="form-group">';
+            html+='         <label class="control-label">Concepto</label>';
+            html+='         <input class="form-control" name="Empleado.NominaOtroPago['+$OtrosPagos+'].Concepto"/>';
+            html+='     </div>';
+            html+=' </div>';
+            html+=' <div class="col-md-3">';
+            html+='     <div class="form-group">';
+            html+='         <label class="control-label">Importe</label>';
+            html+='         <input class="form-control" name="Empleado.NominaOtroPago['+$OtrosPagos+'].Importe"/>';
+            html+='     </div>';
+            html+=' </div>';
+            html+='</div>';
+            html+='<div class="row">';
+            html+=' <div class="col-sm-4">';
+            html+='     <div class="form-group">';
+            html+='         <div class="checkbox">';
+            html+='             <label>';
+            html+='                 <input type="checkbox" id="checkSubsidioAlEmpleo'+$OtrosPagos+'" onchange="checkSubsidioAlEmpleo('+$OtrosPagos+')"><span class="checkbox-material"><span class="check"></span></span> Subsidio Al Empleo';
+            html+='             </label>';
+            html+='         </div>';
+            html+='     </div>';
+            html+=' </div>';
+            html+=' <div class="col-sm-4">';
+            html+='     <div class="form-group">';
+            html+='         <div class="checkbox">';
+            html+='             <label>';
+            html+='                 <input type="checkbox" id="checkCompensacionSaldoAFavor'+$OtrosPagos+'" onchange="checkCompensacionSaldoAFavor('+$OtrosPagos+')"><span class="checkbox-material"><span class="check"></span></span> Compensacion saldo a favor';
+            html+='             </label>';
+            html+='         </div>';
+            html+='     </div>';
+            html+=' </div>';
+            html+='</div>';
+            html+='<div id="SubsidioAlEmpleo'+$OtrosPagos+'" style="display:none;">';
+            html += '</div>';
+            html+='<div id="CompensacionSaldoAFavor'+$OtrosPagos+'" style="display:none;">    ';
+            html += '</div>';
+            $("#OtrosPagos").append(html);
+            $("#OtrosPagos").fadeIn("slow");
+            $OtrosPagos = $OtrosPagos + 1;
+            $("#AddOtroPago").click(function () {
+                var row = '';
+                row += '<div id="OtrosPagos' + $OtrosPagos + '">';
+                row += '    <div class="row" >';
+                row += '        <div class="col-md-3">';
+                row += '            <div class="form-group">';
+                row += '                <label class="control-label">Tipo</label>';
+                row += '                <select name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Tipo" class="form-control">@foreach (var item in Model.OtrosPagos) { WriteLiteral("<option value=\""+item.c_TipoOtroPago.Trim()+"\">"+item.Descripcion+"</option>"); }</select>';
+                row += '            </div>';
+                row += '        </div>';
+                row += '        <div class="col-md-3">';
+                row += '            <div class="form-group">';
+                row += '                <label class="control-label">Clave</label>';
+                row += '                <input class="form-control" name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Clave"/>';
+                row += '            </div>';
+                row += '        </div>';
+                row += '        <div class="col-md-3">';
+                row += '            <div class="form-group">';
+                row += '                <label class="control-label">Concepto</label>';
+                row += '                <input class="form-control" name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Concepto"/>';
+                row += '            </div>';
+                row += '        </div>';
+                row += '        <div class="col-md-3">';
+                row += '            <div class="form-group">';
+                row += '                <label class="control-label">Importe</label>';
+                row += '                <input class="form-control" name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Importe"/>';
+                row += '            </div>';
+                row += '        </div>';
+                row += '    </div>'
+                row += '<div class="row">';
+                row += ' <div class="col-sm-4">';
+                row += '     <div class="form-group">';
+                row += '         <div class="checkbox">';
+                row += '             <label>';
+                row += '                 <input type="checkbox" id="checkSubsidioAlEmpleo' + $OtrosPagos + '" onchange="checkSubsidioAlEmpleo(' + $OtrosPagos + ')"><span class="checkbox-material"><span class="check"></span></span> Subsidio Al Empleo';
+                row += '             </label>';
+                row += '         </div>';
+                row += '     </div>';
+                row += ' </div>';
+                row += ' <div class="col-sm-4">';
+                row += '     <div class="form-group">';
+                row += '         <div class="checkbox">';
+                row += '             <label>';
+                row += '                 <input type="checkbox" id="checkCompensacionSaldoAFavor' + $OtrosPagos + '" onchange="checkCompensacionSaldoAFavor(' + $OtrosPagos + ')"><span class="checkbox-material"><span class="check"></span></span> Compensacion saldo a favor';
+                row += '             </label>';
+                row += '         </div>';
+                row += '     </div>';
+                row += ' </div>';
+                row += '</div>';
+                row += '    <div id="SubsidioAlEmpleo' + $OtrosPagos + '" style="display:none;">';
+                row += '    </div>';
+                row += '    <div id="CompensacionSaldoAFavor' + $OtrosPagos + '" style="display:none;">    ';
+                row += '    </div>';
+                row += '</div>';
+                $('#OtrosPagos').append(row);
+                $OtrosPagos = $OtrosPagos + 1;
+            });
+            $("#DeleteOtrosPagos").click(function () {
+                for (var i = 1; i <= $OtrosPagos;i++){
+                    $('#OtrosPagos' + i).fadeOut();
+                    $('#OtrosPagos' + i).remove();
+                }
+                $OtrosPagos = 1;
+            });
+        });
+        $("#AddIncapacidades").click(function () {
+            $("#AddIncapacidades").attr('disabled', true);
+            var html = '';
+            html += '<div class="row">';
+            html += '   <br />';
+            html += '   <center><b>Incapacidades</b></center>';
+            html += '</div>';
+            html += '<div class="row"><div class="col-sm-3"><button class="btn btn-success btn-xs" type="button" id="AddIncapacidad">Agregar Incapacidad</button></div><div class="col-sm-3"><button type="button" class="btn btn-danger btn-xs" id="DeleteIncapacidad">Eliminar Incapacidad</button></div></div>';
+            html += '<div class="row" id="Incapacidad'+$Incapacidades+'">';
+            html +=     '<div class="col-md-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Tipo de Incapacidad</label>';
+            html += '           <select class="form-control" name="Empleado.NominaIncapacidad[' + $Incapacidades + '].Tipo" >@foreach(var item in Model.Incapacidad) {<option value="@item.c_TipoIncapacidad">@item.Descripcion</option>}</select>';
+            html += '       </div>';
+            html += '   </div>';
+            html += '   <div class="col-md-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Dias de Incapacidad</label>';
+            html += '           <input class="form-control" name="Empleado.NominaIncapacidad[' + $Incapacidades + '].DiasIncapacidad"/>';
+            html += '       </div>';
+            html += '   </div>';
+            html += '   <div class="col-md-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Importe Monetario</label>';
+            html += '           <input class="form-control" name="Empleado.NominaIncapacidad[' + $Incapacidades + '].Importe"/>';
+            html += '       </div>';
+            html += '   </div>';
+            html += '</div>';
+            $("#Incapacidades").append(html);
+            $("#Incapacidades").fadeIn("slow");
+            $Incapacidades = $Incapacidades + 1;
+            $('#AddIncapacidad').click(function () {
+                var row = '';
+                row += '<div class="row" id="Incapacidad'+$Incapacidades+'">';
+                row += '    <div class="col-md-4">';
+                row += '       <div class="form-group">';
+                row += '           <label class="control-label">Tipo de Incapacidad</label>';
+                row += '           <select class="form-control" name="Empleado.NominaIncapacidad[' + $Incapacidades + '].Tipo" >@foreach(var item in Model.Incapacidad) {<option value="@item.c_TipoIncapacidad">@item.Descripcion</option>}</select>';
+                row += '       </div>';
+                row += '   </div>';
+                row += '   <div class="col-md-4">';
+                row += '       <div class="form-group">';
+                row += '           <label class="control-label">Dias de Incapacidad</label>';
+                row += '           <input class="form-control" name="Empleado.NominaIncapacidad[' + $Incapacidades + '].DiasIncapacidad"/>';
+                row += '       </div>';
+                row += '   </div>';
+                row += '   <div class="col-md-4">';
+                row += '       <div class="form-group">';
+                row += '           <label class="control-label">Importe Monetario</label>';
+                row += '           <input class="form-control" name="Empleado.NominaIncapacidad[' + $Incapacidades + '].Importe"/>';
+                row += '       </div>';
+                row += '   </div>';
+                row += '</div>';
+                $('#Incapacidades').append(row);
+                $Incapacidades = $Incapacidades + 1;
+            });
+            $('#DeleteIncapacidad').click(function () {
+                for (var i = 1; i <= $Incapacidades; i++) {
+                    $('#Incapacidad' + i).fadeOut("slow");
+                    $('#Incapacidad' + i).remove();
+                }
+                $Incapacidades = 1;
+            });
+        });
+        $("#AddDeducciones").click(function () {
+            $("#AddDeducciones").attr('disabled', true);
+            var html='';
+            html +='<div class="row">';
+            html +='    <br />';
+            html +='    <center><b>Deducciones</b></center>';
+            html +='</div>';
+            html +='<div class="row">';
+            html +='    <div class="col-sm-3">'
+            html +='        <button class="btn btn-success btn-xs" type="button" id="AddDeduccion">Agregar Deduccion</button>';
+            html +='   </div>';
+            html +='    <div class="col-sm-3">'
+            html +='        <button class="btn btn-danger btn-xs" type="button" id="DeleteDeduccion">Eliminar Deducciones</button>';
+            html +='   </div>';
+            html +='</div>';
+            html +='<div id="Deduccion' + $Deducciones + '">'
+            html +='    <div class="row">';
+            html +='        <div class="col-md-3">';
+            html +='            <div class="form-group">';
+            html +='                <label class="control-label">Tipo Deduccion</label>';
+            html += '                <input type="hidden" name="Empleado.NominaDeducion[' + $Deducciones + '].Id" value="'+guid()+'"/>';
+            html +='                <select class="form-control" name="Empleado.NominaDeducion[' + $Deducciones + '].Tipo">';
+            html +='                    @foreach (var item in Model.Deducciones) { WriteLiteral("<option value=\""+item.c_TipoDeduccion+"\">"+item.Descripcion+"</option>"); } ';
+            html +='                </select>';
+            html +='            </div>';
+            html +='        </div>';
+            html +='        <div class="col-md-2">';
+            html +='            <div class="form-group">';
+            html +='                <label class="control-label">Clave</label>';
+            html +='                <input class="form-control"  name="Empleado.NominaDeducion[' + $Deducciones + '].Clave"/>';
+            html +='            </div>';
+            html +='        </div>';
+            html +='        <div class="col-md-4">';
+            html +='            <div class="form-group">';
+            html +='                <label class="control-label">Concepto</label>';
+            html += '                <input class="form-control" name="Empleado.NominaDeducion[' + $Deducciones + '].Concepto"/>';
+            html +='            </div>';
+            html +='        </div>';
+            html +='        <div class="col-md-3">';
+            html +='            <div class="form-group">';
+            html +='                <label class="control-label">Importe</label>';
+            html += '                <input class="form-control" name="Empleado.NominaDeducion[' + $Deducciones + '].Importe"/>';
+            html +='            </div>';
+            html +='        </div>';
+            html += '   </div>';
+            html += '</div>';
+            $("#Deducciones").append(html);
+            $("#Deducciones").fadeIn("slow");
+            $Deducciones=$Deducciones+1;
+            $("#AddDeduccion").click(function () {
+                var row = '<div id="Deduccion'+$Deducciones+'">';
+                row += '<div class="row">';
+                row += '    <div class="col-md-3">';
+                row += '        <div class="form-group">';
+                row += '            <label class="control-label">Tipo Deduccion</label>';
+                row += '                <input type="hidden" name="Empleado.NominaDeducion[' + $Deducciones + '].Id" value="'+guid()+'"/>'
+                row += '            <select class="form-control" name="Empleado.NominaDeducion[' + $Deducciones + '].Tipo">';
+                row += '                @foreach (var item in Model.Deducciones) { WriteLiteral("<option value=\""+item.c_TipoDeduccion+"\">"+item.Descripcion+"</option>"); } ';
+                row += '            </select>';
+                row += '        </div>';
+                row += '    </div>';
+                row += '    <div class="col-md-2">';
+                row += '        <div class="form-group">';
+                row += '            <label class="control-label">Clave</label>';
+                row += '            <input class="form-control"  name="Empleado.NominaDeducion[' + $Deducciones + '].Clave"/>';
+                row += '        </div>';
+                row += '    </div>';
+                row += '    <div class="col-md-4">';
+                row += '        <div class="form-group">';
+                row += '            <label class="control-label">Concepto</label>';
+                row += '            <input class="form-control" name="Empleado.NominaDeducion[' + $Deducciones + '].Concepto"/>';
+                row += '        </div>';
+                row += '    </div>';
+                row += '    <div class="col-md-3">';
+                row += '        <div class="form-group">';
+                row += '            <label class="control-label">Importe</label>';
+                row += '            <input class="form-control" name="Empleado.NominaDeducion[' + $Deducciones + '].Importe"/>';
+                row += '        </div>';
+                row += '    </div>';
+                row += '</div>';
+                row += '</div>';
+                $('#Deducciones').append(row);
+                $Deducciones=$Deducciones+1;
+            });
+            $('#DeleteDeduccion').click(function () {
+                for (var i = 1; i <= $Deducciones; i++) {
+                    $('#Deduccion' + i).fadeOut("slow");
+                    $('#Deduccion' + i).remove();
+                }
+                $Deducciones = 1;
+            });
+        });
+        $('[rel="tooltip"]').tooltip();
+        //demo.initMaterialWizard();
+        $("#checkJubilacionPensionRetiro").change(function () {
+            if ($("#checkJubilacionPensionRetiro").is(':checked')) {
+                var $row = '';
+                $row +='<div class="row">';
+                $row +='    <br />';
+                $row +='    <center>Jubilacion Pension Retiro</center>';
+                $row +='</div>';
+                $row +='<div class="row">';
+                $row +='    <div class="col-md-4">';
+                $row +='        <div class="form-group">';
+                $row +='            <label class="control-label">Total Una Exhibicion</label>';
+                $row +='            @{Guid IdJubilacionPensionRetiro = Guid.NewGuid(); }';
+                $row +='            @Html.Hidden("Empleado.JubilacionPensionRetiro.Id", IdJubilacionPensionRetiro)';
+                $row +='            @Html.Hidden("Empleado.NominaPercepciones.IdJubilacionPensionRetiro", IdJubilacionPensionRetiro)';
+                $row +='            <input type="text" class="form-control" name="Empleado.JubilacionPensionRetiro.TotalUnaExhibicion" />';
+                $row +='        </div>';
+                $row +='    </div>';
+                $row +='    <div class="col-md-4">';
+                $row +='        <div class="form-group">';
+                $row +='            <label class="control-label">Total Parcialidad</label>';
+                $row +='            <input type="text" class="form-control" name="Empleado.JubilacionPensionRetiro.TotalParcialidad" />';
+                $row +='        </div>';
+                $row +='    </div>';
+                $row +='    <div class="col-md-4">';
+                $row +='        <div class="form-group">';
+                $row +='            <label class="control-label">Monto Diario</label>';
+                $row +='            <input type="text" class="form-control" name="Empleado.JubilacionPensionRetiro.MontoDiario" />';
+                $row +='        </div>';
+                $row +='    </div>';
+                $row +='    <div class="col-md-4">';
+                $row +='        <div class="form-group">';
+                $row +='            <label class="control-label">Ingreso Acumulable</label>';
+                $row +='            <input type="text" class="form-control" name="Empleado.JubilacionPensionRetiro.IngresoAcumulable" />';
+                $row +='        </div>';
+                $row +='    </div>';
+                $row +='    <div class="col-md-4">';
+                $row +='        <div class="form-group">';
+                $row += '            <label class="control-label">Ingreso No Acumulable</label>';
+                $row +='            <input type="text" class="form-control" name="Empleado.JubilacionPensionRetiro.IngresoNoAcumulable" />';
+                $row +='        </div>';
+                $row +='    </div>';
+                $row +='</div>';
+                $("#JubilacionPensionRetiro").html($row);
+                $("#JubilacionPensionRetiro").fadeIn(500);
+            } else {
+                $("#JubilacionPensionRetiro").fadeOut(500);
+                $("#JubilacionPensionRetiro").empty();
+            }
+        });
+        $("#checkSeparacionIndenmizacion").change(function () {
+            if ($("#checkSeparacionIndenmizacion").is(':checked')) {
+                var $row = '';
+                $row += '<div class="row">';
+                $row += '   <br />';
+                $row += '   <center>Separacion Indemnizacion</center>';
+                $row += '</div>';
+                $row += '<div class="row">';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           <label class="control-label">Total Pagado</label>';
+                $row += '           @{Guid IdSeparacionIndemnizacion = Guid.NewGuid();}';
+                $row += '           @Html.Hidden("Empleado.SeparacionIndemnizacion.Id", IdSeparacionIndemnizacion)';
+                $row += '           @Html.Hidden("Empleado.NominaPercepciones.IdSeparacionIndemnizacion", IdSeparacionIndemnizacion)';
+                $row += '           <input type="text" class="form-control" name="Empleado.SeparacionIndemnizacion.TotalPagado" />';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           <label class="control-label">Numero de Años de Servicio</label>';
+                $row += '           <input type="text" class="form-control" name="Empleado.SeparacionIndemnizacion.NumAñosServicio" />';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           <label class="control-label">Ultimo Sueldo Mensual ordinario</label>';
+                $row += '           <input type="text" class="form-control" name="Empleado.SeparacionIndemnizacion.UltimoSueldoMensOrd" />';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           <label class="control-label">Ingreso  Acumulable</label>';
+                $row += '           <input type="text" class="form-control" name="Empleado.SeparacionIndemnizacion.IngresoAcumulable" />';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           <label class="control-label">Ingreso No Acumulable</label>';
+                $row += '           <input type="text" class="form-control" name="Empleado.SeparacionIndemnizacion.IngresoNoAcumulable" />';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '</div>';
+                $('#SeparacionIndemnizacion').html($row);
+                $("#SeparacionIndemnizacion").fadeIn(500);
+            } else {
+                $("#SeparacionIndemnizacion").fadeOut(500);
+                $('#SeparacionIndemnizacion').empty();
+            }
+        });
+        var $Logo, $Imagen;
+        $('#remove').click(function (e) {
+            $('#wizardPicturePreview').attr('src', '/Images/image_placeholder.jpg');
+            $('#logo').val('');
+            $('#remove').hide();
+            $('#selecionar').show();
+            $('#cambiar').hide();
+
+        });
+        $('#logo').change(function (e) {
+            readURL(this, '#wizardPicturePreview');
+            $('#remove').show();
+            $('#selecionar').hide();
+            $('#cambiar').show();
+            $Logo = e.target.files;
+
+        });
+        $('#FechaInicioRelLaboral').datetimepicker({
+            format: 'MM/DD/YYYY',
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove',
+                inline: false
+            }
+        });
+        $('#FechaNacimiento').datetimepicker({
+            format: 'MM/DD/YYYY',
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove',
+                inline: false
+            }
+        });
+
+        $('#DeletePercepcion').click(function () {
+            for (var i = 1; i <= $Percepciones; i++) {
+                $('#Percepcion' + i).fadeOut("slow");
+                $('#Percepcion'+i).remove();
+            }
+            $('#HorasExtras0').empty();
+            $Percepciones=0;
+        })
+        var ValidarNuevo = $("#NuevoEmpleado").validate({
+            debug: true,
+            rules: {
+                'Empleado.Empleado.Nombre': {
+                    required: true
+
+                },
+                'Empleado.Empleado.IdProveedor': {
+                    required: true
+                },
+                'Empleado.Empleado.Departamento': {
+                    required:true
+                },
+                'Empleado.Empleado.Puesto': {
+                    required: true
+                },
+                'Empleado.Empleado.TipoJornada': {
+                    required: true
+                },
+                'Empleado.Empleado.TipoContrato': {
+                    required: true
+                },
+                'Empleado.Empleado.TipoSangre': {
+                    required: true
+                },
+                'Empleado.Empleado.SalarioDiario': {
+                    required: true,
+                    number: true
+                },
+                'Empleado.Empleado.RiesgoPuesto': {
+                    required: true
+                },
+                'Empleado.Empleado.Telefono': {
+                    required: true
+                },
+                'Empleado.Empleado.Bancos': {
+                    required: true
+                },
+                'Empleado.Empleado.FechaInicioRelLaboral': {
+                    required: true
+                },
+                'Empleado.Empleado.Email': {
+                    required: true,
+                    email:true
+                },
+                'Empleado.NominaHistorial.TipoNomina': {
+                    required:true
+                },
+                'Empleado.NominaHistorial.PeriodicidadPago': {
+                    required: true
+                },
+                'Empleado.NominaHistorial.NumeroDiasPagados': {
+                    required: true,
+                    number:true
+                },
+                'Empleado.NominaHistorial.LugarExpedicion': {
+                    required: true
+                },
+                'Empleado.NominaPercepcion[0].Tipo': {
+                    required: true
+                },
+                'Empleado.NominaPercepcion[0].Clave': {
+                    required: true
+                },
+                'Empleado.NominaPercepcion[0].Concepto': {
+                    required: true
+                },
+                'Empleado.NominaPercepcion[0].ImporteGravado': {
+                    required: true,
+                    number:true
+                },
+                'Empleado.NominaPercepcion[0].ImporteExcento': {
+                    required: true,
+                    number:true
+
+                }
+
+            },
+        });
+
+        $('.wizard-card').bootstrapWizard({
+            'tabClass': 'nav nav-pills',
+            'nextSelector': '.btn-next',
+            'previousSelector': '.btn-previous',
+            onNext: function (tab, navigation, index) {
+                var $valid = $('#NuevoEmpleado').valid();
+                console.log('next');
+                console.log($valid);
+                if (!$valid) {
+                    ValidarNuevo.focusInvalid();
+                    return false;
+                }
+            },
+            onInit: function (tab, navigation, index) {
+                //check number of tabs and fill the entire row
+                var $total = navigation.find('li').length;
+                $width = 100 / $total;
+                var $wizard = navigation.closest('.wizard-card');
+                $display_width = $(document).width();
+                if ($display_width < 600 && $total > 3) {
+                    $width = 50;
+                }
+                navigation.find('li').css('width', $width + '%');
+                $first_li = navigation.find('li:first-child a').html();
+                $moving_div = $('<div class="moving-tab">' + $first_li + '</div>');
+                $('.wizard-card .wizard-navigation').append($moving_div);
+                refreshAnimation($wizard, index);
+                $('.moving-tab').css({'transition':'transform 0s','width':'50%'});
+            },
+            onTabClick: function (tab, navigation, index) {
+                var $valid = $('#NuevoEmpleado').valid();
+                if (!$valid) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $wizard = navigation.closest('.wizard-card');
+                // If it's the last tab then hide the last button and show the finish instead
+                if ($current >= $total) {
+                    $($wizard).find('.btn-next').hide();
+                    $($wizard).find('.btn-finish').show();
+                } else {
+                    $($wizard).find('.btn-next').show();
+                    $($wizard).find('.btn-finish').hide();
+                }
+                button_text = navigation.find('li:nth-child(' + $current + ') a').html();
+                setTimeout(function () {
+                    $('.moving-tab').text(button_text);
+                }, 150);
+                var checkbox = $('.footer-checkbox');
+                if (!index == 0) {
+                    $(checkbox).css({
+                        'opacity': '0',
+                        'visibility': 'hidden',
+                        'position': 'absolute'
+                    });
+                } else {
+                    $(checkbox).css({
+                        'opacity': '1',
+                        'visibility': 'visible'
+                    });
+                }
+                refreshAnimation($wizard, index);
+            }
+        });
+
+
+        $('form').submit(function (e) {
+            var isValid = $('#NuevoEmpleado').valid();
+            if (isValid) {
+                var files = $("#logo").get(0).files;
+                for (i = 0; i < files.length; i++) {
+                    $Data.append("Foto", files[i]);
+                }
+                try {
+                    $("#Cargando").fadeIn();
+                    $.ajax({
+                        url: "/Empleados/Nuevo?" + $('form').serialize(),
+                        contentType: false,
+                        processData: false,
+                        type: 'POST',
+                        data: $Data,//$(this).serialize(),
+                        success: function (result) {
+                            if (result.error == false) {
+                                swal({
+                                    title: "Listo!",
+                                    text: "Se ha guardado Correctamente",
+                                    buttonsStyling: false,
+                                    confirmButtonClass: "btn btn-success",
+                                    type: "success"
+                                });
+                                var table = $("#datatables").DataTable();
+                                var id=$('[name="Empleado.Empleado.Id"]').val();
+                                var img='<img src="@Url.Content("/Images/user.png")" class="img-thumbnail" style="width:70px; height:auto;" id="img-'+id+'"/>';
+                                var nombre=$('[name="Empleado.Empleado.Nombre"]').val()+" " +$('[name="Empleado.Empleado.ApellidoPaterno"]').val()+$('[name="Empleado.Empleado.ApellidoMaterno"]').val();
+                                var departamento=$('[name="Empleado.Empleado.Departamento"]').val();
+                                var puesto=$('[name="Empleado.Empleado.Puesto"]').val();
+                                var rfc =$('[name="Empleado.Empleado.RFC"]').val();
+                                var botones='<button class="btn btn-info btn-simple" data-toggle="modal" data-target="#myModal" onclick="OpenModal(\'@Url.Content("/Empleados/Editar?IdTemp=")'+id+'\')" rel="tooltip" data-original-title="Editar"><i class="material-icons">edit</i></button>';
+                                botones+='<button class="btn btn-simple btn-danger btn-icon remove" rel="tooltip" data-original-title="Eliminar" onclick="DeleteRegister(\''+id+'\',\'@Url.Content("/Empleados/Eliminar")\',\'#datatables\')"><i class="material-icons">close</i></button>';
+                                var node=table.row.add([img,nombre,departamento,puesto,rfc,botones]).draw(false).node();
+                                $(node).attr('id', id);
+                                var input=$('#logo')[0];
+                                if (input.files && input.files[0]) {
+                                    readURL($('#logo')[0], '#img-' + id);
+                                }
+
+                            } else {
+                                swal({
+                                    title: "Error!",
+                                    text: result.Description + "<br/><br/>" + result.Message,
+                                    buttonsStyling: false,
+                                    confirmButtonClass: "btn btn-success",
+                                    type: "error"
+                                });
+                            }
+
+                            $("#myModal").modal('hide');
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            swal({
+                                title: "Error!",
+                                text: errorThrown,
+                                buttonsStyling: false,
+                                confirmButtonClass: "btn btn-success",
+                                type: "error"
+                            });
+                        }
+
+
+                    });
+                } catch (ex) {
+                    console.log("trono");
+                    console.log(ex);
+                }
+            }
+
+            return false;
+        });
+        $("#Empleado_Empleado_Telefono").mask("(999) 999-9999");
+        $("#Empleado_Empleado_TelefonoEmergencia").mask("(999) 999-9999");
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+

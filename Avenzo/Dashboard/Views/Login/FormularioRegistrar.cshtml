@@ -1,0 +1,264 @@
+﻿@model Model.RegistrarseView
+<div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1">
+    <div class="card card-signup">
+        <h2 class="card-title text-center">Registrarse</h2>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+                <div class="card-content">
+                    <div class="col-md-12">
+                        <img src="~/Images/Avenzo Fiscal.png" style="width:100%;height:auto;max-width:200px;" />
+                    </div>
+                    <div class="col-md-12">
+                        <div class="info info-horizontal" style="margin-top:15px;">
+                            <div class="icon icon-rose">
+                                <i class="material-icons">timeline</i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">Punto de Venta</h4>
+                                <p class="description">
+                                    Plataforma Punto de venta para control de invetarios.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="info info-horizontal">
+                            <div class="icon icon-primary">
+                                <i class="material-icons">library_books</i>
+                            </div>
+                            <div class="description">
+                                <h4 class="info-title">CFDI</h4>
+                                <p class="description">
+                                    Plataforma para el control, generación y envio de CFDI.
+                                </p>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                <form class="form" method="post" id="formRegistro" action="/Login/Registrarse">
+                    @Html.AntiForgeryToken()
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label">Nombre(s)<span class="text-danger">*</span></label>
+                                    @Html.TextBoxFor(model => model.Nombres, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label">Apellido Paterno</label>
+                                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label">Apellido Materno</label>
+                                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label">Sexo <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="Sexo">
+                                        <option value="" selected disabled></option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">date_range</i>
+                                    </span>
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Fecha Nacimiento</label>
+                                        @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control datepicker" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">email</i>
+                                    </span>
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Correo electrónico<span class="text-danger">*</span></label>
+                                        @Html.TextBoxFor(model => model.Correo, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">lock_outline</i>
+                                    </span>
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Contraseña<span class="text-danger">*</span></label>
+                                        @Html.TextBoxFor(model => model.Contraseña, new { @class = "form-control", @type = "password" })
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">lock_outline</i>
+                                    </span>
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label">Repetir contraseña<span class="text-danger">*</span></label>
+                                        <input class="form-control" type="password" name="ContraseñaRepetida" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <ul>
+                                        <li>Haz tu contraseña 8 caracteres o más.</li>
+                                        <li>Use letras mayúsculas y minúsculas.</li>
+                                        <li>Utilizar más de un número.</li>
+                                        <li>Utilice caracteres especiales (!, @@, #, $,%, ^, &, *,?, _, ~).</li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-12 text-center" style="background:#d9534f;color:white;border-radius:5px;" id="PasswordMeter">Muy Debíl</div>
+                            </div>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="optionsCheckboxes" checked=""><span class="checkbox-material"><span class="check"></span></span> I agree to the
+                                <a href="#something">terms and conditions</a>.
+                            </label>
+                        </div>
+                    </div>
+                    <div class="footer text-center">
+                        <button type="button" class="btn btn-success btn-round" id="btnRegistrarse">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="http://avenzo.mx/avenzo.mx/Scripts/passwordmeter.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.datepicker').datetimepicker({            
+            format: 'MM/DD/YYYY',
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove',
+                inline: false
+            }
+        });
+        $("#FechaNacimiento").mask("99/99/9999");
+        $('[rel="tooltip"]').tooltip();
+        $.extend($.validator.messages, {
+            equalTo: "Por favor, escribe la misma contraseña.",
+            minlength: jQuery.validator.format("Por favor, no escribas menos de {0} caracteres."),
+            required: "Este campo es obligatorio.",
+            email: "Por favor, escribe una dirección de correo válida",
+        });
+        $.validator.addMethod("passwordValido", function (value, element, params) {
+
+            var object = testPassword(value);
+            if (object.score > 24)
+                return true;
+            else
+                return false
+        }, $.validator.format("La Contraseña es muy débil {0}"));
+        $.validator.addMethod("correoValido", function (value, element, params) {
+            var disponible = false;
+            $.ajax({
+                url: "/Cuenta/VerificarCorreo?correo=" + value,
+                method: "POST",
+                async: false,
+                success: function ($Data) {
+                    disponible = $Data.Disponible;
+                }
+            });
+            return disponible;
+        }, $.validator.format("Este correo ya esta registrado {0}"));
+        var validarRecuperar = $("#Registro").validate({
+            debug: true,
+            rules: {
+                Correo: {
+                    required: true,
+                    email: true,
+                    correoValido: ""
+
+                },
+                Sexo: {
+                    required: true
+                },
+                Contraseña: {
+                    required: true,
+                    minlength:8,
+                    passwordValido: ""
+
+                },
+                ContraseñaRepetida: {
+                    equalTo: "#Contrase_a"
+                }
+
+
+
+            }
+        });
+        $("#Contrase_a").keyup(function () {
+            var object = testPassword($(this).val());
+            $("#PasswordMeter").text(object.Verdict);
+            if (object.Verdict == "D\u00E9bil")
+                $("#PasswordMeter").css({ "background": "orange", "color": "white" });
+            if (object.Verdict == "Muy d\u00E9bil")
+                $("#PasswordMeter").css({ "background": "#d9534f", "color": "white" });
+            if (object.Verdict == "Normal")
+                $("#PasswordMeter").css({ "background": "yellow", "color": "black" });
+            if (object.Verdict == "Fuerte")
+                $("#PasswordMeter").css({ "background": "#99ff33", "color": "black" });
+            if (object.Verdict == "Muy Fuerte")
+                $("#PasswordMeter").css({ "background": "#449d44", "color": "white" });
+        });
+        /*$('#Registro').submit(function (event) {
+            var isValid = $("#Registro").valid();
+            if (isValid) {
+                $.post(this.action, $(this).serialize());
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    async:false,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        if (result.error == false) {
+                            alert(result.error);
+                            location.href = "/Home/Index";
+                        }
+                    }
+                });
+            }
+            return false;
+        });*/
+        $("#btnRegistrarse").click(function () {            
+            var isValid = $("#formRegistro").valid();
+            if (isValid) {
+                $("#formRegistro").submit();
+            }
+        });
+    });
+
+</script>

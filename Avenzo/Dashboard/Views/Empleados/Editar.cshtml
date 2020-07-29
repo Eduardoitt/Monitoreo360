@@ -1,0 +1,1800 @@
+﻿@model Model.EmpleadoView
+@{
+    ViewBag.Title = "Empleados";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+<div id="Cargando"></div>
+<div class="wizard-container">
+    <div class="card wizard-card active" data-color="green" id="wizardProfile">
+        <form id="NuevoEmpleado">
+            <div class="wizard-header">
+                <h3 class="wizard-title">Editar</h3>
+                <h5>Editar Empleado.</h5>
+            </div>
+            <div class="wizard-navigation">
+                <ul class="nav nav-pills">
+                    <li class="active" style="width:50%;">
+                        <a href="#DatosPersonales" data-toggle="tab" aria-expanded="true">Datos Personales</a>
+                    </li>
+                    <li style="width:50%;">
+                        <a href="#DatosNomina" data-toggle="tab" aria-expanded="false">Datos de Nomina</a>
+                    </li>
+                </ul>
+                <div class="moving-tab" style="width: 50%; transform: translate3d(-8px, 0px, 0px); transition: all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1);">Datos Personales</div>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane active" id="DatosPersonales">
+                    <div class="row">
+                        <h4 class="info-text"> Datos Personales</h4>
+                    </div>
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("Empleado.Empleado.Id", Model.Empleado.Id)
+                    @Html.Hidden("Empleado.Empleado.IdPlantilla",Model.Empleado.IdPlantilla)
+                    <div class="row">
+                        <div class="col-md-4">
+                            <legend class="text-center">Foto</legend>
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    @if (Model.Empleado.Foto != null)
+                                    {
+                                        //var base64 = Convert.ToBase64String(Model.Empleado.Foto);
+                                        //var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                        <img src="@Model.Empleado.Foto" id="wizardPicturePreview" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Images/image_placeholder.jpg" id="wizardPicturePreview">
+                                    }
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-success btn-round btn-file">
+                                        <span class="fileinput-new" id="selecionar">Selecionar Imagen</span>
+                                        <span class="fileinput-exists" id="cambiar">Cambiar</span>
+                                        <input type="hidden" name="afasdf">
+                                        <input type="file" name="Foto" id="logo">
+                                        <div class="ripple-container"></div>
+                                    </span>
+                                    <a href="#" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput" id="remove"><i class="fa fa-times"></i> Remover</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Nombre(s)</label>
+                                        @Html.TextBox("Empleado.Empleado.Nombre", Model.Empleado.Nombre, new { @class = "form-control", @required = (string)null })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Apellido Paterno</label>
+                                        @Html.TextBox("Empleado.Empleado.ApellidoPaterno", Model.Empleado.ApellidoPaterno, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Apellido Materno</label>
+                                        @Html.TextBox("Empleado.Empleado.ApellidoMaterno", Model.Empleado.ApellidoMaterno, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Compañia</label>
+                                        @Html.DropDownList("Empleado.Empleado.IdProveedor", new SelectList(Model.PAC, "Id", "Nombre", Model.Empleado.IdProveedor), "Seleccione una compañia", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">CURP</label>
+                                        @Html.TextBox("Empleado.Empleado.CURP", Model.Empleado.CURP, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">INE</label>
+                                        @Html.TextBox("Empleado.Empleado.INE", Model.Empleado.INE, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">RFC</label>
+                                        @Html.TextBox("Empleado.Empleado.RFC", Model.Empleado.RFC, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">No. Seguridad Social</label>
+                                        @Html.TextBox("Empleado.Empleado.NumeroSeguridadSocial", Model.Empleado.NumeroSeguridadSocial, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">No. Autorizacion</label>
+                                        @Html.TextBox("Empleado.Empleado.NumeroDeAutorizacion", Model.Empleado.NumeroDeAutorizacion, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">No. Licencia</label>
+                                        @Html.TextBox("Empleado.Empleado.NumeroDeLicencia", Model.Empleado.NumeroDeLicencia, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Departamento</label>
+                                @Html.TextBox("Empleado.Empleado.Departamento", Model.Empleado.Departamento, new { @class = "form-control", @required = (string)null })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Puesto</label>
+                                @Html.TextBox("Empleado.Empleado.Puesto", Model.Empleado.Puesto, new { @class = "form-control", @required = (string)null })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de jornada</label>
+                                @Html.DropDownList("Empleado.Empleado.TipoJornada", new SelectList(Model.Jornadas, "c_TipoJornada", "Descripcion", Model.Empleado.TipoJornada), "Seleccione una Jornada", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de Contrato</label>
+                                @Html.DropDownList("Empleado.Empleado.TipoContrato", new SelectList(Model.Contratos, "c_TipoContrato", "Descripcion", Model.Empleado.TipoContrato.Trim()), "Seleccione un tipo de contrato", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de sangre</label>
+                                <select class="form-control" name="Empleado.Empleado.TipoSangre" id="TipoSangre">
+                                    <option selected disabled>Selecione un tipo de sangre</option>
+                                    <option value="Tipo A positivo">Tipo A positivo</option>
+                                    <option value="Tipo B positivo">Tipo B positivo</option>
+                                    <option value="Tipo AB positivo">Tipo AB positivo</option>
+                                    <option value="Tipo O positivo">Tipo O positivo</option>
+                                    <option value="Tipo A negativo">Tipo A negativo</option>
+                                    <option value="Tipo B negativo">Tipo B negativo</option>
+                                    <option value="Tipo AB negativo">Tipo AB negativo </option>
+                                    <option value="Tipo O negativo">Tipo O negativo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Salario Diario</label>
+                                @Html.TextBox("Empleado.Empleado.SalarioDiario", Model.Empleado.SalarioDiario, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Riesgo del Puesto</label>
+                                @Html.DropDownList("Empleado.Empleado.RiesgoPuesto", new SelectList(Model.RiesgoPuesto, "c_RiesgoPuesto", "Descripcion", Model.Empleado.RiesgoPuesto), "Seleccione tipo de riesgo", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Grado de Estudios</label>
+                                @Html.TextBox("Empleado.Empleado.GradoEstudios", Model.Empleado.GradoEstudios, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Telefono</label>
+                                @Html.TextBox("Empleado.Empleado.Telefono", Model.Empleado.Telefono, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Telefono Emergencia</label>
+                                @Html.TextBox("Empleado.Empleado.TelefonoEmergencia", Model.Empleado.TelefonoEmergencia, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Banco</label>
+                                @Html.DropDownList("Empleado.Empleado.Banco", new SelectList(Model.Bancos, "c_Banco", "Descripcion", Model.Empleado.Banco), "Selecione un Banco", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Cuenta Bancaria</label>
+                                @Html.TextBox("Empleado.Empleado.CuentaBancaria", Model.Empleado.CuentaBancaria, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">ClaveEntFed</label>
+                                @Html.TextBox("Empleado.Empleado.ClaveEntFed", Model.Empleado.ClaveEntFed, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Fecha Inicio Rel Laboral</label>
+                                @Html.TextBox("Empleado.Empleado.FechaInicioRelLaboral", Model.Empleado.FechaInicioRelLaboral, new { @class = "form-control", @id = "FechaInicioRelLaboral" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">CUIP</label>
+                                @Html.TextBox("Empleado.Empleado.CUIP", Model.Empleado.CUIP, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Fecha de nacimiento</label>
+                                @Html.TextBox("Empleado.Empleado.FechaNacimiento", Model.Empleado.FechaNacimiento, new { @class = "form-control", @id = "FechaNacimiento" })
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Correo</label>
+                                @Html.TextBox("Empleado.Empleado.Email", Model.Empleado.Email, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="DatosNomina">
+                    <div class="row">
+                        <h4 class="info-text">Plantilla</h4>
+                    </div>
+                    <div class="row">
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="left: 5px;"><span aria-hidden="true">&times;</span></button>
+                            <strong>Nota!</strong>
+                            <br /> Todos los importes son en <strong>Moneda Mexicana (MXN)</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                @Html.Hidden("Empleado.NominaHistorial.Id", Model.NominaHistorial.Id)
+                                <label class="control-label">Tipo de Nomina</label>
+                                @Html.DropDownList("Empleado.NominaHistorial.TipoNomina", new SelectList(Model.Nomina, "c_TipoNomina", "Descripcion", Model.NominaHistorial.TipoNomina), "Seleccione tipo de Nomina", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Periocidad de Pago</label>
+                                @Html.DropDownList("Empleado.NominaHistorial.PeriodicidadPago", new SelectList(Model.PeriodicidadPago, "c_PeriodicidadPago", "Descripcion", Model.NominaHistorial.PeriodicidadPago), "Seleccione tipo de Pago", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Numero de dias pagados</label>
+                                @Html.TextBox("Empleado.NominaHistorial.NumeroDiasPagados", Model.NominaHistorial.NumeroDiasPagados, new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label"> <button type="button" class="btn btn-xs btn-simple" style="margin:0px;padding:0px;padding-right: 5px;color:black;margin-top: -4px;" data-toggle="popover" data-content="Se debe registrar el código postal del lugar de expedición del comprobante (domicilio de la matriz o de la sucursal)"><i class="fa fa-question-circle" aria-hidden="true"></i></button>Lugar de Expedicion</label>
+                                @Html.TextBox("Empleado.NominaHistorial.LugarExpedicion", Model.NominaHistorial.LugarExpedicion, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="control-label">Tipo de Regimen</label>
+                                @Html.DropDownList("Empleado.NominaHistorial.TipoRegimen", new SelectList(Model.Regimen, "c_TipoRegimen", "Descripcion", Model.NominaHistorial.TipoRegimen), "Selecciona Regimen", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-success" type="button" id="AddDeducciones" @if (Model.NominaDeducion.Count() > 0) { WriteLiteral("disabled"); }>Agregar Deducciones</button>
+                            <button class="btn btn-success" type="button" id="AddIncapacidades" @if (Model.NominaIncapacidad.Count() > 0) { WriteLiteral("disabled"); }>Agregar Incapacidades</button>
+                            <button class="btn btn-success" type="button" id="AddOtrosPagos" @if (Model.NominaOtroPago.Count() > 0) { WriteLiteral("disabled"); }>Agregar Otros Pagos</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        <center><b>Percepciones</b></center>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="checkJubilacionPensionRetiro" name="checkJubilacionPensionRetiro" @if (Model.JubilacionPensionRetiro != null) { WriteLiteral("checked"); }><span class="checkbox-material"><span class="check"></span></span> Jubilacion Pension Retiro
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="checkSeparacionIndenmizacion" name="chcekSeparacionINdenmizacion" @if (Model.SeparacionIndemnizacion != null) { WriteLiteral("checked"); }><span class="checkbox-material"><span class="check"></span></span> Separacion Indenmizacion
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-success btn-xs" onclick="AddPercepcion()" type="button">Agregar Percepcion</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-danger btn-xs" id="DeletePercepcion" type="button">Eliminar Percepciones</button>
+                        </div>
+                    </div>
+                    <div id="JubilacionPensionRetiro" @if (Model.NominaPercepciones.IdJubilacionPensionRetiro == null) { WriteLiteral("style=\"display:none;\""); }>
+                        @if (Model.NominaPercepciones.IdJubilacionPensionRetiro != null)
+                        {
+                            <div class="row">
+                                <br />
+                                <center>Jubilacion Pension Retiro</center>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Total Una Exhibicion</label>
+                                        @Html.Hidden("Empleado.JubilacionPensionRetiro.Id", Model.NominaPercepciones.IdJubilacionPensionRetiro)
+                                        @Html.TextBox("",Model.JubilacionPensionRetiro.TotalUnaExhibicion,new {@class="form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Total Parcialidad</label>
+                                        @Html.TextBox("Empleado.JubilacionPensionRetiro.TotalParcialidad", Model.JubilacionPensionRetiro.TotalParcialidad, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Monto Diario</label>
+                                        @Html.TextBox("Empleado.JubilacionPensionRetiro.MontoDiario", Model.JubilacionPensionRetiro.MontoDiario, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Ingreso Acumulable</label>
+                                        @Html.TextBox("Empleado.JubilacionPensionRetiro.IngresoAcumulable", Model.JubilacionPensionRetiro.IngresoAcumulable, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ingreso No Acumulable</label>
+                                        @Html.TextBox("Empleado.JubilacionPensionRetiro.IngresoNoAcumulable", Model.JubilacionPensionRetiro.IngresoNoAcumulable, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div id="SeparacionIndemnizacion" @if (Model.NominaPercepciones.IdSeparacionIndemnizacion == null) { WriteLiteral("style=\"display:none;\""); }>
+                        @if (Model.NominaPercepciones.IdSeparacionIndemnizacion != null)
+                        {
+                            <div class="row">
+                                <br />
+                                <center>Separacion Indemnizacion</center>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.Label("Total Pagado", new { @class = "control-label" })
+                                        @Html.Hidden("Empleado.SeparacionIndemnizacion.Id", Model.NominaPercepciones.IdSeparacionIndemnizacion)
+                                        @Html.TextBox("Empleado.SeparacionIndemnizacion.TotalPagado", Model.SeparacionIndemnizacion.TotalPagado, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.Label("Numero de Años de Servicio", new { @class = "control-label" })
+                                        @Html.TextBox("Empleado.SeparacionIndemnizacion.NumAñosServicio", Model.SeparacionIndemnizacion.NumAñosServicio, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.Label("Ultimo Sueldo Mensual ordinario", new { @class = "control-label" })
+                                        @Html.TextBox("Empleado.SeparacionIndemnizacion.UltimoSueldoMensOrd", Model.SeparacionIndemnizacion.UltimoSueldoMensOrd, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.Label("Ingreso  Acumulable", new { @class = "control-label" })
+                                        @Html.TextBox("Empleado.SeparacionIndemnizacion.IngresoAcumulable", Model.SeparacionIndemnizacion.IngresoAcumulable, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.Label("Ingreso No Acumulable", new { @class = "control-label" })
+                                        @Html.TextBox("Empleado.SeparacionIndemnizacion.IngresoNoAcumulable", Model.SeparacionIndemnizacion.IngresoNoAcumulable, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="row" id="Percepciones">
+                        <div class="col-md-12" id="Percepcion0">
+                            <div class="row">
+                                <br />
+                                <center>Percepcion</center>
+                            </div>
+                            @if (Model.NominaPercepcion.Count() > 0)
+                            {
+                                for (var i = 0; i < Model.NominaPercepcion.Count(); i++)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            @Html.Hidden("Empleado.NominaPercepcion[" + i + "].Id", Model.NominaPercepcion[i].Id)
+                                            <div class="form-group">
+                                                <label class="control-label">Tipos De Percepciona</label>
+                                                @Html.DropDownList("Empleado.NominaPercepcion[" + i + "].Tipo", new SelectList(Model.Percepciones, "c_TipoPercepcion", "Descripcion", Model.NominaPercepcion[i].Tipo), "Seleccione Percepcion", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label"><button type="button" class="btn btn-xs btn-simple" style="margin:0px;padding:0px;padding-right: 5px;color:black;margin-top: -4px;" data-toggle="popover" data-content="Se debe registrar la clave de control interno que asigna el patrón a cada percepción de nómina propia de su contabilidad, puede conformarse desde 3 hasta 15 caracteres"><i class="fa fa-question-circle" aria-hidden="true"></i></button>Clave</label>
+                                                @Html.TextBox("Empleado.NominaPercepcion[" + i + "].Clave", Model.NominaPercepcion[i].Clave, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Concepto</label>
+                                                @Html.TextBox("Empleado.NominaPercepcion[" + i + "].Concepto", Model.NominaPercepcion[i].Concepto, new { @class = "form-control" })
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Importe Gravado</label>
+                                                @Html.TextBox("Empleado.NominaPercepcion[" + i + "].ImporteGravado", Model.NominaPercepcion[i].ImporteGravado, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Importe Excento</label>
+                                                @Html.TextBox("Empleado.NominaPercepcion[" + i + "].ImporteExcento", Model.NominaPercepcion[i].ImporteExcento, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-sm-3">&nbsp;</label>
+                                                @{var CountHE = Model.NominaHorasExtras != null ? Model.NominaHorasExtras.Where(x => x.IdPercepcion == Model.NominaPercepcion[i].Id).Count() : 0; }
+                                                <button class="btn btn-success btn-xs" onclick="AddHorasExtras(@i,@CountHE)" type="button" id="PercepcionHorasExtras@{WriteLiteral(i);}">Agregar Horas Extras</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label></label>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" onchange="ChangeAccionesOTitulos(@i)" id="checkAccionesOTitulos@{WriteLiteral(i);}" name="ChangeAccionesOTitulos@{WriteLiteral(i);}" @if (Model.NominaPercepcion[i].ValorMercado != null) { WriteLiteral("checked"); }><span class="checkbox-material"><span class="check"></span></span> Acciones o Titulos
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="AccionesOTitulos@{WriteLiteral(i);}" @if (Model.NominaPercepcion[i].ValorMercado == null) { WriteLiteral("style=\"display:none\""); }>
+                                        <div class="row">
+                                            <br />
+                                            <center>Acciones O Titulos</center>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label">Valor de Mercado</label>
+                                                    <input class="form-control" name="Empleado.NominaPercepcion[@i].ValorMercado" value="@Model.NominaPercepcion[i].ValorMercado" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label">Precio Al Otorgarse</label>
+                                                    <input class="form-control" name="Empleado.NominaPercepcion[@i].PrecioOrtorgarse" value="@Model.NominaPercepcion[i].PrecioOrtorgarse" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="HorasExtras@{WriteLiteral(i);}" @if (Model.NominaHorasExtras.Count() == 0) { WriteLiteral("style=\"display:none\""); }>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <center>Horas Extras</center>
+                                            </div>
+                                        </div>
+                                        @if (Model.NominaHorasExtras.Count() > 0)
+                                        {
+                                            List<Model.NominaHorasExtras>
+                                                HorasExtras = Model.NominaHorasExtras.Where(x => x.IdPercepcion == Model.NominaPercepcion[i].Id).ToList();
+                                            for (var j = 0; j < HorasExtras.Count(); j++)
+                                            {
+                                                <div class="row">
+                                                    @Html.Hidden("Empleado.NominaHorasExtras[" + j + "].IdPercepcion", HorasExtras[j].IdPercepcion)
+                                                    @Html.Hidden("Empleado.NominaHorasExtras[" + j + "].Id", HorasExtras[j].Id)
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Dias</label>
+                                                            @Html.TextBox("Empleado.NominaHorasExtras[" + j + "].Dias", HorasExtras[j].Dias, new { @class = "form-control" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Tipos de Horas</label>
+                                                            @Html.DropDownList("Empleado.NominaHorasExtras[" + j + "].Tipos", new SelectList(Model.Horas, "c_TiposHoras", "Descripcion", HorasExtras[j].Tipos), new { @class = "form-control" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Horas Extras</label>
+                                                            @Html.TextBox("Empleado.NominaHorasExtras[" + j + "].HorasExtras", HorasExtras[j].HorasExtras, new { @class = "form-control" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Importe Pagado</label>
+                                                            @Html.TextBox("Empleado.NominaHorasExtras[" + j + "].ImportePagado", HorasExtras[j].ImportePagado, new { @class = "form-control" })
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+        }
+    }
+    else
+    {
+        Guid id = Guid.NewGuid();
+        <div class="row">
+            <div class="col-md-4">
+                @Html.Hidden("Empleado.NominaPercepcion[0].Id", id)
+                <div class="form-group">
+                    <label class="control-label">Tipos De Percepcion </label>
+                    @Html.DropDownList("Empleado.NominaPercepcion[0].Tipo", new SelectList(Model.Percepciones, "c_TipoPercepcion", "Descripcion"), "Seleccione Percepcion", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label"><button type="button" class="btn btn-xs btn-simple" style="margin:0px;padding:0px;padding-right: 5px;color:black;margin-top: -4px;" data-toggle="popover" data-content="Se debe registrar la clave de control interno que asigna el patrón a cada percepción de nómina propia de su contabilidad, puede conformarse desde 3 hasta 15 caracteres"><i class="fa fa-question-circle" aria-hidden="true"></i></button>Clave</label>
+                    @Html.TextBox("Empleado.NominaPercepcion[0].Clave", "", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Concepto</label>
+                    @Html.TextBox("Empleado.NominaPercepcion[0].Concepto", "", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Importe Gravado</label>
+                    @Html.TextBox("Empleado.NominaPercepcion[0].ImporteGravado", "", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Importe Excento</label>
+                    @Html.TextBox("Empleado.NominaPercepcion[0].ImporteExcento", "", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">&nbsp;</label>
+                    <button class="btn btn-success btn-xs" onclick="AddHorasExtras(0,0)" type="button" id="PercepcionHorasExtras0">Agregar Horas Extras</button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label></label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" onchange="ChangeAccionesOTitulos(0)" id="checkAccionesOTitulos0" name="ChangeAccionesOTitulos0"><span class="checkbox-material"><span class="check"></span></span> Acciones o Titulos
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="AccionesOTitulos0" style="display:none">
+            <div class="row">
+                <br />
+                <center>Acciones O Titulos</center>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Valor de Mercado</label>
+                        <input class="form-control" name="Empleado.NominaPercepcion[0].ValorMercado" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Precio Al Otorgarse</label>
+                        <input class="form-control" name="Empleado.NominaPercepcion[0].PrecioOrtorgarse" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="HorasExtras0" style="display:none">
+            <div class="row">
+                <div class="col-md-12">
+                    <center>Horas Extras</center>
+                </div>
+            </div>
+        </div>
+    }
+                        </div>
+                    </div>
+
+                    <div id="Deducciones" @if (Model.NominaDeducion == null) { WriteLiteral("style=\"display:none;\""); }>
+                        @if (Model.NominaDeducion.Count() > 0)
+                        {
+                            <div class="row">
+                                <br />
+                                <center><b>Deducciones</b></center>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <button class="btn btn-success btn-xs" type="button" id="AddDeduccion">Agregar Deduccion</button>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button class="btn btn-danger btn-xs" type="button" id="DeleteDeduccion">Eliminar Deducciones</button>
+                                </div>
+                            </div>
+                            for (var i = 0; i < Model.NominaDeducion.Count(); i++)
+                            {
+
+                                <div id="Deduccion@{WriteLiteral(i);}">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Tipo Deduccion</label>
+                                                @Html.Hidden("Empleado.NominaDeducion[" + i + "].Id", Model.NominaDeducion[i].Id)
+                                                @Html.DropDownList("Empleado.NominaDeducion[" + i + "].Tipo", new SelectList(Model.Deducciones, "c_TipoDeduccion", "Descripcion"), Model.NominaDeducion[i].Tipo, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">Clave</label>';
+                                                @Html.TextArea("Empleado.NominaDeducion[" + i + "].Clave", Model.NominaDeducion[i].Clave, new { @class = "form-control" })
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label">Concepto</label>';
+                                                @Html.TextArea("Empleado.NominaDeducion[" + i + "].Concepto", Model.NominaDeducion[i].Concepto, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Importe</label>
+                                                @Html.TextArea("Empleado.NominaDeducion[" + i + "].Importe", Model.NominaDeducion[i].Importe + "", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        }
+    }
+                    </div>
+                    <div id="Incapacidades" @if (Model.NominaIncapacidad == null) { WriteLiteral("style=\"display:none;\""); }>
+                        @if (Model.NominaIncapacidad.Count() > 0)
+                        {
+                            <div class="row">
+                                <br />
+                                <center><b>Incapacidades</b></center>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <button class="btn btn-success btn-xs" type="button" id="AddIncapacidad">Agregar Incapacidad</button>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn btn-danger btn-xs" id="DeleteIncapacidad">Eliminar Incapacidad</button>
+                                </div>
+                            </div>
+                            for (var i = 0; i < Model.NominaIncapacidad.Count(); i++)
+                            {
+
+                                <div class="row" id="Incapacidad@{ WriteLiteral(i);}">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Tipo de Incapacidad</label>
+                                            @Html.Hidden("Empleado.NominaIncapacidad[" + i + "].Id", Model.NominaIncapacidad[i].Id)
+                                            @Html.DropDownList("Empleado.NominaIncapacidad[" + i + "].Tipo", new SelectList(Model.Incapacidad, "c_TipoIncapacidad", "Descripcion", Model.NominaIncapacidad[i].Tipo), "Selecciona Tipo de Incapacidad", new { @class = "form-control" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Dias de Incapacidad</label>
+                                            @Html.TextArea("Empleado.NominaIncapacidad[" + i + "].DiasIncapacidad", Model.NominaIncapacidad[i].DiasIncapacidad + "", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Importe Monetario</label>
+                                            @Html.TextArea("Empleado.NominaIncapacidad[" + i + "].Importe", Model.NominaIncapacidad[i].Importe + "", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+        }
+    }
+
+                    </div>
+                    <div id="OtrosPagos" @if (Model.NominaOtroPago == null) { WriteLiteral("style=\"display:none;\""); }>
+                        @if (Model.NominaOtroPago.Count() > 0)
+                        {
+                            <div class="row">
+                                <br />
+                                <center><b>Otros Pagos</b></center>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <button class="btn btn-success btn-xs" type="button" id="AddOtroPago">Agregar Otro Pago</button>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button class="btn btn-danger btn-xs" type="button" id="DeleteOtrosPagos">Eliminar Otros Pagos</button>
+                                </div>
+                            </div>
+                            for (var i = 0; i < Model.NominaOtroPago.Count(); i++)
+                            {
+
+                                <div id="OtrosPagos@{WriteLiteral(i); }">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Tipo</label>
+                                                @Html.Hidden("Empleado.NominaOtroPago[" + i + "].Id", Model.NominaOtroPago[i].Id)
+                                                @Html.DropDownList("Empleado.NominaOtroPago[" + i + "].Tipo", new SelectList(Model.OtrosPagos, "c_TipoOtroPago", "Descripcion"), Model.NominaOtroPago[i].Tipo, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Clave</label>
+                                                @Html.TextBox("Empleado.NominaOtroPago[" + i + "].Clave", Model.NominaOtroPago[i].Clave, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Concepto</label>
+                                                @Html.TextBox("Empleado.NominaOtroPago[" + i + "].Concepto", Model.NominaOtroPago[i].Concepto, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Importe</label>
+                                                @Html.TextBox("Empleado.NominaOtroPago[" + i + "].Importe", Model.NominaOtroPago[i].Importe, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" id="checkSubsidioAlEmpleo@{WriteLiteral(i); }" onchange="checkSubsidioAlEmpleo(@i)" @if (Model.NominaOtroPago[i].SubsidioCausado != null) { WriteLiteral("checked"); }><span class="checkbox-material"><span class="check"></span></span> Subsidio Al Empleo
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" id="checkCompensacionSaldoAFavor@{WriteLiteral(i); }" onchange="checkCompensacionSaldoAFavor(@i)" @if (Model.NominaOtroPago[i].SaldoAFavor != null) { WriteLiteral("checked"); }><span class="checkbox-material"><span class="check"></span></span> Compensacion saldo a favor
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="SubsidioAlEmpleo@{WriteLiteral(i); }" @if (Model.NominaOtroPago[i].SubsidioCausado == null) { WriteLiteral("style=\"display:none;\""); }>
+                                        @if (Model.NominaOtroPago[i].SubsidioCausado != null)
+                                        {
+                                            <div class="row"><br><center>Subsidio Al Empleo</center></div>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Subsidio Causado</label>
+                                                        @Html.TextBox("Empleado.NominaOtroPago[" + i + "].SubsidioCausado", Model.NominaOtroPago[i].SubsidioCausado, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+
+
+                                    <div id="CompensacionSaldoAFavor@{WriteLiteral(i); }" @if (Model.NominaOtroPago[i].SaldoAFavor != null) { WriteLiteral("checked"); }>
+                                        @if (Model.NominaOtroPago[i].SaldoAFavor != null)
+                                        {
+                                            <div class="row"><br><center>Compensacion Saldo A Favor</center></div>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Saldo A Favor</label>
+                                                        <input class="form-control" name="Empleado.NominaOtroPago[@{WriteLiteral(i); }].SaldoAFavor" value="@Model.NominaOtroPago[i].SaldoAFavor" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Año</label>
+                                                        <input class="form-control" name="Empleado.NominaOtroPago[@{WriteLiteral(i); }].Año" value="@Model.NominaOtroPago[i].Año" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Remanente Saldo a Favor</label>
+                                                        <input class="form-control" name="Empleado.NominaOtroPago[@{WriteLiteral(i); }].RemanenteSalFav" value="@Model.NominaOtroPago[i].RemanenteSalFav" />
+                                                    </div>
+                                                </div>
+                                            </div>
+    }
+
+                                    </div>
+
+
+                                </div>
+        }
+    }
+                    </div>
+                </div>
+            </div>
+            <div class="wizard-footer">
+                <div class="pull-right">
+                    <input type="button" class="btn btn-next btn-fill btn-success btn-wd" name="next" value="Siguiente">
+                    <button type="submit" class="btn btn-finish btn-fill btn-success btn-wd" name="finish" style="display: none;"><i class="material-icons">save</i>&nbsp;Guardar</button>
+                    <input type="button" class="btn btn-success btn-fill" name="Terminar" value="Terminar" style="display:none;" />
+                </div>
+                <div class="pull-left">
+                    <input type="button" class="btn btn-previous btn-fill btn-default btn-wd" name="previous" value="Anterior">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    @{
+        int Deduccion = Model.NominaDeducion != null ? Model.NominaDeducion.Count() : 0;
+        int Incapacidades = Model.NominaIncapacidad != null ? Model.NominaIncapacidad.Count() : 0;
+        int OtrosPagos= Model.NominaOtroPago != null ? Model.NominaOtroPago.Count() : 0;
+    }
+    var $Percepciones = @Model.NominaPercepcion.Count(),$Deducciones=@Deduccion,$Incapacidades=@Incapacidades,$OtrosPagos=@OtrosPagos;
+    var $Data = new FormData();
+    function guid() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+              .toString(16)
+              .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+          s4() + '-' + s4() + s4() + s4();
+    }
+    var ChangeAccionesOTitulos = function ($Id) {
+        if ($("#checkAccionesOTitulos" + $Id).is(':checked')) {
+            $
+            $("#AccionesOTitulos" + $Id).fadeIn(500);
+            $("[name=ValorMercado" + $Id + "]").prop('required', true);
+            $("[name=PrecioAlOtorgarse" + $Id + "]").prop('required', false);
+        } else {
+            $("#AccionesOTitulos" + $Id).fadeOut(500);
+            $("[name=ValorMercado" + $Id + "]").prop('required', false);
+            $("[name=PrecioAlOtorgarse" + $Id + "]").prop('required', false);
+        }
+    }
+
+    var checkSubsidioAlEmpleo = function (OtrosPagos) {
+        if ($('#checkSubsidioAlEmpleo' + OtrosPagos).is(':checked')) {
+            var html = '<div class="row"><br><center>Subsidio Al Empleo</center></div>';
+            html += '<div class="row">';
+            html += ' <div class="col-sm-4">';
+            html += '     <div class="form-group">';
+            html += '         <label class="control-label">Subsidio Causado</label>';
+            html += '         <input class="form-control" required name="Empleado.NominaOtroPago['+OtrosPagos+'].SubsidioCausado"/>';
+            html += '     </div>';
+            html += ' </div>';
+            html += '</div>';
+            $('#SubsidioAlEmpleo' + OtrosPagos).append(html);
+            $('#SubsidioAlEmpleo' + OtrosPagos).fadeIn("slow");
+            console.log("Checked");
+
+        } else {
+            console.log("UnChecked");
+            $('#SubsidioAlEmpleo' + OtrosPagos).fadeOut("slow", function () {
+                $('#SubsidioAlEmpleo' + OtrosPagos).empty();
+            });
+        }
+    }
+    var checkCompensacionSaldoAFavor = function (OtrosPagos) {
+        if ($('#checkCompensacionSaldoAFavor' + OtrosPagos).is(':checked')) {
+            var html = '';
+            html += '<div class="row"><br><center>Compensacion Saldo A Favor</center></div>';
+            html += '<div class="row">';
+            html += '   <div class="col-sm-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Saldo A Favor</label>';
+            html += '           <input class="form-control" name="Empleado.NominaOtroPago['+OtrosPagos+'].SaldoAFavor"/>';
+            html += '       </div>';
+            html += '   </div>';
+            html += '   <div class="col-sm-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Año</label>';
+            html += '           <input class="form-control" name="Empleado.NominaOtroPago['+OtrosPagos+'].Año" />';
+            html += '       </div>';
+            html += '   </div>';
+            html += '   <div class="col-sm-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Remanente Saldo a Favor</label>';
+            html += '           <input class="form-control" name="Empleado.NominaOtroPago['+OtrosPagos+'].RemanenteSalFav"/>';
+            html += '       </div>';
+            html += '   </div>';
+            html += '</div>';
+            $('#CompensacionSaldoAFavor' + OtrosPagos).append(html);
+            $('#CompensacionSaldoAFavor' + OtrosPagos).fadeIn("slow");
+
+        }else{
+            $('#CompensacionSaldoAFavor' + OtrosPagos).fadeOut("slow", function () {
+                $('#CompensacionSaldoAFavor' + OtrosPagos).empty();
+            });
+        }
+    }
+    var AddHorasExtras = function ($Percepcion, $HorasExtras) {
+        var $row = '';
+        console.log($Percepcion);
+        $('#PercepcionHorasExtras'+$Percepcion).attr('onclick', 'AddHorasExtras('+$Percepcion+','+($HorasExtras+1)+')');
+        var IdPercepcion = $('#Empleado_NominaPercepcion_'+$Percepcion+'__Id').val();
+        $row +='<div class="row">'
+        $row +='    <input type="hidden" name="Empleado.NominaHorasExtras[' + $HorasExtras + '].IdPercepcion" value="'+IdPercepcion+'"/>';
+        $row +='    <input type="hidden" name="Empleado.NominaHorasExtras[' + $HorasExtras + '].Id" value="'+guid()+'"/>';
+        $row +='    <div class="col-md-2">';
+        $row +='        <div class="form-group">';
+        $row +='            <label class="control-label">Dias</label>';
+        $row +='            <input class="form-control" name="Empleado.NominaHorasExtras['+$HorasExtras+'].Dias" />';
+        $row +='        </div>'
+        $row +='    </div>'
+        $row +='    <div class="col-md-2">';
+        $row +='        <div class="form-group">';
+        $row +='            <label class="control-label">Tipos de Horas</label>';
+        $row += '           <select class="form-control" name="Empleado.NominaHorasExtras[' + $HorasExtras + '].Tipos">@foreach (var item in Model.Horas) { WriteLiteral("<option value=\""+item.c_TiposHoras+"\">"+item.Descripcion+"</option>"); }</select>';
+        $row +='        </div>';
+        $row +='    </div>';
+        $row +='    <div class="col-md-3">';
+        $row +='        <div class="form-group">';
+        $row +='            <label class="control-label">Horas Extras</label>';
+        $row +='            <input class="form-control" name="Empleado.NominaHorasExtras[' + $HorasExtras + '].HorasExtras" />';
+        $row +='        </div>'
+        $row +='    </div>'
+        $row +='    <div class="col-md-3">'
+        $row +='        <div class="form-group">'
+        $row +='            <label class="control-label">Importe Pagado</label>'
+        $row +='            <input class="form-control" name="Empleado.NominaHorasExtras[' + $HorasExtras + '].ImportePagado"/>'
+        $row +='        </div>'
+        $row +='    </div>'
+        $row +='    <div class="col-md-2 text-center">'
+        $row +='        <button class="btn btn-danger btn-simple" rel="tooltip" data-original-title="Eliminar Horas Extras" type="button"><span class="glyphicon glyphicon-remove"></span></button>'
+        $row +='    </div>';
+        $row +='</div>';
+        $('#HorasExtras' + $Percepcion).append($row);
+
+        if ($HorasExtras == 0)
+            $('#HorasExtras' + $Percepcion).fadeIn();
+        $('[rel="tooltip"]').tooltip();
+    }
+    var AddPercepcion = function () {
+        $Percepciones = $Percepciones + 1;
+        var IdPercepcion = guid();
+        var $Html = '';
+        $Html += '<div class="col-md-12" id="Percepcion' + $Percepciones + '">';
+        $Html += '  <div class="row"><br/><center>Percepcion</center></div >';
+        $Html += '  <div class="row" >';
+        $Html += '      <div class="col-md-4">';
+        $Html += '          <input id="Empleado_NominaPercepcion_' + $Percepciones + '__Id" name="Empleado.NominaPercepcion[' + $Percepciones + '].Id" type="hidden" value="' + IdPercepcion + '">'
+        $Html += '          <div class="form-group"><label class="control-label">Tipo de Percepcion</label><select class="form-control" name="Empleado.NominaPercepcion['+$Percepciones+'].Tipo">@foreach (var Percepcion in Model.Percepciones) { WriteLiteral("<option id=\""+Percepcion.c_TipoPercepcion+"\">"+Percepcion.Descripcion+"</option>"); }</select></div>';
+        $Html += '      </div >';
+        $Html += '      <div class="col-md-4">';
+        $Html += '          <div class="form-group"><label class="control-label"><button type="button" class="btn btn-xs btn-simple" style="margin:0px;padding:0px;padding-right: 5px;color:black;margin-top: -4px;" data-toggle="popover" data-content="Se debe registrar la clave de control interno que asigna el patrón a cada percepción de nómina propia de su contabilidad, puede conformarse desde 3 hasta 15 caracteres"><i class="fa fa-question-circle" aria-hidden="true"></i></button>Clave</label><input class="form-control" name="Empleado.NominaPercepcion[' + $Percepciones + '].Clave"/></div>';
+        $Html += '      </div >';
+        $Html += '      <div class="col-md-4">';
+        $Html += '          <div class="form-group"><label class="control-label">Concepto</label><input class="form-control" name="Empleado.NominaPercepcion[' + $Percepciones + '].Concepto"/></div>';
+        $Html += '      </div>';
+        $Html += '  </div>';
+        $Html += '  <div class="row">';
+        $Html += '      <div class="col-md-3">';
+        $Html += '          <div class="form-group"><label class="control-label">Importe Gravado</label><input class="form-control" name="Empleado.NominaPercepcion[' + $Percepciones + '].ImporteGravado" /></div>';
+        $Html += '      </div>';
+        $Html += '      <div class="col-md-3">';
+        $Html += '          <div class="form-group"><label class="control-label">Importe Excento</label><input class="form-control"  name="Empleado.NominaPercepcion[' + $Percepciones + '].ImporteExcento"/></div>';
+        $Html += '      </div>';
+        $Html += '      <div class="col-md-3">';
+        $Html += '          <div class="form-group">';
+        $Html += '              <label class="col-sm-3">label>';
+        $Html += '              <button class="btn btn-success btn-xs" id="PercepcionHorasExtras' + $Percepciones + '" type="button" onclick="AddHorasExtras(' + $Percepciones + ',0)">Agregar Horas Extras</button>';
+        $Html += '          </div>';
+        $Html += '      </div>';
+        $Html += '      <div class="col-md-3">';
+        $Html += '          <div class="form-group">';
+        $Html += '              <label class="control-label"></label>';
+        $Html += '              <div class="checkbox" ><label><input type="checkbox" onchange="ChangeAccionesOTitulos(' + $Percepciones + ')" id="checkAccionesOTitulos' + $Percepciones + '"><span class="checkbox-material"><span class="check"></span></span> Acciones o Titulos  </label></div>';
+        $Html += '          </div>';
+        $Html += '      </div>';
+        $Html += '  </div >';
+        $Html += '  <div id="AccionesOTitulos' + $Percepciones + '" style="display:none">';
+        $Html += '      <div class="row" ><br /><center>Acciones O Titulos</center></div >';
+        $Html += '      <div class="row">';
+        $Html += '          <div class="col-md-4">';
+        $Html += '              <div class="form-group"><label class="control-label">Valor de Mercado</label><input class="form-control" name="Empleado.NominaPercepcion['+$Percepciones+'].ValorMercado" /></div>';
+        $Html += '          </div >';
+        $Html += '          <div class="col-md-4">';
+        $Html += '              <div class="form-group"><label class="control-label">Precio Al Otorgarse</label><input class="form-control" name="Empleado.NominaPercepcion[' + $Percepciones + '].PrecioOrtorgarse" /></div>';
+        $Html += '          </div >';
+        $Html += '      </div>';
+        $Html += '  </div >';
+        $Html += '  <div id="HorasExtras'+$Percepciones+'" style="display:none">';
+        $Html += '      <div class="row"><div class="col-md-12"><center>Horas Extras</center></div></div>';
+        $Html += '  </div>';
+        $Html += '</div>';
+        $("#Percepciones").append($Html);
+        $('[data-toggle="popover"]').popover();
+    }
+    function refreshAnimation($wizard, index) {
+        total_steps = $wizard.find('.nav-pills li').length;
+        move_distance = $wizard.width() / total_steps;
+        step_width = move_distance;
+        move_distance *= index;
+        $current = index + 1;
+        if ($current == 1) {
+            move_distance -= 8;
+        } else if ($current == total_steps) {
+            move_distance += 8;
+        }
+        $wizard.find('.moving-tab').css('width', $('#DD').width());
+        $('.moving-tab').css({
+            'transform': 'translate3d(' + move_distance + 'px, 0, 0)',
+            'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'
+        });
+    }
+
+    $(document).ready(function () {
+        $("#TipoSangre").val("@Model.Empleado.TipoSangre");
+        console.log("Listo");
+        $(window).resize(function () {
+            $('.wizard-card').each(function () {
+                $wizard = $(this);
+                index = $wizard.bootstrapWizard('currentIndex');
+                refreshAnimation($wizard, index);
+                $('.moving-tab').css({
+                    'transition': 'transform 0s'
+                });
+            });
+        });
+        $("#AddOtroPago").click(function () {
+            var row = '';
+            row += '<div id="OtrosPagos' + $OtrosPagos + '">';
+            row += '    <div class="row" >';
+            row += '        <div class="col-md-3">';
+            row += '            <div class="form-group">';
+            row += '                <label class="control-label">Tipo</label>';
+            row += '                <select name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Tipo" class="form-control">@foreach (var item in Model.OtrosPagos) { WriteLiteral("<option value=\""+item.c_TipoOtroPago.Trim()+"\">"+item.Descripcion+"</option>"); }</select>';
+            row += '            </div>';
+            row += '        </div>';
+            row += '        <div class="col-md-3">';
+            row += '            <div class="form-group">';
+            row += '                <label class="control-label">Clave</label>';
+            row += '                <input class="form-control" name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Clave"/>';
+            row += '            </div>';
+            row += '        </div>';
+            row += '        <div class="col-md-3">';
+            row += '            <div class="form-group">';
+            row += '                <label class="control-label">Concepto</label>';
+            row += '                <input class="form-control" name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Concepto"/>';
+            row += '            </div>';
+            row += '        </div>';
+            row += '        <div class="col-md-3">';
+            row += '            <div class="form-group">';
+            row += '                <label class="control-label">Importe</label>';
+            row += '                <input class="form-control" name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Importe"/>';
+            row += '            </div>';
+            row += '        </div>';
+            row += '    </div>'
+            row += '<div class="row">';
+            row += ' <div class="col-sm-4">';
+            row += '     <div class="form-group">';
+            row += '         <div class="checkbox">';
+            row += '             <label>';
+            row += '                 <input type="checkbox" id="checkSubsidioAlEmpleo' + $OtrosPagos + '" onchange="checkSubsidioAlEmpleo(' + $OtrosPagos + ')"><span class="checkbox-material"><span class="check"></span></span> Subsidio Al Empleo';
+            row += '             </label>';
+            row += '         </div>';
+            row += '     </div>';
+            row += ' </div>';
+            row += ' <div class="col-sm-4">';
+            row += '     <div class="form-group">';
+            row += '         <div class="checkbox">';
+            row += '             <label>';
+            row += '                 <input type="checkbox" id="checkCompensacionSaldoAFavor' + $OtrosPagos + '" onchange="checkCompensacionSaldoAFavor(' + $OtrosPagos + ')"><span class="checkbox-material"><span class="check"></span></span> Compensacion saldo a favor';
+            row += '             </label>';
+            row += '         </div>';
+            row += '     </div>';
+            row += ' </div>';
+            row += '</div>';
+            row += '    <div id="SubsidioAlEmpleo' + $OtrosPagos + '" style="display:none;">';
+            row += '    </div>';
+            row += '    <div id="CompensacionSaldoAFavor' + $OtrosPagos + '" style="display:none;">    ';
+            row += '    </div>';
+            row += '</div>';
+            $('#OtrosPagos').append(row);
+            $OtrosPagos = $OtrosPagos + 1;
+        });
+        $("#DeleteOtrosPagos").click(function () {
+            for (var i = 1; i <= $OtrosPagos;i++){
+                $('#OtrosPagos' + i).fadeOut();
+                $('#OtrosPagos' + i).remove();
+            }
+            $OtrosPagos = 1;
+        });
+        $("#AddOtrosPagos").click(function () {
+            $("#AddOtrosPagos").attr('disabled', true);
+            var html = '';
+            html+='<div class="row">';
+            html+=' <br />';
+            html+=' <center><b>Otros Pagos</b></center>';
+            html+='</div>';
+            html+='<div class="row">';
+            html+=' <br />';
+            html+=' <center>Otro Pago</center>';
+            html+='</div>';
+            html+= '<div class="row"><div class="col-sm-3"><button class="btn btn-success btn-xs" type="button" id="AddOtroPago">Agregar Otro Pago</button></div><div class="col-sm-3"><button class="btn btn-danger btn-xs" type="button" id="DeleteOtrosPagos">Eliminar Otros Pagos</button></div></div>';
+            html+='<div class="row" id="OtrosPagos'+$OtrosPagos+'">';
+            html+=' <div class="col-md-3">';
+            html+='     <div class="form-group">';
+            html+='         <label class="control-label">Tipo</label>';
+            html+='         <select name="Empleado.NominaOtroPago['+$OtrosPagos+'].Tipo" class="form-control">@foreach (var item in Model.OtrosPagos) { WriteLiteral("<option value=\""+item.c_TipoOtroPago.Trim()+"\">"+item.Descripcion+"</option>"); }</select>';
+            html+='     </div>';
+            html+=' </div>';
+            html+=' <div class="col-md-3">';
+            html+='     <div class="form-group">';
+            html+='         <label class="control-label">Clave</label>';
+            html+='         <input class="form-control" name="Empleado.NominaOtroPago['+$OtrosPagos+'].Clave"/>';
+            html+='     </div>';
+            html+=' </div>';
+            html+=' <div class="col-md-3">';
+            html+='     <div class="form-group">';
+            html+='         <label class="control-label">Concepto</label>';
+            html+='         <input class="form-control" name="Empleado.NominaOtroPago['+$OtrosPagos+'].Concepto"/>';
+            html+='     </div>';
+            html+=' </div>';
+            html+=' <div class="col-md-3">';
+            html+='     <div class="form-group">';
+            html+='         <label class="control-label">Importe</label>';
+            html+='         <input class="form-control" name="Empleado.NominaOtroPago['+$OtrosPagos+'].Importe"/>';
+            html+='     </div>';
+            html+=' </div>';
+            html+='</div>';
+            html+='<div class="row">';
+            html+=' <div class="col-sm-4">';
+            html+='     <div class="form-group">';
+            html+='         <div class="checkbox">';
+            html+='             <label>';
+            html+='                 <input type="checkbox" id="checkSubsidioAlEmpleo'+$OtrosPagos+'" onchange="checkSubsidioAlEmpleo('+$OtrosPagos+')"><span class="checkbox-material"><span class="check"></span></span> Subsidio Al Empleo';
+            html+='             </label>';
+            html+='         </div>';
+            html+='     </div>';
+            html+=' </div>';
+            html+=' <div class="col-sm-4">';
+            html+='     <div class="form-group">';
+            html+='         <div class="checkbox">';
+            html+='             <label>';
+            html+='                 <input type="checkbox" id="checkCompensacionSaldoAFavor'+$OtrosPagos+'" onchange="checkCompensacionSaldoAFavor('+$OtrosPagos+')"><span class="checkbox-material"><span class="check"></span></span> Compensacion saldo a favor';
+            html+='             </label>';
+            html+='         </div>';
+            html+='     </div>';
+            html+=' </div>';
+            html+='</div>';
+            html+='<div id="SubsidioAlEmpleo'+$OtrosPagos+'" style="display:none;">';
+            html += '</div>';
+            html+='<div id="CompensacionSaldoAFavor'+$OtrosPagos+'" style="display:none;">    ';
+            html += '</div>';
+            $("#OtrosPagos").append(html);
+            $("#OtrosPagos").fadeIn("slow");
+            $OtrosPagos = $OtrosPagos + 1;
+            $("#AddOtroPago").click(function () {
+                var row = '';
+                row += '<div id="OtrosPagos' + $OtrosPagos + '">';
+                row += '    <div class="row" >';
+                row += '        <div class="col-md-3">';
+                row += '            <div class="form-group">';
+                row += '                <label class="control-label">Tipo</label>';
+                row += '                <select name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Tipo" class="form-control">@foreach (var item in Model.OtrosPagos) { WriteLiteral("<option value=\""+item.c_TipoOtroPago.Trim()+"\">"+item.Descripcion+"</option>"); }</select>';
+                row += '            </div>';
+                row += '        </div>';
+                row += '        <div class="col-md-3">';
+                row += '            <div class="form-group">';
+                row += '                <label class="control-label">Clave</label>';
+                row += '                <input class="form-control" name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Clave"/>';
+                row += '            </div>';
+                row += '        </div>';
+                row += '        <div class="col-md-3">';
+                row += '            <div class="form-group">';
+                row += '                <label class="control-label">Concepto</label>';
+                row += '                <input class="form-control" name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Concepto"/>';
+                row += '            </div>';
+                row += '        </div>';
+                row += '        <div class="col-md-3">';
+                row += '            <div class="form-group">';
+                row += '                <label class="control-label">Importe</label>';
+                row += '                <input class="form-control" name="Empleado.NominaOtroPago[' + $OtrosPagos + '].Importe"/>';
+                row += '            </div>';
+                row += '        </div>';
+                row += '    </div>'
+                row += '<div class="row">';
+                row += ' <div class="col-sm-4">';
+                row += '     <div class="form-group">';
+                row += '         <div class="checkbox">';
+                row += '             <label>';
+                row += '                 <input type="checkbox" id="checkSubsidioAlEmpleo' + $OtrosPagos + '" onchange="checkSubsidioAlEmpleo(' + $OtrosPagos + ')"><span class="checkbox-material"><span class="check"></span></span> Subsidio Al Empleo';
+                row += '             </label>';
+                row += '         </div>';
+                row += '     </div>';
+                row += ' </div>';
+                row += ' <div class="col-sm-4">';
+                row += '     <div class="form-group">';
+                row += '         <div class="checkbox">';
+                row += '             <label>';
+                row += '                 <input type="checkbox" id="checkCompensacionSaldoAFavor' + $OtrosPagos + '" onchange="checkCompensacionSaldoAFavor(' + $OtrosPagos + ')"><span class="checkbox-material"><span class="check"></span></span> Compensacion saldo a favor';
+                row += '             </label>';
+                row += '         </div>';
+                row += '     </div>';
+                row += ' </div>';
+                row += '</div>';
+                row += '    <div id="SubsidioAlEmpleo' + $OtrosPagos + '" style="display:none;">';
+                row += '    </div>';
+                row += '    <div id="CompensacionSaldoAFavor' + $OtrosPagos + '" style="display:none;">    ';
+                row += '    </div>';
+                row += '</div>';
+                $('#OtrosPagos').append(row);
+                $OtrosPagos = $OtrosPagos + 1;
+            });
+            $("#DeleteOtrosPagos").click(function () {
+                for (var i = 1; i <= $OtrosPagos;i++){
+                    $('#OtrosPagos' + i).fadeOut();
+                    $('#OtrosPagos' + i).remove();
+                }
+                $OtrosPagos = 1;
+            });
+        });
+        $("#AddIncapacidades").click(function () {
+            $("#AddIncapacidades").attr('disabled', true);
+            var html = '';
+            html += '<div class="row">';
+            html += '   <br />';
+            html += '   <center><b>Incapacidades</b></center>';
+            html += '</div>';
+            html += '<div class="row"><div class="col-sm-3"><button class="btn btn-success btn-xs" type="button" id="AddIncapacidad">Agregar Incapacidad</button></div><div class="col-sm-3"><button type="button" class="btn btn-danger btn-xs" id="DeleteIncapacidad">Eliminar Incapacidad</button></div></div>';
+            html += '<div class="row" id="Incapacidad'+$Incapacidades+'">';
+            html +=     '<div class="col-md-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Tipo de Incapacidad</label>';
+            html += '           <select class="form-control" name="Empleado.NominaIncapacidad['+$Incapacidades+'].Tipo" >@foreach(var item in Model.Incapacidad) {<option value="@item.c_TipoIncapacidad">@item.Descripcion</option>}</select>';
+            html += '       </div>';
+            html += '   </div>';
+            html += '   <div class="col-md-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Dias de Incapacidad</label>';
+            html += '           <input class="form-control" name="Empleado.NominaIncapacidad[' + $Incapacidades + '].DiasIncapacidad"/>';
+            html += '       </div>';
+            html += '   </div>';
+            html += '   <div class="col-md-4">';
+            html += '       <div class="form-group">';
+            html += '           <label class="control-label">Importe Monetario</label>';
+            html += '           <input class="form-control" name="Empleado.NominaIncapacidad[' + $Incapacidades + '].Importe"/>';
+            html += '       </div>';
+            html += '   </div>';
+            html += '</div>';
+            $("#Incapacidades").append(html);
+            $("#Incapacidades").fadeIn("slow");
+            $Incapacidades = $Incapacidades + 1;
+            $('#AddIncapacidad').click(function () {
+                var row = '';
+                row += '<div class="row" id="Incapacidad'+$Incapacidades+'">';
+                row += '    <div class="col-md-4">';
+                row += '       <div class="form-group">';
+                row += '           <label class="control-label">Tipo de Incapacidad</label>';
+                row += '           <select class="form-control" name="Empleado.NominaIncapacidad['+$Incapacidades+'].Tipo" >@foreach(var item in Model.Incapacidad) {<option value="@item.c_TipoIncapacidad">@item.Descripcion</option>}</select>';
+                row += '       </div>';
+                row += '   </div>';
+                row += '   <div class="col-md-4">';
+                row += '       <div class="form-group">';
+                row += '           <label class="control-label">Dias de Incapacidad</label>';
+                row += '           <input class="form-control" name="Empleado.NominaIncapacidad[' + $Incapacidades + '].DiasIncapacidad"/>';
+                row += '       </div>';
+                row += '   </div>';
+                row += '   <div class="col-md-4">';
+                row += '       <div class="form-group">';
+                row += '           <label class="control-label">Importe Monetario</label>';
+                row += '           <input class="form-control" name="Empleado.NominaIncapacidad[' + $Incapacidades + '].Importe"/>';
+                row += '       </div>';
+                row += '   </div>';
+                row += '</div>';
+                $('#Incapacidades').append(row);
+                $Incapacidades = $Incapacidades + 1;
+            });
+            $('#DeleteIncapacidad').click(function () {
+                for (var i = 1; i <= $Incapacidades; i++) {
+                    $('#Incapacidad' + i).fadeOut("slow");
+                    $('#Incapacidad' + i).remove();
+                }
+                $Incapacidades = 1;
+            });
+        });
+        $("#AddDeducciones").click(function () {
+            $("#AddDeducciones").attr('disabled', true);
+            var html='';
+            html +='<div class="row">';
+            html +='    <br />';
+            html +='    <center><b>Deducciones</b></center>';
+            html +='</div>';
+            html +='<div class="row">';
+            html +='    <div class="col-sm-3">'
+            html +='        <button class="btn btn-success btn-xs" type="button" id="AddDeduccion">Agregar Deduccion</button>';
+            html +='   </div>';
+            html +='    <div class="col-sm-3">'
+            html +='        <button class="btn btn-danger btn-xs" type="button" id="DeleteDeduccion">Eliminar Deducciones</button>';
+            html +='   </div>';
+            html +='</div>';
+            html +='<div id="Deduccion' + $Deducciones + '">'
+            html +='    <div class="row">';
+            html +='        <div class="col-md-3">';
+            html +='            <div class="form-group">';
+            html +='                <label class="control-label">Tipo Deduccion</label>';
+            html +='                <select class="form-control" name="Empleado.NominaDeduccion['+$Deducciones+'].Tipo">';
+            html +='                    @foreach (var item in Model.Deducciones) { WriteLiteral("<option value=\""+item.c_TipoDeduccion+"\">"+item.Descripcion+"</option>"); } ';
+            html +='                </select>';
+            html +='            </div>';
+            html +='        </div>';
+            html +='        <div class="col-md-2">';
+            html +='            <div class="form-group">';
+            html +='                <label class="control-label">Clave</label>';
+            html +='                <input class="form-control"  name="Empleado.NominaDeduccion['+$Deducciones+'].Clave"/>';
+            html +='            </div>';
+            html +='        </div>';
+            html +='        <div class="col-md-4">';
+            html +='            <div class="form-group">';
+            html +='                <label class="control-label">Concepto</label>';
+            html +='                <input class="form-control" name="Empleado.NominaDeduccion['+$Deducciones+'].Concepto"/>';
+            html +='            </div>';
+            html +='        </div>';
+            html +='        <div class="col-md-3">';
+            html +='            <div class="form-group">';
+            html +='                <label class="control-label">Importe</label>';
+            html +='                <input class="form-control" name="Empleado.NominaDeduccion['+$Deducciones+'].Importe"/>';
+            html +='            </div>';
+            html +='        </div>';
+            html += '   </div>';
+            html += '</div>';
+            $("#Deducciones").append(html);
+            $("#Deducciones").fadeIn("slow");
+            $Deducciones=$Deducciones+1;
+            $("#AddDeduccion").click(function () {
+                var row = '<div id="Deduccion'+$Deducciones+'">';
+                row += '<div class="row">';
+                row += '    <div class="col-md-3">';
+                row += '        <div class="form-group">';
+                row += '            <label class="control-label">Tipo Deduccion</label>';
+                row += '            <select class="form-control" name="Empleado.NominaDeduccion['+$Deducciones+'].Tipo">';
+                row += '                @foreach (var item in Model.Deducciones) { WriteLiteral("<option value=\""+item.c_TipoDeduccion+"\">"+item.Descripcion+"</option>"); } ';
+                row += '            </select>';
+                row += '        </div>';
+                row += '    </div>';
+                row += '    <div class="col-md-2">';
+                row += '        <div class="form-group">';
+                row += '            <label class="control-label">Clave</label>';
+                row += '            <input class="form-control"  name="Empleado.NominaDeduccion['+$Deducciones+'].Clave"/>';
+                row += '        </div>';
+                row += '    </div>';
+                row += '    <div class="col-md-4">';
+                row += '        <div class="form-group">';
+                row += '            <label class="control-label">Concepto</label>';
+                row += '            <input class="form-control" name="Empleado.NominaDeduccion['+$Deducciones+'].Concepto"/>';
+                row += '        </div>';
+                row += '    </div>';
+                row += '    <div class="col-md-3">';
+                row += '        <div class="form-group">';
+                row += '            <label class="control-label">Importe</label>';
+                row += '            <input class="form-control" name="Empleado.NominaDeduccion['+$Deducciones+'].Importe"/>';
+                row += '        </div>';
+                row += '    </div>';
+                row += '</div>';
+                row += '</div>';
+                $('#Deducciones').append(row);
+                $Deducciones=$Deducciones+1;
+            });
+            $('#DeleteDeduccion').click(function () {
+                for (var i = 1; i <= $Deducciones; i++) {
+                    $('#Deduccion' + i).fadeOut("slow");
+                    $('#Deduccion' + i).remove();
+                }
+                $Deducciones = 1;
+            });
+        });
+        $('[rel="tooltip"]').tooltip();
+        //demo.initMaterialWizard();
+        $("#checkJubilacionPensionRetiro").change(function () {
+            if ($("#checkJubilacionPensionRetiro").is(':checked')) {
+                var $row = '<div class="row">';
+                $row += '   <br />';
+                $row += '   <center>Jubilacion Pension Retiro</center>';
+                $row += '</div>';
+                $row += '<div class="row">';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           <label class="control-label">Total Una Exhibicion</label>';
+                $row += '           @Html.TextBox("Empleado.JubilacionPensionRetiro.TotalUnaExhibicion", "",new {@class="form-control" })';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           <label class="control-label">Total Parcialidad</label>';
+                $row += '           @Html.TextBox("Empleado.JubilacionPensionRetiro.TotalParcialidad","", new { @class = "form-control" })';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           <label class="control-label">Monto Diario</label>';
+                $row += '           @Html.TextBox("Empleado.JubilacionPensionRetiro.MontoDiario", "", new { @class = "form-control" })';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           <label class="control-label">Ingreso Acumulable</label>';
+                $row += '           @Html.TextBox("Empleado.JubilacionPensionRetiro.IngresoAcumulable", "", new { @class = "form-control" })';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           <label>Ingreso No Acumulable</label>';
+                $row += '           @Html.TextBox("Empleado.JubilacionPensionRetiro.IngresoNoAcumulable","", new { @class = "form-control" })';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '</div>';
+                $("#JubilacionPensionRetiro").html($row);
+                $("#JubilacionPensionRetiro").fadeIn(500);
+            } else {
+                $("#JubilacionPensionRetiro").empty();
+                $("#JubilacionPensionRetiro").fadeOut(500);
+            }
+        });
+        $("#checkSeparacionIndenmizacion").change(function () {
+            if ($("#checkSeparacionIndenmizacion").is(':checked')) {
+                var $row = '<div class="row">';
+                $row += '   <br />';
+                $row += '   <center>Separacion Indemnizacion</center>';
+                $row += '</div>';
+                $row += '<div class="row">';
+                $row +=     '<div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           @Html.Label("Total Pagado",new { @class="control-label"})';
+                $row += '           @Html.TextBox("Empleado.SeparacionIndemnizacion.TotalPagado","", new { @class = "form-control" })';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           @Html.Label("Numero de Años de Servicio", new { @class = "control-label" })';
+                $row += '           @Html.TextBox("Empleado.SeparacionIndemnizacion.NumAñosServicio","", new { @class = "form-control" })';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           @Html.Label("Ultimo Sueldo Mensual ordinario", new { @class = "control-label" })';
+                $row += '           @Html.TextBox("Empleado.SeparacionIndemnizacion.UltimoSueldoMensOrd","", new { @class = "form-control" })';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           @Html.Label("Ingreso  Acumulable", new { @class = "control-label" })';
+                $row += '           @Html.TextBox("Empleado.SeparacionIndemnizacion.IngresoAcumulable", "", new { @class = "form-control" })';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '   <div class="col-md-4">';
+                $row += '       <div class="form-group">';
+                $row += '           @Html.Label("Ingreso No Acumulable", new { @class = "control-label" })';
+                $row += '           @Html.TextBox("Empleado.SeparacionIndemnizacion.IngresoNoAcumulable", "", new { @class = "form-control" })';
+                $row += '       </div>';
+                $row += '   </div>';
+                $row += '</div>';
+                $("#SeparacionIndemnizacion").html($row);
+                $("#SeparacionIndemnizacion").fadeIn(500);
+
+            } else {
+
+                $("#SeparacionIndemnizacion").fadeOut(500);
+                $("#SeparacionIndemnizacion").empty();
+            }
+        });
+        var $Logo, $Imagen;
+        $('#remove').click(function (e) {
+            $('#wizardPicturePreview').attr('src', '/Images/image_placeholder.jpg');
+            $('#logo').val('');
+            $('#remove').hide();
+            $('#selecionar').show();
+            $('#cambiar').hide();
+
+        });
+        $('#logo').change(function (e) {
+            readURL(this, '#wizardPicturePreview');
+            $('#remove').show();
+            $('#selecionar').hide();
+            $('#cambiar').show();
+            $Logo = e.target.files;
+
+        });
+        $('#FechaInicioRelLaboral').datetimepicker({
+            format: 'MM/DD/YYYY',
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove',
+                inline: false
+            }
+        });
+        $('#FechaNacimiento').datetimepicker({
+            format: 'MM/DD/YYYY',
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove',
+                inline: false
+            }
+        });
+
+        $('#DeletePercepcion').click(function () {
+            for (var i = 1; i <= $Percepciones; i++) {
+                $('#Percepcion' + i).fadeOut("slow");
+                $('#Percepcion'+i).remove();
+            }
+            $('#HorasExtras0').empty();
+            $Percepciones=0;
+        })
+        var ValidarNuevo = $("#NuevoEmpleado").validate({
+            debug: true,
+            rules: {
+                'Empleado.Empleado.Nombre': {
+                    required: true
+
+                },
+                'Empleado.Empleado.IdProveedor': {
+                    required: true
+                },
+                'Empleado.Empleado.Departamento': {
+                    required:true
+                },
+                'Empleado.Empleado.Puesto': {
+                    required: true
+                },
+                'Empleado.Empleado.TipoJornada': {
+                    required: true
+                },
+                'Empleado.Empleado.TipoContrato': {
+                    required: true
+                },
+                'Empleado.Empleado.TipoSangre': {
+                    required: true
+                },
+                'Empleado.Empleado.SalarioDiario': {
+                    required: true,
+                    number: true
+                },
+                'Empleado.Empleado.RiesgoPuesto': {
+                    required: true
+                },
+                'Empleado.Empleado.Telefono': {
+                    required: true
+                },
+                'Empleado.Empleado.Bancos': {
+                    required: true
+                },
+                'Empleado.Empleado.FechaInicioRelLaboral': {
+                    required: true
+                },
+                'Empleado.Empleado.Email': {
+                    required: true,
+                    email:true
+                },
+                'Empleado.NominaHistorial.TipoNomina': {
+                    required:true
+                },
+                'Empleado.NominaHistorial.PeriodicidadPago': {
+                    required: true
+                },
+                'Empleado.NominaHistorial.NumeroDiasPagados': {
+                    required: true,
+                    number:true
+                },
+                'Empleado.NominaHistorial.LugarExpedicion': {
+                    required: true
+                },
+                'Empleado.NominaPercepcion[0].Tipo': {
+                    required: true
+                },
+                'Empleado.NominaPercepcion[0].Clave': {
+                    required: true
+                },
+                'Empleado.NominaPercepcion[0].Concepto': {
+                    required: true
+                },
+                'Empleado.NominaPercepcion[0].ImporteGravado': {
+                    required: true,
+                    number:true
+                },
+                'Empleado.NominaPercepcion[0].ImporteExcento': {
+                    required: true,
+                    number:true
+
+                }
+
+            },
+        });
+
+        $('.wizard-card').bootstrapWizard({
+            'tabClass': 'nav nav-pills',
+            'nextSelector': '.btn-next',
+            'previousSelector': '.btn-previous',
+            onNext: function (tab, navigation, index) {
+                var $valid = $('#NuevoEmpleado').valid();
+                console.log('next');
+                console.log($valid);
+                if (!$valid) {
+                    ValidarNuevo.focusInvalid();
+                    return false;
+                }
+            },
+            onInit: function (tab, navigation, index) {
+                //check number of tabs and fill the entire row
+                var $total = navigation.find('li').length;
+                $width = 100 / $total;
+                var $wizard = navigation.closest('.wizard-card');
+                $display_width = $(document).width();
+                if ($display_width < 600 && $total > 3) {
+                    $width = 50;
+                }
+                navigation.find('li').css('width', $width + '%');
+                $first_li = navigation.find('li:first-child a').html();
+                $moving_div = $('<div class="moving-tab">' + $first_li + '</div>');
+                $('.wizard-card .wizard-navigation').append($moving_div);
+                refreshAnimation($wizard, index);
+                $('.moving-tab').css({'transition':'transform 0s','width':'50%'});
+            },
+            onTabClick: function (tab, navigation, index) {
+                var $valid = $('#NuevoEmpleado').valid();
+                if (!$valid) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+                var $wizard = navigation.closest('.wizard-card');
+                // If it's the last tab then hide the last button and show the finish instead
+                if ($current >= $total) {
+                    $($wizard).find('.btn-next').hide();
+                    $($wizard).find('.btn-finish').show();
+                } else {
+                    $($wizard).find('.btn-next').show();
+                    $($wizard).find('.btn-finish').hide();
+                }
+                button_text = navigation.find('li:nth-child(' + $current + ') a').html();
+                setTimeout(function () {
+                    $('.moving-tab').text(button_text);
+                }, 150);
+                var checkbox = $('.footer-checkbox');
+                if (!index == 0) {
+                    $(checkbox).css({
+                        'opacity': '0',
+                        'visibility': 'hidden',
+                        'position': 'absolute'
+                    });
+                } else {
+                    $(checkbox).css({
+                        'opacity': '1',
+                        'visibility': 'visible'
+                    });
+                }
+                refreshAnimation($wizard, index);
+            }
+        });
+
+
+        $('form').submit(function (e) {
+            var isValid = $('#NuevoEmpleado').valid();
+            if (isValid) {
+                var files = $("#logo").get(0).files;
+                for (i = 0; i < files.length; i++) {
+                    $Data.append("Foto", files[i]);
+                }
+                try {
+                    $("#Cargando").fadeIn();
+                    $.ajax({
+                        url: "/Empleados/Nuevo?" + $('form').serialize(),
+                        contentType: false,
+                        processData: false,
+                        type: 'POST',
+                        data: $Data,//$(this).serialize(),
+                        success: function (result) {
+                            if (result.error == false) {
+                                swal({
+                                    title: "Listo!",
+                                    text: "Se ha guardado Correctamente",
+                                    buttonsStyling: false,
+                                    confirmButtonClass: "btn btn-success",
+                                    type: "success"
+                                });
+                                var table = $("#datatables").DataTable();
+                                var id=$('[name="Empleado.Empleado.Id"]').val();
+                                var img='<img src="@Url.Content("/Images/user.png")" class="img-thumbnail" style="width:70px; height:auto;" id="img-'+id+'"/>';
+                                var nombre=$('[name="Empleado.Empleado.Nombre"]').val()+" " +$('[name="Empleado.Empleado.ApellidoPaterno"]').val()+$('[name="Empleado.Empleado.ApellidoMaterno"]').val();
+                                var departamento=$('[name="Empleado.Empleado.Departamento"]').val();
+                                var puesto=$('[name="Empleado.Empleado.Puesto"]').val();
+                                var rfc =$('[name="Empleado.Empleado.RFC"]').val();
+                                var botones='<button class="btn btn-info btn-simple" data-toggle="modal" data-target="#myModal" onclick="OpenModal(\'@Url.Content("/Empleados/Editar?IdTemp=")'+id+'\')" rel="tooltip" data-original-title="Editar"><i class="material-icons">edit</i></button>';
+                                botones+='<button class="btn btn-simple btn-danger btn-icon remove" rel="tooltip" data-original-title="Eliminar" onclick="DeleteRegister(\''+id+'\',\'@Url.Content("/Empleados/Eliminar")\',\'#datatables\')"><i class="material-icons">close</i></button>';
+                                var node=table.row.add([img,nombre,departamento,puesto,rfc,botones]).draw(false).node();
+                                $(node).attr('id', id);
+                                var input=$('#logo')[0];
+                                if (input.files && input.files[0]) {
+                                    readURL($('#logo')[0], '#img-' + id);
+                                }
+
+                            } else {
+                                swal({
+                                    title: "Error!",
+                                    text: result.Description + "<br/><br/>" + result.Message,
+                                    buttonsStyling: false,
+                                    confirmButtonClass: "btn btn-success",
+                                    type: "error"
+                                });
+                            }
+
+                            $("#myModal").modal('hide');
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            swal({
+                                title: "Error!",
+                                text: errorThrown,
+                                buttonsStyling: false,
+                                confirmButtonClass: "btn btn-success",
+                                type: "error"
+                            });
+                        }
+
+
+                    });
+                } catch (ex) {
+                    console.log("trono");
+                    console.log(ex);
+                }
+            }
+
+            return false;
+        });
+        $("#Empleado_Empleado_Telefono").mask("(999) 999-9999");
+        $("#Empleado_Empleado_TelefonoEmergencia").mask("(999) 999-9999");
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+

@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    ViewBag.TitleModal = "Registrar Operacion";
+}
+
+    
+    <div class="container-fluid">
+        <div class="row" id="selecionDeOpereacion">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label">Tipo de Operacion</label>
+                    <select class="form-control" id="CargoAbono">
+                        <option disabled selected value>Seleccione una Opcion</option>
+                        <option value="0">Egreso</option>
+                        <option value="1">Ingreso</option>
+                    </select>
+                    @Html.Hidden("idIngreso", Guid.NewGuid())
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group" id="TiposEgresos" style="display:none">
+                    <label class="control-label">Tipo de Egreso</label>
+                    <select class="form-control" id="OpcionEgreso">
+                        <option disabled selected value>Selecion una Opcion</option>
+                        <option value="N">Nomina</option>
+                        <option value="C">Compra</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="Ingreso" style="display:none;">
+        </div>
+        <div id="Egreso" style="display:none;">
+        </div>
+    </div>
+    <br />                    
+   
+
+<script>
+    $(function () {
+        $('#CargoAbono').change(function () {
+            var tipo = $(this).val();
+            if (tipo == "1") {
+                $("#Egreso").fadeOut(500, function () {
+                    $("#Egreso").empty();
+                    $("#TiposEgresos").fadeOut();
+                });
+                $('#Ingreso').load('@Url.Action("_Ingreso")', function () {
+                    $('#Ingreso').fadeIn(1000);
+                    $("#NuevoIngreso").attr("action", "/Operaciones/_Ingreso");
+                });
+            }
+            else if (tipo == "0") {
+                $("#Ingreso").fadeOut(500, function () {
+                    $("#Ingreso").empty();
+                });
+                $("#TiposEgresos").fadeIn();
+            }
+
+        });
+        $('#OpcionEgreso').change(function () {
+            var Tipo = $(this).val();
+            console.log("se cambio:"+Tipo);
+            if (Tipo == "N") {
+                $('#Egreso').load('/Nominas/Index', function () {
+                    $('#Egreso').fadeIn(1000);
+                    $("#NuevoIngreso").attr("action", "/Operaciones/_Egreso");
+                });
+            }
+            
+        });
+
+    });
+</script>

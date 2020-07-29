@@ -1,0 +1,1508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AvenzoSeguridadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bancos">
+          <Key>
+            <PropertyRef Name="c_Banco" />
+          </Key>
+          <Property Name="c_Banco" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RazonSocial" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="c_Estados" />
+          </Key>
+          <Property Name="c_Estados" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="c_Pais" Type="varchar(max)" Nullable="false" />
+          <Property Name="NombreEstado" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MetodosDePago">
+          <Key>
+            <PropertyRef Name="c_MetodoPago" />
+          </Key>
+          <Property Name="c_MetodoPago" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nominas">
+          <Key>
+            <PropertyRef Name="c_TipoNomina" />
+          </Key>
+          <Property Name="c_TipoNomina" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OtrosPagos">
+          <Key>
+            <PropertyRef Name="c_TipoOtroPago" />
+          </Key>
+          <Property Name="c_TipoOtroPago" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RFC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Usuario" Type="varchar(max)" Nullable="false" />
+          <Property Name="Contrasena" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CURP" Type="varchar" MaxLength="25" />
+          <Property Name="PersonaMoral" Type="bit" />
+          <Property Name="Llave" Type="varbinary(max)" />
+          <Property Name="Certificado" Type="varbinary(max)" />
+          <Property Name="ContrasenaLlave" Type="varbinary(max)" />
+          <Property Name="RegimenFiscal" Type="nchar" MaxLength="10" />
+          <Property Name="RegistroPatronal" Type="varchar" MaxLength="200" />
+          <Property Name="RfcPatronOrigen" Type="varchar" MaxLength="30" />
+          <Property Name="Logo" Type="varbinary(max)" />
+          <Property Name="FechaVigenciaIncio" Type="datetime" />
+          <Property Name="FechaVigenciaFinal" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Regimen">
+          <Key>
+            <PropertyRef Name="c_TipoRegimen" />
+          </Key>
+          <Property Name="c_TipoRegimen" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegimenFiscal">
+          <Key>
+            <PropertyRef Name="c_RegimenFiscal" />
+          </Key>
+          <Property Name="c_RegimenFiscal" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="Fisica" Type="bit" Nullable="false" />
+          <Property Name="Moral" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Catalogos">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NombreCatalogo" Type="varchar" MaxLength="30" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="valor" Type="varchar" MaxLength="50" />
+          <Property Name="activo" Type="bit" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AvenzoSeguridad.AS.Ciudad' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="IdCiudad" />
+          </Key>
+          <Property Name="IdCiudad" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Ciudad" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Clientes_ALT">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdProveedor" Type="uniqueidentifier" />
+          <Property Name="IdUsuario" Type="uniqueidentifier" />
+          <Property Name="NumeroTelefonoAlarma" Type="varchar" MaxLength="30" />
+          <Property Name="PalabraClave" Type="varchar" MaxLength="50" />
+          <Property Name="PalabraClaveSilenciosa" Type="varchar" MaxLength="50" />
+          <Property Name="Nombres" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="200" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="200" />
+          <Property Name="Calle" Type="varchar" MaxLength="200" />
+          <Property Name="NoInterior" Type="varchar" MaxLength="50" />
+          <Property Name="NoExterior" Type="varchar" MaxLength="50" />
+          <Property Name="Colonia" Type="varchar" MaxLength="30" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="TelefonoTrabajo" Type="varchar" MaxLength="20" />
+          <Property Name="TelefonoCelular" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Foto" Type="varbinary(max)" />
+          <Property Name="Estado" Type="varchar" MaxLength="30" />
+          <Property Name="Pais" Type="varchar" MaxLength="30" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="30" />
+          <Property Name="TipoAfilacion" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroPatrocinador" Type="varchar" MaxLength="50" />
+          <Property Name="FechaNacimiento" Type="varchar" MaxLength="20" />
+          <Property Name="LugarNacimiento" Type="varchar" MaxLength="50" />
+          <Property Name="Sexo" Type="varchar" MaxLength="20" />
+          <Property Name="EstadoCivil" Type="varchar" MaxLength="20" />
+          <Property Name="Profesion" Type="varchar" MaxLength="50" />
+          <Property Name="CURP" Type="varchar" MaxLength="20" />
+          <Property Name="RFC" Type="varchar" MaxLength="50" />
+          <Property Name="Banco" Type="varchar" MaxLength="10" />
+          <Property Name="ClaveBancaria" Type="varchar" MaxLength="100" />
+          <Property Name="NumeroCLABE" Type="varchar" MaxLength="50" />
+          <Property Name="Beneficiario" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="NoEmpleado" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" />
+          <Property Name="NoEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProveedor" Type="uniqueidentifier" />
+          <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="200" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="200" />
+          <Property Name="Usuario" Type="varchar" MaxLength="200" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="FechaNacimiento" Type="datetime" />
+          <Property Name="FechaInicioRelLaboral" Type="datetime" />
+          <Property Name="RFC" Type="varchar" MaxLength="25" />
+          <Property Name="CURP" Type="varchar" MaxLength="25" />
+          <Property Name="HuellaDactilar" Type="varbinary(max)" />
+          <Property Name="Foto" Type="varbinary(max)" />
+          <Property Name="INE" Type="varchar(max)" />
+          <Property Name="NumeroSeguridadSocial" Type="varchar" MaxLength="50" />
+          <Property Name="Departamento" Type="varchar(max)" />
+          <Property Name="Direccion" Type="varchar(max)" />
+          <Property Name="Puesto" Type="varchar(max)" />
+          <Property Name="RiesgoPuesto" Type="varchar" MaxLength="10" />
+          <Property Name="TipoContrato" Type="varchar" MaxLength="10" />
+          <Property Name="TipoJornada" Type="varchar" MaxLength="10" />
+          <Property Name="SalarioDiario" Type="float" />
+          <Property Name="Banco" Type="varchar" MaxLength="10" />
+          <Property Name="CuentaBancaria" Type="varchar(max)" />
+          <Property Name="ClaveEntFed" Type="varchar" MaxLength="10" />
+          <Property Name="GradoEstudios" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="TelefonoEmergencia" Type="varchar" MaxLength="50" />
+          <Property Name="Firma" Type="varbinary(max)" />
+          <Property Name="TipoSangre" Type="varchar" MaxLength="50" />
+          <Property Name="CUIP" Type="varchar(max)" />
+          <Property Name="NumeroDeLicencia" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroDeAutorizacion" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="25" />
+          <Property Name="FechaCreacion" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AvenzoSeguridad.AS.Estado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="IdEstado" />
+          </Key>
+          <Property Name="IdEstado" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Estado" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AvenzoSeguridad.AS.Pais' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="IdPais" />
+          </Key>
+          <Property Name="IdPais" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Pais" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" />
+          <Property Name="Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Contraseña" Type="varchar(max)" Nullable="false" />
+          <Property Name="TipoUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Roles" Type="varchar(max)" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="Timbres" Type="int" />
+          <Property Name="TimbresUsados" Type="int" />
+        </EntityType>
+        <Function Name="DeletePAC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AC">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Opcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetBancos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AC">
+          <Parameter Name="Filtro" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetMetodosDePago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AC">
+          <Parameter Name="ID" Type="varchar" Mode="In" />
+          <Parameter Name="Metodo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetPAC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AC">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Opcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertPAC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AC">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="RFC" Type="varchar" Mode="In" />
+          <Parameter Name="Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasena" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ContrasenaLlave" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="CURP" Type="varchar" Mode="In" />
+          <Parameter Name="PersonaMoral" Type="bit" Mode="In" />
+          <Parameter Name="Llave" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="RegimenFiscal" Type="nchar" Mode="In" />
+          <Parameter Name="RegistroPatronal" Type="varchar" Mode="In" />
+          <Parameter Name="RfcPatronOrigen" Type="varchar" Mode="In" />
+          <Parameter Name="Certificado" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="VigenciaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="VigenciaFinal" Type="datetime" Mode="In" />
+          <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+          <Parameter Name="Logo" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="UpdatePAC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AC">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="RFC" Type="varchar" Mode="In" />
+          <Parameter Name="Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasena" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ContrasenaLlave" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="CURP" Type="varchar" Mode="In" />
+          <Parameter Name="PersonaMoral" Type="bit" Mode="In" />
+          <Parameter Name="Llave" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="RegimenFiscal" Type="nchar" Mode="In" />
+          <Parameter Name="RegistroPatronal" Type="varchar" Mode="In" />
+          <Parameter Name="RfcPatronOrigen" Type="varchar" Mode="In" />
+          <Parameter Name="Certificado" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="VigenciaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="VigenciaFinal" Type="datetime" Mode="In" />
+          <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+          <Parameter Name="Logo" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="DeleteClientes_ALT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="DeleteMonitoreoIngresos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdIngreso" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Option" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCliente_ALT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="Cadena" Type="varchar" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="getEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="op" Type="int" Mode="In" />
+          <Parameter Name="NoEmpleado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Opcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetIngresos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="Opcion" Type="int" Mode="In" />
+          <Parameter Name="IdIngreso" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="GetNominaHistorial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="Opcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertCliente_ALT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IDProveedor" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="numAlarma" Type="varchar" Mode="In" />
+          <Parameter Name="PalabraClave" Type="varchar" Mode="In" />
+          <Parameter Name="PalabraClaveSilen" Type="varchar" Mode="In" />
+          <Parameter Name="nombres" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+          <Parameter Name="calle" Type="varchar" Mode="In" />
+          <Parameter Name="NoInterior" Type="varchar" Mode="In" />
+          <Parameter Name="NoExterior" Type="varchar" Mode="In" />
+          <Parameter Name="Colonia" Type="varchar" Mode="In" />
+          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="telTrabajo" Type="varchar" Mode="In" />
+          <Parameter Name="telCelular" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="foto" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="estado" Type="varchar" Mode="In" />
+          <Parameter Name="pais" Type="varchar" Mode="In" />
+          <Parameter Name="ciudad" Type="varchar" Mode="In" />
+          <Parameter Name="tipoAfilacion" Type="varchar" Mode="In" />
+          <Parameter Name="numeroPatrocinador" Type="varchar" Mode="In" />
+          <Parameter Name="fechaNacimiento" Type="varchar" Mode="In" />
+          <Parameter Name="lugarNacimiento" Type="varchar" Mode="In" />
+          <Parameter Name="sexo" Type="varchar" Mode="In" />
+          <Parameter Name="estadoCivil" Type="varchar" Mode="In" />
+          <Parameter Name="profesion" Type="varchar" Mode="In" />
+          <Parameter Name="curp" Type="varchar" Mode="In" />
+          <Parameter Name="rfc" Type="varchar" Mode="In" />
+          <Parameter Name="banco" Type="varchar" Mode="In" />
+          <Parameter Name="ClaveBancaria" Type="varchar" Mode="In" />
+          <Parameter Name="numeroCLABE" Type="varchar" Mode="In" />
+          <Parameter Name="beneficiario" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+          <Parameter Name="usuarioCreacion" Type="varchar" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Usuario" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="InsertIngresos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="idIngresos" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IdProveedor" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="Cargos" Type="float" Mode="In" />
+          <Parameter Name="Abonos" Type="float" Mode="In" />
+          <Parameter Name="CargosUSD" Type="float" Mode="In" />
+          <Parameter Name="AbonosUSD" Type="float" Mode="In" />
+          <Parameter Name="MetodoDePago" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Concepto" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="RevisoRoboT" Type="bit" Mode="In" />
+          <Parameter Name="Folio" Type="int" Mode="In" />
+          <Parameter Name="MismaFactura" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="RequiereFactura" Type="bit" Mode="In" />
+          <Parameter Name="Usuario" Type="varchar(max)" Mode="In" />
+          <Parameter Name="FacturaPDF" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="FacturaXML" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="TipoCambio" Type="float" Mode="In" />
+          <Parameter Name="Unidad" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+          <Parameter Name="IdDispositivo" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Moneda" Type="nchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateCliente_ALT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IdProveedor" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="NumeroTelefonoAlarma" Type="varchar" Mode="In" />
+          <Parameter Name="PalabraClave" Type="varchar" Mode="In" />
+          <Parameter Name="PalabraClaveSilenciosa" Type="varchar" Mode="In" />
+          <Parameter Name="Nombres" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+          <Parameter Name="Calle" Type="varchar" Mode="In" />
+          <Parameter Name="NoInterior" Type="varchar" Mode="In" />
+          <Parameter Name="NoExterior" Type="varchar" Mode="In" />
+          <Parameter Name="Colonia" Type="varchar" Mode="In" />
+          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="TelefonoTrabajo" Type="varchar" Mode="In" />
+          <Parameter Name="TelefonoCelular" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Foto" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Estado" Type="varchar" Mode="In" />
+          <Parameter Name="Pais" Type="varchar" Mode="In" />
+          <Parameter Name="Ciudad" Type="varchar" Mode="In" />
+          <Parameter Name="TipoAfilacion" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroPatrocinador" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="varchar" Mode="In" />
+          <Parameter Name="LugarNacimiento" Type="varchar" Mode="In" />
+          <Parameter Name="Sexo" Type="varchar" Mode="In" />
+          <Parameter Name="EstadoCivil" Type="varchar" Mode="In" />
+          <Parameter Name="Profesion" Type="varchar" Mode="In" />
+          <Parameter Name="CURP" Type="varchar" Mode="In" />
+          <Parameter Name="RFC" Type="varchar" Mode="In" />
+          <Parameter Name="ClaveBancaria" Type="varchar" Mode="In" />
+          <Parameter Name="Banco" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroCLABE" Type="varchar" Mode="In" />
+          <Parameter Name="Beneficiario" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+          <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Usuario" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="UpdateMonitoreoIngresos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="Folio" Type="int" Mode="In" />
+          <Parameter Name="IdIngreso" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="FacturaXML" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="FacturaPDF" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Cargos" Type="float" Mode="In" />
+          <Parameter Name="Abonos" Type="float" Mode="In" />
+          <Parameter Name="TipoCambio" Type="float" Mode="In" />
+          <Parameter Name="CargosUSD" Type="float" Mode="In" />
+          <Parameter Name="AbonosUSD" Type="float" Mode="In" />
+          <Parameter Name="MetodoDePago" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+          <Parameter Name="Unidad" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Concepto" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="RevisoRoboT" Type="bit" Mode="In" />
+          <Parameter Name="MismaFactura" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="RequiereFactura" Type="bit" Mode="In" />
+          <Parameter Name="RequiereCancelacion" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="AvenzoSeguridadModelStoreContainer">
+          <EntitySet Name="Bancos" EntityType="Self.Bancos" Schema="AC" store:Type="Tables" />
+          <EntitySet Name="Estados" EntityType="Self.Estados" Schema="AC" store:Type="Tables" />
+          <EntitySet Name="MetodosDePago" EntityType="Self.MetodosDePago" Schema="AC" store:Type="Tables" />
+          <EntitySet Name="Nominas" EntityType="Self.Nominas" Schema="AC" store:Type="Tables" />
+          <EntitySet Name="OtrosPagos" EntityType="Self.OtrosPagos" Schema="AC" store:Type="Tables" />
+          <EntitySet Name="PAC" EntityType="Self.PAC" Schema="AC" store:Type="Tables" />
+          <EntitySet Name="Regimen" EntityType="Self.Regimen" Schema="AC" store:Type="Tables" />
+          <EntitySet Name="RegimenFiscal" EntityType="Self.RegimenFiscal" Schema="AC" store:Type="Tables" />
+          <EntitySet Name="Catalogos" EntityType="Self.Catalogos" Schema="AS" store:Type="Tables" />
+          <EntitySet Name="Clientes_ALT" EntityType="Self.Clientes_ALT" Schema="AS" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="AS" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="AS" store:Type="Tables" />
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" store:Type="Tables" store:Schema="AS">
+            <DefiningQuery>SELECT 
+    [Ciudad].[IdCiudad] AS [IdCiudad], 
+    [Ciudad].[Ciudad] AS [Ciudad]
+    FROM [AS].[Ciudad] AS [Ciudad]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Estado" EntityType="Self.Estado" store:Type="Tables" store:Schema="AS">
+            <DefiningQuery>SELECT 
+    [Estado].[IdEstado] AS [IdEstado], 
+    [Estado].[Estado] AS [Estado]
+    FROM [AS].[Estado] AS [Estado]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Pais" EntityType="Self.Pais" store:Type="Tables" store:Schema="AS">
+            <DefiningQuery>SELECT 
+    [Pais].[IdPais] AS [IdPais], 
+    [Pais].[Pais] AS [Pais]
+    FROM [AS].[Pais] AS [Pais]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AvenzoSeguridadModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AvenzoSeguridadEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Empleados" EntityType="AvenzoSeguridadModel.Empleados" />
+          <EntitySet Name="Usuarios" EntityType="AvenzoSeguridadModel.Usuarios" />
+          <FunctionImport Name="getEmpleado" ReturnType="Collection(AvenzoSeguridadModel.getEmpleado_Result)">
+            <Parameter Name="op" Mode="In" Type="Int32" />
+            <Parameter Name="NoEmpleado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetFactura" ReturnType="Collection(AvenzoSeguridadModel.GetFactura_Result)">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Opcion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetIngresos" ReturnType="Collection(AvenzoSeguridadModel.GetIngresos_Result)">
+            <Parameter Name="Opcion" Mode="In" Type="Int32" />
+            <Parameter Name="IdIngreso" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetNominaHistorial" ReturnType="Collection(AvenzoSeguridadModel.GetNominaHistorial_Result)">
+          <Parameter Name="Opcion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetBancos" ReturnType="Collection(AvenzoSeguridadModel.GetBancos_Result)">
+          <Parameter Name="Filtro" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetMetodosDePago" ReturnType="Collection(AvenzoSeguridadModel.GetMetodosDePago_Result)">
+            <Parameter Name="ID" Mode="In" Type="String" />
+            <Parameter Name="Metodo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetPAC" ReturnType="Collection(AvenzoSeguridadModel.GetPAC_Result)">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Opcion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertPAC">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="RFC" Mode="In" Type="String" />
+            <Parameter Name="Usuario" Mode="In" Type="String" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
+            <Parameter Name="ContrasenaLlave" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="CURP" Mode="In" Type="String" />
+            <Parameter Name="PersonaMoral" Mode="In" Type="Boolean" />
+            <Parameter Name="Llave" Mode="In" Type="Binary" />
+            <Parameter Name="RegimenFiscal" Mode="In" Type="String" />
+            <Parameter Name="RegistroPatronal" Mode="In" Type="String" />
+            <Parameter Name="RfcPatronOrigen" Mode="In" Type="String" />
+            <Parameter Name="Certificado" Mode="In" Type="Binary" />
+            <Parameter Name="VigenciaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="VigenciaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="UsuarioCreacion" Mode="In" Type="String" />
+            <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
+            <Parameter Name="Logo" Mode="In" Type="Binary" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePAC">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="RFC" Mode="In" Type="String" />
+            <Parameter Name="Usuario" Mode="In" Type="String" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
+            <Parameter Name="ContrasenaLlave" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="CURP" Mode="In" Type="String" />
+            <Parameter Name="PersonaMoral" Mode="In" Type="Boolean" />
+            <Parameter Name="Llave" Mode="In" Type="Binary" />
+            <Parameter Name="RegimenFiscal" Mode="In" Type="String" />
+            <Parameter Name="RegistroPatronal" Mode="In" Type="String" />
+            <Parameter Name="RfcPatronOrigen" Mode="In" Type="String" />
+            <Parameter Name="Certificado" Mode="In" Type="Binary" />
+            <Parameter Name="VigenciaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="VigenciaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="UsuarioCreacion" Mode="In" Type="String" />
+            <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
+            <Parameter Name="Logo" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <EntitySet Name="Bancos" EntityType="AvenzoSeguridadModel.Bancos" />
+          <EntitySet Name="MetodosDePago" EntityType="AvenzoSeguridadModel.MetodosDePago" />
+          <EntitySet Name="Nominas" EntityType="AvenzoSeguridadModel.Nominas" />
+          <EntitySet Name="OtrosPagos" EntityType="AvenzoSeguridadModel.OtrosPagos" />
+          <EntitySet Name="PAC" EntityType="AvenzoSeguridadModel.PAC" />
+          <EntitySet Name="Regimen" EntityType="AvenzoSeguridadModel.Regimen" />
+          <EntitySet Name="RegimenFiscal" EntityType="AvenzoSeguridadModel.RegimenFiscal" />
+          <FunctionImport Name="DeleteClientes_ALT">
+          <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="InsertCliente_ALT">
+            <Parameter Name="IDProveedor" Mode="In" Type="Guid" />
+            <Parameter Name="numAlarma" Mode="In" Type="String" />
+            <Parameter Name="PalabraClave" Mode="In" Type="String" />
+            <Parameter Name="PalabraClaveSilen" Mode="In" Type="String" />
+            <Parameter Name="nombres" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="calle" Mode="In" Type="String" />
+            <Parameter Name="NoInterior" Mode="In" Type="String" />
+            <Parameter Name="NoExterior" Mode="In" Type="String" />
+            <Parameter Name="Colonia" Mode="In" Type="String" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="telTrabajo" Mode="In" Type="String" />
+            <Parameter Name="telCelular" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="foto" Mode="In" Type="Binary" />
+            <Parameter Name="estado" Mode="In" Type="String" />
+            <Parameter Name="pais" Mode="In" Type="String" />
+            <Parameter Name="ciudad" Mode="In" Type="String" />
+            <Parameter Name="tipoAfilacion" Mode="In" Type="String" />
+            <Parameter Name="numeroPatrocinador" Mode="In" Type="String" />
+            <Parameter Name="fechaNacimiento" Mode="In" Type="String" />
+            <Parameter Name="lugarNacimiento" Mode="In" Type="String" />
+            <Parameter Name="sexo" Mode="In" Type="String" />
+            <Parameter Name="estadoCivil" Mode="In" Type="String" />
+            <Parameter Name="profesion" Mode="In" Type="String" />
+            <Parameter Name="curp" Mode="In" Type="String" />
+            <Parameter Name="rfc" Mode="In" Type="String" />
+            <Parameter Name="banco" Mode="In" Type="String" />
+            <Parameter Name="ClaveBancaria" Mode="In" Type="String" />
+            <Parameter Name="numeroCLABE" Mode="In" Type="String" />
+            <Parameter Name="beneficiario" Mode="In" Type="String" />
+            <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
+            <Parameter Name="usuarioCreacion" Mode="In" Type="String" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Usuario" Mode="In" Type="Guid" />
+            <Parameter Name="ID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCliente_ALT">
+            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="IdProveedor" Mode="In" Type="Guid" />
+            <Parameter Name="NumeroTelefonoAlarma" Mode="In" Type="String" />
+            <Parameter Name="PalabraClave" Mode="In" Type="String" />
+            <Parameter Name="PalabraClaveSilenciosa" Mode="In" Type="String" />
+            <Parameter Name="Nombres" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Calle" Mode="In" Type="String" />
+            <Parameter Name="NoInterior" Mode="In" Type="String" />
+            <Parameter Name="NoExterior" Mode="In" Type="String" />
+            <Parameter Name="Colonia" Mode="In" Type="String" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="TelefonoTrabajo" Mode="In" Type="String" />
+            <Parameter Name="TelefonoCelular" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Foto" Mode="In" Type="Binary" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
+            <Parameter Name="Pais" Mode="In" Type="String" />
+            <Parameter Name="Ciudad" Mode="In" Type="String" />
+            <Parameter Name="TipoAfilacion" Mode="In" Type="String" />
+            <Parameter Name="NumeroPatrocinador" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="String" />
+            <Parameter Name="LugarNacimiento" Mode="In" Type="String" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+            <Parameter Name="EstadoCivil" Mode="In" Type="String" />
+            <Parameter Name="Profesion" Mode="In" Type="String" />
+            <Parameter Name="CURP" Mode="In" Type="String" />
+            <Parameter Name="RFC" Mode="In" Type="String" />
+            <Parameter Name="ClaveBancaria" Mode="In" Type="String" />
+            <Parameter Name="Banco" Mode="In" Type="String" />
+            <Parameter Name="NumeroCLABE" Mode="In" Type="String" />
+            <Parameter Name="Beneficiario" Mode="In" Type="String" />
+            <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
+            <Parameter Name="UsuarioCreacion" Mode="In" Type="String" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Usuario" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteMonitoreoIngresos">
+            <Parameter Name="IdIngreso" Mode="In" Type="Guid" />
+            <Parameter Name="Option" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateMonitoreoIngresos">
+            <Parameter Name="Folio" Mode="In" Type="Int32" />
+            <Parameter Name="IdIngreso" Mode="In" Type="Guid" />
+            <Parameter Name="FacturaXML" Mode="In" Type="Binary" />
+            <Parameter Name="FacturaPDF" Mode="In" Type="Binary" />
+            <Parameter Name="Cargos" Mode="In" Type="Double" />
+            <Parameter Name="Abonos" Mode="In" Type="Double" />
+            <Parameter Name="TipoCambio" Mode="In" Type="Double" />
+            <Parameter Name="CargosUSD" Mode="In" Type="Double" />
+            <Parameter Name="AbonosUSD" Mode="In" Type="Double" />
+            <Parameter Name="MetodoDePago" Mode="In" Type="String" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="Unidad" Mode="In" Type="String" />
+            <Parameter Name="Concepto" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="RevisoRoboT" Mode="In" Type="Boolean" />
+            <Parameter Name="MismaFactura" Mode="In" Type="Guid" />
+            <Parameter Name="RequiereFactura" Mode="In" Type="Boolean" />
+            <Parameter Name="RequiereCancelacion" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="Estado" EntityType="AvenzoSeguridadModel.Estado" />
+          <FunctionImport Name="InsertIngresos">
+            <Parameter Name="idIngresos" Mode="In" Type="Guid" />
+            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="IdProveedor" Mode="In" Type="Guid" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Cargos" Mode="In" Type="Double" />
+            <Parameter Name="Abonos" Mode="In" Type="Double" />
+            <Parameter Name="CargosUSD" Mode="In" Type="Double" />
+            <Parameter Name="AbonosUSD" Mode="In" Type="Double" />
+            <Parameter Name="MetodoDePago" Mode="In" Type="String" />
+            <Parameter Name="Concepto" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="RevisoRoboT" Mode="In" Type="Boolean" />
+            <Parameter Name="Folio" Mode="In" Type="Int32" />
+            <Parameter Name="MismaFactura" Mode="In" Type="Guid" />
+            <Parameter Name="RequiereFactura" Mode="In" Type="Boolean" />
+            <Parameter Name="Usuario" Mode="In" Type="String" />
+            <Parameter Name="FacturaPDF" Mode="In" Type="Binary" />
+            <Parameter Name="FacturaXML" Mode="In" Type="Binary" />
+            <Parameter Name="TipoCambio" Mode="In" Type="Double" />
+            <Parameter Name="Unidad" Mode="In" Type="String" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="IdDispositivo" Mode="In" Type="Guid" />
+            <Parameter Name="Moneda" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Estados" EntityType="AvenzoSeguridadModel.Estados" />
+          <EntitySet Name="Catalogos" EntityType="AvenzoSeguridadModel.Catalogos" />
+          <EntitySet Name="Ciudad" EntityType="AvenzoSeguridadModel.Ciudad" />
+          <EntitySet Name="Pais" EntityType="AvenzoSeguridadModel.Pais" />
+          <FunctionImport Name="DeletePAC">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Opcion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Clientes_ALT" EntityType="AvenzoSeguridadModel.Clientes_ALT" />
+          <FunctionImport Name="GetCliente_ALT" ReturnType="Collection(AvenzoSeguridadModel.GetCliente_ALT_Result)">
+            <Parameter Name="Cadena" Mode="In" Type="String" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="NoEmpleado" />
+          </Key>
+          <Property Name="Id" Type="Guid" />
+          <Property Name="NoEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProveedor" Type="Guid" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="FechaInicioRelLaboral" Type="DateTime" Precision="3" />
+          <Property Name="RFC" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CURP" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="HuellaDactilar" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="INE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroSeguridadSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Departamento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Puesto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RiesgoPuesto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TipoContrato" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TipoJornada" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SalarioDiario" Type="Double" />
+          <Property Name="Banco" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CuentaBancaria" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveEntFed" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GradoEstudios" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoEmergencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Firma" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="TipoSangre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CUIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDeLicencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDeAutorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Name="Id" Type="Guid" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TipoUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Roles" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="Timbres" Type="Int32" />
+          <Property Name="TimbresUsados" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="getEmpleado_Result">
+          <Property Type="Int32" Name="NoEmpleado" Nullable="false" />
+          <Property Type="Guid" Name="IdProveedor" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaInicioRelLaboral" Nullable="true" Precision="23" />
+          <Property Type="String" Name="RFC" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="CURP" Nullable="true" MaxLength="25" />
+          <Property Type="Binary" Name="HuellaDactilar" Nullable="true" />
+          <Property Type="Binary" Name="Foto" Nullable="true" />
+          <Property Type="String" Name="INE" Nullable="true" />
+          <Property Type="String" Name="NumeroSeguridadSocial" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Departamento" Nullable="true" />
+          <Property Type="String" Name="Direccion" Nullable="true" />
+          <Property Type="String" Name="Puesto" Nullable="true" />
+          <Property Type="String" Name="RiesgoPuesto" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TipoContrato" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TipoJornada" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Banco" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CuentaBancaria" Nullable="true" />
+          <Property Type="Double" Name="SalarioDiario" Nullable="true" />
+          <Property Type="String" Name="ClaveEntFed" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="GradoEstudios" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TelefonoEmergencia" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="Firma" Nullable="true" />
+          <Property Type="String" Name="TipoSangre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CUIP" Nullable="true" />
+          <Property Type="String" Name="NumeroDeLicencia" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NumeroDeAutorizacion" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetFactura_Result">
+          <Property Type="Guid" Name="Id" Nullable="true" />
+          <Property Type="Int32" Name="Folio" Nullable="true" />
+          <Property Type="Binary" Name="XML" Nullable="true" />
+          <Property Type="String" Name="Ruta" Nullable="true" />
+          <Property Type="Boolean" Name="Cancelado" Nullable="true" />
+          <Property Type="Guid" Name="IdCliente" Nullable="true" />
+          <Property Type="Guid" Name="IdProveedor" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetIngresos_Result">
+          <Property Type="Guid" Name="IdIngreso" Nullable="false" />
+          <Property Type="Guid" Name="IdProveedor" Nullable="true" />
+          <Property Type="Guid" Name="IdCliente" Nullable="true" />
+          <Property Type="Guid" Name="IdDispositivo" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="TipoCambio" Nullable="true" />
+          <Property Type="Int32" Name="Cantidad" Nullable="true" />
+          <Property Type="String" Name="Unidad" Nullable="true" />
+          <Property Type="Double" Name="Cargos" Nullable="true" />
+          <Property Type="Double" Name="Abonos" Nullable="true" />
+          <Property Type="Double" Name="CargosUSD" Nullable="true" />
+          <Property Type="Double" Name="AbonosUSD" Nullable="true" />
+          <Property Type="String" Name="MetodoDePago" Nullable="false" />
+          <Property Type="String" Name="Concepto" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+          <Property Type="Boolean" Name="RevisoRoboT" Nullable="false" />
+          <Property Type="Int32" Name="Folio" Nullable="true" />
+          <Property Type="Guid" Name="MismaFactura" Nullable="true" />
+          <Property Type="Boolean" Name="RequiereFactura" Nullable="false" />
+          <Property Type="String" Name="Usuario" Nullable="false" />
+          <Property Type="Binary" Name="FacturaPDF" Nullable="true" />
+          <Property Type="Binary" Name="FacturaXML" Nullable="true" />
+          <Property Type="String" Name="Moneda" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="RequiereCancelacion" Nullable="true" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetNominaHistorial_Result">
+          <Property Type="Guid" Name="IdNominaHistorial" Nullable="false" />
+          <Property Type="Guid" Name="IdProveedor" Nullable="true" />
+          <Property Type="Int32" Name="NoEmpleado" Nullable="true" />
+          <Property Type="Int32" Name="Folio" Nullable="true" />
+          <Property Type="String" Name="TipoRegimen" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Moneda" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Serie" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="LugarExpedicion" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TipoNomina" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PeriodicidadPago" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="RevisoRoboT" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetBancos_Result">
+          <Property Type="String" Name="c_Banco" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="RazonSocial" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetMetodosDePago_Result">
+          <Property Type="String" Name="c_MetodoPago" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetPAC_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="RFC" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Usuario" Nullable="false" />
+          <Property Type="String" Name="Contrasena" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="CURP" Nullable="true" MaxLength="25" />
+          <Property Type="Boolean" Name="PersonaMoral" Nullable="true" />
+          <Property Type="Binary" Name="Llave" Nullable="true" />
+          <Property Type="Binary" Name="Certificado" Nullable="true" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ContrasenaLlave" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="RegimenFiscal" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="RfcPatronOrigen" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="RegistroPatronal" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="Activo" Nullable="false" />
+          <Property Type="Binary" Name="Logo" Nullable="true" />
+          <Property Type="DateTime" Name="FechaVigenciaIncio" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaVigenciaFinal" Nullable="true" Precision="23" />
+        </ComplexType>
+        <EntityType Name="Bancos">
+          <Key>
+            <PropertyRef Name="c_Banco" />
+          </Key>
+          <Property Name="c_Banco" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MetodosDePago">
+          <Key>
+            <PropertyRef Name="c_MetodoPago" />
+          </Key>
+          <Property Name="c_MetodoPago" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Nominas">
+          <Key>
+            <PropertyRef Name="c_TipoNomina" />
+          </Key>
+          <Property Name="c_TipoNomina" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OtrosPagos">
+          <Key>
+            <PropertyRef Name="c_TipoOtroPago" />
+          </Key>
+          <Property Name="c_TipoOtroPago" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PAC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RFC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CURP" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PersonaMoral" Type="Boolean" />
+          <Property Name="Llave" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Certificado" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ContrasenaLlave" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RegimenFiscal" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="RegistroPatronal" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RfcPatronOrigen" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FechaVigenciaIncio" Type="DateTime" Precision="3" />
+          <Property Name="FechaVigenciaFinal" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Regimen">
+          <Key>
+            <PropertyRef Name="c_TipoRegimen" />
+          </Key>
+          <Property Name="c_TipoRegimen" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RegimenFiscal">
+          <Key>
+            <PropertyRef Name="c_RegimenFiscal" />
+          </Key>
+          <Property Name="c_RegimenFiscal" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Fisica" Type="Boolean" Nullable="false" />
+          <Property Name="Moral" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="IdEstado" />
+          </Key>
+          <Property Name="IdEstado" Type="Guid" Nullable="false" />
+          <Property Name="Estado1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="c_Estados" />
+          </Key>
+          <Property Name="c_Estados" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="c_Pais" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NombreEstado" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Catalogos">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="Guid" Nullable="false" />
+          <Property Name="NombreCatalogo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="valor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="IdCiudad" />
+          </Key>
+          <Property Name="IdCiudad" Type="Guid" Nullable="false" />
+          <Property Name="Ciudad1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="IdPais" />
+          </Key>
+          <Property Name="IdPais" Type="Guid" Nullable="false" />
+          <Property Name="Pais1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Clientes_ALT">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Guid" Nullable="false" />
+          <Property Name="IdProveedor" Type="Guid" />
+          <Property Name="IdUsuario" Type="Guid" />
+          <Property Name="NumeroTelefonoAlarma" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PalabraClave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PalabraClaveSilenciosa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Calle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NoInterior" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NoExterior" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Colonia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoTrabajo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoCelular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Estado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Pais" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TipoAfilacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroPatrocinador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LugarNacimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoCivil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Profesion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CURP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RFC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Banco" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroCLABE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Beneficiario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+        </EntityType>
+        <ComplexType Name="GetCliente_ALT_Result">
+          <Property Type="Guid" Name="IdCliente" Nullable="false" />
+          <Property Type="Guid" Name="IdProveedor" Nullable="true" />
+          <Property Type="String" Name="NumeroTelefonoAlarma" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PalabraClave" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PalabraClaveSilenciosa" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Calle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NoInterior" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NoExterior" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Colonia" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CodigoPostal" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TelefonoTrabajo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TelefonoCelular" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="Foto" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Pais" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="TipoAfilacion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NumeroPatrocinador" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaNacimiento" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="LugarNacimiento" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EstadoCivil" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Profesion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CURP" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="RFC" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Banco" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ClaveBancaria" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NumeroCLABE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Beneficiario" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+          <Property Type="Guid" Name="IdUsuario" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AvenzoSeguridadModelStoreContainer" CdmEntityContainer="AvenzoSeguridadEntities">
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="NumeroDeAutorizacion" ColumnName="NumeroDeAutorizacion" />
+                <ScalarProperty Name="NumeroDeLicencia" ColumnName="NumeroDeLicencia" />
+                <ScalarProperty Name="CUIP" ColumnName="CUIP" />
+                <ScalarProperty Name="TipoSangre" ColumnName="TipoSangre" />
+                <ScalarProperty Name="Firma" ColumnName="Firma" />
+                <ScalarProperty Name="TelefonoEmergencia" ColumnName="TelefonoEmergencia" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="GradoEstudios" ColumnName="GradoEstudios" />
+                <ScalarProperty Name="ClaveEntFed" ColumnName="ClaveEntFed" />
+                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="SalarioDiario" ColumnName="SalarioDiario" />
+                <ScalarProperty Name="TipoJornada" ColumnName="TipoJornada" />
+                <ScalarProperty Name="TipoContrato" ColumnName="TipoContrato" />
+                <ScalarProperty Name="RiesgoPuesto" ColumnName="RiesgoPuesto" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="NumeroSeguridadSocial" ColumnName="NumeroSeguridadSocial" />
+                <ScalarProperty Name="INE" ColumnName="INE" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="HuellaDactilar" ColumnName="HuellaDactilar" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="FechaInicioRelLaboral" ColumnName="FechaInicioRelLaboral" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="NoEmpleado" ColumnName="NoEmpleado" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="TimbresUsados" ColumnName="TimbresUsados" />
+                <ScalarProperty Name="Timbres" ColumnName="Timbres" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getEmpleado" FunctionName="AvenzoSeguridadModel.Store.getEmpleado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridadModel.getEmpleado_Result">
+                <ScalarProperty Name="NoEmpleado" ColumnName="NoEmpleado" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="FechaInicioRelLaboral" ColumnName="FechaInicioRelLaboral" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="HuellaDactilar" ColumnName="HuellaDactilar" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="INE" ColumnName="INE" />
+                <ScalarProperty Name="NumeroSeguridadSocial" ColumnName="NumeroSeguridadSocial" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="RiesgoPuesto" ColumnName="RiesgoPuesto" />
+                <ScalarProperty Name="TipoContrato" ColumnName="TipoContrato" />
+                <ScalarProperty Name="TipoJornada" ColumnName="TipoJornada" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
+                <ScalarProperty Name="SalarioDiario" ColumnName="SalarioDiario" />
+                <ScalarProperty Name="ClaveEntFed" ColumnName="ClaveEntFed" />
+                <ScalarProperty Name="GradoEstudios" ColumnName="GradoEstudios" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="TelefonoEmergencia" ColumnName="TelefonoEmergencia" />
+                <ScalarProperty Name="Firma" ColumnName="Firma" />
+                <ScalarProperty Name="TipoSangre" ColumnName="TipoSangre" />
+                <ScalarProperty Name="CUIP" ColumnName="CUIP" />
+                <ScalarProperty Name="NumeroDeLicencia" ColumnName="NumeroDeLicencia" />
+                <ScalarProperty Name="NumeroDeAutorizacion" ColumnName="NumeroDeAutorizacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFactura" FunctionName="AvenzoSeguridadModel.Store.GetFactura">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridadModel.GetFactura_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="XML" ColumnName="XML" />
+                <ScalarProperty Name="Ruta" ColumnName="Ruta" />
+                <ScalarProperty Name="Cancelado" ColumnName="Cancelado" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetIngresos" FunctionName="AvenzoSeguridadModel.Store.GetIngresos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridadModel.GetIngresos_Result">
+                <ScalarProperty Name="IdIngreso" ColumnName="IdIngreso" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdDispositivo" ColumnName="IdDispositivo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="TipoCambio" ColumnName="TipoCambio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="Cargos" ColumnName="Cargos" />
+                <ScalarProperty Name="Abonos" ColumnName="Abonos" />
+                <ScalarProperty Name="CargosUSD" ColumnName="CargosUSD" />
+                <ScalarProperty Name="AbonosUSD" ColumnName="AbonosUSD" />
+                <ScalarProperty Name="MetodoDePago" ColumnName="MetodoDePago" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="RevisoRoboT" ColumnName="RevisoRoboT" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="MismaFactura" ColumnName="MismaFactura" />
+                <ScalarProperty Name="RequiereFactura" ColumnName="RequiereFactura" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="FacturaPDF" ColumnName="FacturaPDF" />
+                <ScalarProperty Name="FacturaXML" ColumnName="FacturaXML" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="RequiereCancelacion" ColumnName="RequiereCancelacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetNominaHistorial" FunctionName="AvenzoSeguridadModel.Store.GetNominaHistorial">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridadModel.GetNominaHistorial_Result">
+                <ScalarProperty Name="IdNominaHistorial" ColumnName="IdNominaHistorial" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="NoEmpleado" ColumnName="NoEmpleado" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="TipoRegimen" ColumnName="TipoRegimen" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="LugarExpedicion" ColumnName="LugarExpedicion" />
+                <ScalarProperty Name="TipoNomina" ColumnName="TipoNomina" />
+                <ScalarProperty Name="PeriodicidadPago" ColumnName="PeriodicidadPago" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="RevisoRoboT" ColumnName="RevisoRoboT" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBancos" FunctionName="AvenzoSeguridadModel.Store.GetBancos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridadModel.GetBancos_Result">
+                <ScalarProperty Name="c_Banco" ColumnName="c_Banco" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMetodosDePago" FunctionName="AvenzoSeguridadModel.Store.GetMetodosDePago">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridadModel.GetMetodosDePago_Result">
+                <ScalarProperty Name="c_MetodoPago" ColumnName="c_MetodoPago" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPAC" FunctionName="AvenzoSeguridadModel.Store.GetPAC">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridadModel.GetPAC_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="PersonaMoral" ColumnName="PersonaMoral" />
+                <ScalarProperty Name="Llave" ColumnName="Llave" />
+                <ScalarProperty Name="Certificado" ColumnName="Certificado" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="ContrasenaLlave" ColumnName="ContrasenaLlave" />
+                <ScalarProperty Name="RegimenFiscal" ColumnName="RegimenFiscal" />
+                <ScalarProperty Name="RfcPatronOrigen" ColumnName="RfcPatronOrigen" />
+                <ScalarProperty Name="RegistroPatronal" ColumnName="RegistroPatronal" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="FechaVigenciaIncio" ColumnName="FechaVigenciaIncio" />
+                <ScalarProperty Name="FechaVigenciaFinal" ColumnName="FechaVigenciaFinal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertPAC" FunctionName="AvenzoSeguridadModel.Store.InsertPAC" />
+          <FunctionImportMapping FunctionImportName="UpdatePAC" FunctionName="AvenzoSeguridadModel.Store.UpdatePAC" />
+          <EntitySetMapping Name="Bancos">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.Bancos">
+              <MappingFragment StoreEntitySet="Bancos">
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="c_Banco" ColumnName="c_Banco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetodosDePago">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.MetodosDePago">
+              <MappingFragment StoreEntitySet="MetodosDePago">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="c_MetodoPago" ColumnName="c_MetodoPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nominas">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.Nominas">
+              <MappingFragment StoreEntitySet="Nominas">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="c_TipoNomina" ColumnName="c_TipoNomina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtrosPagos">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.OtrosPagos">
+              <MappingFragment StoreEntitySet="OtrosPagos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="c_TipoOtroPago" ColumnName="c_TipoOtroPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAC">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.PAC">
+              <MappingFragment StoreEntitySet="PAC">
+                <ScalarProperty Name="FechaVigenciaFinal" ColumnName="FechaVigenciaFinal" />
+                <ScalarProperty Name="FechaVigenciaIncio" ColumnName="FechaVigenciaIncio" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="RfcPatronOrigen" ColumnName="RfcPatronOrigen" />
+                <ScalarProperty Name="RegistroPatronal" ColumnName="RegistroPatronal" />
+                <ScalarProperty Name="RegimenFiscal" ColumnName="RegimenFiscal" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="ContrasenaLlave" ColumnName="ContrasenaLlave" />
+                <ScalarProperty Name="Certificado" ColumnName="Certificado" />
+                <ScalarProperty Name="Llave" ColumnName="Llave" />
+                <ScalarProperty Name="PersonaMoral" ColumnName="PersonaMoral" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regimen">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.Regimen">
+              <MappingFragment StoreEntitySet="Regimen">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="c_TipoRegimen" ColumnName="c_TipoRegimen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegimenFiscal">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.RegimenFiscal">
+              <MappingFragment StoreEntitySet="RegimenFiscal">
+                <ScalarProperty Name="Moral" ColumnName="Moral" />
+                <ScalarProperty Name="Fisica" ColumnName="Fisica" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="c_RegimenFiscal" ColumnName="c_RegimenFiscal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteClientes_ALT" FunctionName="AvenzoSeguridadModel.Store.DeleteClientes_ALT" />
+          <FunctionImportMapping FunctionImportName="InsertCliente_ALT" FunctionName="AvenzoSeguridadModel.Store.InsertCliente_ALT" />
+          <FunctionImportMapping FunctionImportName="UpdateCliente_ALT" FunctionName="AvenzoSeguridadModel.Store.UpdateCliente_ALT" />
+          <FunctionImportMapping FunctionImportName="DeleteMonitoreoIngresos" FunctionName="AvenzoSeguridadModel.Store.DeleteMonitoreoIngresos" />
+          <FunctionImportMapping FunctionImportName="UpdateMonitoreoIngresos" FunctionName="AvenzoSeguridadModel.Store.UpdateMonitoreoIngresos" />
+          <EntitySetMapping Name="Estado">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="Estado1" ColumnName="Estado" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertIngresos" FunctionName="AvenzoSeguridadModel.Store.InsertIngresos" />
+          <EntitySetMapping Name="Estados">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.Estados">
+              <MappingFragment StoreEntitySet="Estados">
+                <ScalarProperty Name="NombreEstado" ColumnName="NombreEstado" />
+                <ScalarProperty Name="c_Pais" ColumnName="c_Pais" />
+                <ScalarProperty Name="c_Estados" ColumnName="c_Estados" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Catalogos">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.Catalogos">
+              <MappingFragment StoreEntitySet="Catalogos">
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NombreCatalogo" ColumnName="NombreCatalogo" />
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudad">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.Ciudad">
+              <MappingFragment StoreEntitySet="Ciudad">
+                <ScalarProperty Name="Ciudad1" ColumnName="Ciudad" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.Pais">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="Pais1" ColumnName="Pais" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeletePAC" FunctionName="AvenzoSeguridadModel.Store.DeletePAC" />
+          <EntitySetMapping Name="Clientes_ALT">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.Clientes_ALT">
+              <MappingFragment StoreEntitySet="Clientes_ALT">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="NumeroCLABE" ColumnName="NumeroCLABE" />
+                <ScalarProperty Name="ClaveBancaria" ColumnName="ClaveBancaria" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="NumeroPatrocinador" ColumnName="NumeroPatrocinador" />
+                <ScalarProperty Name="TipoAfilacion" ColumnName="TipoAfilacion" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="TelefonoTrabajo" ColumnName="TelefonoTrabajo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="NoExterior" ColumnName="NoExterior" />
+                <ScalarProperty Name="NoInterior" ColumnName="NoInterior" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="PalabraClaveSilenciosa" ColumnName="PalabraClaveSilenciosa" />
+                <ScalarProperty Name="PalabraClave" ColumnName="PalabraClave" />
+                <ScalarProperty Name="NumeroTelefonoAlarma" ColumnName="NumeroTelefonoAlarma" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCliente_ALT" FunctionName="AvenzoSeguridadModel.Store.GetCliente_ALT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridadModel.GetCliente_ALT_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="NumeroTelefonoAlarma" ColumnName="NumeroTelefonoAlarma" />
+                <ScalarProperty Name="PalabraClave" ColumnName="PalabraClave" />
+                <ScalarProperty Name="PalabraClaveSilenciosa" ColumnName="PalabraClaveSilenciosa" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NoInterior" ColumnName="NoInterior" />
+                <ScalarProperty Name="NoExterior" ColumnName="NoExterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="TelefonoTrabajo" ColumnName="TelefonoTrabajo" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="TipoAfilacion" ColumnName="TipoAfilacion" />
+                <ScalarProperty Name="NumeroPatrocinador" ColumnName="NumeroPatrocinador" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="ClaveBancaria" ColumnName="ClaveBancaria" />
+                <ScalarProperty Name="NumeroCLABE" ColumnName="NumeroCLABE" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

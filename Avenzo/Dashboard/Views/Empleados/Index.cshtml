@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Empleados";
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+<script>
+    $(document).ready(function () {
+        $("#AppView").load("/Empleados/_PanelEmpleados", function (data, status, xhr) {            
+            if (xhr.responseJSON != undefined) {
+                swal({
+                    title: "Error!",
+                    text: xhr.responseJSON.Description + "<br/><br/>" + xhr.responseJSON.Message,
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    type: "error"
+                });
+            } else {
+                console.log(data)
+                $("#AppView").fadeIn(500);
+            }
+        });
+        $('.sidebar-wrapper >.nav > li').removeClass('active');
+        $('#navEmpleados').addClass('active');
+         
+    });
+</script>

@@ -1,0 +1,91 @@
+﻿@model List<Model.CFDIForPanel>
+@{ 
+    Layout = null;
+}
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="green">
+            <img src="~/Images/SAT-logo-350x324_Blanco.png" style="width:33px"/>
+        </div>
+        <div class="card-content">
+            <h4>Nomina 1.2</h4>
+            <div class="row">
+                <button class="btn btn-success" data-toggle="modal" data-target="#myModal" onclick="OpenModal('@Url.Content("/Nominas/_Nuevo")')">Realizar Nominas</button>
+            </div>
+            <br />
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped" id="datatables" style="width:100%;">
+                        <thead>
+                            <tr>                                
+                                <th class="text-center">Folio</th>
+                                <th class="text-center">Empresa</th>
+                                <th class="text-center">Empleado</th>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Cancelado</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var cfdi in Model.OrderByDescending(x=>x.FechaCreacion))
+                            {
+                                <tr id="@cfdi.Id">
+                                    <td class="text-center">@cfdi.Folio</td>
+                                    <td class="text-center">@cfdi.Empresa</td>
+                                    <td class="text-center">@cfdi.Empleado</td>
+                                    <td class="text-center">@cfdi.FechaCreacion</td>
+                                    <td class="text-center">@if (cfdi.Cancelado == true)
+                                    { <span class="label label-danger">Cancelado</span>}
+                                    else
+                                    {<span class="label label-success">Emitido</span> }</td>
+                                    <td class="text-center"><a href="~/Facturas/Descargar?Id=@cfdi.Id"><i class="material-icons">file_download</i></a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+       
+        history.pushState(null, "", "/Nominas/Index");
+        $('[rel="tooltip"]').tooltip();
+        $('#datatables').DataTable({
+            pagingType: "full_numbers",
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 nuevo text-center'><'col-sm-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            responsive: true,
+            language: {
+                search: "<div class='form-group'>_INPUT_</div>",
+                searchPlaceholder: "Buscar en Registros",
+                lengthMenu: "<div class='form-group'>Mostrar _MENU_ Registros</div>",
+                zeroRecords: "No hay Empleados",
+                info: "Registros _START_  al  _END_  de _TOTAL_",
+                infoEmpty: "No hay registros disponibles",
+                infoFiltered: "(filtrado de _MAX_ registros)",
+                //"sSearch": "Buscar",
+                oPaginate: {
+                    "sFirst": "Primero",
+                    "sPrevious": "Anterior",
+                    "sNext": "Siguiente",
+                    "sLast": "Ultimo"
+                }
+            },
+            columnDefs: [{
+                "targets": 'no-sort',
+                "orderable": false,
+            }],
+            fnDrawCallback: function () {
+                
+            }
+        });
+    });
+</script>

@@ -1,0 +1,125 @@
+﻿@model Model.Catalogos
+
+@{
+    ViewBag.Title = "Nuevo";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    ViewBag.TitleModal = "Nuevo Catalogo";
+}
+
+@using (Ajax.BeginForm("/Nuevo", null, new AjaxOptions { UpdateTargetId = "NuevoId" }, new { @id = "NuevoCatalogo" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="Cargando"></div>
+    @Html.Hidden("IdCatalogo",Guid.NewGuid())
+    <div class="form-horizontal">
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">                
+                <select class="form-control" name="Tipo">
+                    <option value="Camaras">Camaras</option>
+                    <option value="Alarmas">Alarmas</option>
+                    <option value="Creditos">Creditos</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model=>model.Cantidad,htmlAttributes:new { @class= "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaLimiteInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FechaLimiteInicio, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                @Html.ValidationMessageFor(model => model.FechaLimiteInicio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FechaLimiteFinal, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FechaLimiteFinal, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                @Html.ValidationMessageFor(model => model.FechaLimiteFinal, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-warning btn-simple" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success btn-simple"><i class="material-icons">save</i> &nbsp;Guardar cambios</button>
+        </div>        
+    </div>
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        demo.initFormExtendedDatetimepickers();
+        $('form').submit(function (event) {
+            
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    $("#myModal").modal('hide');
+                    if (result.error == "none") {
+                        swal({
+                            title: "Se agrego!",
+                            text: "Se agrego correctamente!",
+                            buttonsStyling: false,
+                            confirmButtonClass: "btn btn-success",
+                            type: "success"
+                        });
+                        var table = $("#datatables").DataTable();
+                        var Button = '<button class="btn btn-simple btn-info" data-toggle="modal" data-target="#myModal" rel="tooltip" data-original-title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button><button class="btn btn-simple btn-danger btn-icon remove" rel="tooltip" data-original-title="Eliminar"><i class="material-icons">close</i></button>';
+                        var Array = [$('[name=Tipo]').val(), $('#Nombre').val(), $('#Descripcion').val(), $('#Valor').val(), '','',Button];
+                        var rowIndex = table.row.add(Array).draw(false);
+                        var row = $('#datatables').dataTable().fnGetNodes(rowIndex);
+                        $(row).attr('id', $('#IdCatalogo').val());
+                        var rowNode = rowIndex.node();
+                        //$(rowNode).find('td').eq(5).addClass('text-center');
+                        //$(rowNode).find('td').eq(6).addClass('text-center');
+                    } else {
+                        swal({
+                            title: "Hubo un error!",
+                            text: "error:"+result.Message,
+                            buttonsStyling: false,
+                            confirmButtonClass: "btn btn-success",
+                            type: "error"
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    });
+    
+</script>

@@ -1,0 +1,308 @@
+﻿@model List<Model.AdeudosForPanel>
+@{  
+    Layout = null;
+}
+<style>
+    .detalles{
+        transition:all .5s;
+    }
+    .voltear{
+        transform:rotate(180deg);
+    }
+    .btn {
+        margin:0;
+    }
+</style>
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">monetization_on</i>
+            </div>
+            <div class="card-content">
+                <div class="row" style="margin-bottom:10px; margin-top:10px">
+                    <div class="col-sm-6" style='font-family:"Roboto", "Helvetica", "Arial",sans-serif; font-weight: 300; line-height: 1.5em;font-size:20px'>
+                        Adeudos
+                    </div>
+                    <div class="col-sm-4 col-sm-12 text-right">
+                        <div class="dt-buttons">
+                            <a class="dt-button button-copy buttons-html5" tabindex="0" aria-controls="datatables">
+                                <span><i class="material-icons text-info" rel="tooltip" data-original-title="Copiar">content_copy</i></span>
+                            </a>
+                            <a class="dt-button button-csv buttons-html5" tabindex="0" aria-controls="datatables">
+                                <span><i class="fa fa-file-text-o fa-lg text-primary" aria-hidden="true" rel="tooltip" data-original-title="Exportar CSV"></i></span>
+                            </a>
+                            <a class="dt-button button-excel buttons-html5" tabindex="0" aria-controls="datatables">
+                                <span><i class="fa fa-file-excel-o fa-lg" aria-hidden="true" rel="tooltip" data-original-title="Exportar excel"></i></span>
+                            </a>
+                            <a class="dt-button button-pdf buttons-html5" tabindex="0" aria-controls="datatables">
+                                <span><i class="material-icons text-danger" rel="tooltip" data-original-title="Exportar PDF">picture_as_pdf</i></span>
+                            </a>
+                            <a class="dt-button button-print" tabindex="0" aria-controls="datatables">
+                                <span><i class="material-icons text-warning" rel="tooltip" data-original-title="Imprimir">print</i></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="material-datatables">
+                        <table class="table table-striped table-no-bordered table-hover dataTable dtr-inline" id="datatables" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th class="disabled-sorting text-center">Fecha</th>
+                                    <th>De</th>
+                                    <th>Cliente</th>
+                                    <th class="">Adeudo</th>                                    
+                                    <th class="text-center">Pagado</th>
+                                    <th class="disabled-sorting text-right" style="width:178px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var ingreso in Model)
+                                {
+                                    <tr id="@ingreso.Id" id-cliente="@ingreso.IdCliente">
+                                        <td class="text-center">@ingreso.FechaCreacion.Day/@ingreso.FechaCreacion.Month/@ingreso.FechaCreacion.Year</td>
+                                        <td>@ingreso.Empresa</td>
+                                        <td>@ingreso.Cliente</td>
+                                        <td>@ingreso.Concepto</td>                                        
+                                        <td class="text-center" style="vertical-align:central;align-items:center;">
+                                            <div class="checkbox" style="top:-9px;">
+                                                <label>
+                                                    <input type="checkbox" @if (ingreso.Pagado==true) { WriteLiteral("checked"); } disabled ><span class="checkbox-material">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td class="text-right" style="width:228px;">
+                                        @if (ingreso.IdCFDI != null)
+                                        {
+                                            <a class="btn btn-success btn-simple  btn-icon" rel="tooltip" data-original-title="Descargar" href="/Facturas/Descargar?Id=@ingreso.IdCFDI"><i class="material-icons">file_download</i></a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-primary btn-simple btn-icon create" rel="tooltip" data-original-title="Crear Factura" data-id="@ingreso.Id"><i class="material-icons">create</i></a>
+                                        }
+                                        <button class="btn btn-info btn-simple detalles btn-icon" rel="tooltip" data-original-title="Detalles"><i class="material-icons">details</i></button>
+                                        </td>
+                                    </tr>                                  
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+   
+    function format(IdCliente, IdAdeudo) {
+        console.log("data");
+        console.log(IdCliente);
+        var Cargos = 0;
+        var CargosUSD = 0;
+        var tr = '<div class="table-responsive">'
+        tr += '<table class="table table-hover table-striped table-no-bordered" style="font-size:12px;width:100%">';
+        tr += '<thead><tr>';
+        tr += '<th class="text-center" style="width:10%;"><b>Moneda</b></th>';
+        tr += '<th class="text-center" style="width:10%;"><b>Metodo de pago</b></th>';
+        tr += '<th class="text-center" style="width:10%;"><b>Tipo Cambio</b></th>';
+        tr += '<th class="text-center" style="width:10%;"><b>Cargos</b></th>';
+        tr += '<th class="text-center" style="width:10%;"><b>Cargos USD</b></th>';
+        tr += '<th class="text-center" style="width:10%;"><b>Comentario</b></th>';
+        tr += '<th class="text-center" style="width:10%;"><b>Usuario Creacion</b></th>';
+        tr += '<th class="text-center" style="width:10%;"><b>Fecha de Pago</b></th>';
+        tr += '</tr><thead><tbody>';        
+        $.ajax({
+            url: "/Adeudos/Service?IdCliente=" + IdCliente,
+            method: "GET",
+            async: false,
+            success: function (result) {
+                for (var k in result.Ingresos) {
+                    if (IdAdeudo == result.Ingresos[k].IdAdeudo) {
+                        Cargos += result.Ingresos[k].Cargos;
+                        CargosUSD += result.Ingresos[k].CargosUSD;
+                        tr += '<tr>';
+                        tr += '<td class="text-center" style="width:10%;">' + result.Ingresos[k].Moneda + '</td>';
+                        tr += '<td class="text-center" style="width:10%;">' + result.Ingresos[k].MetodoDePago + '</td>';
+                        tr += '<td class="text-center" style="width:10%;">' + result.Ingresos[k].TipoCambio + '</td>';
+                        tr += '<td class="text-center" style="width:10%;">$ ' + result.Ingresos[k].Cargos + '</td>';
+                        tr += '<td class="text-center" style="width:10%;">$ ' + result.Ingresos[k].CargosUSD + '</td>';
+                        tr += '<td class="text-center" style="width:10%;">' + result.Ingresos[k].Comentario + '</td>';
+                        tr += '<td class="text-center" style="width:10%;">' + result.Ingresos[k].UsuarioCreacion + '</td>';                        
+                        tr += '<td class="text-center" style="width:10%;">' + result.Ingresos[k].FechaCreacion+ '</td>';
+                        tr += '</tr>';
+                    }                    
+                }
+            }
+        });
+        tr += '</tbody><tfoot><tr><td></td><td></td><td><b>Total</b></td><td class="text-center"><b> $' + Cargos + '</b></td><td class="text-center"><b> $ ' + CargosUSD + '</b></td><td></td><td></td><td></td><tr></tfoot>';
+        tr += '</table></div>';
+        return tr;
+    }
+    $(document).ready(function () {
+        App.Adeudo.Inicio();        
+        
+        var table=$('#datatables').DataTable({
+            "bSort": false,
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Todos"]
+            ],
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: '<i class="material-icons text-info" rel="tooltip" data-original-title="Copiar">content_copy</i>',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        },
+                        columns:[0,1,2,3,4]
+                    },
+                },
+                {
+                    extend: 'csv',
+                    text: '<i class="fa fa-file-text-o fa-lg text-primary" aria-hidden="true" rel="tooltip" data-original-title="Exportar CSV"></i>',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        },
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                },
+                {
+                    extend: 'excel',
+                    text: '<i class="fa fa-file-excel-o fa-lg" aria-hidden="true" rel="tooltip" data-original-title="Exportar excel"></i>',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        },
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: '<i class="material-icons text-danger" rel="tooltip" data-original-title="Exportar PDF">picture_as_pdf</i>',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        },
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="material-icons text-warning" rel="tooltip" data-original-title="Imprimir">print</i>',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        },
+                        columns: [0, 1, 2, 3, 4]
+                    },
+                    autoPrint:true
+                }                
+            ],
+            responsive: true,
+            language: {
+                search: "<div class=\"form-group form-inline\" style=\"margin:0px;\">_INPUT_</div>",
+                searchPlaceholder: "Buscar en Registros",
+                "lengthMenu": "Mostrar _MENU_ Registros",
+                "zeroRecords": "No hay Adeudos",
+                "info": "Registros _START_  al  _END_  de _TOTAL_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros)",
+                //"sSearch": "Buscar",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sPrevious": "Anterior",
+                    "sNext": "Siguiente",
+                    "sLast": "Ultimo"
+                }
+            },
+            fnDrawCallback: function () {
+                $(".detalles").click(function () {
+                    console.log("detallles");
+                    var tr = $(this).closest('tr');
+                    var row = table.row(tr);
+                    if (row.child.isShown()) {
+                        // This row is already open - close it
+                        if ($(this).attr("class").includes("voltear")) {
+                            console.log("Closet");
+                            row.child.hide();
+                            $(this).removeClass("voltear");
+                        }
+                    }
+                    else {
+                        // Open this row
+                        console.log("Open");
+                        $(this).addClass("voltear");
+                        row.child(format($(tr).attr("id-cliente"), $(tr).attr("id"))).show();
+                        //return false; 
+                    }
+                });
+                $(".cancelar").click(function () {
+                    var Id = $(this).attr("id");
+                    swal({
+                        title: '¿Estas seguro de cancelar esta factura?',
+                        text: "No se puede revertir esto!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si, Cancelar!',
+                        cancelButtonText: 'No, Me equivoqué',
+                        confirmButtonClass: 'btn btn-success',
+                        cancelButtonClass: 'btn btn-danger',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey:false,
+                        buttonsStyling: false
+                    }).then(function () {                        
+                        $.get("/Facturas/Cancelar?Id=" + Id, function (data, status) {
+                            console.log(data);
+                            if (data.error == false) {
+                                swal(
+                                    'Cancelado!',
+                                    'Tu factura ha sido cancelada.',
+                                    'success'
+                                )
+                                window.open("/Facturas/Descargar?Id="+Id);
+                            } else {
+                                swal(
+                                   'Error!',
+                                   data.Message,
+                                   'error'
+                                )
+                            }
+                        })
+                    });
+                });
+                $('.create').click(function () {
+                    var Id = $(this).attr("data-id");
+                    OpenModal('/Adeudos/SelecionDeFactura?IdAdeudo='+Id)
+                });
+                $('[rel="tooltip"]').tooltip();
+            }
+           
+        });
+        $(".buttons-copy").click(function () {
+            showNotification('top','center','info','<i class="material-icons">content_copy</i>','Se ha Copiado correctamente');
+        });
+        $(".buttons-csv").click(function () {
+            showNotification('top', 'center', 'primary', '<i class="fa fa-file-text-o fa-lg text-primary" aria-hidden="true"></i>', 'Se descargado el cvs correctamente');
+        });
+        $(".buttons-excel").click(function () {
+            showNotification('top', 'center', 'success', '<i class="fa fa-file-excel-o fa-lg" aria-hidden="true"></i>', 'Se descargado el excel correctamente');
+        });
+        $(".buttons-pdf").click(function () {
+            showNotification('top', 'center', 'danger', '<i class="material-icons">picture_as_pdf</i>', 'Se descargado el PDF correctamente');
+        });
+        $('[rel="tooltip"]').tooltip();
+    });
+</script>

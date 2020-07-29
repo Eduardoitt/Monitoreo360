@@ -1,0 +1,1601 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AvenzoSeguridad2Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="AvenzoSeguridad2ModelStoreContainer">
+          <EntitySet Name="Catalogos" EntityType="AvenzoSeguridad2Model.Store.Catalogos" store:Type="Tables" Schema="AS" />
+          <EntitySet Name="ClienteComponentes" EntityType="AvenzoSeguridad2Model.Store.ClienteComponentes" store:Type="Tables" store:Schema="AS" store:Name="ClienteComponentes">
+            <DefiningQuery>SELECT 
+      [ClienteComponentes].[IdClienteComponente] AS [IdClienteComponente], 
+      [ClienteComponentes].[IdCliente] AS [IdCliente], 
+      [ClienteComponentes].[IdComponente] AS [IdComponente], 
+      [ClienteComponentes].[IdComponenteArduino] AS [IdComponenteArduino]
+      FROM [AS].[ClienteComponentes] AS [ClienteComponentes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ClienteContactos" EntityType="AvenzoSeguridad2Model.Store.ClienteContactos" store:Type="Tables" Schema="AS" />
+          <EntitySet Name="Clientes" EntityType="AvenzoSeguridad2Model.Store.Clientes" store:Type="Tables" Schema="AS" />
+          <EntitySet Name="Componentes" EntityType="AvenzoSeguridad2Model.Store.Componentes" store:Type="Tables" store:Schema="AS" store:Name="Componentes">
+            <DefiningQuery>SELECT 
+      [Componentes].[IdComponente] AS [IdComponente], 
+      [Componentes].[Nombre] AS [Nombre], 
+      [Componentes].[Costo] AS [Costo], 
+      [Componentes].[EsComponenteArduino] AS [EsComponenteArduino], 
+      [Componentes].[FechaInstalacion] AS [FechaInstalacion], 
+      [Componentes].[FechaMantenimiento] AS [FechaMantenimiento], 
+      [Componentes].[UsuarioInstalo] AS [UsuarioInstalo], 
+      [Componentes].[UsuarioMantenimiento] AS [UsuarioMantenimiento]
+      FROM [AS].[Componentes] AS [Componentes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Correos" EntityType="AvenzoSeguridad2Model.Store.Correos" store:Type="Tables" store:Schema="AS" store:Name="Correos">
+            <DefiningQuery>SELECT 
+      [Correos].[IdCorreo] AS [IdCorreo], 
+      [Correos].[Email] AS [Email], 
+      [Correos].[Fecha] AS [Fecha], 
+      [Correos].[TipoMensaje] AS [TipoMensaje], 
+      [Correos].[Folio] AS [Folio]
+      FROM [AS].[Correos] AS [Correos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Empleados" EntityType="AvenzoSeguridad2Model.Store.Empleados" store:Type="Tables" Schema="AS" />
+          <EntitySet Name="Llamadas" EntityType="AvenzoSeguridad2Model.Store.Llamadas" store:Type="Tables" store:Schema="AS" store:Name="Llamadas">
+            <DefiningQuery>SELECT 
+      [Llamadas].[IdLlamada] AS [IdLlamada], 
+      [Llamadas].[IdSkypeLlamada] AS [IdSkypeLlamada], 
+      [Llamadas].[Llamada] AS [Llamada], 
+      [Llamadas].[FechaCreacion] AS [FechaCreacion]
+      FROM [AS].[Llamadas] AS [Llamadas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Mensajes" EntityType="AvenzoSeguridad2Model.Store.Mensajes" store:Type="Tables" store:Schema="AS" store:Name="Mensajes">
+            <DefiningQuery>SELECT 
+      [Mensajes].[IdUsurioEmisor] AS [IdUsurioEmisor], 
+      [Mensajes].[IdUsurioRepcetor] AS [IdUsurioRepcetor], 
+      [Mensajes].[Mensaje] AS [Mensaje], 
+      [Mensajes].[Fecha] AS [Fecha]
+      FROM [AS].[Mensajes] AS [Mensajes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MonitoreoIngresos" EntityType="AvenzoSeguridad2Model.Store.MonitoreoIngresos" store:Type="Tables" Schema="AS" />
+          <EntitySet Name="Pagos" EntityType="AvenzoSeguridad2Model.Store.Pagos" store:Type="Tables" store:Schema="AS" store:Name="Pagos">
+            <DefiningQuery>SELECT 
+      [Pagos].[IdPago] AS [IdPago], 
+      [Pagos].[IdCompra] AS [IdCompra], 
+      [Pagos].[IdCliente] AS [IdCliente], 
+      [Pagos].[FechaLimite] AS [FechaLimite], 
+      [Pagos].[Pagado] AS [Pagado]
+      FROM [AS].[Pagos] AS [Pagos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Pais" EntityType="AvenzoSeguridad2Model.Store.Pais" store:Type="Tables" Schema="AS" />
+          <EntitySet Name="Paquetes" EntityType="AvenzoSeguridad2Model.Store.Paquetes" store:Type="Tables" Schema="AS" />
+          <EntitySet Name="Usuarios" EntityType="AvenzoSeguridad2Model.Store.Usuarios" store:Type="Tables" Schema="AS" />
+          <AssociationSet Name="FK_Clientes_IdUsuarios" Association="AvenzoSeguridad2Model.Store.FK_Clientes_IdUsuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Catalogos">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Tipo" Type="varchar(max)" Nullable="false" />
+          <Property Name="Nombre" Type="varchar(max)" />
+          <Property Name="Descripcion" Type="varchar(max)" />
+          <Property Name="Valor" Type="float" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="FechaLimiteInicio" Type="datetime" />
+          <Property Name="FechaLimiteFinal" Type="datetime" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'AvenzoSeguridad2.AS.ClienteComponentes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="ClienteComponentes">
+          <Key>
+            <PropertyRef Name="IdClienteComponente" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdComponente" />
+            <PropertyRef Name="IdComponenteArduino" />
+          </Key>
+          <Property Name="IdClienteComponente" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdCliente" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdComponente" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdComponenteArduino" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClienteContactos">
+          <Key>
+            <PropertyRef Name="IdClienteContacto" />
+          </Key>
+          <Property Name="IdClienteContacto" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdCliente" Type="uniqueidentifier" />
+          <Property Name="NumeroTelefonoAlarma" Type="varchar" MaxLength="30" />
+          <Property Name="NombreClienteContacto" Type="varchar" MaxLength="50" />
+          <Property Name="DireccionClienteContacto" Type="varchar" MaxLength="50" />
+          <Property Name="TelefonoClienteContacto" Type="varchar" MaxLength="20" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="30" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="PrioridadContacto" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdProveedor" Type="uniqueidentifier" />
+          <Property Name="IdUsuario" Type="uniqueidentifier" />
+          <Property Name="NumeroTelefonoAlarma" Type="varchar" MaxLength="30" />
+          <Property Name="Nombres" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="200" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="200" />
+          <Property Name="NumeroDeCuenta" Type="varchar" MaxLength="10" />
+          <Property Name="PalabraClave" Type="varchar" MaxLength="50" />
+          <Property Name="PalabraClaveSilenciosa" Type="varchar" MaxLength="50" />
+          <Property Name="Calle" Type="varchar" MaxLength="200" />
+          <Property Name="NoInterior" Type="varchar" MaxLength="50" />
+          <Property Name="NoExterior" Type="varchar" MaxLength="50" />
+          <Property Name="Colonia" Type="varchar" MaxLength="30" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="TelefonoTrabajo" Type="varchar" MaxLength="20" />
+          <Property Name="TelefonoCelular" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Foto" Type="varbinary(max)" />
+          <Property Name="Estado" Type="varchar" MaxLength="30" />
+          <Property Name="Pais" Type="varchar" MaxLength="30" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="30" />
+          <Property Name="TipoAfilacion" Type="uniqueidentifier" />
+          <Property Name="NumeroPatrocinador" Type="varchar" MaxLength="50" />
+          <Property Name="FechaNacimiento" Type="varchar" MaxLength="20" />
+          <Property Name="LugarNacimiento" Type="varchar" MaxLength="50" />
+          <Property Name="Sexo" Type="varchar" MaxLength="20" />
+          <Property Name="EstadoCivil" Type="varchar" MaxLength="20" />
+          <Property Name="Profesion" Type="varchar" MaxLength="50" />
+          <Property Name="CURP" Type="varchar" MaxLength="20" />
+          <Property Name="RFC" Type="varchar" MaxLength="50" />
+          <Property Name="Banco" Type="varchar" MaxLength="10" />
+          <Property Name="NumCtaPago" Type="varchar" MaxLength="50" />
+          <Property Name="ClaveBancaria" Type="varchar" MaxLength="100" />
+          <Property Name="NumeroCLABE" Type="varchar" MaxLength="50" />
+          <Property Name="Beneficiario" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'AvenzoSeguridad2.AS.Componentes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Componentes">
+          <Key>
+            <PropertyRef Name="IdComponente" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Costo" />
+            <PropertyRef Name="EsComponenteArduino" />
+          </Key>
+          <Property Name="IdComponente" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Costo" Type="int" Nullable="false" />
+          <Property Name="EsComponenteArduino" Type="bit" Nullable="false" />
+          <Property Name="FechaInstalacion" Type="date" />
+          <Property Name="FechaMantenimiento" Type="date" />
+          <Property Name="UsuarioInstalo" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioMantenimiento" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'AvenzoSeguridad2.AS.Correos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Correos">
+          <Key>
+            <PropertyRef Name="IdCorreo" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="TipoMensaje" />
+          </Key>
+          <Property Name="IdCorreo" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="TipoMensaje" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Folio" Type="int" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NoEmpleado" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdProveedor" Type="uniqueidentifier" />
+          <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="200" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="200" />
+          <Property Name="Usuario" Type="varchar" MaxLength="200" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="FechaNacimiento" Type="datetime" />
+          <Property Name="FechaInicioRelLaboral" Type="datetime" />
+          <Property Name="RFC" Type="varchar" MaxLength="25" />
+          <Property Name="CURP" Type="varchar" MaxLength="25" />
+          <Property Name="HuellaDactilar" Type="varbinary(max)" />
+          <Property Name="Foto" Type="varbinary(max)" />
+          <Property Name="INE" Type="varchar(max)" />
+          <Property Name="NumeroSeguridadSocial" Type="varchar" MaxLength="50" />
+          <Property Name="Departamento" Type="varchar(max)" />
+          <Property Name="Direccion" Type="varchar(max)" />
+          <Property Name="Puesto" Type="varchar(max)" />
+          <Property Name="RiesgoPuesto" Type="varchar" MaxLength="10" />
+          <Property Name="TipoContrato" Type="varchar" MaxLength="10" />
+          <Property Name="TipoJornada" Type="varchar" MaxLength="10" />
+          <Property Name="SalarioDiario" Type="float" />
+          <Property Name="Banco" Type="varchar" MaxLength="10" />
+          <Property Name="CuentaBancaria" Type="varchar(max)" />
+          <Property Name="ClaveEntFed" Type="varchar" MaxLength="10" />
+          <Property Name="GradoEstudios" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="TelefonoEmergencia" Type="varchar" MaxLength="50" />
+          <Property Name="Firma" Type="varbinary(max)" />
+          <Property Name="TipoSangre" Type="varchar" MaxLength="50" />
+          <Property Name="CUIP" Type="varchar(max)" />
+          <Property Name="NumeroDeLicencia" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroDeAutorizacion" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="25" />
+          <Property Name="FechaCreacion" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'AvenzoSeguridad2.AS.Llamadas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Llamadas">
+          <Key>
+            <PropertyRef Name="IdLlamada" />
+            <PropertyRef Name="IdSkypeLlamada" />
+            <PropertyRef Name="Llamada" />
+            <PropertyRef Name="FechaCreacion" />
+          </Key>
+          <Property Name="IdLlamada" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdSkypeLlamada" Type="int" Nullable="false" />
+          <Property Name="Llamada" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'AvenzoSeguridad2.AS.Mensajes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Mensajes">
+          <Key>
+            <PropertyRef Name="IdUsurioEmisor" />
+            <PropertyRef Name="IdUsurioRepcetor" />
+            <PropertyRef Name="Mensaje" />
+            <PropertyRef Name="Fecha" />
+          </Key>
+          <Property Name="IdUsurioEmisor" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdUsurioRepcetor" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Mensaje" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MonitoreoIngresos">
+          <Key>
+            <PropertyRef Name="IdIngreso" />
+          </Key>
+          <Property Name="IdIngreso" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdAdeudo" Type="uniqueidentifier" />
+          <Property Name="Cargos" Type="float" />
+          <Property Name="Abonos" Type="float" />
+          <Property Name="CargosUSD" Type="float" />
+          <Property Name="AbonosUSD" Type="float" />
+          <Property Name="TipoCambio" Type="float" />
+          <Property Name="MetodoDePago" Type="varchar(max)" Nullable="false" />
+          <Property Name="Moneda" Type="nchar" MaxLength="10" />
+          <Property Name="Comentario" Type="varchar" MaxLength="200" />
+          <Property Name="UsuarioCreacion" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'AvenzoSeguridad2.AS.Pagos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="IdPago" />
+            <PropertyRef Name="IdCompra" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="FechaLimite" />
+            <PropertyRef Name="Pagado" />
+          </Key>
+          <Property Name="IdPago" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdCompra" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdCliente" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FechaLimite" Type="datetime" Nullable="false" />
+          <Property Name="Pagado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="IdPais" />
+          </Key>
+          <Property Name="IdPais" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Pais" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Paquetes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdAdeudo" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdInventario" Type="uniqueidentifier" />
+          <Property Name="Precio" Type="float" />
+          <Property Name="UsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Contraseña" Type="varchar(max)" Nullable="false" />
+          <Property Name="TipoUsuario" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Roles" Type="varchar(max)" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="Timbres" Type="int" />
+          <Property Name="TimbresUsados" Type="int" />
+          <Property Name="TimbresCancelados" Type="int" />
+        </EntityType>
+        <Association Name="FK_Clientes_IdUsuarios">
+          <End Role="Usuarios" Type="AvenzoSeguridad2Model.Store.Usuarios" Multiplicity="0..1" />
+          <End Role="Clientes" Type="AvenzoSeguridad2Model.Store.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CloseIncidentes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdIncidente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="CloseIncidentesComentarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdIncidente" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="CloseIncidentesManual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdIncidente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="EditIncidentes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdIncidente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="FechaHoraFin" Type="datetime" Mode="In" />
+          <Parameter Name="Estatus" Type="varchar" Mode="In" />
+          <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EditIncidentesComentarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdIncidente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IdClienteContacto" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Estatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetCatalogo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Opcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCatalogoByNombreCatalogo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="NombreCatalogo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetClienteByClientID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="ClientID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="GetClienteByPhoneNumberOrAccountNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+          <Parameter Name="AccountNumber" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetClienteContactosByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="GetClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Cadena" Type="varchar" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Opcion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetClientesMonitoreo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS" />
+        <Function Name="GetIncidentes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="selector" Type="int" Mode="In" />
+          <Parameter Name="palabraClave" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetIncidentesComentarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdIncidente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IdClienteContacto" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="GetInfoContactoByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdClienteContacto" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="InsertIncidentes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdIncidente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Estatus" Type="varchar" Mode="In" />
+          <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertIncidentesComentarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdIncidente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IdClienteContacto" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="EstatusLlamada" Type="varchar" Mode="In" />
+          <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertIncidentesManuales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdIncidente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="FechaHoraInicio" Type="datetime" Mode="In" />
+          <Parameter Name="Estatus" Type="varchar" Mode="In" />
+          <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AvenzoSeguridad2Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="AvenzoSeguridad2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Catalogos" EntityType="AvenzoSeguridad2Model.Catalogos" />
+          <EntitySet Name="ClienteComponentes" EntityType="AvenzoSeguridad2Model.ClienteComponentes" />
+          <EntitySet Name="ClienteContactos" EntityType="AvenzoSeguridad2Model.ClienteContactos" />
+          <EntitySet Name="Clientes" EntityType="AvenzoSeguridad2Model.Clientes" />
+          <EntitySet Name="Componentes" EntityType="AvenzoSeguridad2Model.Componentes" />
+          <EntitySet Name="Correos" EntityType="AvenzoSeguridad2Model.Correos" />
+          <EntitySet Name="Empleados" EntityType="AvenzoSeguridad2Model.Empleados" />
+          <EntitySet Name="Llamadas" EntityType="AvenzoSeguridad2Model.Llamadas" />
+          <EntitySet Name="Mensajes" EntityType="AvenzoSeguridad2Model.Mensajes" />
+          <EntitySet Name="MonitoreoIngresos" EntityType="AvenzoSeguridad2Model.MonitoreoIngresos" />
+          <EntitySet Name="Pagos" EntityType="AvenzoSeguridad2Model.Pagos" />
+          <EntitySet Name="Pais" EntityType="AvenzoSeguridad2Model.Pais" />
+          <EntitySet Name="Paquetes" EntityType="AvenzoSeguridad2Model.Paquetes" />
+          <EntitySet Name="Usuarios" EntityType="AvenzoSeguridad2Model.Usuarios" />
+          <AssociationSet Name="FK_Clientes_IdUsuarios" Association="AvenzoSeguridad2Model.FK_Clientes_IdUsuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <FunctionImport Name="GetInfoContactoByID" ReturnType="Collection(AvenzoSeguridad2Model.GetInfoContactoByID_Result)">
+          <Parameter Name="IdClienteContacto" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetCatalogo" ReturnType="Collection(AvenzoSeguridad2Model.GetCatalogo_Result)">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Opcion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetClientes" ReturnType="Collection(AvenzoSeguridad2Model.GetClientes_Result)">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Cadena" Mode="In" Type="String" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Opcion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetClienteContactosByID" ReturnType="Collection(AvenzoSeguridad2Model.GetClienteContactosByID_Result)">
+          <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetClienteByClientID" ReturnType="Collection(AvenzoSeguridad2Model.GetClienteByClientID_Result)">
+          <Parameter Name="ClientID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetClienteByPhoneNumberOrAccountNumber" ReturnType="Collection(AvenzoSeguridad2Model.GetClienteByPhoneNumberOrAccountNumber_Result)">
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="AccountNumber" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetCatalogoByNombreCatalogo" ReturnType="Collection(AvenzoSeguridad2Model.GetCatalogoByNombreCatalogo_Result)">
+          <Parameter Name="NombreCatalogo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertIncidentes">
+            <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
+            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Estatus" Mode="In" Type="String" />
+            <Parameter Name="UsuarioCreacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertIncidentesComentarios">
+            <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
+            <Parameter Name="IdClienteContacto" Mode="In" Type="Guid" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="EstatusLlamada" Mode="In" Type="String" />
+            <Parameter Name="UsuarioCreacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertIncidentesManuales">
+            <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
+            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="FechaHoraInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="Estatus" Mode="In" Type="String" />
+            <Parameter Name="UsuarioCreacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetIncidentes" ReturnType="Collection(AvenzoSeguridad2Model.GetIncidentes_Result)">
+            <Parameter Name="selector" Mode="In" Type="Int32" />
+            <Parameter Name="palabraClave" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetIncidentesComentarios" ReturnType="Collection(AvenzoSeguridad2Model.GetIncidentesComentarios_Result)">
+            <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
+            <Parameter Name="IdClienteContacto" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="EditIncidentes">
+            <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="FechaHoraFin" Mode="In" Type="DateTime" />
+            <Parameter Name="Estatus" Mode="In" Type="String" />
+            <Parameter Name="UsuarioCreacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EditIncidentesComentarios">
+            <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
+            <Parameter Name="IdClienteContacto" Mode="In" Type="Guid" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Estatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CloseIncidentes">
+            <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CloseIncidentesComentarios">
+          <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="CloseIncidentesManual">
+            <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetClientesMonitoreo" ReturnType="Collection(AvenzoSeguridad2Model.GetClientesMonitoreo_Result)" />
+        </EntityContainer>
+        <EntityType Name="Catalogos">
+          <Key>
+            <PropertyRef Name="IdCatalogo" />
+          </Key>
+          <Property Name="IdCatalogo" Type="Guid" Nullable="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Valor" Type="Double" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="FechaLimiteInicio" Type="DateTime" />
+          <Property Name="FechaLimiteFinal" Type="DateTime" />
+          <Property Name="FechaCreacion" Type="DateTime" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Activo" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ClienteComponentes">
+          <Key>
+            <PropertyRef Name="IdClienteComponente" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdComponente" />
+            <PropertyRef Name="IdComponenteArduino" />
+          </Key>
+          <Property Name="IdClienteComponente" Type="Guid" Nullable="false" />
+          <Property Name="IdCliente" Type="Guid" Nullable="false" />
+          <Property Name="IdComponente" Type="Guid" Nullable="false" />
+          <Property Name="IdComponenteArduino" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClienteContactos">
+          <Key>
+            <PropertyRef Name="IdClienteContacto" />
+          </Key>
+          <Property Name="IdClienteContacto" Type="Guid" Nullable="false" />
+          <Property Name="IdCliente" Type="Guid" />
+          <Property Name="NumeroTelefonoAlarma" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="NombreClienteContacto" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DireccionClienteContacto" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="TelefonoClienteContacto" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="FechaCreacion" Type="DateTime" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="PrioridadContacto" Type="Byte" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Guid" Nullable="false" />
+          <Property Name="IdProveedor" Type="Guid" />
+          <Property Name="IdUsuario" Type="Guid" />
+          <Property Name="NumeroTelefonoAlarma" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="NumeroDeCuenta" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PalabraClave" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PalabraClaveSilenciosa" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Calle" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="NoInterior" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NoExterior" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Colonia" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="TelefonoTrabajo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="TelefonoCelular" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Estado" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Pais" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="TipoAfilacion" Type="Guid" />
+          <Property Name="NumeroPatrocinador" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FechaNacimiento" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="LugarNacimiento" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Sexo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="EstadoCivil" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Profesion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CURP" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="RFC" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Banco" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="NumCtaPago" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ClaveBancaria" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="NumeroCLABE" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Beneficiario" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FechaCreacion" Type="DateTime" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Usuarios" Relationship="AvenzoSeguridad2Model.FK_Clientes_IdUsuarios" FromRole="Clientes" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Componentes">
+          <Key>
+            <PropertyRef Name="IdComponente" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Costo" />
+            <PropertyRef Name="EsComponenteArduino" />
+          </Key>
+          <Property Name="IdComponente" Type="Guid" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Costo" Type="Int32" Nullable="false" />
+          <Property Name="EsComponenteArduino" Type="Boolean" Nullable="false" />
+          <Property Name="FechaInstalacion" Type="DateTime" />
+          <Property Name="FechaMantenimiento" Type="DateTime" />
+          <Property Name="UsuarioInstalo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="UsuarioMantenimiento" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Correos">
+          <Key>
+            <PropertyRef Name="IdCorreo" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="TipoMensaje" />
+          </Key>
+          <Property Name="IdCorreo" Type="Guid" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+          <Property Name="TipoMensaje" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Folio" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="NoEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProveedor" Type="Guid" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Usuario" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" />
+          <Property Name="FechaInicioRelLaboral" Type="DateTime" />
+          <Property Name="RFC" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="CURP" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="HuellaDactilar" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="INE" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="NumeroSeguridadSocial" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Departamento" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Puesto" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="RiesgoPuesto" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="TipoContrato" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="TipoJornada" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="SalarioDiario" Type="Double" />
+          <Property Name="Banco" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="CuentaBancaria" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="ClaveEntFed" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="GradoEstudios" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="TelefonoEmergencia" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Firma" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="TipoSangre" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CUIP" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="NumeroDeLicencia" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NumeroDeAutorizacion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="FechaCreacion" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="Llamadas">
+          <Key>
+            <PropertyRef Name="IdLlamada" />
+            <PropertyRef Name="IdSkypeLlamada" />
+            <PropertyRef Name="Llamada" />
+            <PropertyRef Name="FechaCreacion" />
+          </Key>
+          <Property Name="IdLlamada" Type="Guid" Nullable="false" />
+          <Property Name="IdSkypeLlamada" Type="Int32" Nullable="false" />
+          <Property Name="Llamada" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mensajes">
+          <Key>
+            <PropertyRef Name="IdUsurioEmisor" />
+            <PropertyRef Name="IdUsurioRepcetor" />
+            <PropertyRef Name="Mensaje" />
+            <PropertyRef Name="Fecha" />
+          </Key>
+          <Property Name="IdUsurioEmisor" Type="Guid" Nullable="false" />
+          <Property Name="IdUsurioRepcetor" Type="Guid" Nullable="false" />
+          <Property Name="Mensaje" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MonitoreoIngresos">
+          <Key>
+            <PropertyRef Name="IdIngreso" />
+          </Key>
+          <Property Name="IdIngreso" Type="Guid" Nullable="false" />
+          <Property Name="IdAdeudo" Type="Guid" />
+          <Property Name="Cargos" Type="Double" />
+          <Property Name="Abonos" Type="Double" />
+          <Property Name="CargosUSD" Type="Double" />
+          <Property Name="AbonosUSD" Type="Double" />
+          <Property Name="TipoCambio" Type="Double" />
+          <Property Name="MetodoDePago" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Moneda" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="Comentario" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="IdPago" />
+            <PropertyRef Name="IdCompra" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="FechaLimite" />
+            <PropertyRef Name="Pagado" />
+          </Key>
+          <Property Name="IdPago" Type="Guid" Nullable="false" />
+          <Property Name="IdCompra" Type="Guid" Nullable="false" />
+          <Property Name="IdCliente" Type="Guid" Nullable="false" />
+          <Property Name="FechaLimite" Type="DateTime" Nullable="false" />
+          <Property Name="Pagado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="IdPais" />
+          </Key>
+          <Property Name="IdPais" Type="Guid" Nullable="false" />
+          <Property Name="Pais1" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Paquetes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="IdAdeudo" Type="Guid" Nullable="false" />
+          <Property Name="IdInventario" Type="Guid" />
+          <Property Name="Precio" Type="Double" />
+          <Property Name="UsuarioCreacion" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="FechaCreacion" Type="DateTime" />
+          <Property Name="Activo" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Contraseña" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="TipoUsuario" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Roles" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="Timbres" Type="Int32" />
+          <Property Name="TimbresUsados" Type="Int32" />
+          <Property Name="TimbresCancelados" Type="Int32" />
+          <NavigationProperty Name="Clientes" Relationship="AvenzoSeguridad2Model.FK_Clientes_IdUsuarios" FromRole="Usuarios" ToRole="Clientes" />
+        </EntityType>
+        <Association Name="FK_Clientes_IdUsuarios">
+          <End Role="Usuarios" Type="AvenzoSeguridad2Model.Usuarios" Multiplicity="0..1" />
+          <End Role="Clientes" Type="AvenzoSeguridad2Model.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetInfoContactoByID_Result">
+          <Property Type="Guid" Name="IdClienteContacto" Nullable="false" />
+          <Property Type="Guid" Name="IdCliente" Nullable="true" />
+          <Property Type="String" Name="NumeroTelefonoAlarma" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="NombreClienteContacto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DireccionClienteContacto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TelefonoClienteContacto" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="true" MaxLength="30" />
+          <Property Type="Byte" Name="PrioridadContacto" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetCatalogo_Result">
+          <Property Type="Guid" Name="IdCatalogo" Nullable="false" />
+          <Property Type="String" Name="Tipo" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" />
+          <Property Type="String" Name="Descripcion" Nullable="true" />
+          <Property Type="Double" Name="Valor" Nullable="true" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetClientes_Result">
+          <Property Type="Guid" Name="IdCliente" Nullable="false" />
+          <Property Type="Guid" Name="IdProveedor" Nullable="true" />
+          <Property Type="Guid" Name="IdUsuario" Nullable="true" />
+          <Property Type="String" Name="NumeroTelefonoAlarma" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NumeroDeCuenta" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PalabraClave" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PalabraClaveSilenciosa" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Calle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NoInterior" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NoExterior" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Colonia" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CodigoPostal" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TelefonoTrabajo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TelefonoCelular" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="Foto" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Pais" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="30" />
+          <Property Type="Guid" Name="TipoAfilacion" Nullable="true" />
+          <Property Type="String" Name="NumeroPatrocinador" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaNacimiento" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="LugarNacimiento" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EstadoCivil" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Profesion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CURP" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="RFC" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Banco" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NumCtaPago" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ClaveBancaria" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NumeroCLABE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Beneficiario" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetClienteContactosByID_Result">
+          <Property Type="Guid" Name="IdClienteContacto" Nullable="false" />
+          <Property Type="Guid" Name="IdCliente" Nullable="true" />
+          <Property Type="String" Name="NumeroTelefonoAlarma" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="NombreClienteContacto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DireccionClienteContacto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TelefonoClienteContacto" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="true" MaxLength="30" />
+          <Property Type="Byte" Name="PrioridadContacto" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetClienteByClientID_Result">
+          <Property Type="Guid" Name="IdCliente" Nullable="false" />
+          <Property Type="Guid" Name="IdProveedor" Nullable="true" />
+          <Property Type="Guid" Name="IdUsuario" Nullable="true" />
+          <Property Type="String" Name="NumeroTelefonoAlarma" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NumeroDeCuenta" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PalabraClave" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PalabraClaveSilenciosa" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Calle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NoInterior" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NoExterior" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Colonia" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CodigoPostal" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TelefonoTrabajo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TelefonoCelular" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="Foto" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Pais" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="30" />
+          <Property Type="Guid" Name="TipoAfilacion" Nullable="true" />
+          <Property Type="String" Name="NumeroPatrocinador" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaNacimiento" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="LugarNacimiento" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EstadoCivil" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Profesion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CURP" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="RFC" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Banco" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NumCtaPago" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ClaveBancaria" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NumeroCLABE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Beneficiario" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetClienteByPhoneNumberOrAccountNumber_Result">
+          <Property Type="Guid" Name="IdCliente" Nullable="false" />
+          <Property Type="Guid" Name="IdProveedor" Nullable="true" />
+          <Property Type="Guid" Name="IdUsuario" Nullable="true" />
+          <Property Type="String" Name="NumeroTelefonoAlarma" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NumeroDeCuenta" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PalabraClave" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PalabraClaveSilenciosa" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Calle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NoInterior" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NoExterior" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Colonia" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CodigoPostal" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TelefonoTrabajo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TelefonoCelular" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="Foto" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Pais" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="30" />
+          <Property Type="Guid" Name="TipoAfilacion" Nullable="true" />
+          <Property Type="String" Name="NumeroPatrocinador" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaNacimiento" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="LugarNacimiento" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EstadoCivil" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Profesion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CURP" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="RFC" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Banco" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NumCtaPago" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ClaveBancaria" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NumeroCLABE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Beneficiario" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetCatalogoByNombreCatalogo_Result">
+          <Property Type="Guid" Name="IdCatalogo" Nullable="false" />
+          <Property Type="String" Name="Tipo" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" />
+          <Property Type="String" Name="Descripcion" Nullable="true" />
+          <Property Type="Double" Name="Valor" Nullable="true" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetIncidentes_Result">
+          <Property Type="Guid" Name="IdIncidente" Nullable="false" />
+          <Property Type="Guid" Name="IdCliente" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" />
+          <Property Type="DateTime" Name="FechaHoraInicio" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaHoraFin" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetIncidentesComentarios_Result">
+          <Property Type="Guid" Name="IdIncidente" Nullable="false" />
+          <Property Type="Guid" Name="IdClienteContacto" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" />
+          <Property Type="DateTime" Name="FechaHoraInicio" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaHoraFin" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EstatusLlamada" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetClientesMonitoreo_Result">
+          <Property Type="Guid" Name="IdCliente" Nullable="false" />
+          <Property Type="Guid" Name="IdProveedor" Nullable="true" />
+          <Property Type="Guid" Name="IdUsuario" Nullable="true" />
+          <Property Type="String" Name="NumeroTelefonoAlarma" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NumeroDeCuenta" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PalabraClave" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PalabraClaveSilenciosa" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Calle" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NoInterior" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NoExterior" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Colonia" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CodigoPostal" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TelefonoTrabajo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TelefonoCelular" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="Foto" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Pais" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="30" />
+          <Property Type="Guid" Name="TipoAfilacion" Nullable="true" />
+          <Property Type="String" Name="NumeroPatrocinador" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FechaNacimiento" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="LugarNacimiento" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EstadoCivil" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Profesion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CURP" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="RFC" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Banco" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NumCtaPago" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ClaveBancaria" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NumeroCLABE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Beneficiario" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UsuarioCreacion" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AvenzoSeguridad2ModelStoreContainer" CdmEntityContainer="AvenzoSeguridad2Entities">
+          <EntitySetMapping Name="Catalogos">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.Catalogos">
+              <MappingFragment StoreEntitySet="Catalogos">
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FechaLimiteInicio" ColumnName="FechaLimiteInicio" />
+                <ScalarProperty Name="FechaLimiteFinal" ColumnName="FechaLimiteFinal" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClienteComponentes">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.ClienteComponentes">
+              <MappingFragment StoreEntitySet="ClienteComponentes">
+                <ScalarProperty Name="IdClienteComponente" ColumnName="IdClienteComponente" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
+                <ScalarProperty Name="IdComponenteArduino" ColumnName="IdComponenteArduino" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClienteContactos">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.ClienteContactos">
+              <MappingFragment StoreEntitySet="ClienteContactos">
+                <ScalarProperty Name="IdClienteContacto" ColumnName="IdClienteContacto" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NumeroTelefonoAlarma" ColumnName="NumeroTelefonoAlarma" />
+                <ScalarProperty Name="NombreClienteContacto" ColumnName="NombreClienteContacto" />
+                <ScalarProperty Name="DireccionClienteContacto" ColumnName="DireccionClienteContacto" />
+                <ScalarProperty Name="TelefonoClienteContacto" ColumnName="TelefonoClienteContacto" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="PrioridadContacto" ColumnName="PrioridadContacto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NumeroTelefonoAlarma" ColumnName="NumeroTelefonoAlarma" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="NumeroDeCuenta" ColumnName="NumeroDeCuenta" />
+                <ScalarProperty Name="PalabraClave" ColumnName="PalabraClave" />
+                <ScalarProperty Name="PalabraClaveSilenciosa" ColumnName="PalabraClaveSilenciosa" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NoInterior" ColumnName="NoInterior" />
+                <ScalarProperty Name="NoExterior" ColumnName="NoExterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="TelefonoTrabajo" ColumnName="TelefonoTrabajo" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="TipoAfilacion" ColumnName="TipoAfilacion" />
+                <ScalarProperty Name="NumeroPatrocinador" ColumnName="NumeroPatrocinador" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="NumCtaPago" ColumnName="NumCtaPago" />
+                <ScalarProperty Name="ClaveBancaria" ColumnName="ClaveBancaria" />
+                <ScalarProperty Name="NumeroCLABE" ColumnName="NumeroCLABE" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Componentes">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.Componentes">
+              <MappingFragment StoreEntitySet="Componentes">
+                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="EsComponenteArduino" ColumnName="EsComponenteArduino" />
+                <ScalarProperty Name="FechaInstalacion" ColumnName="FechaInstalacion" />
+                <ScalarProperty Name="FechaMantenimiento" ColumnName="FechaMantenimiento" />
+                <ScalarProperty Name="UsuarioInstalo" ColumnName="UsuarioInstalo" />
+                <ScalarProperty Name="UsuarioMantenimiento" ColumnName="UsuarioMantenimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Correos">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.Correos">
+              <MappingFragment StoreEntitySet="Correos">
+                <ScalarProperty Name="IdCorreo" ColumnName="IdCorreo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="TipoMensaje" ColumnName="TipoMensaje" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NoEmpleado" ColumnName="NoEmpleado" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="FechaInicioRelLaboral" ColumnName="FechaInicioRelLaboral" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="HuellaDactilar" ColumnName="HuellaDactilar" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="INE" ColumnName="INE" />
+                <ScalarProperty Name="NumeroSeguridadSocial" ColumnName="NumeroSeguridadSocial" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="RiesgoPuesto" ColumnName="RiesgoPuesto" />
+                <ScalarProperty Name="TipoContrato" ColumnName="TipoContrato" />
+                <ScalarProperty Name="TipoJornada" ColumnName="TipoJornada" />
+                <ScalarProperty Name="SalarioDiario" ColumnName="SalarioDiario" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="CuentaBancaria" ColumnName="CuentaBancaria" />
+                <ScalarProperty Name="ClaveEntFed" ColumnName="ClaveEntFed" />
+                <ScalarProperty Name="GradoEstudios" ColumnName="GradoEstudios" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="TelefonoEmergencia" ColumnName="TelefonoEmergencia" />
+                <ScalarProperty Name="Firma" ColumnName="Firma" />
+                <ScalarProperty Name="TipoSangre" ColumnName="TipoSangre" />
+                <ScalarProperty Name="CUIP" ColumnName="CUIP" />
+                <ScalarProperty Name="NumeroDeLicencia" ColumnName="NumeroDeLicencia" />
+                <ScalarProperty Name="NumeroDeAutorizacion" ColumnName="NumeroDeAutorizacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Llamadas">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.Llamadas">
+              <MappingFragment StoreEntitySet="Llamadas">
+                <ScalarProperty Name="IdLlamada" ColumnName="IdLlamada" />
+                <ScalarProperty Name="IdSkypeLlamada" ColumnName="IdSkypeLlamada" />
+                <ScalarProperty Name="Llamada" ColumnName="Llamada" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mensajes">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.Mensajes">
+              <MappingFragment StoreEntitySet="Mensajes">
+                <ScalarProperty Name="IdUsurioEmisor" ColumnName="IdUsurioEmisor" />
+                <ScalarProperty Name="IdUsurioRepcetor" ColumnName="IdUsurioRepcetor" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonitoreoIngresos">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.MonitoreoIngresos">
+              <MappingFragment StoreEntitySet="MonitoreoIngresos">
+                <ScalarProperty Name="IdIngreso" ColumnName="IdIngreso" />
+                <ScalarProperty Name="IdAdeudo" ColumnName="IdAdeudo" />
+                <ScalarProperty Name="Cargos" ColumnName="Cargos" />
+                <ScalarProperty Name="Abonos" ColumnName="Abonos" />
+                <ScalarProperty Name="CargosUSD" ColumnName="CargosUSD" />
+                <ScalarProperty Name="AbonosUSD" ColumnName="AbonosUSD" />
+                <ScalarProperty Name="TipoCambio" ColumnName="TipoCambio" />
+                <ScalarProperty Name="MetodoDePago" ColumnName="MetodoDePago" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pagos">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.Pagos">
+              <MappingFragment StoreEntitySet="Pagos">
+                <ScalarProperty Name="IdPago" ColumnName="IdPago" />
+                <ScalarProperty Name="IdCompra" ColumnName="IdCompra" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="FechaLimite" ColumnName="FechaLimite" />
+                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.Pais">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="Pais1" ColumnName="Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paquetes">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.Paquetes">
+              <MappingFragment StoreEntitySet="Paquetes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdAdeudo" ColumnName="IdAdeudo" />
+                <ScalarProperty Name="IdInventario" ColumnName="IdInventario" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="AvenzoSeguridad2Model.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Timbres" ColumnName="Timbres" />
+                <ScalarProperty Name="TimbresUsados" ColumnName="TimbresUsados" />
+                <ScalarProperty Name="TimbresCancelados" ColumnName="TimbresCancelados" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetInfoContactoByID" FunctionName="AvenzoSeguridad2Model.Store.GetInfoContactoByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridad2Model.GetInfoContactoByID_Result">
+                <ScalarProperty Name="IdClienteContacto" ColumnName="IdClienteContacto" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NumeroTelefonoAlarma" ColumnName="NumeroTelefonoAlarma" />
+                <ScalarProperty Name="NombreClienteContacto" ColumnName="NombreClienteContacto" />
+                <ScalarProperty Name="DireccionClienteContacto" ColumnName="DireccionClienteContacto" />
+                <ScalarProperty Name="TelefonoClienteContacto" ColumnName="TelefonoClienteContacto" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="PrioridadContacto" ColumnName="PrioridadContacto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCatalogo" FunctionName="AvenzoSeguridad2Model.Store.GetCatalogo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridad2Model.GetCatalogo_Result">
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetClientes" FunctionName="AvenzoSeguridad2Model.Store.GetClientes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridad2Model.GetClientes_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NumeroTelefonoAlarma" ColumnName="NumeroTelefonoAlarma" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="NumeroDeCuenta" ColumnName="NumeroDeCuenta" />
+                <ScalarProperty Name="PalabraClave" ColumnName="PalabraClave" />
+                <ScalarProperty Name="PalabraClaveSilenciosa" ColumnName="PalabraClaveSilenciosa" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NoInterior" ColumnName="NoInterior" />
+                <ScalarProperty Name="NoExterior" ColumnName="NoExterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="TelefonoTrabajo" ColumnName="TelefonoTrabajo" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="TipoAfilacion" ColumnName="TipoAfilacion" />
+                <ScalarProperty Name="NumeroPatrocinador" ColumnName="NumeroPatrocinador" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="NumCtaPago" ColumnName="NumCtaPago" />
+                <ScalarProperty Name="ClaveBancaria" ColumnName="ClaveBancaria" />
+                <ScalarProperty Name="NumeroCLABE" ColumnName="NumeroCLABE" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetClienteContactosByID" FunctionName="AvenzoSeguridad2Model.Store.GetClienteContactosByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridad2Model.GetClienteContactosByID_Result">
+                <ScalarProperty Name="IdClienteContacto" ColumnName="IdClienteContacto" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NumeroTelefonoAlarma" ColumnName="NumeroTelefonoAlarma" />
+                <ScalarProperty Name="NombreClienteContacto" ColumnName="NombreClienteContacto" />
+                <ScalarProperty Name="DireccionClienteContacto" ColumnName="DireccionClienteContacto" />
+                <ScalarProperty Name="TelefonoClienteContacto" ColumnName="TelefonoClienteContacto" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="PrioridadContacto" ColumnName="PrioridadContacto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetClienteByClientID" FunctionName="AvenzoSeguridad2Model.Store.GetClienteByClientID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridad2Model.GetClienteByClientID_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NumeroTelefonoAlarma" ColumnName="NumeroTelefonoAlarma" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="NumeroDeCuenta" ColumnName="NumeroDeCuenta" />
+                <ScalarProperty Name="PalabraClave" ColumnName="PalabraClave" />
+                <ScalarProperty Name="PalabraClaveSilenciosa" ColumnName="PalabraClaveSilenciosa" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NoInterior" ColumnName="NoInterior" />
+                <ScalarProperty Name="NoExterior" ColumnName="NoExterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="TelefonoTrabajo" ColumnName="TelefonoTrabajo" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="TipoAfilacion" ColumnName="TipoAfilacion" />
+                <ScalarProperty Name="NumeroPatrocinador" ColumnName="NumeroPatrocinador" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="NumCtaPago" ColumnName="NumCtaPago" />
+                <ScalarProperty Name="ClaveBancaria" ColumnName="ClaveBancaria" />
+                <ScalarProperty Name="NumeroCLABE" ColumnName="NumeroCLABE" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetClienteByPhoneNumberOrAccountNumber" FunctionName="AvenzoSeguridad2Model.Store.GetClienteByPhoneNumberOrAccountNumber">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridad2Model.GetClienteByPhoneNumberOrAccountNumber_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NumeroTelefonoAlarma" ColumnName="NumeroTelefonoAlarma" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="NumeroDeCuenta" ColumnName="NumeroDeCuenta" />
+                <ScalarProperty Name="PalabraClave" ColumnName="PalabraClave" />
+                <ScalarProperty Name="PalabraClaveSilenciosa" ColumnName="PalabraClaveSilenciosa" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NoInterior" ColumnName="NoInterior" />
+                <ScalarProperty Name="NoExterior" ColumnName="NoExterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="TelefonoTrabajo" ColumnName="TelefonoTrabajo" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="TipoAfilacion" ColumnName="TipoAfilacion" />
+                <ScalarProperty Name="NumeroPatrocinador" ColumnName="NumeroPatrocinador" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="NumCtaPago" ColumnName="NumCtaPago" />
+                <ScalarProperty Name="ClaveBancaria" ColumnName="ClaveBancaria" />
+                <ScalarProperty Name="NumeroCLABE" ColumnName="NumeroCLABE" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCatalogoByNombreCatalogo" FunctionName="AvenzoSeguridad2Model.Store.GetCatalogoByNombreCatalogo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridad2Model.GetCatalogoByNombreCatalogo_Result">
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertIncidentes" FunctionName="AvenzoSeguridad2Model.Store.InsertIncidentes" />
+          <FunctionImportMapping FunctionImportName="InsertIncidentesComentarios" FunctionName="AvenzoSeguridad2Model.Store.InsertIncidentesComentarios" />
+          <FunctionImportMapping FunctionImportName="InsertIncidentesManuales" FunctionName="AvenzoSeguridad2Model.Store.InsertIncidentesManuales" />
+          <FunctionImportMapping FunctionImportName="GetIncidentes" FunctionName="AvenzoSeguridad2Model.Store.GetIncidentes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridad2Model.GetIncidentes_Result">
+                <ScalarProperty Name="IdIncidente" ColumnName="IdIncidente" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaHoraInicio" ColumnName="FechaHoraInicio" />
+                <ScalarProperty Name="FechaHoraFin" ColumnName="FechaHoraFin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetIncidentesComentarios" FunctionName="AvenzoSeguridad2Model.Store.GetIncidentesComentarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridad2Model.GetIncidentesComentarios_Result">
+                <ScalarProperty Name="IdIncidente" ColumnName="IdIncidente" />
+                <ScalarProperty Name="IdClienteContacto" ColumnName="IdClienteContacto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaHoraInicio" ColumnName="FechaHoraInicio" />
+                <ScalarProperty Name="FechaHoraFin" ColumnName="FechaHoraFin" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstatusLlamada" ColumnName="EstatusLlamada" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EditIncidentes" FunctionName="AvenzoSeguridad2Model.Store.EditIncidentes" />
+          <FunctionImportMapping FunctionImportName="EditIncidentesComentarios" FunctionName="AvenzoSeguridad2Model.Store.EditIncidentesComentarios" />
+          <FunctionImportMapping FunctionImportName="CloseIncidentes" FunctionName="AvenzoSeguridad2Model.Store.CloseIncidentes" />
+          <FunctionImportMapping FunctionImportName="CloseIncidentesComentarios" FunctionName="AvenzoSeguridad2Model.Store.CloseIncidentesComentarios" />
+          <FunctionImportMapping FunctionImportName="CloseIncidentesManual" FunctionName="AvenzoSeguridad2Model.Store.CloseIncidentesManual" />
+          <FunctionImportMapping FunctionImportName="GetClientesMonitoreo" FunctionName="AvenzoSeguridad2Model.Store.GetClientesMonitoreo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridad2Model.GetClientesMonitoreo_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NumeroTelefonoAlarma" ColumnName="NumeroTelefonoAlarma" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="NumeroDeCuenta" ColumnName="NumeroDeCuenta" />
+                <ScalarProperty Name="PalabraClave" ColumnName="PalabraClave" />
+                <ScalarProperty Name="PalabraClaveSilenciosa" ColumnName="PalabraClaveSilenciosa" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NoInterior" ColumnName="NoInterior" />
+                <ScalarProperty Name="NoExterior" ColumnName="NoExterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="TelefonoTrabajo" ColumnName="TelefonoTrabajo" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="TipoAfilacion" ColumnName="TipoAfilacion" />
+                <ScalarProperty Name="NumeroPatrocinador" ColumnName="NumeroPatrocinador" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="NumCtaPago" ColumnName="NumCtaPago" />
+                <ScalarProperty Name="ClaveBancaria" ColumnName="ClaveBancaria" />
+                <ScalarProperty Name="NumeroCLABE" ColumnName="NumeroCLABE" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="AvenzoProteccion" ZoomLevel="34">
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.Catalogos" Width="1.5" PointX="5.75" PointY="0.75" Height="3.1340950520833335" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.ClienteComponentes" Width="1.5" PointX="5.75" PointY="4.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.ClienteContactos" Width="1.5" PointX="7.75" PointY="0.75" Height="2.9417936197916656" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.Clientes" Width="1.5" PointX="3" PointY="1.25" Height="8.9031380208333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.Componentes" Width="1.5" PointX="7.75" PointY="4.75" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.Correos" Width="1.5" PointX="5.75" PointY="8.75" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.Empleados" Width="1.5" PointX="7.75" PointY="8.75" Height="8.1339322916666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.Llamadas" Width="1.5" PointX="9.75" PointY="0.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.Mensajes" Width="1.5" PointX="9.75" PointY="3.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.MonitoreoIngresos" Width="1.5" PointX="9.75" PointY="6.75" Height="3.5186979166666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.Pagos" Width="1.5" PointX="11.75" PointY="0.75" Height="1.9802864583333353" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.Pais" Width="1.5" PointX="0.75" PointY="11.75" Height="1.4033821614583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.Paquetes" Width="1.5" PointX="2.75" PointY="11.75" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridad2Model.Usuarios" Width="1.5" PointX="0.75" PointY="4.25" Height="2.9417936197916674" IsExpanded="true" />
+        <AssociationConnector Association="AvenzoSeguridad2Model.FK_Clientes_IdUsuarios" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="5.7208968098958337" />
+          <ConnectorPoint PointX="3" PointY="5.7208968098958337" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

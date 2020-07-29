@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Tienda";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card card-pricing card-raised">
+                <div class="card-content">
+                    <h6 class="category">Prueba</h6>
+                    <div class="icon">
+                        <i class="material-icons">
+                            <img src="~/Images/coins1600_Color.png" style="width:100px" />
+                        </i>
+                    </div>
+                    <h3 class="card-title">Gratis</h3>
+                    <p class="card-description">
+                        Tienes <b>10 Creditos </b>Gratis de prueba por <b>Tiempo Ilimitado</b>
+                    </p>
+                    <a href="#pablo" class="btn btn-rose btn-round" disabled>Lo Tienes Actualmente</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-pricing card-raised">
+                <div class="card-content">
+                    <h6 class="category">Pequeñas Empresas</h6>
+                    <div class="icon icon-rose">
+                        <i class="material-icons"><img src="~/Images/coins-64.png"/></i>
+                    </div>
+                    <h3 class="card-title">$299.00</h3>
+                    <p class="card-description">
+                        Tienes 50 Creditos por tiempo ilimitado
+                    </p>
+                    <a href="#pablo" class="btn btn-white btn-round" >Comprar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-pricing card-raised">
+                <div class="card-content">
+                    <h6 class="category">Medium Company</h6>
+                    <div class="icon">
+                        <i class="material-icons"><img src="~/Images/coins-128.png"/></i>
+                    </div>
+                    <h3 class="card-title">$699.00</h3>
+                    <p class="card-description">
+                        Tienes 150 Creditos por tiempo ilimitado
+                    </p>
+                    <a href="#pablo" class="btn btn-white btn-round">Comprar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-pricing card-raised">
+                <div class="card-content">
+                    <h6 class="category">Premiun</h6>
+                    <div class="icon">
+                        <i class="material-icons"><img src="~/Images/coins1600_Color.png"/></i>
+                    </div>
+                    <h3 class="card-title">$1590.00</h3>
+                    <p class="card-description">
+                        Tienes 500 Creditos por Tiempo ilimitado
+                    </p>
+                    <a href="#pablo" class="btn btn-white btn-round">Comprar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#loader').fadeOut();
+        $('#AppView').fadeIn();
+
+    });
+</script>

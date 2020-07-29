@@ -1,0 +1,80 @@
+﻿@model Model.Login
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    @using (Ajax.BeginForm("/Login", null, new AjaxOptions { UpdateTargetId = "Login" }, new { @id = "Login" ,@style="margin-top:150px"}))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-sm-4">
+                <h2>Inicio de sesión</h2>
+                <div class="form-group">
+                    @Html.LabelFor(u => u.UserName)
+                    @Html.TextBoxFor(u => u.UserName, new { @class = "form-control", required = (string)null })
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.Password)
+                    @Html.PasswordFor(u => u.Password, new { @class = "form-control", required = (string)null })
+                </div>
+                <div class="editor-label">
+                    @Html.CheckBoxFor(u => u.RememberMe)
+                    @Html.LabelFor(u => u.RememberMe)
+                </div>
+                <div class="alert alert-danger" role="alert" id="error" style="display:none;">Tu contraseña o correo electrónico están incorrectos</div>
+                <button type="button" id="Entrar" class="btn btn-info" >Entrar</button>
+                <a href="@Url.Action("Recuperar")" class="btn btn-warning" id="btnRecuperar">Olvidastes tu Contraseña?</a>
+            </div>
+        </div>
+    }    
+</div>
+<script>
+    $(document).ready(function () {
+        if ('@ViewBag.Recuperar' == 'True') {
+            alert("Se ha cambiado la contraseña correctamente");
+        }
+        $.extend($.validator.messages, {
+            equalTo: "Por favor, escribe la misma contraseña.",
+            minlength: jQuery.validator.format("Por favor, no escribas menos de {0} caracteres."),
+            required: "Este campo es obligatorio.",
+            email: "Por favor, escribe una dirección de correo válida",
+        });
+        var validatorUsuario = $("#Login").validate({
+            debug: true,
+            rules: {
+                Password: {
+                    required: true,
+                    minlength: 8,
+
+                },
+                UserName: {
+                    required: true,
+                    email: true,
+                }
+            }
+        });
+        $("#Entrar").click(function () {
+            var isValid = $("#Login").valid();
+            console.log(isValid);
+            if (isValid) {
+                $.ajax({
+                    url: "/Usuario/Login?UserName=" + $("#UserName").val() + "&Password=" + $("#Password").val() + "&returnUrl=@ViewBag.returnUrl",
+                    method: "POST",
+                    async: false,
+                    complete: function (data, status) {
+                        console.log("Data");
+                        console.log(data);
+                        if (data.responseText.includes("true")) {
+                            $("#error").fadeIn();
+                        } else {
+                            location.href = "/";
+                        }
+                    }
+                });
+            }
+        });
+    });
+    
+</script>

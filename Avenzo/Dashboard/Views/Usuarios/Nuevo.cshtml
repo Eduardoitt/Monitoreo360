@@ -1,0 +1,286 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+    ViewBag.TitleModal = "Nuevo Usuario";
+}
+<style>
+    .noUi-base {
+        background-color: #02a94f;
+    }
+</style>
+<div class="container-fluid">
+    <form action="/Usuarios/Nuevo" method="post" id="Nuevo">
+        <div class="row">
+            @Html.Hidden("Id", Guid.NewGuid())
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label">Tipo de Cliente</label>
+                    <select class="form-control" id="Tipo" name="Tipo">
+                        <option selected disabled>Selecciona tipo de usuario</option>
+                        <option value="Empleado">Empleado</option>
+                        <option value="Cliente">Cliente</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label">Permisos</label>
+                    <select class="form-control" id="Permisos" name="Permisos">
+                        <option value="Client">Cliente</option>
+                        <option value="Admin">Administrador</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label class="control-label" id="name-label">Nombre del empleado o cliente</label>
+                    <input class="form-control col-sm-3" id="Nombre" name="Nombre" disabled/>
+                    
+                </div>
+            </div>
+            <div class="col-sm-1" style="height:  100%;bottom: -29px; display:none;" id="spinner">
+                <div class="form-group">
+                    <label class="control-label"></label>
+                    <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+                    <span class="sr-only">Loading...</span>
+                </div>                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label">Correo Electronico</label>
+                    <input class="form-control" name="Email" id="Email"/>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label">Asignar Timbres</label>
+                    <div id="slider-text">Timbres Disponibles: &nbsp;<i class='material-icons' style='font-size:medium;'>all_inclusive</i></div>
+                    <div id="slider"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">Nueva Contraseña</label>
+                            <input class="form-control" type="password" id="Contraseña" name="Contraseña"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">Repetir Contraseña</label>
+                            <input class="form-control" type="password" name="RepetirContraseña"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" style="bottom:-36px;">
+                <div class="col-sm-12">
+                    <ul>
+                        <li>Haz tu contraseña 8 caracteres o más.</li>
+                        <li>Use letras mayúsculas y minúsculas.</li>
+                        <li>Utilizar más de un número.</li>
+                        <li>Utilice caracteres especiales (!, @@, #, $,%, ^, &, *,?, _, ~).</li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 text-center" style="background:#d9534f;color:white;border-radius:5px;" id="PasswordMeter">Muy Debíl</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-warning btn-simple" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success btn-simple"><i class="material-icons">save</i> &nbsp;Guardar cambios</button>
+        </div>
+    </form>
+    
+</div>
+<script src="http://avenzo.mx/avenzo.mx/Scripts/passwordmeter.js"></script>
+<script>
+    var $Datos;
+    var datatable = $('#datatables').DataTable();
+    var inputNombre = document.getElementById("Nombre");
+    var AutocompletarNombres = new Awesomplete(inputNombre, {
+        minChars: 1,
+        maxItems: 5,
+        autoFirst: true,
+        replace: function (text) {
+            this.input.value = text.label;
+            var input = document.getElementById("Id");
+            input.value = text.value;
+            if ($('#Tipo').val() == "Empleado") {
+                for (var k in $Datos.Empleados) {
+                    if ($Datos.Empleados[k].Id == text.value) {                        
+                        $('#Email').val($Datos.Empleados[k].Email);
+                    }
+                }
+            } else {           
+                for (var k in $Datos.clientes) {
+                    if ($Datos.clientes[k].IdCliente == text.value) {                       
+                        $('#Email').val($Datos.clientes[k].Email);
+                    }
+                }
+            }
+            
+        }
+    });
+    $.validator.addMethod("nombreValido", function (value, elemen, params) {
+        console.log("AplicandoValidacion");
+        for (var k in $Datos.clientes) {
+            if ($Datos.clientes[k].IdCliente == $("#Id").val() && $Datos.clientes[k].Nombres + " " + $Datos.clientes[k].ApellidoPaterno + " " + $Datos.clientes[k].ApellidoMaterno == $("#Nombre").val())
+            {
+                console.log("Entra");
+                return true;
+            }
+        }
+        return false;
+    },$.validator.format("El nombre no es valido"));
+    $.validator.addMethod("passwordValido", function (value, element, params) {
+
+        var object = testPassword(value);
+        if (object.score > 24)
+            return true;
+        else
+            return false
+    }, $.validator.format("La Contraseña es muy débil {0}"));
+    $.validator.addMethod("correoValido", function (value, element, params) {
+        var disponible = false;
+        $.ajax({
+            url: "/Cuenta/VerificarCorreo?correo=" + value,
+            method: "POST",
+            async: false,
+            success: function ($Data) {
+                disponible = $Data.Disponible;
+            }
+        });
+        return disponible;
+    }, $.validator.format("Este correo ya esta registrado {0}"));
+    var NuevoIngreso = $("#Nuevo").validate({
+        debug: true,
+        rules: {
+            Tipo: {
+                required:true
+            },
+            Permisos: {
+                required:true
+            },
+            Nombre: {
+                required: true,
+                nombreValido:""
+            },
+            Email: {
+                required: true,
+                email: true,
+                correoValido:""
+            },
+            Contraseña: {
+                required: true,
+                minlength: 8,
+                passwordValido: ""
+            },
+            RepetirContraseña: {
+                required: true,
+                equalTo:"#Contraseña"
+            },
+            
+        }
+    });
+    
+    $('#Tipo').change(function () {
+        $('#Nombre').val('');
+        $('#Email').val('');
+        $('#spinner').fadeIn(500);
+        $('#Nombre').attr('disabled', true);
+        if ($('#Tipo').val() == "Empleado")
+        {
+            $('#name-label').text("Nombre del Empleado");
+            $.getJSON('/Empleados/Service', function (result) {
+                $Datos = result;
+                var list = [];
+                for (var k in result.Empleados) {
+                    if (result.Empleados[k].IdUsuario == null && result.Empleados[k].Activo==true) {
+                        list.push({ label: result.Empleados[k].Nombre + " " + result.Empleados[k].ApellidoPaterno + " " + result.Empleados[k].ApellidoMaterno, value: result.Empleados[k].Id });
+                    }
+                    
+                }
+                AutocompletarNombres.list = list;
+                $('#spinner').fadeOut(500);
+                $('#Nombre').removeAttr('disabled');
+            });
+        }
+        else
+        {
+            $('#name-label').text('Nombre del Cliente');
+             $.getJSON('/Clientes/Service', function (result) {
+                $Datos = result;
+                var list = [];
+                for (var k in result.clientes) {
+                    if (result.clientes[k].IdUsuario == null&&result.clientes[k].Activo==true) {
+                        list.push({ label: result.clientes[k].Nombres + " " + result.clientes[k].ApellidoPaterno + " " + result.clientes[k].ApellidoMaterno, value: result.clientes[k].IdCliente });
+                    }
+                }
+                AutocompletarNombres.list = list;
+                $('#spinner').fadeOut(500);
+                $('#Nombre').removeAttr('disabled');
+            });
+        }
+    });
+   
+    var slider = document.getElementById('slider');
+    var start = 10;
+    noUiSlider.create(slider, {
+        start: start,
+        step: 1,
+        connect: "lower",
+        range: {
+            min: 0,
+            max: 100
+        }
+    });
+    slider.noUiSlider.on('update', function (values, handle) { $('#slider-text').text("Timbres Disponibles: " + Math.trunc(values)); });
+    $("#Contraseña").keyup(function () {
+        var object = testPassword($(this).val());
+        $("#PasswordMeter").text(object.Verdict);
+        if (object.Verdict == "D\u00E9bil")
+            $("#PasswordMeter").css({ "background": "orange", "color": "white" });
+        if (object.Verdict == "Muy d\u00E9bil")
+            $("#PasswordMeter").css({ "background": "#d9534f", "color": "white" });
+        if (object.Verdict == "Normal")
+            $("#PasswordMeter").css({ "background": "yellow", "color": "black" });
+        if (object.Verdict == "Fuerte")
+            $("#PasswordMeter").css({ "background": "#99ff33", "color": "black" });
+        if (object.Verdict == "Muy Fuerte")
+            $("#PasswordMeter").css({ "background": "#449d44", "color": "white" });
+    });
+    $('#Nuevo').submit(function () {
+        var isValid = $("#Nuevo").valid();
+        if (isValid) {
+            $.post("/Usuarios/Nuevo", { Tipo: $('#Tipo').val(), Permiso: $('#Permisos').val(), Id: $('#Id').val(), Usuario: $('#Email').val(), Timbres: Math.abs(slider.noUiSlider.get()), Contrasena: $('#Contraseña').val() }, function (data, status, xhr) {
+                if (data.error == false) {
+                    swal({
+                        title: "Listo!",
+                        text: "Se guardo Correctamente",
+                        buttonsStyling: false,
+                        confirmButtonClass: "btn btn-success",
+                        type: "success"
+                    });
+                    datatable.row.add(["","","","","","",""]).draw(false);
+                } else {
+                    swal({
+                        title: "Error!",
+                        text: result.Message,
+                        buttonsStyling: false,
+                        confirmButtonClass: "btn btn-success",
+                        type: "error"
+                    })
+                }
+                $('#myModal').modal('hide');
+            });
+           
+        }
+        return false;
+    });
+</script>

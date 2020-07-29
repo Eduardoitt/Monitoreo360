@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<div class="container-fluid">
+    <div class="row" id="Card" style="display:none;">
+    </div>
+    <div class="row" style="display:none;" id="success">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="card card-signup">                
+                <h2 class="card-title text-center">Enviado</h2>
+                <div class="row">
+                    <div class="swal2-icon swal2-success animate"><span class="line tip animate-success-tip"></span> <span class="line long animate-success-long"></span><div class="placeholder"></div> <div class="fix"></div></div>
+                </div>
+                <div class="row text-center">
+                    <h3 class="wizard-title">
+                            Se ha enviado correctamente un correo!
+                    </h3>
+                    <h5>Se ha ha enviado un correo para que pueda cambiar la contraseña</h5>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="row" style="display:none;" id="error">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="card card-signup">
+                <h2 class="card-title text-center">Error</h2>
+                <div class="row">
+                    <div class="swal2-icon swal2-success animate"><span class="line tip animate-success-tip"></span> <span class="line long animate-success-long"></span><div class="placeholder"></div> <div class="fix"></div></div>
+                </div>
+                <div class="row text-center">
+                    <h3 class="wizard-title">
+                        hubo un error!
+                    </h3>
+                    <h5 id="MessageError">Se ha ha enviado un correo para que pueda cambiar la contraseña</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#Card").load("/Cuenta/FormularioRecuperar", function (data, status) {
+            $("#success").fadeOut(500);
+            $("#error").fadeOut(500);
+            $("#Card").fadeIn(500);
+        });
+        if (window.history && window.history.pushState) {
+            //window.history.pushState('forward', null, './#forward');
+            $(window).on('popstate', function () {
+                if (location.href.includes("Login/Registrarse")) {
+                    $("#success").fadeOut(500, function () {
+                        $("#Card").fadeOut(500, function () {
+                            $("#Card").load("/Login/FormularioRegistrar", function () {
+                                $("#Card").fadeIn(500);
+                                $("#success").fadeOut(500);
+                                $("#error").fadeOut(500);
+                            });
+                        });
+                    });                    
+
+                }
+                else if (location.href.includes("/Login/Index") || location.href.includes("/Login")) {
+                    $("#success").fadeOut(500, function () {
+                        $("#Card").fadeOut(500, function () {
+                            $("#Card").load("/Login/FormularioLogin", function () {
+                                $("#Card").fadeIn(500);
+                                $("#success").fadeOut(500);
+                                $("#error").fadeOut(500);
+                            });
+                        });
+                    });
+                    
+                } else if (location.href.includes("/Cuenta/Recuperar")) {
+                    $("#Card").fadeOut(500, function () {
+                        $("#Card").load("/Cuenta/FormularioRecuperar", function () {
+                            $("#Card").fadeIn(500);
+                            $("#success").fadeOut(500);
+                            $("#error").fadeOut(500);
+                        });
+                    });
+                }
+
+            });
+        }
+
+    });   
+</script>
