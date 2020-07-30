@@ -36,7 +36,7 @@ namespace Monitoreo_360
             List<Model.Usuarios> usuarios = new List<Model.Usuarios>();
 
             usuarios = db.Usuarios.OrderBy(x => x.Usuario).ToList();
-            this.ProgressBar.MaximumValue = usuarios.Count() + 5;
+            this.ProgressBar.Maximum = usuarios.Count() + 5;
             foreach (var usuario in usuarios)
             {
 

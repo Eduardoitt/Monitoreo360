@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel_Clientes = new System.Windows.Forms.Panel();
-            this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -45,8 +45,8 @@
             // 
             // bunifuElipse
             // 
-            this.bunifuElipse.ElipseRadius = 15;
-            this.bunifuElipse.TargetControl = this;
+           /* this.bunifuElipse.ElipseRadius = 15;
+            this.bunifuElipse.TargetControl = this;*/
             // 
             // timer
             // 
@@ -72,7 +72,7 @@
 
         #endregion
         private System.Windows.Forms.Panel panel_Clientes;
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
+        private System.Windows.Forms.Button bunifuElipse;
         private System.Windows.Forms.Timer timer;
     }
 }

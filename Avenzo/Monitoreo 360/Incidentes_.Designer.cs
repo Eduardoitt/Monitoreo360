@@ -39,7 +39,8 @@
             this.FechaInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaHoraFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            //this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Grid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,8 +141,8 @@
             // 
             // bunifuElipse
             // 
-            this.bunifuElipse.ElipseRadius = 15;
-            this.bunifuElipse.TargetControl = this;
+            /*this.bunifuElipse.ElipseRadius = 15;
+            this.bunifuElipse.TargetControl = this;*/
             // 
             // Incidentes
             // 
@@ -170,6 +171,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaInicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaHoraFinal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estatus;
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
+        //private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
+        private System.Windows.Forms.Button bunifuElipse;
     }
 }

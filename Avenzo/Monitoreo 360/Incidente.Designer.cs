@@ -34,7 +34,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            //this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse1 = new System.Windows.Forms.Button();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label_ColorEstablecimiento = new System.Windows.Forms.Label();
@@ -78,7 +79,8 @@
             this.Estatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comentarios = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Monitorista = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TextBox_Comentarios = new Bunifu.Framework.UI.BunifuMetroTextbox();
+            //this.TextBox_Comentarios = new Bunifu.Framework.UI.BunifuMetroTextbox();
+            this.TextBox_Comentarios = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).BeginInit();
@@ -90,8 +92,8 @@
             // 
             // bunifuElipse1
             // 
-            this.bunifuElipse1.ElipseRadius = 15;
-            this.bunifuElipse1.TargetControl = this;
+            /*this.bunifuElipse1.ElipseRadius = 15;
+            this.bunifuElipse1.TargetControl = this;*/
             // 
             // groupBox
             // 
@@ -572,16 +574,16 @@
             // 
             // TextBox_Comentarios
             // 
-            this.TextBox_Comentarios.AutoScroll = true;
+            /*this.TextBox_Comentarios.AutoScroll = true;
             this.TextBox_Comentarios.BorderColorFocused = System.Drawing.Color.Firebrick;
             this.TextBox_Comentarios.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.TextBox_Comentarios.BorderColorMouseHover = System.Drawing.Color.Firebrick;
-            this.TextBox_Comentarios.BorderThickness = 1;
+            this.TextBox_Comentarios.BorderThickness = 1;*/
             this.TextBox_Comentarios.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TextBox_Comentarios.Enabled = false;
             this.TextBox_Comentarios.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.TextBox_Comentarios.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.TextBox_Comentarios.isPassword = false;
+           // this.TextBox_Comentarios.isPassword = false;
             this.TextBox_Comentarios.Location = new System.Drawing.Point(26, 629);
             this.TextBox_Comentarios.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_Comentarios.Name = "TextBox_Comentarios";
@@ -629,7 +631,8 @@
 
         #endregion
 
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
+        //private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
+        private System.Windows.Forms.Button bunifuElipse1;
         private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label_ColorEstablecimiento;
@@ -673,7 +676,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Estatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comentarios;
         private System.Windows.Forms.DataGridViewTextBoxColumn Monitorista;
-        private Bunifu.Framework.UI.BunifuMetroTextbox TextBox_Comentarios;
+        //private Bunifu.Framework.UI.BunifuMetroTextbox TextBox_Comentarios;
+        private System.Windows.Forms.TextBox TextBox_Comentarios;
         private System.Windows.Forms.Label label16;
     }
 }

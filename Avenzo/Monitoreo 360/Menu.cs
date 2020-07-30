@@ -39,19 +39,19 @@ namespace Monitoreo_360
                     Button_Badge.Visible = true;
                 }
                 System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
-                Bunifu.Framework.UI.BunifuFlatButton Button_Alerta = new Bunifu.Framework.UI.BunifuFlatButton();
-                Button_Alerta.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(151)))), ((int)(((byte)(203)))));
+                System.Windows.Forms.Button Button_Alerta = new System.Windows.Forms.Button();
+               // Button_Alerta.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(151)))), ((int)(((byte)(203)))));
                 Button_Alerta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
                 Button_Alerta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-                Button_Alerta.BorderRadius = 0;
+               // Button_Alerta.BorderRadius = 0;
                 string text=incidente.Clientes.Nombres + " " + incidente.Clientes.ApellidoPaterno + " : " + incidente.FechaHoraInicio.Day + "/" + incidente.FechaHoraInicio.Month + "/" + incidente.FechaHoraInicio.Year+" "+incidente.FechaHoraInicio.Hour+":"+incidente.FechaHoraInicio.Minute;
-                Button_Alerta.ButtonText = text;
+                Button_Alerta.Text = text;
                 Button_Alerta.Cursor = System.Windows.Forms.Cursors.Hand;
                 Button_Alerta.Click += new EventHandler(Button_Alerta_Click);
-                Button_Alerta.DisabledColor = System.Drawing.Color.Gray;
-                Button_Alerta.Iconcolor = System.Drawing.Color.Transparent;
-                Button_Alerta.Iconimage = ((System.Drawing.Image)(resources.GetObject("Button_Alerta.Iconimage")));
-                Button_Alerta.Iconimage_right = null;
+                //Button_Alerta.DisabledColor = System.Drawing.Color.Gray;
+                //Button_Alerta.Iconcolor = System.Drawing.Color.Transparent;
+                //Button_Alerta.Iconimage = ((System.Drawing.Image)(resources.GetObject("Button_Alerta.Iconimage")));
+                /*Button_Alerta.Iconimage_right = null;
                 Button_Alerta.Iconimage_right_Selected = null;
                 Button_Alerta.Iconimage_Selected = null;
                 Button_Alerta.IconMarginLeft = 0;
@@ -60,19 +60,19 @@ namespace Monitoreo_360
                 Button_Alerta.IconRightZoom = 0D;
                 Button_Alerta.IconVisible = true;
                 Button_Alerta.IconZoom = 90D;
-                Button_Alerta.IsTab = false;
+                Button_Alerta.IsTab = false;*/
                 Button_Alerta.Location = new System.Drawing.Point(-7, y);
                 Button_Alerta.Name = incidente.Id.ToString();
-                Button_Alerta.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
+               /* Button_Alerta.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
                 Button_Alerta.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(44)))), ((int)(((byte)(100)))));
                 Button_Alerta.OnHoverTextColor = System.Drawing.Color.White;
-                Button_Alerta.selected = false;
+                Button_Alerta.selected = false;*/
                 Button_Alerta.Size = new System.Drawing.Size(265, 48);
                 Button_Alerta.TabIndex = 0;
                 Button_Alerta.Text = text;
                 Button_Alerta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                Button_Alerta.Textcolor = System.Drawing.Color.White;
-                Button_Alerta.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                //Button_Alerta.Textcolor = System.Drawing.Color.White;
+                Button_Alerta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.panel_Notificaciones.Controls.Add(Button_Alerta);                
                 y += 48;
             }
@@ -89,7 +89,7 @@ namespace Monitoreo_360
                 Button_Badge.Text = (int.Parse(Button_Badge.Text) - 1) + "";
                 Button_Badge.Visible = true;
             }
-            string name = ((Bunifu.Framework.UI.BunifuFlatButton)sender).Name;
+            string name = ((System.Windows.Forms.Button)sender).Name;
             Guid Id = Guid.Parse(name);
             Model.Incidentes incidente = db.Incidentes.Where(model => model.Id == Id).FirstOrDefault();
             CultureInfo CI = new CultureInfo("es-MX");
@@ -287,15 +287,15 @@ namespace Monitoreo_360
                 form.Location = new Point(20, 20);
                 form.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top;
 
-                Bunifu.Framework.UI.BunifuFlatButton Button_AgregarClientes = new Bunifu.Framework.UI.BunifuFlatButton(); ;
-                Bunifu.Framework.UI.BunifuElipse bunifuElipse_AgregarClientes = new Bunifu.Framework.UI.BunifuElipse(this.components); ;
-                Button_AgregarClientes.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
+                System.Windows.Forms.Button Button_AgregarClientes = new System.Windows.Forms.Button(); 
+                System.Windows.Forms.Button bunifuElipse_AgregarClientes = new System.Windows.Forms.Button(); 
+                //Button_AgregarClientes.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
                 Button_AgregarClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
                 Button_AgregarClientes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-                Button_AgregarClientes.BorderRadius = 0;
-                Button_AgregarClientes.ButtonText = "Agregar Clientes";
+               // Button_AgregarClientes.BorderRadius = 0;
+                Button_AgregarClientes.Text = "Agregar Clientes";
                 Button_AgregarClientes.Cursor = System.Windows.Forms.Cursors.Hand;
-                Button_AgregarClientes.DisabledColor = System.Drawing.Color.Gray;
+               /* Button_AgregarClientes.DisabledColor = System.Drawing.Color.Gray;
                 Button_AgregarClientes.Iconcolor = System.Drawing.Color.Transparent;
                 Button_AgregarClientes.Iconimage = global::Monitoreo_360.Properties.Resources.Add_User_Male_104px;
                 Button_AgregarClientes.Iconimage_right = null;
@@ -307,23 +307,23 @@ namespace Monitoreo_360
                 Button_AgregarClientes.IconRightZoom = 0D;
                 Button_AgregarClientes.IconVisible = true;
                 Button_AgregarClientes.IconZoom = 70D;
-                Button_AgregarClientes.IsTab = false;
+                Button_AgregarClientes.IsTab = false;*/
                 Button_AgregarClientes.Location = new System.Drawing.Point(20, 8);
                 Button_AgregarClientes.Name = "Button_AgregarClientes";
-                Button_AgregarClientes.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
+              /*  Button_AgregarClientes.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
                 Button_AgregarClientes.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(44)))), ((int)(((byte)(100)))));
                 Button_AgregarClientes.OnHoverTextColor = System.Drawing.Color.White;
-                Button_AgregarClientes.selected = false;
+                Button_AgregarClientes.selected = false;*/
                 Button_AgregarClientes.Size = new System.Drawing.Size(174, 30);
                 Button_AgregarClientes.TabIndex = 0;
                 Button_AgregarClientes.Text = "Agregar Clientes";
                 Button_AgregarClientes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-                Button_AgregarClientes.Textcolor = System.Drawing.Color.White;
-                Button_AgregarClientes.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               // Button_AgregarClientes.Textcolor = System.Drawing.Color.White;
+                Button_AgregarClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 Button_AgregarClientes.Click += new System.EventHandler(this.Button_AgregarClientes_Click);
 
-                bunifuElipse_AgregarClientes.ElipseRadius = 5;
-                bunifuElipse_AgregarClientes.TargetControl = Button_AgregarClientes;
+               // bunifuElipse_AgregarClientes.ElipseRadius = 5;
+                //bunifuElipse_AgregarClientes.TargetControl = Button_AgregarClientes;
                 this.panel_Controls.Controls.Add(Button_AgregarClientes);
                 this.panel_Content.Controls.Add(form);
                 

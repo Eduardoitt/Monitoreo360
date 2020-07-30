@@ -32,22 +32,25 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.DataGrid_Incidentes = new Bunifu.Framework.UI.BunifuCustomDataGrid();
+            //this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse = new System.Windows.Forms.Button();
+            //this.DataGrid_Incidentes = new Bunifu.Framework.UI.BunifuCustomDataGrid();
+            this.DataGrid_Incidentes = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eventos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaHoraInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaHoraFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProgressBar = new Bunifu.Framework.UI.BunifuProgressBar();
+            //this.ProgressBar = new Bunifu.Framework.UI.BunifuProgressBar();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid_Incidentes)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse
             // 
-            this.bunifuElipse.ElipseRadius = 30;
-            this.bunifuElipse.TargetControl = this;
+            /*this.bunifuElipse.ElipseRadius = 30;
+            this.bunifuElipse.TargetControl = this;*/
             // 
             // DataGrid_Incidentes
             // 
@@ -86,10 +89,10 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DataGrid_Incidentes.DefaultCellStyle = dataGridViewCellStyle3;
             this.DataGrid_Incidentes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DataGrid_Incidentes.DoubleBuffered = true;
+            //this.DataGrid_Incidentes.DoubleBuffered = true;
             this.DataGrid_Incidentes.EnableHeadersVisualStyles = false;
-            this.DataGrid_Incidentes.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
-            this.DataGrid_Incidentes.HeaderForeColor = System.Drawing.Color.White;
+            //this.DataGrid_Incidentes.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            //this.DataGrid_Incidentes.HeaderForeColor = System.Drawing.Color.White;
             this.DataGrid_Incidentes.Location = new System.Drawing.Point(0, 0);
             this.DataGrid_Incidentes.Name = "DataGrid_Incidentes";
             this.DataGrid_Incidentes.ReadOnly = true;
@@ -142,11 +145,11 @@
             // 
             this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.ProgressBar.BackColor = System.Drawing.Color.Silver;
-            this.ProgressBar.BorderRadius = 5;
+            //this.ProgressBar.BorderRadius = 5;
             this.ProgressBar.Location = new System.Drawing.Point(148, 202);
-            this.ProgressBar.MaximumValue = 100;
+            //this.ProgressBar.MaximumValue = 100;
             this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            //this.ProgressBar.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
             this.ProgressBar.Size = new System.Drawing.Size(519, 10);
             this.ProgressBar.TabIndex = 4;
             this.ProgressBar.Value = 5;
@@ -166,14 +169,17 @@
 
         #endregion
 
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
-        private Bunifu.Framework.UI.BunifuCustomDataGrid DataGrid_Incidentes;
+        //private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
+        private System.Windows.Forms.Button bunifuElipse;
+       // private Bunifu.Framework.UI.BunifuCustomDataGrid DataGrid_Incidentes;
+        private System.Windows.Forms.DataGridView DataGrid_Incidentes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn Eventos;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaHoraInicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaHoraFinal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estatus;
-        private Bunifu.Framework.UI.BunifuProgressBar ProgressBar;
+        //private Bunifu.Framework.UI.BunifuProgressBar ProgressBar;
+        private System.Windows.Forms.ProgressBar ProgressBar;
     }
 }

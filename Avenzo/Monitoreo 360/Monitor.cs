@@ -46,7 +46,7 @@ namespace Monitoreo_360
             Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
             List<Model.Clientes> clientes = new List<Model.Clientes>();
             clientes = db.Clientes.Where(model => model.Activo == true && !string.IsNullOrEmpty(model.NumeroTelefonoAlarma) && !string.IsNullOrEmpty(model.NumeroDeCuenta) && model.IdProveedor == prove).ToList();
-            this.ProgressBar.MaximumValue = clientes.Count() + 5;
+            this.ProgressBar.Maximum = clientes.Count() + 5;
             foreach (var cliente in clientes)
             {
                 setDataPanel(cliente);

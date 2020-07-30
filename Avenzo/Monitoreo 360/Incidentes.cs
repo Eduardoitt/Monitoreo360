@@ -37,7 +37,7 @@ namespace Monitoreo_360
         {
             List<Model.Incidentes> incidentes = new List<Model.Incidentes>();
             incidentes = db.Incidentes.Where(x => x.Activo==true).ToList();
-            this.ProgressBar.MaximumValue = incidentes.Count() + 5;
+            this.ProgressBar.Maximum = incidentes.Count() + 5;
             foreach (var incidente in incidentes)
             {
 

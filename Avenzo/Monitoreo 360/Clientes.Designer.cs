@@ -33,7 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             //this.DataGrid_Clientes = new Bunifu.Framework.UI.BunifuCustomDataGrid();
-            this.DataGrid_Clientes = new System.Windows.Forms.DataGrid();
+            this.DataGrid_Clientes = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumeroDeCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,7 +91,7 @@
             //this.DataGrid_Clientes.DoubleBuffered = true;
             //this.DataGrid_Clientes.EnableHeadersVisualStyles = false;
             //this.DataGrid_Clientes.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
-            this.DataGrid_Clientes.HeaderForeColor = System.Drawing.Color.White;
+           // this.DataGrid_Clientes.HeaderForeColor = System.Drawing.Color.White;
             this.DataGrid_Clientes.Location = new System.Drawing.Point(0, 0);
             this.DataGrid_Clientes.Name = "DataGrid_Clientes";
             this.DataGrid_Clientes.ReadOnly = true;
@@ -186,7 +186,7 @@
         #endregion
 
         //private Bunifu.Framework.UI.BunifuCustomDataGrid DataGrid_Clientes;
-        private System.Windows.Forms.DataGrid DataGrid_Clientes;
+        private System.Windows.Forms.DataGridView DataGrid_Clientes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumeroDeCuenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;

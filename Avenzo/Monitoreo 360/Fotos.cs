@@ -79,7 +79,8 @@ namespace Monitoreo_360
         }
         public void AgregarImagen(string file,int x ,int y,string Name) {
             Panel panel = new System.Windows.Forms.Panel();
-            Bunifu.Framework.UI.BunifuImageButton Button_Close = new Bunifu.Framework.UI.BunifuImageButton();
+           // Bunifu.Framework.UI.BunifuImageButton Button_Close = new Bunifu.Framework.UI.BunifuImageButton();
+            System.Windows.Forms.Button Button_Close = new System.Windows.Forms.Button();
             PictureBox pictureBox = new System.Windows.Forms.PictureBox();
             panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(Button_Close)).BeginInit();
@@ -100,14 +101,14 @@ namespace Monitoreo_360
             // 
             Button_Close.BackColor = System.Drawing.Color.Firebrick;
             Button_Close.Image = global::Monitoreo_360.Properties.Resources.Delete_96px;
-            Button_Close.ImageActive = null;
+            //Button_Close.ImageActive = null;
             Button_Close.Location = new System.Drawing.Point(152, 0);
             //Button_Close.Name = "Button_Close";
             Button_Close.Size = new System.Drawing.Size(18, 18);
-            Button_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+           // Button_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             Button_Close.TabIndex = 1;
             Button_Close.TabStop = false;
-            Button_Close.Zoom = 10;
+            //Button_Close.Zoom = 10;
             // 
             // pictureBox
             // 

@@ -31,8 +31,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.DataGrid_Usuarios = new Bunifu.Framework.UI.BunifuCustomDataGrid();
-            this.ProgressBar = new Bunifu.Framework.UI.BunifuProgressBar();
+            this.DataGrid_Usuarios = new System.Windows.Forms.DataGridView();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,10 +77,10 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DataGrid_Usuarios.DefaultCellStyle = dataGridViewCellStyle3;
             this.DataGrid_Usuarios.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DataGrid_Usuarios.DoubleBuffered = true;
+            //this.DataGrid_Usuarios.DoubleBuffered = true;
             this.DataGrid_Usuarios.EnableHeadersVisualStyles = false;
-            this.DataGrid_Usuarios.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
-            this.DataGrid_Usuarios.HeaderForeColor = System.Drawing.Color.White;
+           // this.DataGrid_Usuarios.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            //this.DataGrid_Usuarios.HeaderForeColor = System.Drawing.Color.White;
             this.DataGrid_Usuarios.Location = new System.Drawing.Point(0, 0);
             this.DataGrid_Usuarios.Name = "DataGrid_Usuarios";
             this.DataGrid_Usuarios.ReadOnly = true;
@@ -95,11 +95,11 @@
             // 
             this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.ProgressBar.BackColor = System.Drawing.Color.Silver;
-            this.ProgressBar.BorderRadius = 5;
+            //this.ProgressBar.BorderRadius = 5;
             this.ProgressBar.Location = new System.Drawing.Point(161, 202);
-            this.ProgressBar.MaximumValue = 100;
+            this.ProgressBar.Maximum = 100;
             this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            this.ProgressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
             this.ProgressBar.Size = new System.Drawing.Size(519, 10);
             this.ProgressBar.TabIndex = 4;
             this.ProgressBar.Value = 5;
@@ -150,8 +150,8 @@
 
         #endregion
 
-        private Bunifu.Framework.UI.BunifuCustomDataGrid DataGrid_Usuarios;
-        private Bunifu.Framework.UI.BunifuProgressBar ProgressBar;
+        private System.Windows.Forms.DataGridView DataGrid_Usuarios;
+        private System.Windows.Forms.ProgressBar ProgressBar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Usuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoUsuario;

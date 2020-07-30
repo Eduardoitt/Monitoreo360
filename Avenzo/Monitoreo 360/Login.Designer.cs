@@ -36,9 +36,12 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label_Error = new System.Windows.Forms.Label();
             this.metroButton_Login = new MetroFramework.Controls.MetroButton();
-            this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.textBox_Password = new Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.textBox_Email = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            //this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse = new System.Windows.Forms.Button();
+            //this.textBox_Password = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            this.textBox_Password = new System.Windows.Forms.TextBox();
+           // this.textBox_Email = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            this.textBox_Email = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -111,21 +114,21 @@
             // 
             // bunifuElipse
             // 
-            this.bunifuElipse.ElipseRadius = 20;
-            this.bunifuElipse.TargetControl = this;
+           /* this.bunifuElipse.ElipseRadius = 20;
+            this.bunifuElipse.TargetControl = this;*/
             // 
             // textBox_Password
             // 
             this.textBox_Password.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBox_Password.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_Password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox_Password.HintForeColor = System.Drawing.Color.Empty;
+          /*  this.textBox_Password.HintForeColor = System.Drawing.Color.Empty;
             this.textBox_Password.HintText = "";
             this.textBox_Password.isPassword = true;
             this.textBox_Password.LineFocusedColor = System.Drawing.Color.Maroon;
             this.textBox_Password.LineIdleColor = System.Drawing.Color.Gray;
             this.textBox_Password.LineMouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.textBox_Password.LineThickness = 4;
+            this.textBox_Password.LineThickness = 4;*/
             this.textBox_Password.Location = new System.Drawing.Point(535, 516);
             this.textBox_Password.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox_Password.Name = "textBox_Password";
@@ -139,13 +142,13 @@
             this.textBox_Email.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBox_Email.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_Email.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox_Email.HintForeColor = System.Drawing.Color.Empty;
+           /* this.textBox_Email.HintForeColor = System.Drawing.Color.Empty;
             this.textBox_Email.HintText = "";
             this.textBox_Email.isPassword = false;
             this.textBox_Email.LineFocusedColor = System.Drawing.Color.Maroon;
             this.textBox_Email.LineIdleColor = System.Drawing.Color.Gray;
             this.textBox_Email.LineMouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.textBox_Email.LineThickness = 4;
+            this.textBox_Email.LineThickness = 4;*/
             this.textBox_Email.Location = new System.Drawing.Point(535, 452);
             this.textBox_Email.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox_Email.Name = "textBox_Email";
@@ -195,9 +198,12 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label_Error;
         private MetroFramework.Controls.MetroButton metroButton_Login;
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
-        private Bunifu.Framework.UI.BunifuMaterialTextbox textBox_Password;
-        private Bunifu.Framework.UI.BunifuMaterialTextbox textBox_Email;
+        //private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
+        private System.Windows.Forms.Button bunifuElipse;
+       // private Bunifu.Framework.UI.BunifuMaterialTextbox textBox_Password;
+        private System.Windows.Forms.TextBox textBox_Password;
+        //private Bunifu.Framework.UI.BunifuMaterialTextbox textBox_Email;
+        private System.Windows.Forms.TextBox textBox_Email;
         private System.Windows.Forms.Panel panel1;
     }
 }

@@ -17,8 +17,9 @@ namespace Monitoreo_360
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         Guid IdUsuario;
         Panel panel;
-        Bunifu.Framework.UI.BunifuFlatButton Button;
-        public Cadena(Guid IdUsuario, Bunifu.Framework.UI.BunifuFlatButton Button,Panel panel)
+        //Bunifu.Framework.UI.BunifuFlatButton Button;
+        System.Windows.Forms.Button Button;
+        public Cadena(Guid IdUsuario, System.Windows.Forms.Button Button,Panel panel)
         {
             InitializeComponent();
             List<LogMonitoreo360> logs = db.LogMonitoreo360.OrderBy(x => x.FechaCreacion).OrderByDescending(x => x.FechaCreacion).ToList();

@@ -79,7 +79,8 @@ namespace Monitoreo_360
             setTextBoxValue(this.TextBox_Beneficiario, cliente.Beneficiario);            
             setComboBoxBancoValue(cliente.Banco);            
         }
-        public void setTextBoxValue(Bunifu.Framework.UI.BunifuMaterialTextbox field , string value) {
+        //Bunifu.Framework.UI.BunifuMaterialTextbox field 
+        public void setTextBoxValue(System.Windows.Forms.TextBox field , string value) {
             if (field.InvokeRequired) {
                 field.Invoke(new MethodInvoker(delegate{ field.Text = value; }));
             }

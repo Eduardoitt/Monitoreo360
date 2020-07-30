@@ -117,24 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="openFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="bunifuElipse.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>150, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Button_AgregarFotos.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAALUAAAApCAYAAABz92iRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGDSURBVHhe7dxBSkJRGIbh1uLMmTNnzpw5cwPOnLkCV+AG
-        XIEbyCCSCC5NIshBIEEIDQwiB5FEcAnij+9cvRRtwPPxPvCDqMOXw1U4/0kAZogadogadogadogadoga
-        dv5F/Tyfx+1wGJedTpw2GgxztKNGbwaDeJrN9vVW6qi/drv0hbvRKF4Wi/jcbPafAMdJjb4WRdyPx3Hd
-        79fN1lEraJ3SQI7elssoer34Lssqah3fqh3I2eN0Gg+TSRW1Tmkd40DOPtbruOp2q6jPW630TA3kTj8g
-        U9R6ATggatghatghatghatghatghatghatghatghatghatghatghatghatghatghatghatghatipoz5r
-        NtMtXCB3ddTamaAr5kDOyu02LtrtKmpdK9f1ciBn2lujZUwpaj166Go5W5mQq98Np6jlfbVKb2qxDesS
-        kAvFrDV52s502F1TRy2KWZuatAdED9wMc+yjPzm00FSLbA7+RA04IGrYIWrYIWrYIWqYifgB4ApTP0gm
-        EToAAAAASUVORK5CYII=
-</value>
+  <data name="openFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>17, 17</value>
+  </data>
+  <data name="bunifuElipse.TrayLocation" type="System.Drawing.Point, System.Drawing">
+    <value>150, 17</value>
   </data>
 </root>

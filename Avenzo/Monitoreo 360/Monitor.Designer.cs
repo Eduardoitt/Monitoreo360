@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panel = new System.Windows.Forms.Panel();
-            this.ProgressBar = new Bunifu.Framework.UI.BunifuProgressBar();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // panel
@@ -44,11 +44,11 @@
             // 
             this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.ProgressBar.BackColor = System.Drawing.Color.Silver;
-            this.ProgressBar.BorderRadius = 5;
+            //this.ProgressBar.BorderRadius = 5;
             this.ProgressBar.Location = new System.Drawing.Point(148, 202);
-            this.ProgressBar.MaximumValue = 100;
+            this.ProgressBar.Maximum = 100;
             this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            this.ProgressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
             this.ProgressBar.Size = new System.Drawing.Size(519, 10);
             this.ProgressBar.TabIndex = 5;
             this.ProgressBar.Value = 5;
@@ -68,6 +68,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel;
-        private Bunifu.Framework.UI.BunifuProgressBar ProgressBar;
+        private System.Windows.Forms.ProgressBar ProgressBar;
     }
 }

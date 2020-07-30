@@ -51,7 +51,8 @@
             this.dateTimePicker_SabadoFinal = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_DomingoFinal = new System.Windows.Forms.DateTimePicker();
             this.Button_Guardar = new MetroFramework.Controls.MetroButton();
-            this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            //this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // htmlLabel1
@@ -335,8 +336,8 @@
             // 
             // bunifuElipse
             // 
-            this.bunifuElipse.ElipseRadius = 15;
-            this.bunifuElipse.TargetControl = this;
+            //this.bunifuElipse.ElipseRadius = 15;
+            //this.bunifuElipse.TargetControl = this;
             // 
             // HorarioOperacion
             // 
@@ -401,6 +402,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker_SabadoFinal;
         private System.Windows.Forms.DateTimePicker dateTimePicker_DomingoFinal;
         private MetroFramework.Controls.MetroButton Button_Guardar;
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
+       // private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
+        private System.Windows.Forms.Button bunifuElipse;
     }
 }

@@ -78,7 +78,7 @@ namespace Monitoreo_360
                 P = false;
                 metroGrid_Contactos.Rows[e.RowIndex].Cells[2].ErrorText = "Escribe un numero de telefono";
             }
-            if (metroGrid_Contactos.Rows[e.RowIndex].Cells[4].EditedFormattedValue != null&& metroGrid_Contactos.Rows[e.RowIndex].Cells[4].EditedFormattedValue !="")
+            if (metroGrid_Contactos.Rows[e.RowIndex].Cells[4].EditedFormattedValue != null && metroGrid_Contactos.Rows[e.RowIndex].Cells[4].EditedFormattedValue !="")
             {
                 PR = true;
                 Priority = int.Parse(metroGrid_Contactos.Rows[e.RowIndex].Cells[4].EditedFormattedValue.ToString());
