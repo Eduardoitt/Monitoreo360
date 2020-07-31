@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bunifu_UI_v1.5.3">
-      <HintPath>C:\Users\Ivan\Downloads\Bunifu_UI_v1.5.3.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -144,6 +141,8 @@
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
@@ -294,6 +293,405 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdeudosInstalaciones.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Asociados.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AvenzoSeguridad.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AvenzoSeguridad.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AvenzoSeguridad.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AvenzoSeguridad.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AvenzoSeguridad.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Bancos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarritoCompras.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Catalogos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CFDI.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CFDIEnDeuda.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CFDIPorOperacion.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ciudades.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClaveProdServ.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClaveProdServHistorial.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClaveProdServPorPAC.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClaveUnidad.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClienteComponentes.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClienteContactos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Clientes.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CodigoEventos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CodigosPostales.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colonias.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Complementos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Componentes.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompraInventario.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompraProductos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Contratos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Correos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Deducciones.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DispositivosAsignados.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentacionEmpleado.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empleados.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Estados.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormaDePago.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetAdeudosInstalacionesById_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetBancos_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCatalogoByNombreCatalogo_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCatalogo_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCFDIByAdeudo_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCFDIByDoctoRelaionado_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCFDIPorOperacionByAdeudo_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCFDIPorOperacion_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCFDI_Paginacion_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCFDI_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCiudadesByEstado_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClaveProdServByBusqueda_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClaveProdServByClase_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClaveProdServByPAC_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClaveProdServPorPAC_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClienteByClientID_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClienteByPhoneNumberOrAccountNumber_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClienteContactos_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClientesById_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClientesByUserID_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClientesMonitoreo_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClientes_Paginacion_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetClientes_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetColoniasByCodigoPostal_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetCorreo_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetDoctoRelacionadoByFactura_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetDoctoRelacionadoByPago10_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEmpleadosById_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEmpleadosByPuesto_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEmpleadosByUserID_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEmpleados_Paginacion_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEmpleados_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEstadosByPais_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetFormaDePago_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetHorarioOperaciones_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetIncidentes_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetInventario_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetISRBySueldo_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMetodosDePago_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMonitoreoIngresoByAdeudo_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMonitoreoIngreso_Paginacion_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMonitoreoIngreso_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetMunicipioByEstado_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetNominaDeduccion_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetNominaHistorial_Paginacion_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetNominaHistorial_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetPACById_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetPAC_Paginacion_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetPAC_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetPaquete_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSensores_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetSubsudioAlEmpleoBySueldo_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetUsuarioById_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetUsuarios_Paginacion_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HorarioOperaciones.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Horas.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Incapacidades.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Incidentes.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Inventario.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ISR.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Jornadas.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Llamadas.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Localidades.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LogMonitoreo360.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mensajes.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mensualidades.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetodosDePago.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Monedas.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MonitoreoIngresos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Municipios.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NominaDeduccion.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NominaHistorial.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NominaHorasExtras.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NominaIncapacidad.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NominaJubilacionPensionRetiro.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NominaOtrosPago.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NominaPercepcion.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NominaPercepciones.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Nominas.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NominaSeparacionIndemnizacion.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrigenRecurso.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OtrosPagos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PAC.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pagos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Paises.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Paquetes.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Percepciones.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PeriodicidadPagos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Regimen.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegimenFiscal.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReporteLlamada.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RiesgosPuesto.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Saldos.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sensores.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubsudioAlEmpleo.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsoCFDI.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuarios.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Monitor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -379,6 +777,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Monitor.resx">
       <DependentUpon>Monitor.cs</DependentUpon>
@@ -402,6 +801,13 @@
     <EmbeddedResource Include="Usuarios.resx">
       <DependentUpon>Usuarios.cs</DependentUpon>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\AvenzoSeguridad.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AvenzoSeguridad.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\AvenzoSeguridad.edmx.diagram">
+      <DependentUpon>AvenzoSeguridad.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -419,6 +825,16 @@
   <ItemGroup>
     <None Include="Resources\alarm.bmp" />
     <None Include="Resources\Add User Male_104px.png" />
+    <Content Include="Models\AvenzoSeguridad.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AvenzoSeguridad.edmx</DependentUpon>
+      <LastGenOutput>AvenzoSeguridad.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AvenzoSeguridad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AvenzoSeguridad.edmx</DependentUpon>
+      <LastGenOutput>AvenzoSeguridad.cs</LastGenOutput>
+    </Content>
     <Content Include="Resources\alarm.mp3" />
     <None Include="Resources\alarm.wav" />
     <None Include="Resources\android-icon.png" />
@@ -490,6 +906,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fotos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
