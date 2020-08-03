@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 using System.Globalization;
 
 namespace Monitoreo_360
@@ -15,7 +15,7 @@ namespace Monitoreo_360
     public partial class Incidentes : UserControl
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
-        delegate void setDataList(Model.Incidentes incidente);
+        delegate void setDataList(Models.Incidentes incidente);
         delegate void setVisibleGridView(bool visible);
         Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
         public Incidentes()
@@ -35,7 +35,7 @@ namespace Monitoreo_360
         }
         public bool getData()
         {
-            List<Model.Incidentes> incidentes = new List<Model.Incidentes>();
+            List<Models.Incidentes> incidentes = new List<Models.Incidentes>();
             incidentes = db.Incidentes.Where(x => x.Activo==true).ToList();
             this.ProgressBar.Maximum = incidentes.Count() + 5;
             foreach (var incidente in incidentes)
@@ -58,7 +58,7 @@ namespace Monitoreo_360
                 ProgressBar.Visible = !visible;
             }
         }
-        public void setDataGridView(Model.Incidentes incidente)
+        public void setDataGridView(Models.Incidentes incidente)
         {
             if (DataGrid_Incidentes.InvokeRequired)
             {
@@ -67,9 +67,9 @@ namespace Monitoreo_360
             }
             else
             {
-                Model.Clientes cliente = db.Clientes.Where(x => x.IdCliente == incidente.IdCliente).FirstOrDefault();
+                Models.Clientes cliente = db.Clientes.Where(x => x.IdCliente == incidente.IdCliente).FirstOrDefault();
                 CultureInfo CI = new CultureInfo("es-MX");
-                Model.LogMonitoreo360 Log = db.LogMonitoreo360.Where(x => x.Id == incidente.IdLog).FirstOrDefault();
+                Models.LogMonitoreo360 Log = db.LogMonitoreo360.Where(x => x.Id == incidente.IdLog).FirstOrDefault();
                 string report = Log.Log.Substring(66, Log.Log.Length - 66);
                 string eventos = "";
                 foreach (var evento in report.Split('-')[1].Split('/'))
@@ -93,7 +93,7 @@ namespace Monitoreo_360
         private void DataGrid_Incidentes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Guid id = Guid.Parse(this.DataGrid_Incidentes.Rows[e.RowIndex].Cells[0].Value.ToString());
-            Model.Incidentes Modelincidente = db.Incidentes.Where(model => model.Id == id).FirstOrDefault();
+            Models.Incidentes Modelincidente = db.Incidentes.Where(model => model.Id == id).FirstOrDefault();
             Incidente incidente = new Incidente(Modelincidente);
             incidente.ShowDialog();
         }

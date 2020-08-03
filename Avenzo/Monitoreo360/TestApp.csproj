@@ -192,12 +192,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SkypeControl\SkypeControl.csproj">
-      <Project>{7929F278-3A47-4FF1-A96F-44121E759261}</Project>
-      <Name>SkypeControl</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="SKYPE4COMLib">
       <Guid>{03282B5D-B38F-469D-849A-09B0A7F4881B}</Guid>
       <VersionMajor>1</VersionMajor>

@@ -8,22 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using MetroFramework;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
     public partial class Direccion : MetroFramework.Forms.MetroForm
     {
         Guid IdUsuario = new Guid();
-        Model.Clientes cliente;
+        Models.Clientes cliente;
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         public Direccion(Guid IdCliente, Guid IdUsuario)
         {
             InitializeComponent();
 
             List<Estados> estados = db.Estados.Where(x=>x.c_Pais== "MEX").ToList();
-            List<Ciudad> ciudades = db.Ciudad.ToList();
-            comboBox_Ciudad.Items.AddRange(ciudades.Select(x => x.Ciudad1).ToArray());
+            /*List<Ciudad> ciudades = db.Ciudad.ToList();
+            comboBox_Ciudad.Items.AddRange(ciudades.Select(x => x.Ciudad1).ToArray());*/
             comboBox_Estado.Items.AddRange(estados.Select(x => x.NombreEstado).ToArray());            
             this.IdUsuario = IdUsuario;
             this.cliente = db.Clientes.Where(x => x.IdCliente == IdCliente).FirstOrDefault();

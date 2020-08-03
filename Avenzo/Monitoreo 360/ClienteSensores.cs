@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
@@ -48,7 +48,7 @@ namespace Monitoreo_360
         public void setInfo(Guid IdCliente)
         {
             this.IdCliente = IdCliente;
-            List<Sensores> sensores = db.GetSensores(IdCliente, 2).ToList();
+            List<GetSensores_Result> sensores = db.GetSensores(IdCliente, 2).ToList();
             int index = 0;
             foreach (var sensor in sensores) {
                 index = this.dataGridView_Sensores.Rows.Add();

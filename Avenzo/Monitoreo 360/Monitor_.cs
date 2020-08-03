@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
@@ -24,7 +24,7 @@ namespace Monitoreo_360
 
         private void Monitor_Load(object sender, EventArgs e)
         {
-            List<Model.Clientes> Clientes = db.Clientes.Where(model => model.Activo == true && !string.IsNullOrEmpty(model.NumeroTelefonoAlarma)&&!string.IsNullOrEmpty(model.NumeroDeCuenta)).ToList();
+            List<Models.Clientes> Clientes = db.Clientes.Where(model => model.Activo == true && !string.IsNullOrEmpty(model.NumeroTelefonoAlarma)&&!string.IsNullOrEmpty(model.NumeroDeCuenta)).ToList();
             int width = this.panel_Clientes.Width;
             int ClientesRow = ((int)(width / 35));
             int x = 5; int y = 5;
@@ -99,7 +99,7 @@ namespace Monitoreo_360
         private void buttonStatus_Click(object sender, EventArgs e)
         {
             Button button = ((Button)sender);
-            Model.Clientes cliente = db.Clientes.Where(x=>x.NumeroDeCuenta==button.Name).FirstOrDefault();
+            Models.Clientes cliente = db.Clientes.Where(x=>x.NumeroDeCuenta==button.Name).FirstOrDefault();
             ClienteInfo form = new ClienteInfo();
             form.Text = "Cliente " + cliente.Nombres + " " + cliente.ApellidoPaterno + " " + cliente.ApellidoMaterno;
             form.setInfo(cliente);
@@ -110,7 +110,7 @@ namespace Monitoreo_360
         {
             this.timer.Stop();
             CultureInfo CI = new CultureInfo("es-MX");
-            List<Model.Clientes> Clientes = db.Clientes.Where(model => model.Activo == true && !string.IsNullOrEmpty(model.NumeroTelefonoAlarma) && !string.IsNullOrEmpty(model.NumeroDeCuenta)).ToList();            
+            List<Models.Clientes> Clientes = db.Clientes.Where(model => model.Activo == true && !string.IsNullOrEmpty(model.NumeroTelefonoAlarma) && !string.IsNullOrEmpty(model.NumeroDeCuenta)).ToList();            
             foreach (var cliente in Clientes.OrderBy(model => model.Nombres))
             {
                 List<LogMonitoreo360> logs = db.LogMonitoreo360.Where(model => cliente.NumeroDeCuenta.Contains(model.Log.Substring(61, 4)) && cliente.NumeroTelefonoAlarma.Contains(model.Log.Substring(54, 6).Replace("-", ""))).ToList();
@@ -167,7 +167,7 @@ namespace Monitoreo_360
             TimeSpan Hora = new TimeSpan(now.Hour, now.Minute, now.Second);
             foreach (var horario in horarios)
             {
-                Model.Clientes cliente = db.Clientes.Where(x => x.IdCliente == horario.IdCliente).FirstOrDefault();
+                Models.Clientes cliente = db.Clientes.Where(x => x.IdCliente == horario.IdCliente).FirstOrDefault();
                 List<LogMonitoreo360> logs = db.LogMonitoreo360.Where(model => cliente.NumeroDeCuenta.Contains(model.Log.Substring(61, 4)) && cliente.NumeroTelefonoAlarma.Contains(model.Log.Substring(54, 6).Replace("-", ""))).OrderBy(x => x.FechaCreacion).ToList();
                 foreach (var log in logs)
                 {

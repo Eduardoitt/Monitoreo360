@@ -14,8 +14,9 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Database.Query;
 using Google.Apis.Auth.OAuth2;
-using Model;
-using Monitoreo_360.Properties;
+//using Model;
+//using Monitoreo_360.Properties;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
@@ -27,7 +28,7 @@ namespace Monitoreo_360
         private FirebaseAuthLink Auth;
         private System.Windows.Forms.Button Button;
         private Guid IdIncidente = Guid.NewGuid();
-        Model.Clientes cliente = new Model.Clientes();
+        Models.Clientes cliente = new Models.Clientes();
         DateTime TiempoInicio;
         Panel panel;
         Guid IdUsuario;
@@ -46,7 +47,7 @@ namespace Monitoreo_360
             }
         }
 
-        public void setInfo(Model.Clientes cliente, Guid IdLog)
+        public void setInfo(Models.Clientes cliente, Guid IdLog)
         {
             
             this.cliente = cliente;
@@ -68,7 +69,7 @@ namespace Monitoreo_360
             label_ColorEstablecimiento.Text = cliente.ColorEstablecimiento;
             label_FechaCreation.Text = cliente.FechaCreacion.ToString();
             VerifyAsync(cliente.NumeroDeCuenta + "@avenzo.mx", cliente.NumeroDeCuenta);
-            List<ClienteContactos> contactos = db.GetClienteContactos(2, cliente.IdCliente).ToList();
+            List<GetClienteContactos_Result> contactos = db.GetClienteContactos(2, cliente.IdCliente).ToList();
             foreach (var contacto in contactos.OrderBy(x => x.Prioridad))
             {
                 var n = dataGridView_Contactos.Rows.Add();
@@ -192,7 +193,7 @@ namespace Monitoreo_360
         
         private void Button_Guardar_Click(object sender, EventArgs e)
         {
-            Model.Incidentes incidentes = db.Incidentes.Where(x=>x.Id==IdIncidente).FirstOrDefault();
+            Models.Incidentes incidentes = db.Incidentes.Where(x=>x.Id==IdIncidente).FirstOrDefault();
             db.UpdateIncidente(IdIncidente,incidentes.IdCliente,incidentes.IdLog,this.TextBox_Comentarios.Text, TiempoInicio,DateTime.Now,"Completo",true,DateTime.Now,IdUsuario);
             if (string.IsNullOrEmpty(Button.Text))
             {

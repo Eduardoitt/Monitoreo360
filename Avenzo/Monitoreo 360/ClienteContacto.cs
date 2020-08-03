@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework;
-using Model;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
@@ -21,7 +21,7 @@ namespace Monitoreo_360
         {
             InitializeComponent();
             this.IdCliente = IdCliente;
-            List<Model.ClienteContactos> contactos= db.GetClienteContactos(2, IdCliente).ToList();
+            List<GetClienteContactos_Result> contactos= db.GetClienteContactos(2, IdCliente).ToList();
             int n;
             foreach (var contacto in contactos.OrderBy(x=>x.Prioridad)) {
                 n = metroGrid_Contactos.Rows.Add();

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
@@ -25,7 +25,7 @@ namespace Monitoreo_360
         public void setInfo(Guid IdCliente)
         {
             this.IdCliente = IdCliente;
-            Model.HorarioOperaciones HO = db.GetHorarioOperaciones(this.IdCliente).FirstOrDefault();
+            GetHorarioOperaciones_Result HO = db.GetHorarioOperaciones(this.IdCliente).FirstOrDefault();
             if (HO!=null) {
                 dateTimePicker_LunesInicio.Value = new DateTime(2000,12,1,HO.LunesInicio.Value.Hours, HO.LunesInicio.Value.Minutes, HO.LunesInicio.Value.Seconds);
                 dateTimePicker_LunesFinal.Value = new DateTime(2000, 12, 1, HO.LunesFinal.Value.Hours, HO.LunesFinal.Value.Minutes, HO.LunesFinal.Value.Seconds);
@@ -64,7 +64,7 @@ namespace Monitoreo_360
                 DF = new TimeSpan(dateTimePicker_DomingoFinal.Value.Hour, dateTimePicker_DomingoFinal.Value.Minute, dateTimePicker_DomingoFinal.Value.Second);
                 if (db.HorarioOperaciones.Where(x => x.IdCliente == this.IdCliente).Any())
                 {
-                    Model.HorarioOperaciones HO = db.GetHorarioOperaciones(this.IdCliente).First();
+                    GetHorarioOperaciones_Result HO = db.GetHorarioOperaciones(this.IdCliente).First();
                     db.UpdateHorarioOperaciones(HO.Id,HO.IdCliente,DI,DF,LI,
                         LF,MI,MF,MII,MIF,
                         JI,JF,VI,VF,SI,

@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
     public partial class Clientes : UserControl
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
-        delegate void setDataList(Model.Clientes cliente);
+        delegate void setDataList(Models.Clientes cliente);
         delegate void setVisibleGridView(bool visible);
         Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
         public Clientes()
@@ -35,7 +35,7 @@ namespace Monitoreo_360
         }
         public bool getData()
         {
-            List<Model.Clientes> clientes = new List<Model.Clientes>();
+            List<Models.Clientes> clientes = new List<Models.Clientes>();
             Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
             clientes = db.Clientes.Where(x => x.IdProveedor == prove).OrderBy(x => x.Nombres).ToList();
             //this.ProgressBar.MaximumValue = clientes.Count() + 5;
@@ -60,7 +60,7 @@ namespace Monitoreo_360
                 ProgressBar.Visible = !visible;
             }
         }
-        public void setDataGridView(Model.Clientes cliente)
+        public void setDataGridView(Models.Clientes cliente)
         {
             if (DataGrid_Clientes.InvokeRequired)
             {

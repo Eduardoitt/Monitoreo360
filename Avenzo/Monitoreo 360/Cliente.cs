@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 using System.Threading;
 using MetroFramework;
 using FireSharp.Interfaces;
@@ -21,7 +21,7 @@ namespace Monitoreo_360
     {
         
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
-        delegate void setDataList(Model.Clientes cliente);
+        delegate void setDataList(Models.Clientes cliente);
         delegate void setVisibleGridView(bool visible);
         Guid IdUsuario;
         public Cliente(Guid IdUsuario)
@@ -42,7 +42,7 @@ namespace Monitoreo_360
             });
         }
         public bool  getData() {
-            List<Model.Clientes> clientes = new List<Model.Clientes>();
+            List<Models.Clientes> clientes = new List<Models.Clientes>();
             Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
             clientes = db.Clientes.Where(x => x.IdProveedor == prove).OrderBy(x => x.Nombres).ToList();
             int n = 0;
@@ -63,7 +63,7 @@ namespace Monitoreo_360
                 metroProgressSpinner.Visible = !visible;
             }
         }
-        public void setDataGridView(Model.Clientes cliente)
+        public void setDataGridView(Models.Clientes cliente)
         {
             if (dataGridView_Clientes.InvokeRequired)
             {

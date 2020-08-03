@@ -8,14 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
     public partial class Incidente : MetroFramework.Forms.MetroForm
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
-        public Incidente(Model.Incidentes incidentes)
+        public Incidente(Models.Incidentes incidentes)
         {
             InitializeComponent();
             this.TextBox_Comentarios.Text = incidentes.Comentarios;
@@ -31,7 +31,7 @@ namespace Monitoreo_360
             this.label_Colonia.Text = "Col. " + incidentes.Clientes.Colonia + ", Calle " + incidentes.Clientes.Calle;
             this.label_NoInterior.Text= " No Interior " + incidentes.Clientes.NoInterior + " No Exterior " + incidentes.Clientes.NoExterior;
             this.label_Entre_Calles.Text = incidentes.Clientes.EntreCalles;
-            List<ClienteContactos> contactos = db.GetClienteContactos(2, incidentes.Clientes.IdCliente).ToList();
+            List<GetClienteContactos_Result> contactos = db.GetClienteContactos(2, incidentes.Clientes.IdCliente).ToList();
             foreach (var contacto in contactos.OrderBy(x => x.Prioridad))
             {
                 ReporteLlamada llamada = db.ReporteLlamada.Where(x=>x.IdClienteContacto==contacto.Id).FirstOrDefault();
@@ -59,8 +59,8 @@ namespace Monitoreo_360
             string Zona = "1";
             if (eventos.Count() > 1)
             {
-                List<Sensores> clienteSensores = db.GetSensores(incidentes.Clientes.IdCliente, 2).ToList();
-                HorarioOperaciones Horario = db.GetHorarioOperaciones(incidentes.Clientes.IdCliente).FirstOrDefault();
+                List<GetSensores_Result> clienteSensores = db.GetSensores(incidentes.Clientes.IdCliente, 2).ToList();
+                GetHorarioOperaciones_Result Horario = db.GetHorarioOperaciones(incidentes.Clientes.IdCliente).FirstOrDefault();
                 List<CodigoEventos> CodigosEventos = db.CodigoEventos.ToList();
                 foreach (var evento in eventos)
                 {

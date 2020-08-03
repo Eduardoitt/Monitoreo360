@@ -5,12 +5,13 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using Model;
+
+
 namespace Helpers
 {
     public class Correo
     {
-        static AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
+     //
         public static MailMessage configMailMessage(string from, string subject) {
             MailMessage email = new MailMessage();
             email.From = new MailAddress(from);
@@ -50,15 +51,15 @@ namespace Helpers
             smtp.Send(email);            
             email.Dispose();
         }
-        public static void EnviarFactura(string Correos,string Nombre,string Host,string HTML,CFDI Factura)
+        public static void EnviarFactura(string Correos,string Nombre,string Host,string HTML,string RutaXML , string RutaPDF,Guid Id)
         {
             MailMessage email = configMailMessage("no-reply@avenzo.mx", "Factura ✓");
             email.To.Add(new MailAddress(Correos));            
-            email.Attachments.Add(new Attachment(Factura.Ruta+".xml"));
-            email.Attachments.Add(new Attachment(Factura.Ruta+".PDF"));
+            email.Attachments.Add(new Attachment(RutaXML + ".xml"));
+            email.Attachments.Add(new Attachment(RutaPDF + ".PDF"));
             
             SmtpClient smtp = configSmtp();
-            email.Body = BodyHtmlFacturas(HTML,Factura.Id,Nombre,Host);
+            email.Body = BodyHtmlFacturas(HTML,Id,Nombre,Host);
             smtp.Send(email);
             email.Dispose();
         }

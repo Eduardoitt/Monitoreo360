@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 namespace Monitoreo_360
 {
     public partial class ClienteEdit : MetroFramework.Forms.MetroForm
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
-        Model.Clientes cliente = new Model.Clientes();
+        Models.Clientes cliente = new Models.Clientes();
         Guid Id = new Guid();
         Guid IdUsuario = Guid.NewGuid();
         List<Bancos> bancos = new List<Bancos>();

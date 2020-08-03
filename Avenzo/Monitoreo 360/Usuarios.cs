@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
     public partial class Usuarios : UserControl
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
-        delegate void setDataList(Model.Usuarios usuario);
+        delegate void setDataList(Models.Usuarios usuario);
         delegate void setVisibleGridView(bool visible);
         public Usuarios()
         {
@@ -33,7 +33,7 @@ namespace Monitoreo_360
         }
         public bool getData()
         {
-            List<Model.Usuarios> usuarios = new List<Model.Usuarios>();
+            List<Models.Usuarios> usuarios = new List<Models.Usuarios>();
 
             usuarios = db.Usuarios.OrderBy(x => x.Usuario).ToList();
             this.ProgressBar.Maximum = usuarios.Count() + 5;
@@ -58,7 +58,7 @@ namespace Monitoreo_360
             }
         }
 
-        public void setDataGridView(Model.Usuarios usuario)
+        public void setDataGridView(Monitoreo_360.Models.Usuarios usuario)
         {
             if (DataGrid_Usuarios.InvokeRequired)
             {

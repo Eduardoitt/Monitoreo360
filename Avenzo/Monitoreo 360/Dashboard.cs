@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
@@ -24,7 +24,7 @@ namespace Monitoreo_360
         {
             InitializeComponent();           
             this.Idusuario = IdUsuario;
-            List<Model.Incidentes> Incidentes = new List<Model.Incidentes>();
+            List<Models.Incidentes> Incidentes = new List<Models.Incidentes>();
             Incidentes = db.Incidentes.Where(x => x.Activo == true&&x.Estatus == "Pendiente").ToList();
             int y = 0;
             foreach (var incidente in Incidentes)
@@ -122,7 +122,7 @@ namespace Monitoreo_360
             //*********************************************************************************
             //*************************** Incidentes Pendientes *******************************
             //*********************************************************************************
-            List<Model.Incidentes> Incidentes = new List<Model.Incidentes>();
+            List<Models.Incidentes> Incidentes = new List<Models.Incidentes>();
             Incidentes = db.Incidentes.Where(x => x.Activo == true && x.Estatus != "Completo"&&x.Estatus!="Pendiente").ToList();
             foreach (var incidente in Incidentes)
             {
@@ -135,7 +135,7 @@ namespace Monitoreo_360
                 string NumeroCuenta = Log.Log.Substring(61, 4);
                 string report = Log.Log.Substring(66, Log.Log.Length - 66);
                 string[] eventos = report.Split('-')[1].Split('/');
-                Model.Clientes cliente = db.Clientes.Where(x => x.IdCliente == incidente.IdCliente).FirstOrDefault();
+                Models.Clientes cliente = db.Clientes.Where(x => x.IdCliente == incidente.IdCliente).FirstOrDefault();
                 bool ParticionZona = false;
                 List<ClienteEventos> Eventos = new List<ClienteEventos>();
                 string Zona = "1";
@@ -143,8 +143,8 @@ namespace Monitoreo_360
                 {
                     if (eventos.Count() > 1)
                     {
-                        List<Sensores> clienteSensores = db.GetSensores(cliente.IdCliente, 2).ToList();
-                        HorarioOperaciones Horario = db.GetHorarioOperaciones(cliente.IdCliente).FirstOrDefault();
+                        List<GetSensores_Result> clienteSensores = db.GetSensores(cliente.IdCliente, 2).ToList();
+                        GetHorarioOperaciones_Result Horario = db.GetHorarioOperaciones(cliente.IdCliente).FirstOrDefault();
                         List<CodigoEventos> CodigosEventos = db.CodigoEventos.ToList();
                         foreach (var evento in eventos)
                         {
@@ -280,7 +280,7 @@ namespace Monitoreo_360
             //*********************************************************************************
             try
             {
-                List<Model.Clientes> Clients = db.Clientes.Where(x => x.Activo == true && x.NumeroTelefonoAlarma != null && x.NumeroDeCuenta != null).OrderBy(x => x.Nombres).ToList();
+                List<Models.Clientes> Clients = db.Clientes.Where(x => x.Activo == true && x.NumeroTelefonoAlarma != null && x.NumeroDeCuenta != null).OrderBy(x => x.Nombres).ToList();
                 List<LogMonitoreo360> Logs = db.LogMonitoreo360.ToList();
                 foreach (var client in Clients.OrderBy(x => x.Nombres))
                 {

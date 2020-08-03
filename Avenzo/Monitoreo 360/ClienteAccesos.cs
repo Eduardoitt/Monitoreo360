@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using Firebase;
 using Firebase.Auth;
 using MetroFramework;
-using Model;
+using Monitoreo_360.Models;
 using Newtonsoft.Json.Linq;
 
 namespace Monitoreo_360
@@ -22,7 +22,7 @@ namespace Monitoreo_360
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         private FirebaseAuthLink Auth;
         private Firebase.Auth.User User;
-        private Model.Clientes cliente = new Model.Clientes();
+        private Models.Clientes cliente = new Models.Clientes();
         private Usuarios usuario = new Usuarios();
         ClienteEdit formEdit;
         public ClienteAccesos(ClienteEdit formEdit)

@@ -13,19 +13,19 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Database.Query;
 using Google.Apis.Auth.OAuth2;
-using Model;
+using Monitoreo_360.Models;
 namespace Monitoreo_360
 {
     public partial class ClienteInfo : MetroFramework.Forms.MetroForm
     {
         private AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         private Guid IdIncidente;
-        Model.Clientes cliente = new Model.Clientes();
+        Models.Clientes cliente = new Models.Clientes();
         public ClienteInfo()
         {
             InitializeComponent();
         }
-        public void setInfo(Model.Clientes cliente)
+        public void setInfo(Models.Clientes cliente)
         {            
             this.cliente = cliente;
             textBox_TelefonoAlarma.Text = cliente.NumeroTelefonoAlarma;
@@ -38,7 +38,7 @@ namespace Monitoreo_360
             textBox_Pais.Text = cliente.Pais;
             textBox_PalabraClave.Text = cliente.PalabraClave;
             textBox_Fecha.Text = cliente.FechaCreacion.ToString();            
-            List<ClienteContactos> contactos = db.GetClienteContactos(2, cliente.IdCliente).ToList();
+            List<GetClienteContactos_Result> contactos = db.GetClienteContactos(2, cliente.IdCliente).ToList();
             foreach (var contacto in contactos.OrderBy(x=>x.Prioridad)) {
                 var n = dataGridView_Contactos.Rows.Add();
                 this.dataGridView_Contactos.Rows[n].Cells[0].Value = contacto.Id;

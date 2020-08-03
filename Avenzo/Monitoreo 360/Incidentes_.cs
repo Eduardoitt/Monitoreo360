@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 namespace Monitoreo_360
 {
     public partial class Incidentes_ : MetroFramework.Forms.MetroForm
@@ -21,11 +21,11 @@ namespace Monitoreo_360
         }
         public void setInfo(Guid IdUsuario) {
             this.IdUsuario = IdUsuario;
-            List<Model.Incidentes> Incidentes = db.Incidentes.Where(x => x.Activo == true).ToList();
+            List<Models.Incidentes> Incidentes = db.Incidentes.Where(x => x.Activo == true).ToList();
             foreach (var Incidente in Incidentes) {
-                Model.Clientes cliente = db.Clientes.Where(x => x.IdCliente == Incidente.IdCliente).FirstOrDefault();
+                Models.Clientes cliente = db.Clientes.Where(x => x.IdCliente == Incidente.IdCliente).FirstOrDefault();
                 CultureInfo CI = new CultureInfo("es-MX");
-                Model.LogMonitoreo360 Log = db.LogMonitoreo360.Where(x=>x.Id==Incidente.IdLog).FirstOrDefault();
+                Models.LogMonitoreo360 Log = db.LogMonitoreo360.Where(x=>x.Id==Incidente.IdLog).FirstOrDefault();
                 var n = Grid.Rows.Add();
                 string report = Log.Log.Substring(66, Log.Log.Length - 66);
                 string eventos = "";
@@ -47,7 +47,7 @@ namespace Monitoreo_360
         private void Grid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Guid id = Guid.Parse(this.Grid.Rows[e.RowIndex].Cells[0].Value.ToString());
-            Model.Incidentes Modelincidente=db.Incidentes.Where(model => model.Id == id).FirstOrDefault();
+            Models.Incidentes Modelincidente=db.Incidentes.Where(model => model.Id == id).FirstOrDefault();
             Incidente incidente = new Incidente(Modelincidente);
             incidente.ShowDialog();
             

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 
 
 namespace Monitoreo_360
@@ -84,15 +84,15 @@ namespace Monitoreo_360
                     string NumeroCuenta = this.textBox1.Text.Substring(61, 4);
                     string report = this.textBox1.Text.Substring(66, this.textBox1.Text.Length - 66);
                     string[] eventos = report.Split('-')[1].Split('/');
-                    Model.Clientes cliente = db.Clientes.Where(x => x.NumeroDeCuenta.Contains(NumeroCuenta) && x.NumeroTelefonoAlarma.Contains(NumeroTelefono)).FirstOrDefault();
+                    Models.Clientes cliente = db.Clientes.Where(x => x.NumeroDeCuenta.Contains(NumeroCuenta) && x.NumeroTelefonoAlarma.Contains(NumeroTelefono)).FirstOrDefault();
                     bool ParticionZona = false;
                     List<ClienteEventos> Eventos = new List<ClienteEventos>();
                     string Zona = "1";
                     if (cliente!=null) {
                         if (eventos.Count() > 1)
                         {
-                            List<Sensores> clienteSensores = db.GetSensores(cliente.IdCliente, 2).ToList();
-                            HorarioOperaciones Horario = db.GetHorarioOperaciones(cliente.IdCliente).FirstOrDefault();
+                            List<GetSensores_Result> clienteSensores = db.GetSensores(cliente.IdCliente, 2).ToList();
+                            GetHorarioOperaciones_Result Horario = db.GetHorarioOperaciones(cliente.IdCliente).FirstOrDefault();
                             List<CodigoEventos> CodigosEventos = db.CodigoEventos.ToList();
                             foreach (var evento in eventos)
                             {

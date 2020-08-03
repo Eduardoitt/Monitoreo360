@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
     public partial class Monitor : UserControl
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
-        delegate void setDataList(Model.Clientes cliente);
+        delegate void setDataList(Models.Clientes cliente);
         delegate void setVisiblePanel(bool visible);
         private Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
         private int width = 0;
@@ -44,7 +44,7 @@ namespace Monitoreo_360
         public bool getData()
         {
             Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
-            List<Model.Clientes> clientes = new List<Model.Clientes>();
+            List<Models.Clientes> clientes = new List<Models.Clientes>();
             clientes = db.Clientes.Where(model => model.Activo == true && !string.IsNullOrEmpty(model.NumeroTelefonoAlarma) && !string.IsNullOrEmpty(model.NumeroDeCuenta) && model.IdProveedor == prove).ToList();
             this.ProgressBar.Maximum = clientes.Count() + 5;
             foreach (var cliente in clientes)
@@ -67,7 +67,7 @@ namespace Monitoreo_360
             }
         }
 
-        public void setDataPanel(Model.Clientes cliente)
+        public void setDataPanel(Models.Clientes cliente)
         {
             if (panel.InvokeRequired)
             {
@@ -134,7 +134,7 @@ namespace Monitoreo_360
         private void buttonStatus_Click(object sender, EventArgs e)
         {
             Button button = ((Button)sender);
-            Model.Clientes cliente = db.Clientes.Where(x => x.NumeroDeCuenta == button.Name).FirstOrDefault();
+            Models.Clientes cliente = db.Clientes.Where(x => x.NumeroDeCuenta == button.Name).FirstOrDefault();
             ClienteInfo form = new ClienteInfo();
             form.Text = "Cliente " + cliente.Nombres + " " + cliente.ApellidoPaterno + " " + cliente.ApellidoMaterno;
             form.setInfo(cliente);
