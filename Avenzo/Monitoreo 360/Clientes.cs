@@ -81,32 +81,7 @@ namespace Monitoreo_360
                 DataGrid_Clientes.Rows[n].Cells[6].Value = cliente.Email;
                 DataGrid_Clientes.Rows[n].Cells[7].Value = cliente.NumeroTelefonoAlarma;
 
-               /* DataGrid_Clientes.Rows.Add();
-                n = Convert.ToInt32( cliente.IdCliente);
-                DataGrid_Clientes.Rows.Add(n);
-                DataGrid_Clientes.Rows[n].Cells[1].Value = cliente.NumeroDeCuenta;
-                n = Convert.ToInt32(cliente.NumeroDeCuenta);
-                DataGrid_Clientes.Rows.Add(n);
 
-                DataGrid_Clientes.Rows[n].Cells[2].Value = cliente.Nombres;
-                n = Convert.ToInt32(cliente.Nombres);
-                DataGrid_Clientes.Rows.Add(n);
-
-                DataGrid_Clientes.Rows[n].Cells[3].Value = cliente.ApellidoPaterno;
-                n = Convert.ToInt32(cliente.ApellidoPaterno);
-                DataGrid_Clientes.Rows.Add(n);
-                DataGrid_Clientes.Rows[n].Cells[4].Value = cliente.ApellidoMaterno;
-                n = Convert.ToInt32(cliente.ApellidoMaterno);
-                DataGrid_Clientes.Rows.Add(n);
-                DataGrid_Clientes.Rows[n].Cells[5].Value = cliente.Telefono;
-                n = Convert.ToInt32(cliente.Telefono);
-                DataGrid_Clientes.Rows.Add(n);
-                DataGrid_Clientes.Rows[n].Cells[6].Value = cliente.Email;
-                n = Convert.ToInt32(cliente.Email);
-                DataGrid_Clientes.Rows.Add(n);
-                DataGrid_Clientes.Rows[n].Cells[7].Value = cliente.NumeroTelefonoAlarma;
-                n = Convert.ToInt32(cliente.NumeroTelefonoAlarma);
-                DataGrid_Clientes.Rows.Add(n);*/
                 //dataGridView_Clientes.Rows[n].Cells[9].Nam;
                 //dataGridView_Clientes.Rows[n].Cells[8].Value = "Editar";
             }

@@ -46,7 +46,7 @@ namespace Monitoreo_360
             Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
             List<Models.Clientes> clientes = new List<Models.Clientes>();
             clientes = db.Clientes.Where(model => model.Activo == true && !string.IsNullOrEmpty(model.NumeroTelefonoAlarma) && !string.IsNullOrEmpty(model.NumeroDeCuenta) && model.IdProveedor == prove).ToList();
-            this.ProgressBar.Maximum = clientes.Count() + 5;
+           // this.ProgressBar.Maximum = clientes.Count() + 5;
             foreach (var cliente in clientes)
             {
                 setDataPanel(cliente);
@@ -76,7 +76,7 @@ namespace Monitoreo_360
             }
             else
             {                
-                this.ProgressBar.Value += 1;
+                //this.ProgressBar.Value += 1;
                 System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Monitor_));
                 Button buttonStatus = new Button();
                 buttonStatus.BackColor = System.Drawing.Color.LightGray;
