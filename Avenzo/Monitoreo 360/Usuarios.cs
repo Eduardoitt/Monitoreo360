@@ -58,7 +58,7 @@ namespace Monitoreo_360
             }
         }
 
-        public void setDataGridView(Monitoreo_360.Models.Usuarios usuario)
+        public void setDataGridView(Models.Usuarios usuario)
         {
             if (DataGrid_Usuarios.InvokeRequired)
             {
