@@ -87,7 +87,7 @@ namespace Monitoreo_360
             }
         }
 
-        private void DataGrid_Clientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGrid_Clientes_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
             new ClienteEdit(Guid.Parse(DataGrid_Clientes.Rows[e.RowIndex].Cells[0].Value.ToString()), Guid.Parse("8bead89f-b0ca-4ca9-9268-4de6c727e3a2")).ShowDialog();

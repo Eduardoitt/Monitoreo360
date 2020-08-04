@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.DataGrid_Clientes = new System.Windows.Forms.DataGridView();
+            this.IdCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumeroDeCuentaa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApellidoPaternoo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApellidoMaternoo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Telefonoo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumeroTelefonoAlarma = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumeroDeCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,14 +47,6 @@
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.bunifuElipse_Clientes = new System.Windows.Forms.Button();
-            this.IdCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumeroDeCuentaa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ApellidoPaternoo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ApellidoMaternoo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Telefonoo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumeroTelefonoAlarma = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid_Clientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,6 +73,57 @@
             this.DataGrid_Clientes.Size = new System.Drawing.Size(841, 414);
             this.DataGrid_Clientes.TabIndex = 0;
             this.DataGrid_Clientes.Visible = false;
+            this.DataGrid_Clientes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGrid_Clientes_CellClick_1);
+            // 
+            // IdCliente
+            // 
+            this.IdCliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.IdCliente.HeaderText = "IdCliente";
+            this.IdCliente.Name = "IdCliente";
+            this.IdCliente.ReadOnly = true;
+            this.IdCliente.Visible = false;
+            // 
+            // NumeroDeCuentaa
+            // 
+            this.NumeroDeCuentaa.HeaderText = "Numero De Cuenta";
+            this.NumeroDeCuentaa.Name = "NumeroDeCuentaa";
+            this.NumeroDeCuentaa.ReadOnly = true;
+            // 
+            // Nombres
+            // 
+            this.Nombres.HeaderText = "Nombre";
+            this.Nombres.Name = "Nombres";
+            this.Nombres.ReadOnly = true;
+            // 
+            // ApellidoPaternoo
+            // 
+            this.ApellidoPaternoo.HeaderText = "Apellido Paterno";
+            this.ApellidoPaternoo.Name = "ApellidoPaternoo";
+            this.ApellidoPaternoo.ReadOnly = true;
+            // 
+            // ApellidoMaternoo
+            // 
+            this.ApellidoMaternoo.HeaderText = "Apellido Materno";
+            this.ApellidoMaternoo.Name = "ApellidoMaternoo";
+            this.ApellidoMaternoo.ReadOnly = true;
+            // 
+            // Telefonoo
+            // 
+            this.Telefonoo.HeaderText = "Telefono";
+            this.Telefonoo.Name = "Telefonoo";
+            this.Telefonoo.ReadOnly = true;
+            // 
+            // Email
+            // 
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            // 
+            // NumeroTelefonoAlarma
+            // 
+            this.NumeroTelefonoAlarma.HeaderText = "Telefono de Alarma";
+            this.NumeroTelefonoAlarma.Name = "NumeroTelefonoAlarma";
+            this.NumeroTelefonoAlarma.ReadOnly = true;
             // 
             // Id
             // 
@@ -139,56 +190,6 @@
             this.bunifuElipse_Clientes.Name = "bunifuElipse_Clientes";
             this.bunifuElipse_Clientes.Size = new System.Drawing.Size(75, 23);
             this.bunifuElipse_Clientes.TabIndex = 0;
-            // 
-            // IdCliente
-            // 
-            this.IdCliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.IdCliente.HeaderText = "IdCliente";
-            this.IdCliente.Name = "IdCliente";
-            this.IdCliente.ReadOnly = true;
-            this.IdCliente.Visible = false;
-            // 
-            // NumeroDeCuentaa
-            // 
-            this.NumeroDeCuentaa.HeaderText = "Numero De Cuenta";
-            this.NumeroDeCuentaa.Name = "NumeroDeCuentaa";
-            this.NumeroDeCuentaa.ReadOnly = true;
-            // 
-            // Nombres
-            // 
-            this.Nombres.HeaderText = "Nombre";
-            this.Nombres.Name = "Nombres";
-            this.Nombres.ReadOnly = true;
-            // 
-            // ApellidoPaternoo
-            // 
-            this.ApellidoPaternoo.HeaderText = "Apellido Paterno";
-            this.ApellidoPaternoo.Name = "ApellidoPaternoo";
-            this.ApellidoPaternoo.ReadOnly = true;
-            // 
-            // ApellidoMaternoo
-            // 
-            this.ApellidoMaternoo.HeaderText = "Apellido Materno";
-            this.ApellidoMaternoo.Name = "ApellidoMaternoo";
-            this.ApellidoMaternoo.ReadOnly = true;
-            // 
-            // Telefonoo
-            // 
-            this.Telefonoo.HeaderText = "Telefono";
-            this.Telefonoo.Name = "Telefonoo";
-            this.Telefonoo.ReadOnly = true;
-            // 
-            // Email
-            // 
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            // 
-            // NumeroTelefonoAlarma
-            // 
-            this.NumeroTelefonoAlarma.HeaderText = "Telefono de Alarma";
-            this.NumeroTelefonoAlarma.Name = "NumeroTelefonoAlarma";
-            this.NumeroTelefonoAlarma.ReadOnly = true;
             // 
             // Clientes
             // 
