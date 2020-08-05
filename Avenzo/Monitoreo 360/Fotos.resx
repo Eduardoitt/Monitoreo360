@@ -124,4 +124,17 @@
   <data name="bunifuElipse.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>150, 17</value>
   </data>
+  <data name="Button_AgregarFotos.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAALUAAAApCAYAAABz92iRAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAYNJREFUeF7t3EFKQlEYhuHW4syZM2fOnDlzA86cuQJX4AZcgRvIIJIILk0iyEEg
+        QQgNDCIHkURwCeKP71y9FG3A8/E+8IOow5fDVTj/SQBmiBp2iBp2iBp2iBp2iBp2/kX9PJ/H7XAYl51O
+        nDYaDHO0o0ZvBoN4ms329VbqqL92u/SFu9EoXhaL+Nxs9p8Ax0mNvhZF3I/Hcd3v183WUStondJAjt6W
+        yyh6vfguyypqHd+qHcjZ43QaD5NJFbVOaR3jQM4+1uu46narqM9brfRMDeROPyBT1HoBOCBq2CFq2CFq
+        2CFq2CFq2CFq2CFq2CFq2CFq2CFq2CFq2CFq2CFq2CFq2CFq2CFq2CFq2KmjPms20y1cIHd11NqZoCvm
+        QM7K7TYu2u0qal0r1/VyIGfaW6NlTClqPXroajlbmZCr3w2nqOV9tUpvarEN6xKQC8WsNXnaznTYXVNH
+        LYpZm5q0B0QP3Axz7KM/ObTQVItsDv5EDTggatghatghatghapiJ+AHgClM/SCYROgAAAABJRU5ErkJg
+        gg==
+</value>
+  </data>
 </root>
