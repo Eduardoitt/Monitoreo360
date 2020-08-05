@@ -70,7 +70,7 @@
             //this.Button_AgregarFotos.ActiveLineColor = System.Drawing.Color.Firebrick;
             this.Button_AgregarFotos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.Button_AgregarFotos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Button_AgregarFotos.BackgroundImage")));
-            //this.Button_AgregarFotos.ButtonText = "Agregar Fotos";
+            this.Button_AgregarFotos.Text = "Agregar Fotos";
             this.Button_AgregarFotos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Button_AgregarFotos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button_AgregarFotos.ForeColor = System.Drawing.Color.Firebrick;

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,11 +35,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label_Error = new System.Windows.Forms.Label();
             this.metroButton_Login = new MetroFramework.Controls.MetroButton();
-            //this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuElipse = new System.Windows.Forms.Button();
-            //this.textBox_Password = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.textBox_Password = new System.Windows.Forms.TextBox();
-           // this.textBox_Email = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.textBox_Email = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -50,20 +46,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(564, 434);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(154, 21);
+            this.label1.Size = new System.Drawing.Size(140, 20);
             this.label1.TabIndex = 3;
             this.label1.Text = "Correo Electronico";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(593, 496);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 21);
+            this.label2.Size = new System.Drawing.Size(92, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Contraseña";
             // 
@@ -114,25 +110,21 @@
             // 
             // bunifuElipse
             // 
-           /* this.bunifuElipse.ElipseRadius = 20;
-            this.bunifuElipse.TargetControl = this;*/
+            this.bunifuElipse.Location = new System.Drawing.Point(0, 0);
+            this.bunifuElipse.Name = "bunifuElipse";
+            this.bunifuElipse.Size = new System.Drawing.Size(75, 23);
+            this.bunifuElipse.TabIndex = 0;
             // 
             // textBox_Password
             // 
             this.textBox_Password.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textBox_Password.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_Password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-          /*  this.textBox_Password.HintForeColor = System.Drawing.Color.Empty;
-            this.textBox_Password.HintText = "";
-            this.textBox_Password.isPassword = true;
-            this.textBox_Password.LineFocusedColor = System.Drawing.Color.Maroon;
-            this.textBox_Password.LineIdleColor = System.Drawing.Color.Gray;
-            this.textBox_Password.LineMouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.textBox_Password.LineThickness = 4;*/
             this.textBox_Password.Location = new System.Drawing.Point(535, 516);
             this.textBox_Password.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox_Password.Name = "textBox_Password";
-            this.textBox_Password.Size = new System.Drawing.Size(215, 39);
+            this.textBox_Password.PasswordChar = '*';
+            this.textBox_Password.Size = new System.Drawing.Size(215, 24);
             this.textBox_Password.TabIndex = 2;
             this.textBox_Password.Text = "Prueba";
             this.textBox_Password.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -140,19 +132,12 @@
             // textBox_Email
             // 
             this.textBox_Email.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textBox_Email.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_Email.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-           /* this.textBox_Email.HintForeColor = System.Drawing.Color.Empty;
-            this.textBox_Email.HintText = "";
-            this.textBox_Email.isPassword = false;
-            this.textBox_Email.LineFocusedColor = System.Drawing.Color.Maroon;
-            this.textBox_Email.LineIdleColor = System.Drawing.Color.Gray;
-            this.textBox_Email.LineMouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.textBox_Email.LineThickness = 4;*/
             this.textBox_Email.Location = new System.Drawing.Point(535, 452);
             this.textBox_Email.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox_Email.Name = "textBox_Email";
-            this.textBox_Email.Size = new System.Drawing.Size(215, 39);
+            this.textBox_Email.Size = new System.Drawing.Size(215, 24);
             this.textBox_Email.TabIndex = 1;
             this.textBox_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -178,7 +163,6 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Login";
             this.Resizable = false;

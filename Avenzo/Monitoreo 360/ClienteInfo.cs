@@ -49,10 +49,10 @@ namespace Monitoreo_360
             }
         }     
 
-        private void ClienteInfo_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        //private void ClienteInfo_FormClosing(object sender, FormClosingEventArgs e)
+        //{
             
-        }
+        //}
         private void dataGridView_Contactos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;

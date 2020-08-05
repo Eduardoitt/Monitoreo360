@@ -529,7 +529,7 @@
             this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "Alerta";
             this.TransparencyKey = System.Drawing.Color.Red;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClienteInfo_FormClosing);
+            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClienteInfo_FormClosing);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).EndInit();
