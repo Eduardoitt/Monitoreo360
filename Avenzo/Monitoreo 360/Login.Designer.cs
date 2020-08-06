@@ -107,6 +107,7 @@
             this.metroButton_Login.Text = "Inicar sesion";
             this.metroButton_Login.UseSelectable = true;
             this.metroButton_Login.Click += new System.EventHandler(this.pictureBox3_Click);
+            //this.metroButton_Login.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.metroButton_Login_KeyPress);
             // 
             // bunifuElipse
             // 

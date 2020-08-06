@@ -17,11 +17,13 @@ namespace Monitoreo_360
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         delegate void setDataList(Models.Incidentes incidente);
         delegate void setVisibleGridView(bool visible);
+        delegate void setMaximun(int max);
         Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
         public Incidentes()
         {
             InitializeComponent();
             this.ProgressBar.Value = 5;
+            this.ProgressBar.Minimum = 5;
             Data();
         }
         async void Data()
@@ -38,6 +40,8 @@ namespace Monitoreo_360
             List<Models.Incidentes> incidentes = new List<Models.Incidentes>();
             incidentes = db.Incidentes.Where(x => x.Activo==true).ToList();
             //this.ProgressBar.Maximum = incidentes.Count() + 5;
+            int max = incidentes.Count() + 5;
+            setMax(max);
             foreach (var incidente in incidentes)
             {
 
@@ -56,6 +60,18 @@ namespace Monitoreo_360
             {
                 DataGrid_Incidentes.Visible = visible;
                 ProgressBar.Visible = !visible;
+            }
+        }
+        public void setMax(int max)
+        {
+            if (DataGrid_Incidentes.InvokeRequired)
+            {
+                setMaximun establecermax = new setMaximun(setMax);
+                this.Invoke(establecermax,new object[] { max});
+            }
+            else
+            {
+                ProgressBar.Maximum = max;
             }
         }
         public void setDataGridView(Models.Incidentes incidente)

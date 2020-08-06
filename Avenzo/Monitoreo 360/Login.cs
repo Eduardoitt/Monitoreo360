@@ -24,6 +24,7 @@ namespace Monitoreo_360
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             try {
+                
                 string Password = Helpers.SHA1.Encode(textBox_Password.Text);
                 string Email = textBox_Email.Text;
                 if (db.Usuarios.Where(x => x.Usuario == Email && x.Contraseña == Password).Any())
@@ -46,5 +47,7 @@ namespace Monitoreo_360
             }
             
         }
+
+
     }
 }

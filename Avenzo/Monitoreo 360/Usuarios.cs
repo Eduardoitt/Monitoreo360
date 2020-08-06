@@ -16,6 +16,7 @@ namespace Monitoreo_360
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         delegate void setDataList(Models.Usuarios usuario);
         delegate void setVisibleGridView(bool visible);
+        delegate void setMaximun(int max);
         public Usuarios()
         {
             InitializeComponent();
@@ -37,6 +38,8 @@ namespace Monitoreo_360
 
             usuarios = db.Usuarios.OrderBy(x => x.Usuario).ToList();
             //this.ProgressBar.Maximum = usuarios.Count() + 5;
+            int max = usuarios.Count() + 5;
+            setMaximo(max);
             foreach (var usuario in usuarios)
             {
 
@@ -57,7 +60,18 @@ namespace Monitoreo_360
                 ProgressBar.Visible = !visible;
             }
         }
-
+        public void setMaximo(int max)
+        {
+            if (DataGrid_Usuarios.InvokeRequired)
+            {
+                setMaximun dg = new setMaximun(setMaximo);
+                this.Invoke(dg,new object[] { max});
+            }
+            else
+            {
+                ProgressBar.Maximum = max;
+            }
+        }
         public void setDataGridView(Models.Usuarios usuario)
         {
             if (DataGrid_Usuarios.InvokeRequired)

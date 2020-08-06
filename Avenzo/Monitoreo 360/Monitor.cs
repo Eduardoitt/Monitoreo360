@@ -16,6 +16,7 @@ namespace Monitoreo_360
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         delegate void setDataList(Models.Clientes cliente);
         delegate void setVisiblePanel(bool visible);
+        delegate void setMaximunD(int max);
         private Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
         private int width = 0;
         private int ClientesRow = 0;
@@ -46,12 +47,25 @@ namespace Monitoreo_360
             Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
             List<Models.Clientes> clientes = new List<Models.Clientes>();
             clientes = db.Clientes.Where(model => model.Activo == true && !string.IsNullOrEmpty(model.NumeroTelefonoAlarma) && !string.IsNullOrEmpty(model.NumeroDeCuenta) && model.IdProveedor == prove).ToList();
-           // this.ProgressBar.Maximum = clientes.Count() + 5;
+            // this.ProgressBar.Maximum = clientes.Count() + 5;
+            int max = clientes.Count() + 5;
+            setMaximo(max);
             foreach (var cliente in clientes)
             {
                 setDataPanel(cliente);
             }
             return true;
+        }
+        public void setMaximo(int max)
+        {
+            if (panel.InvokeRequired)
+            {
+                setMaximunD d = new setMaximunD(setMaximo);
+                this.Invoke(d,new object[] { max});
+            }else
+            {
+                ProgressBar.Maximum = max;
+            }
         }
         public void setVisibleDataPanel(bool visible)
         {
@@ -76,7 +90,7 @@ namespace Monitoreo_360
             }
             else
             {                
-                //this.ProgressBar.Value += 1;
+                this.ProgressBar.Value += 1;
                 System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Monitor_));
                 Button buttonStatus = new Button();
                 buttonStatus.BackColor = System.Drawing.Color.LightGray;
