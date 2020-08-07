@@ -83,14 +83,14 @@ namespace Monitoreo_360
             System.Windows.Forms.Button Button_Close = new System.Windows.Forms.Button();
             PictureBox pictureBox = new System.Windows.Forms.PictureBox();
             panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(Button_Close)).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)(Button_Close)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(pictureBox)).BeginInit();
             this.panel_Galeria.Controls.Add(panel);
 
             // 
             // panel
             // 
-            panel.Controls.Add(Button_Close);
+            //panel.Controls.Add(Button_Close);
             panel.Controls.Add(pictureBox);
             panel.Location = new System.Drawing.Point(x, y);
             //panel.Name = "panel";
@@ -99,15 +99,15 @@ namespace Monitoreo_360
             // 
             // Button_Close
             // 
-            Button_Close.BackColor = System.Drawing.Color.Firebrick;
-            Button_Close.Image = global::Monitoreo_360.Properties.Resources.Delete_96px;
-            //Button_Close.ImageActive = null;
-            Button_Close.Location = new System.Drawing.Point(152, 0);
-            //Button_Close.Name = "Button_Close";
-            Button_Close.Size = new System.Drawing.Size(18, 18);
-           // Button_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            Button_Close.TabIndex = 1;
-            Button_Close.TabStop = false;
+           // Button_Close.BackColor = System.Drawing.Color.Firebrick;
+           // Button_Close.Image = global::Monitoreo_360.Properties.Resources.Delete_96px;
+           // //Button_Close.ImageActive = null;
+           // Button_Close.Location = new System.Drawing.Point(152, 0);
+           // //Button_Close.Name = "Button_Close";
+           // Button_Close.Size = new System.Drawing.Size(18, 18);
+           //// Button_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+           // Button_Close.TabIndex = 1;
+           // Button_Close.TabStop = false;
             //Button_Close.Zoom = 10;
             // 
             // pictureBox
@@ -125,7 +125,7 @@ namespace Monitoreo_360
             
 
             panel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(Button_Close)).EndInit();
+            //((System.ComponentModel.ISupportInitialize)(Button_Close)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(pictureBox)).EndInit();
         }
         public void pictureBox_DoubleClick(object sender, EventArgs e) {

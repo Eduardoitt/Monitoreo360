@@ -116,7 +116,7 @@
         private System.Windows.Forms.Panel panel_Galeria;
         //private System.Windows.Forms.Panel panel;
        // private Bunifu.Framework.UI.BunifuImageButton Button_Close;
-        //private System.Windows.Forms.Button Button_Close;
+        private System.Windows.Forms.Button Button_Close;
         //private System.Windows.Forms.PictureBox pictureBox;
     }
 }

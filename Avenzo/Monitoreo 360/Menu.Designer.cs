@@ -177,7 +177,6 @@
             this.Button_Clientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
             this.Button_Clientes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Button_Clientes.Cursor = System.Windows.Forms.Cursors.Hand;
-            //this.Button_Clientes.Image = global::Monitoreo_360.Properties.Resources.People_96px;
             this.Button_Clientes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Button_Clientes.Location = new System.Drawing.Point(0, 136);
             this.Button_Clientes.Name = "Button_Clientes";
@@ -271,6 +270,7 @@
             this.panel_Controls.Name = "panel_Controls";
             this.panel_Controls.Size = new System.Drawing.Size(814, 46);
             this.panel_Controls.TabIndex = 5;
+            this.panel_Controls.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Controls_Paint);
             // 
             // panel_Content
             // 

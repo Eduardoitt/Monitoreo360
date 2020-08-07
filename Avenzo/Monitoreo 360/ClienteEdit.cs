@@ -129,7 +129,7 @@ namespace Monitoreo_360
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-
+            //agregar procedimiento de guardar
         }
 
         private void metroButton_Contactos_Click(object sender, EventArgs e)

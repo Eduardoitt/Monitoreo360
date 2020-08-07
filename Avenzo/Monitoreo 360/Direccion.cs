@@ -38,8 +38,13 @@ namespace Monitoreo_360
             this.Textbox_Google.Text = cliente.GoogleMaps;
             comboBox_Estado.SelectedItem = cliente.Estado;
             comboBox_Ciudad.SelectedItem = cliente.Ciudad;
-            if(cliente.GoogleMaps!=null)
-                this.webBrowser.Url = new Uri(cliente.GoogleMaps);
+            if (cliente.GoogleMaps != null)
+            {
+                webBrowser.ScriptErrorsSuppressed = true;
+                //this.webBrowser.Url = new Uri(cliente.GoogleMaps);
+                this.webBrowser.Navigate(new Uri(cliente.GoogleMaps));               
+            }
+               
         }
 
         private void Button_Guardar_Click(object sender, EventArgs e)

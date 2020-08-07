@@ -289,43 +289,21 @@ namespace Monitoreo_360
                 form.Location = new Point(20, 20);
                 form.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top;
 
-                System.Windows.Forms.Button Button_AgregarClientes = new System.Windows.Forms.Button(); 
-                System.Windows.Forms.Button bunifuElipse_AgregarClientes = new System.Windows.Forms.Button(); 
-                //Button_AgregarClientes.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
+                
+                System.Windows.Forms.Button bunifuElipse_AgregarClientes = new System.Windows.Forms.Button();
+                System.Windows.Forms.Button Button_AgregarClientes = new System.Windows.Forms.Button();
                 Button_AgregarClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
                 Button_AgregarClientes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-               // Button_AgregarClientes.BorderRadius = 0;
                 Button_AgregarClientes.Text = "Agregar Clientes";
                 Button_AgregarClientes.Cursor = System.Windows.Forms.Cursors.Hand;
-               /* Button_AgregarClientes.DisabledColor = System.Drawing.Color.Gray;
-                Button_AgregarClientes.Iconcolor = System.Drawing.Color.Transparent;
-                Button_AgregarClientes.Iconimage = global::Monitoreo_360.Properties.Resources.Add_User_Male_104px;
-                Button_AgregarClientes.Iconimage_right = null;
-                Button_AgregarClientes.Iconimage_right_Selected = null;
-                Button_AgregarClientes.Iconimage_Selected = null;
-                Button_AgregarClientes.IconMarginLeft = 0;
-                Button_AgregarClientes.IconMarginRight = 0;
-                Button_AgregarClientes.IconRightVisible = true;
-                Button_AgregarClientes.IconRightZoom = 0D;
-                Button_AgregarClientes.IconVisible = true;
-                Button_AgregarClientes.IconZoom = 70D;
-                Button_AgregarClientes.IsTab = false;*/
                 Button_AgregarClientes.Location = new System.Drawing.Point(20, 8);
                 Button_AgregarClientes.Name = "Button_AgregarClientes";
-              /*  Button_AgregarClientes.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
-                Button_AgregarClientes.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(44)))), ((int)(((byte)(100)))));
-                Button_AgregarClientes.OnHoverTextColor = System.Drawing.Color.White;
-                Button_AgregarClientes.selected = false;*/
                 Button_AgregarClientes.Size = new System.Drawing.Size(174, 30);
                 Button_AgregarClientes.TabIndex = 0;
                 Button_AgregarClientes.Text = "Agregar Clientes";
                 Button_AgregarClientes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-               // Button_AgregarClientes.Textcolor = System.Drawing.Color.White;
                 Button_AgregarClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 Button_AgregarClientes.Click += new System.EventHandler(this.Button_AgregarClientes_Click);
-
-               // bunifuElipse_AgregarClientes.ElipseRadius = 5;
-                //bunifuElipse_AgregarClientes.TargetControl = Button_AgregarClientes;
                 this.panel_Controls.Controls.Add(Button_AgregarClientes);
                 this.panel_Content.Controls.Add(form);
                 
@@ -335,7 +313,10 @@ namespace Monitoreo_360
 
             
         }
-
+        private void panel_Controls_Paint(object sender, PaintEventArgs e)
+        {
+            //this.Button_AgregarClientes.
+        }
         private void Button_CerrarSesion_Click(object sender, EventArgs e)
         {
             login.Show();
@@ -656,5 +637,7 @@ namespace Monitoreo_360
             
             this.panel_Content.Controls.Add(form);
         }
+
+       
     }
 }
