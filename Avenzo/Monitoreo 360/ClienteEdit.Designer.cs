@@ -28,28 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.metroPanel = new MetroFramework.Controls.MetroPanel();
-            this.TextBox_ClaveBancaria = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_Celular = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_EstadoCivil = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_Email = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_TelefonoCasa = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_Beneficiario = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_CURP = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_NumCTAPago = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_RFC = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.bunifuMaterialTextbox3 = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_TelefonoTrabajo = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_Profesion = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_ApellidoMaterno = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_ApellidoPaterno = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_Nombre = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.TextBox_NumeroDeCuenta = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMaterialTextbox();
+            this.TextBox_ClaveBancaria = new System.Windows.Forms.TextBox();
+            this.TextBox_Celular = new System.Windows.Forms.TextBox();
+            this.TextBox_EstadoCivil = new System.Windows.Forms.TextBox();
+            this.TextBox_Email = new System.Windows.Forms.TextBox();
+            this.TextBox_TelefonoCasa = new System.Windows.Forms.TextBox();
+            this.TextBox_Beneficiario = new System.Windows.Forms.TextBox();
+            this.TextBox_CURP = new System.Windows.Forms.TextBox();
+            this.TextBox_NumCTAPago = new System.Windows.Forms.TextBox();
+            this.TextBox_RFC = new System.Windows.Forms.TextBox();
+            this.bunifuMaterialTextbox3 = new System.Windows.Forms.TextBox();
+            this.TextBox_TelefonoTrabajo = new System.Windows.Forms.TextBox();
+            this.TextBox_Profesion = new System.Windows.Forms.TextBox();
+            this.TextBox_ApellidoMaterno = new System.Windows.Forms.TextBox();
+            this.TextBox_ApellidoPaterno = new System.Windows.Forms.TextBox();
+            this.TextBox_Nombre = new System.Windows.Forms.TextBox();
+            this.TextBox_NumeroDeCuenta = new System.Windows.Forms.TextBox();
             this.metroButton_Horario = new MetroFramework.Controls.MetroButton();
             this.metroButton_Sensores = new MetroFramework.Controls.MetroButton();
             this.metroButton_Ubicacion = new MetroFramework.Controls.MetroButton();
@@ -78,7 +77,7 @@
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.metroProgressSpinner = new MetroFramework.Controls.MetroProgressSpinner();
-            this.bunifuElipse = new System.Windows.Forms.Button();//Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuElipse = new System.Windows.Forms.Button();
             this.metroPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -86,44 +85,44 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(171, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(152, 20);
+            this.label1.Size = new System.Drawing.Size(134, 18);
             this.label1.TabIndex = 49;
             this.label1.Text = "Numero de cuenta:";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Black;
             this.label9.Location = new System.Drawing.Point(182, 153);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(141, 20);
+            this.label9.Size = new System.Drawing.Size(122, 18);
             this.label9.TabIndex = 57;
             this.label9.Text = "Apellido Materno:";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
             this.label10.Location = new System.Drawing.Point(188, 104);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(135, 20);
+            this.label10.Size = new System.Drawing.Size(119, 18);
             this.label10.TabIndex = 58;
             this.label10.Text = "Apellido Paterno:";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Black;
             this.label11.Location = new System.Drawing.Point(235, 62);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(88, 20);
+            this.label11.Size = new System.Drawing.Size(84, 18);
             this.label11.TabIndex = 59;
             this.label11.Text = "Nombre(s):";
             // 
@@ -191,306 +190,178 @@
             // TextBox_ClaveBancaria
             // 
             this.TextBox_ClaveBancaria.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_ClaveBancaria.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_ClaveBancaria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_ClaveBancaria.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_ClaveBancaria.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_ClaveBancaria.HintText = "";
-            //this.TextBox_ClaveBancaria.isPassword = false;
-            //this.TextBox_ClaveBancaria.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_ClaveBancaria.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_ClaveBancaria.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_ClaveBancaria.LineThickness = 3;
             this.TextBox_ClaveBancaria.Location = new System.Drawing.Point(496, 490);
             this.TextBox_ClaveBancaria.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_ClaveBancaria.Name = "TextBox_ClaveBancaria";
-            this.TextBox_ClaveBancaria.Size = new System.Drawing.Size(176, 33);
+            this.TextBox_ClaveBancaria.Size = new System.Drawing.Size(176, 22);
             this.TextBox_ClaveBancaria.TabIndex = 149;
-            this.TextBox_ClaveBancaria.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_Celular
             // 
             this.TextBox_Celular.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_Celular.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_Celular.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_Celular.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_Celular.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_Celular.HintText = "";
-            //this.TextBox_Celular.isPassword = false;
-            //this.TextBox_Celular.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_Celular.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_Celular.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_Celular.LineThickness = 3;
             this.TextBox_Celular.Location = new System.Drawing.Point(496, 357);
             this.TextBox_Celular.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_Celular.Name = "TextBox_Celular";
-            this.TextBox_Celular.Size = new System.Drawing.Size(176, 33);
+            this.TextBox_Celular.Size = new System.Drawing.Size(176, 22);
             this.TextBox_Celular.TabIndex = 148;
-            this.TextBox_Celular.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_EstadoCivil
             // 
             this.TextBox_EstadoCivil.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_EstadoCivil.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_EstadoCivil.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_EstadoCivil.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_EstadoCivil.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_EstadoCivil.HintText = "";
-            //this.TextBox_EstadoCivil.isPassword = false;
-            //this.TextBox_EstadoCivil.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_EstadoCivil.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_EstadoCivil.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_EstadoCivil.LineThickness = 3;
             this.TextBox_EstadoCivil.Location = new System.Drawing.Point(496, 288);
             this.TextBox_EstadoCivil.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_EstadoCivil.Name = "TextBox_EstadoCivil";
-            this.TextBox_EstadoCivil.Size = new System.Drawing.Size(176, 33);
+            this.TextBox_EstadoCivil.Size = new System.Drawing.Size(176, 22);
             this.TextBox_EstadoCivil.TabIndex = 147;
-            this.TextBox_EstadoCivil.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_Email
             // 
             this.TextBox_Email.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_Email.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_Email.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_Email.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_Email.HintText = "";
-            //this.TextBox_Email.isPassword = false;
-            //this.TextBox_Email.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_Email.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_Email.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_Email.LineThickness = 3;
             this.TextBox_Email.Location = new System.Drawing.Point(264, 288);
             this.TextBox_Email.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_Email.Name = "TextBox_Email";
-            this.TextBox_Email.Size = new System.Drawing.Size(176, 33);
+            this.TextBox_Email.Size = new System.Drawing.Size(176, 22);
             this.TextBox_Email.TabIndex = 146;
-            this.TextBox_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_TelefonoCasa
             // 
             this.TextBox_TelefonoCasa.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_TelefonoCasa.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_TelefonoCasa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_TelefonoCasa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_TelefonoCasa.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_TelefonoCasa.HintText = "";
-            //this.TextBox_TelefonoCasa.isPassword = false;
-            //this.TextBox_TelefonoCasa.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_TelefonoCasa.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_TelefonoCasa.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_TelefonoCasa.LineThickness = 3;
             this.TextBox_TelefonoCasa.Location = new System.Drawing.Point(264, 354);
             this.TextBox_TelefonoCasa.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_TelefonoCasa.Name = "TextBox_TelefonoCasa";
-            this.TextBox_TelefonoCasa.Size = new System.Drawing.Size(176, 33);
+            this.TextBox_TelefonoCasa.Size = new System.Drawing.Size(176, 22);
             this.TextBox_TelefonoCasa.TabIndex = 145;
-            this.TextBox_TelefonoCasa.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_Beneficiario
             // 
             this.TextBox_Beneficiario.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_Beneficiario.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_Beneficiario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_Beneficiario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_Beneficiario.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_Beneficiario.HintText = "";
-            //this.TextBox_Beneficiario.isPassword = false;
-            //this.TextBox_Beneficiario.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_Beneficiario.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_Beneficiario.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_Beneficiario.LineThickness = 3;
             this.TextBox_Beneficiario.Location = new System.Drawing.Point(264, 550);
             this.TextBox_Beneficiario.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_Beneficiario.Name = "TextBox_Beneficiario";
-            this.TextBox_Beneficiario.Size = new System.Drawing.Size(176, 33);
+            this.TextBox_Beneficiario.Size = new System.Drawing.Size(176, 22);
             this.TextBox_Beneficiario.TabIndex = 144;
-            this.TextBox_Beneficiario.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_CURP
             // 
             this.TextBox_CURP.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_CURP.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_CURP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_CURP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_CURP.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_CURP.HintText = "";
-            //this.TextBox_CURP.isPassword = false;
-            //this.TextBox_CURP.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_CURP.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_CURP.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_CURP.LineThickness = 3;
             this.TextBox_CURP.Location = new System.Drawing.Point(264, 490);
             this.TextBox_CURP.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_CURP.Name = "TextBox_CURP";
-            this.TextBox_CURP.Size = new System.Drawing.Size(176, 33);
+            this.TextBox_CURP.Size = new System.Drawing.Size(176, 22);
             this.TextBox_CURP.TabIndex = 143;
-            this.TextBox_CURP.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_NumCTAPago
             // 
             this.TextBox_NumCTAPago.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_NumCTAPago.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_NumCTAPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_NumCTAPago.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_NumCTAPago.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_NumCTAPago.HintText = "";
-            //this.TextBox_NumCTAPago.isPassword = false;
-            //this.TextBox_NumCTAPago.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_NumCTAPago.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_NumCTAPago.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_NumCTAPago.LineThickness = 3;
             this.TextBox_NumCTAPago.Location = new System.Drawing.Point(12, 550);
             this.TextBox_NumCTAPago.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_NumCTAPago.Name = "TextBox_NumCTAPago";
-            this.TextBox_NumCTAPago.Size = new System.Drawing.Size(176, 33);
+            this.TextBox_NumCTAPago.Size = new System.Drawing.Size(176, 22);
             this.TextBox_NumCTAPago.TabIndex = 142;
-            this.TextBox_NumCTAPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_RFC
             // 
             this.TextBox_RFC.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_RFC.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_RFC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_RFC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_RFC.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_RFC.HintText = "";
-            //this.TextBox_RFC.isPassword = false;
-            //this.TextBox_RFC.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_RFC.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_RFC.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_RFC.LineThickness = 3;
             this.TextBox_RFC.Location = new System.Drawing.Point(12, 490);
             this.TextBox_RFC.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_RFC.Name = "TextBox_RFC";
-            this.TextBox_RFC.Size = new System.Drawing.Size(176, 33);
+            this.TextBox_RFC.Size = new System.Drawing.Size(176, 22);
             this.TextBox_RFC.TabIndex = 141;
-            this.TextBox_RFC.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // bunifuMaterialTextbox3
             // 
             this.bunifuMaterialTextbox3.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.bunifuMaterialTextbox3.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.bunifuMaterialTextbox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.bunifuMaterialTextbox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.bunifuMaterialTextbox3.HintForeColor = System.Drawing.Color.Empty;
-            //this.bunifuMaterialTextbox3.HintText = "";
-            //this.bunifuMaterialTextbox3.isPassword = false;
-            //this.bunifuMaterialTextbox3.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.bunifuMaterialTextbox3.LineIdleColor = System.Drawing.Color.Gray;
-            //this.bunifuMaterialTextbox3.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.bunifuMaterialTextbox3.LineThickness = 3;
             this.bunifuMaterialTextbox3.Location = new System.Drawing.Point(12, 426);
             this.bunifuMaterialTextbox3.Margin = new System.Windows.Forms.Padding(4);
             this.bunifuMaterialTextbox3.Name = "bunifuMaterialTextbox3";
-            this.bunifuMaterialTextbox3.Size = new System.Drawing.Size(176, 33);
+            this.bunifuMaterialTextbox3.Size = new System.Drawing.Size(176, 22);
             this.bunifuMaterialTextbox3.TabIndex = 140;
-            this.bunifuMaterialTextbox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_TelefonoTrabajo
             // 
             this.TextBox_TelefonoTrabajo.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_TelefonoTrabajo.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_TelefonoTrabajo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_TelefonoTrabajo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_TelefonoTrabajo.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_TelefonoTrabajo.HintText = "";
-            //this.TextBox_TelefonoTrabajo.isPassword = false;
-            //this.TextBox_TelefonoTrabajo.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_TelefonoTrabajo.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_TelefonoTrabajo.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_TelefonoTrabajo.LineThickness = 3;
             this.TextBox_TelefonoTrabajo.Location = new System.Drawing.Point(12, 354);
             this.TextBox_TelefonoTrabajo.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_TelefonoTrabajo.Name = "TextBox_TelefonoTrabajo";
-            this.TextBox_TelefonoTrabajo.Size = new System.Drawing.Size(176, 33);
+            this.TextBox_TelefonoTrabajo.Size = new System.Drawing.Size(176, 22);
             this.TextBox_TelefonoTrabajo.TabIndex = 139;
-            this.TextBox_TelefonoTrabajo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_Profesion
             // 
             this.TextBox_Profesion.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_Profesion.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_Profesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_Profesion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_Profesion.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_Profesion.HintText = "";
-            //this.TextBox_Profesion.isPassword = false;
-            //this.TextBox_Profesion.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_Profesion.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_Profesion.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_Profesion.LineThickness = 3;
             this.TextBox_Profesion.Location = new System.Drawing.Point(12, 288);
             this.TextBox_Profesion.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_Profesion.Name = "TextBox_Profesion";
-            this.TextBox_Profesion.Size = new System.Drawing.Size(176, 33);
+            this.TextBox_Profesion.Size = new System.Drawing.Size(176, 22);
             this.TextBox_Profesion.TabIndex = 138;
-            this.TextBox_Profesion.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_ApellidoMaterno
             // 
             this.TextBox_ApellidoMaterno.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_ApellidoMaterno.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_ApellidoMaterno.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_ApellidoMaterno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_ApellidoMaterno.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_ApellidoMaterno.HintText = "";
-            //this.TextBox_ApellidoMaterno.isPassword = false;
-            //this.TextBox_ApellidoMaterno.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_ApellidoMaterno.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_ApellidoMaterno.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_ApellidoMaterno.LineThickness = 3;
             this.TextBox_ApellidoMaterno.Location = new System.Drawing.Point(339, 137);
             this.TextBox_ApellidoMaterno.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_ApellidoMaterno.Name = "TextBox_ApellidoMaterno";
-            this.TextBox_ApellidoMaterno.Size = new System.Drawing.Size(218, 33);
+            this.TextBox_ApellidoMaterno.Size = new System.Drawing.Size(218, 22);
             this.TextBox_ApellidoMaterno.TabIndex = 137;
-            this.TextBox_ApellidoMaterno.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_ApellidoPaterno
             // 
             this.TextBox_ApellidoPaterno.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_ApellidoPaterno.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_ApellidoPaterno.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_ApellidoPaterno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_ApellidoPaterno.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_ApellidoPaterno.HintText = "";
-            //this.TextBox_ApellidoPaterno.isPassword = false;
-            //this.TextBox_ApellidoPaterno.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_ApellidoPaterno.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_ApellidoPaterno.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_ApellidoPaterno.LineThickness = 3;
             this.TextBox_ApellidoPaterno.Location = new System.Drawing.Point(339, 91);
             this.TextBox_ApellidoPaterno.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_ApellidoPaterno.Name = "TextBox_ApellidoPaterno";
-            this.TextBox_ApellidoPaterno.Size = new System.Drawing.Size(218, 33);
+            this.TextBox_ApellidoPaterno.Size = new System.Drawing.Size(218, 22);
             this.TextBox_ApellidoPaterno.TabIndex = 136;
-            this.TextBox_ApellidoPaterno.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_Nombre
             // 
             this.TextBox_Nombre.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_Nombre.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_Nombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_Nombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_Nombre.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_Nombre.HintText = "";
-            //this.TextBox_Nombre.isPassword = false;
-            //this.TextBox_Nombre.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_Nombre.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_Nombre.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_Nombre.LineThickness = 3;
             this.TextBox_Nombre.Location = new System.Drawing.Point(339, 49);
             this.TextBox_Nombre.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_Nombre.Name = "TextBox_Nombre";
-            this.TextBox_Nombre.Size = new System.Drawing.Size(218, 33);
+            this.TextBox_Nombre.Size = new System.Drawing.Size(218, 22);
             this.TextBox_Nombre.TabIndex = 135;
-            this.TextBox_Nombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // TextBox_NumeroDeCuenta
             // 
             this.TextBox_NumeroDeCuenta.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.TextBox_NumeroDeCuenta.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.TextBox_NumeroDeCuenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.TextBox_NumeroDeCuenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_NumeroDeCuenta.HintForeColor = System.Drawing.Color.Empty;
-            //this.TextBox_NumeroDeCuenta.HintText = "";
-            //this.TextBox_NumeroDeCuenta.isPassword = false;
-            //this.TextBox_NumeroDeCuenta.LineFocusedColor = System.Drawing.Color.Blue;
-            //this.TextBox_NumeroDeCuenta.LineIdleColor = System.Drawing.Color.Gray;
-            //this.TextBox_NumeroDeCuenta.LineMouseHoverColor = System.Drawing.Color.Blue;
-            //this.TextBox_NumeroDeCuenta.LineThickness = 3;
             this.TextBox_NumeroDeCuenta.Location = new System.Drawing.Point(339, 9);
             this.TextBox_NumeroDeCuenta.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_NumeroDeCuenta.Name = "TextBox_NumeroDeCuenta";
-            this.TextBox_NumeroDeCuenta.Size = new System.Drawing.Size(101, 33);
+            this.TextBox_NumeroDeCuenta.Size = new System.Drawing.Size(101, 22);
             this.TextBox_NumeroDeCuenta.TabIndex = 134;
-            this.TextBox_NumeroDeCuenta.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // metroButton_Horario
             // 
@@ -582,40 +453,40 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.Location = new System.Drawing.Point(8, 530);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(149, 20);
+            this.label24.Size = new System.Drawing.Size(140, 18);
             this.label24.TabIndex = 121;
             this.label24.Text = "Num. CTA. de Pago";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.Location = new System.Drawing.Point(8, 196);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(132, 20);
+            this.label23.Size = new System.Drawing.Size(119, 18);
             this.label23.TabIndex = 120;
             this.label23.Text = "Tipo de Afiliacion";
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.Location = new System.Drawing.Point(260, 530);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(96, 20);
+            this.label22.Size = new System.Drawing.Size(85, 18);
             this.label22.TabIndex = 119;
             this.label22.Text = "Beneficiario";
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.Location = new System.Drawing.Point(492, 530);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(57, 20);
+            this.label20.Size = new System.Drawing.Size(51, 18);
             this.label20.TabIndex = 118;
             this.label20.Text = "Banco";
             // 
@@ -632,119 +503,119 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.Location = new System.Drawing.Point(492, 466);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(124, 20);
+            this.label18.Size = new System.Drawing.Size(107, 18);
             this.label18.TabIndex = 116;
             this.label18.Text = "Clave Bancaria";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(8, 466);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(37, 20);
+            this.label16.Size = new System.Drawing.Size(39, 18);
             this.label16.TabIndex = 115;
             this.label16.Text = "RFC";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Black;
             this.label13.Location = new System.Drawing.Point(492, 402);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(43, 20);
+            this.label13.Size = new System.Drawing.Size(42, 18);
             this.label13.TabIndex = 114;
             this.label13.Text = "Sexo";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Black;
             this.label12.Location = new System.Drawing.Point(260, 402);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(165, 20);
+            this.label12.Size = new System.Drawing.Size(145, 18);
             this.label12.TabIndex = 113;
             this.label12.Text = "Fecha de nacimiento";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
             this.label8.Location = new System.Drawing.Point(8, 264);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(174, 20);
+            this.label8.Size = new System.Drawing.Size(157, 18);
             this.label8.TabIndex = 112;
             this.label8.Text = "Profesion u ocupacion";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
             this.label7.Location = new System.Drawing.Point(260, 268);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(150, 20);
+            this.label7.Size = new System.Drawing.Size(132, 18);
             this.label7.TabIndex = 111;
             this.label7.Text = "Correo electronico";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
             this.label6.Location = new System.Drawing.Point(492, 268);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(91, 20);
+            this.label6.Size = new System.Drawing.Size(83, 18);
             this.label6.TabIndex = 110;
             this.label6.Text = "Estado civil";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
             this.label5.Location = new System.Drawing.Point(8, 333);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(238, 20);
+            this.label5.Size = new System.Drawing.Size(208, 18);
             this.label5.TabIndex = 109;
             this.label5.Text = "Numero de telefono de trabajo";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
             this.label4.Location = new System.Drawing.Point(260, 333);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(221, 20);
+            this.label4.Size = new System.Drawing.Size(195, 18);
             this.label4.TabIndex = 108;
             this.label4.Text = "Numero de telefono de casa";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(492, 333);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 20);
+            this.label3.Size = new System.Drawing.Size(132, 18);
             this.label3.TabIndex = 107;
             this.label3.Text = "Numero de Celular";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(8, 402);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(160, 20);
+            this.label2.Size = new System.Drawing.Size(141, 18);
             this.label2.TabIndex = 106;
             this.label2.Text = "Lugar de nacimiento";
             // 
@@ -765,7 +636,7 @@
             // 
             // metroDateTime_FechaNacimiento
             // 
-            this.metroDateTime_FechaNacimiento.CalendarFont = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.metroDateTime_FechaNacimiento.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.metroDateTime_FechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.metroDateTime_FechaNacimiento.Location = new System.Drawing.Point(264, 425);
             this.metroDateTime_FechaNacimiento.MinimumSize = new System.Drawing.Size(0, 29);
@@ -809,8 +680,10 @@
             // 
             // bunifuElipse
             // 
-            //this.bunifuElipse.ElipseRadius = 15;
-            //this.bunifuElipse.TargetControl = this;
+            this.bunifuElipse.Location = new System.Drawing.Point(0, 0);
+            this.bunifuElipse.Name = "bunifuElipse";
+            this.bunifuElipse.Size = new System.Drawing.Size(75, 23);
+            this.bunifuElipse.TabIndex = 0;
             // 
             // ClienteEdit
             // 

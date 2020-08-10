@@ -313,6 +313,25 @@ namespace Monitoreo_360
 
             
         }
+        private void Button_AgregarClientes_Click(object sender, EventArgs e)
+        {
+            int width = this.panel_Content.Width;
+            int height = this.panel_Content.Height;
+            this.panel_Content.Controls.Clear();
+            this.panel_Controls.Controls.Clear();
+            Button_Clientes.Enabled = true;
+            Button_Incidentes.Enabled = false;
+            Button_Cadena.Enabled = true;
+            Button_Monitor.Enabled = true;
+            Button_Usuarios.Enabled = true;
+            ClientesAdd form = new ClientesAdd();
+            form.Width = width - 40;
+            form.Height = height - 40;
+            form.Location = new Point(20, 20);
+            form.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top;
+            form.ShowDialog();
+
+        }
         private void panel_Controls_Paint(object sender, PaintEventArgs e)
         {
             //this.Button_AgregarClientes.
@@ -345,10 +364,7 @@ namespace Monitoreo_360
             
         }
 
-        private void Button_AgregarClientes_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void Button_Monitor_Click(object sender, EventArgs e)
         {

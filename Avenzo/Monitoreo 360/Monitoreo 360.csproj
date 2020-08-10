@@ -233,6 +233,12 @@
     <Compile Include="Clientes.Designer.cs">
       <DependentUpon>Clientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClientesAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientesAdd.Designer.cs">
+      <DependentUpon>ClientesAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClienteSensores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -747,6 +753,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Clientes.resx">
       <DependentUpon>Clientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientesAdd.resx">
+      <DependentUpon>ClientesAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ClienteSensores.resx">
       <DependentUpon>ClienteSensores.cs</DependentUpon>
