@@ -31,9 +31,14 @@
             this.txt_Nombres = new System.Windows.Forms.TextBox();
             this.lbl_Nombre = new System.Windows.Forms.Label();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.lbl_Beneficiario = new System.Windows.Forms.Label();
+            this.txt_Beneficiario = new System.Windows.Forms.TextBox();
+            this.lbl_ClaveBanc = new System.Windows.Forms.Label();
+            this.txt_ClaveBanc = new System.Windows.Forms.TextBox();
+            this.btn_Add = new System.Windows.Forms.Button();
             this.CB_Banco = new MetroFramework.Controls.MetroComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lbl_NumClave = new System.Windows.Forms.Label();
+            this.txt_NumClave = new System.Windows.Forms.TextBox();
             this.lbl_NumCatPago = new System.Windows.Forms.Label();
             this.txt_NumCatPago = new System.Windows.Forms.TextBox();
             this.lbl_Banco = new System.Windows.Forms.Label();
@@ -49,24 +54,6 @@
             this.txt_FechaNac = new System.Windows.Forms.TextBox();
             this.lbl_NumPat = new System.Windows.Forms.Label();
             this.txt_NumPat = new System.Windows.Forms.TextBox();
-            this.lbl_GMaps = new System.Windows.Forms.Label();
-            this.txt_Gmaps = new System.Windows.Forms.TextBox();
-            this.lbl_CP = new System.Windows.Forms.Label();
-            this.txt_CP = new System.Windows.Forms.TextBox();
-            this.lbl_Colonia = new System.Windows.Forms.Label();
-            this.txt_Colonia = new System.Windows.Forms.TextBox();
-            this.lbl_Exterior = new System.Windows.Forms.Label();
-            this.txt_NumExt = new System.Windows.Forms.TextBox();
-            this.lbl_NumExterior = new System.Windows.Forms.Label();
-            this.txt_NumInt = new System.Windows.Forms.TextBox();
-            this.lbl_Calle = new System.Windows.Forms.Label();
-            this.txt_Calle = new System.Windows.Forms.TextBox();
-            this.CB_Ciudad = new MetroFramework.Controls.MetroComboBox();
-            this.CB_Estado = new MetroFramework.Controls.MetroComboBox();
-            this.CB_Pais = new MetroFramework.Controls.MetroComboBox();
-            this.lbl_Ciudad = new System.Windows.Forms.Label();
-            this.lbl_Estado = new System.Windows.Forms.Label();
-            this.lbl_Pais = new System.Windows.Forms.Label();
             this.lbl_RFC = new System.Windows.Forms.Label();
             this.txt_RFC = new System.Windows.Forms.TextBox();
             this.lbl_CURP = new System.Windows.Forms.Label();
@@ -86,7 +73,6 @@
             this.lbl_ApPat = new System.Windows.Forms.Label();
             this.txt_ApPat = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btn_Add = new System.Windows.Forms.Button();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -111,10 +97,14 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.White;
+            this.metroPanel1.Controls.Add(this.lbl_Beneficiario);
+            this.metroPanel1.Controls.Add(this.txt_Beneficiario);
+            this.metroPanel1.Controls.Add(this.lbl_ClaveBanc);
+            this.metroPanel1.Controls.Add(this.txt_ClaveBanc);
             this.metroPanel1.Controls.Add(this.btn_Add);
             this.metroPanel1.Controls.Add(this.CB_Banco);
-            this.metroPanel1.Controls.Add(this.label1);
-            this.metroPanel1.Controls.Add(this.textBox1);
+            this.metroPanel1.Controls.Add(this.lbl_NumClave);
+            this.metroPanel1.Controls.Add(this.txt_NumClave);
             this.metroPanel1.Controls.Add(this.lbl_NumCatPago);
             this.metroPanel1.Controls.Add(this.txt_NumCatPago);
             this.metroPanel1.Controls.Add(this.lbl_Banco);
@@ -130,24 +120,6 @@
             this.metroPanel1.Controls.Add(this.txt_FechaNac);
             this.metroPanel1.Controls.Add(this.lbl_NumPat);
             this.metroPanel1.Controls.Add(this.txt_NumPat);
-            this.metroPanel1.Controls.Add(this.lbl_GMaps);
-            this.metroPanel1.Controls.Add(this.txt_Gmaps);
-            this.metroPanel1.Controls.Add(this.lbl_CP);
-            this.metroPanel1.Controls.Add(this.txt_CP);
-            this.metroPanel1.Controls.Add(this.lbl_Colonia);
-            this.metroPanel1.Controls.Add(this.txt_Colonia);
-            this.metroPanel1.Controls.Add(this.lbl_Exterior);
-            this.metroPanel1.Controls.Add(this.txt_NumExt);
-            this.metroPanel1.Controls.Add(this.lbl_NumExterior);
-            this.metroPanel1.Controls.Add(this.txt_NumInt);
-            this.metroPanel1.Controls.Add(this.lbl_Calle);
-            this.metroPanel1.Controls.Add(this.txt_Calle);
-            this.metroPanel1.Controls.Add(this.CB_Ciudad);
-            this.metroPanel1.Controls.Add(this.CB_Estado);
-            this.metroPanel1.Controls.Add(this.CB_Pais);
-            this.metroPanel1.Controls.Add(this.lbl_Ciudad);
-            this.metroPanel1.Controls.Add(this.lbl_Estado);
-            this.metroPanel1.Controls.Add(this.lbl_Pais);
             this.metroPanel1.Controls.Add(this.lbl_RFC);
             this.metroPanel1.Controls.Add(this.txt_RFC);
             this.metroPanel1.Controls.Add(this.lbl_CURP);
@@ -172,47 +144,91 @@
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(12, 52);
+            this.metroPanel1.Location = new System.Drawing.Point(10, 63);
             this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(710, 770);
+            this.metroPanel1.Size = new System.Drawing.Size(710, 649);
             this.metroPanel1.Style = MetroFramework.MetroColorStyle.Red;
             this.metroPanel1.TabIndex = 2;
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
+            // lbl_Beneficiario
+            // 
+            this.lbl_Beneficiario.AutoSize = true;
+            this.lbl_Beneficiario.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.lbl_Beneficiario.Location = new System.Drawing.Point(250, 523);
+            this.lbl_Beneficiario.Name = "lbl_Beneficiario";
+            this.lbl_Beneficiario.Size = new System.Drawing.Size(89, 18);
+            this.lbl_Beneficiario.TabIndex = 63;
+            this.lbl_Beneficiario.Text = "Beneficiario:";
+            // 
+            // txt_Beneficiario
+            // 
+            this.txt_Beneficiario.Location = new System.Drawing.Point(253, 544);
+            this.txt_Beneficiario.Name = "txt_Beneficiario";
+            this.txt_Beneficiario.Size = new System.Drawing.Size(176, 20);
+            this.txt_Beneficiario.TabIndex = 62;
+            // 
+            // lbl_ClaveBanc
+            // 
+            this.lbl_ClaveBanc.AutoSize = true;
+            this.lbl_ClaveBanc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.lbl_ClaveBanc.Location = new System.Drawing.Point(18, 523);
+            this.lbl_ClaveBanc.Name = "lbl_ClaveBanc";
+            this.lbl_ClaveBanc.Size = new System.Drawing.Size(111, 18);
+            this.lbl_ClaveBanc.TabIndex = 61;
+            this.lbl_ClaveBanc.Text = "Clave Bancaria:";
+            // 
+            // txt_ClaveBanc
+            // 
+            this.txt_ClaveBanc.Location = new System.Drawing.Point(21, 544);
+            this.txt_ClaveBanc.Name = "txt_ClaveBanc";
+            this.txt_ClaveBanc.Size = new System.Drawing.Size(176, 20);
+            this.txt_ClaveBanc.TabIndex = 60;
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.Location = new System.Drawing.Point(497, 602);
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.Size = new System.Drawing.Size(154, 36);
+            this.btn_Add.TabIndex = 59;
+            this.btn_Add.Text = "Agregar";
+            this.btn_Add.UseVisualStyleBackColor = true;
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
+            // 
             // CB_Banco
             // 
             this.CB_Banco.FormattingEnabled = true;
             this.CB_Banco.ItemHeight = 23;
-            this.CB_Banco.Location = new System.Drawing.Point(19, 654);
+            this.CB_Banco.Location = new System.Drawing.Point(19, 479);
             this.CB_Banco.Name = "CB_Banco";
             this.CB_Banco.Size = new System.Drawing.Size(174, 29);
             this.CB_Banco.TabIndex = 58;
             this.CB_Banco.UseSelectable = true;
             // 
-            // label1
+            // lbl_NumClave
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.label1.Location = new System.Drawing.Point(495, 633);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 18);
-            this.label1.TabIndex = 57;
-            this.label1.Text = "Profesión:";
+            this.lbl_NumClave.AutoSize = true;
+            this.lbl_NumClave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.lbl_NumClave.Location = new System.Drawing.Point(495, 458);
+            this.lbl_NumClave.Name = "lbl_NumClave";
+            this.lbl_NumClave.Size = new System.Drawing.Size(107, 18);
+            this.lbl_NumClave.TabIndex = 57;
+            this.lbl_NumClave.Text = "Número Clave:";
             // 
-            // textBox1
+            // txt_NumClave
             // 
-            this.textBox1.Location = new System.Drawing.Point(498, 654);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(176, 20);
-            this.textBox1.TabIndex = 56;
+            this.txt_NumClave.Location = new System.Drawing.Point(498, 479);
+            this.txt_NumClave.Name = "txt_NumClave";
+            this.txt_NumClave.Size = new System.Drawing.Size(176, 20);
+            this.txt_NumClave.TabIndex = 56;
             // 
             // lbl_NumCatPago
             // 
             this.lbl_NumCatPago.AutoSize = true;
             this.lbl_NumCatPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_NumCatPago.Location = new System.Drawing.Point(259, 633);
+            this.lbl_NumCatPago.Location = new System.Drawing.Point(259, 458);
             this.lbl_NumCatPago.Name = "lbl_NumCatPago";
             this.lbl_NumCatPago.Size = new System.Drawing.Size(102, 18);
             this.lbl_NumCatPago.TabIndex = 55;
@@ -220,7 +236,7 @@
             // 
             // txt_NumCatPago
             // 
-            this.txt_NumCatPago.Location = new System.Drawing.Point(262, 654);
+            this.txt_NumCatPago.Location = new System.Drawing.Point(262, 479);
             this.txt_NumCatPago.Name = "txt_NumCatPago";
             this.txt_NumCatPago.Size = new System.Drawing.Size(176, 20);
             this.txt_NumCatPago.TabIndex = 54;
@@ -229,7 +245,7 @@
             // 
             this.lbl_Banco.AutoSize = true;
             this.lbl_Banco.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_Banco.Location = new System.Drawing.Point(17, 633);
+            this.lbl_Banco.Location = new System.Drawing.Point(17, 458);
             this.lbl_Banco.Name = "lbl_Banco";
             this.lbl_Banco.Size = new System.Drawing.Size(55, 18);
             this.lbl_Banco.TabIndex = 53;
@@ -239,7 +255,7 @@
             // 
             this.lbl_Profesion.AutoSize = true;
             this.lbl_Profesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_Profesion.Location = new System.Drawing.Point(496, 578);
+            this.lbl_Profesion.Location = new System.Drawing.Point(496, 403);
             this.lbl_Profesion.Name = "lbl_Profesion";
             this.lbl_Profesion.Size = new System.Drawing.Size(76, 18);
             this.lbl_Profesion.TabIndex = 51;
@@ -247,7 +263,7 @@
             // 
             // txt_Profesion
             // 
-            this.txt_Profesion.Location = new System.Drawing.Point(499, 599);
+            this.txt_Profesion.Location = new System.Drawing.Point(499, 424);
             this.txt_Profesion.Name = "txt_Profesion";
             this.txt_Profesion.Size = new System.Drawing.Size(176, 20);
             this.txt_Profesion.TabIndex = 50;
@@ -256,7 +272,7 @@
             // 
             this.lbl_EstadoCivil.AutoSize = true;
             this.lbl_EstadoCivil.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_EstadoCivil.Location = new System.Drawing.Point(260, 578);
+            this.lbl_EstadoCivil.Location = new System.Drawing.Point(260, 403);
             this.lbl_EstadoCivil.Name = "lbl_EstadoCivil";
             this.lbl_EstadoCivil.Size = new System.Drawing.Size(90, 18);
             this.lbl_EstadoCivil.TabIndex = 49;
@@ -264,7 +280,7 @@
             // 
             // txt_EstadoCivil
             // 
-            this.txt_EstadoCivil.Location = new System.Drawing.Point(263, 599);
+            this.txt_EstadoCivil.Location = new System.Drawing.Point(263, 424);
             this.txt_EstadoCivil.Name = "txt_EstadoCivil";
             this.txt_EstadoCivil.Size = new System.Drawing.Size(176, 20);
             this.txt_EstadoCivil.TabIndex = 48;
@@ -273,7 +289,7 @@
             // 
             this.lbl_Sexo.AutoSize = true;
             this.lbl_Sexo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_Sexo.Location = new System.Drawing.Point(18, 578);
+            this.lbl_Sexo.Location = new System.Drawing.Point(18, 403);
             this.lbl_Sexo.Name = "lbl_Sexo";
             this.lbl_Sexo.Size = new System.Drawing.Size(46, 18);
             this.lbl_Sexo.TabIndex = 47;
@@ -281,7 +297,7 @@
             // 
             // txt_Sexo
             // 
-            this.txt_Sexo.Location = new System.Drawing.Point(21, 599);
+            this.txt_Sexo.Location = new System.Drawing.Point(21, 424);
             this.txt_Sexo.Name = "txt_Sexo";
             this.txt_Sexo.Size = new System.Drawing.Size(176, 20);
             this.txt_Sexo.TabIndex = 46;
@@ -290,7 +306,7 @@
             // 
             this.lbl_Lugnaci.AutoSize = true;
             this.lbl_Lugnaci.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_Lugnaci.Location = new System.Drawing.Point(494, 520);
+            this.lbl_Lugnaci.Location = new System.Drawing.Point(494, 345);
             this.lbl_Lugnaci.Name = "lbl_Lugnaci";
             this.lbl_Lugnaci.Size = new System.Drawing.Size(148, 18);
             this.lbl_Lugnaci.TabIndex = 45;
@@ -298,7 +314,7 @@
             // 
             // txt_LugNac
             // 
-            this.txt_LugNac.Location = new System.Drawing.Point(497, 541);
+            this.txt_LugNac.Location = new System.Drawing.Point(497, 366);
             this.txt_LugNac.Name = "txt_LugNac";
             this.txt_LugNac.Size = new System.Drawing.Size(176, 20);
             this.txt_LugNac.TabIndex = 44;
@@ -307,7 +323,7 @@
             // 
             this.lbl_FechaNac.AutoSize = true;
             this.lbl_FechaNac.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_FechaNac.Location = new System.Drawing.Point(258, 520);
+            this.lbl_FechaNac.Location = new System.Drawing.Point(258, 345);
             this.lbl_FechaNac.Name = "lbl_FechaNac";
             this.lbl_FechaNac.Size = new System.Drawing.Size(152, 18);
             this.lbl_FechaNac.TabIndex = 43;
@@ -315,7 +331,7 @@
             // 
             // txt_FechaNac
             // 
-            this.txt_FechaNac.Location = new System.Drawing.Point(261, 541);
+            this.txt_FechaNac.Location = new System.Drawing.Point(261, 366);
             this.txt_FechaNac.Name = "txt_FechaNac";
             this.txt_FechaNac.Size = new System.Drawing.Size(176, 20);
             this.txt_FechaNac.TabIndex = 42;
@@ -324,7 +340,7 @@
             // 
             this.lbl_NumPat.AutoSize = true;
             this.lbl_NumPat.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_NumPat.Location = new System.Drawing.Point(16, 520);
+            this.lbl_NumPat.Location = new System.Drawing.Point(16, 345);
             this.lbl_NumPat.Name = "lbl_NumPat";
             this.lbl_NumPat.Size = new System.Drawing.Size(155, 18);
             this.lbl_NumPat.TabIndex = 41;
@@ -332,172 +348,10 @@
             // 
             // txt_NumPat
             // 
-            this.txt_NumPat.Location = new System.Drawing.Point(19, 541);
+            this.txt_NumPat.Location = new System.Drawing.Point(19, 366);
             this.txt_NumPat.Name = "txt_NumPat";
             this.txt_NumPat.Size = new System.Drawing.Size(176, 20);
             this.txt_NumPat.TabIndex = 40;
-            // 
-            // lbl_GMaps
-            // 
-            this.lbl_GMaps.AutoSize = true;
-            this.lbl_GMaps.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_GMaps.Location = new System.Drawing.Point(494, 464);
-            this.lbl_GMaps.Name = "lbl_GMaps";
-            this.lbl_GMaps.Size = new System.Drawing.Size(102, 18);
-            this.lbl_GMaps.TabIndex = 39;
-            this.lbl_GMaps.Text = "Google Maps:";
-            // 
-            // txt_Gmaps
-            // 
-            this.txt_Gmaps.Location = new System.Drawing.Point(497, 485);
-            this.txt_Gmaps.Name = "txt_Gmaps";
-            this.txt_Gmaps.Size = new System.Drawing.Size(176, 20);
-            this.txt_Gmaps.TabIndex = 38;
-            // 
-            // lbl_CP
-            // 
-            this.lbl_CP.AutoSize = true;
-            this.lbl_CP.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_CP.Location = new System.Drawing.Point(258, 464);
-            this.lbl_CP.Name = "lbl_CP";
-            this.lbl_CP.Size = new System.Drawing.Size(106, 18);
-            this.lbl_CP.TabIndex = 37;
-            this.lbl_CP.Text = "Código Postal:";
-            // 
-            // txt_CP
-            // 
-            this.txt_CP.Location = new System.Drawing.Point(261, 485);
-            this.txt_CP.Name = "txt_CP";
-            this.txt_CP.Size = new System.Drawing.Size(176, 20);
-            this.txt_CP.TabIndex = 36;
-            // 
-            // lbl_Colonia
-            // 
-            this.lbl_Colonia.AutoSize = true;
-            this.lbl_Colonia.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_Colonia.Location = new System.Drawing.Point(16, 464);
-            this.lbl_Colonia.Name = "lbl_Colonia";
-            this.lbl_Colonia.Size = new System.Drawing.Size(63, 18);
-            this.lbl_Colonia.TabIndex = 35;
-            this.lbl_Colonia.Text = "Colonia:";
-            // 
-            // txt_Colonia
-            // 
-            this.txt_Colonia.Location = new System.Drawing.Point(19, 485);
-            this.txt_Colonia.Name = "txt_Colonia";
-            this.txt_Colonia.Size = new System.Drawing.Size(176, 20);
-            this.txt_Colonia.TabIndex = 34;
-            // 
-            // lbl_Exterior
-            // 
-            this.lbl_Exterior.AutoSize = true;
-            this.lbl_Exterior.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_Exterior.Location = new System.Drawing.Point(260, 407);
-            this.lbl_Exterior.Name = "lbl_Exterior";
-            this.lbl_Exterior.Size = new System.Drawing.Size(121, 18);
-            this.lbl_Exterior.TabIndex = 33;
-            this.lbl_Exterior.Text = "Numero Exterior:";
-            // 
-            // txt_NumExt
-            // 
-            this.txt_NumExt.Location = new System.Drawing.Point(263, 428);
-            this.txt_NumExt.Name = "txt_NumExt";
-            this.txt_NumExt.Size = new System.Drawing.Size(176, 20);
-            this.txt_NumExt.TabIndex = 32;
-            // 
-            // lbl_NumExterior
-            // 
-            this.lbl_NumExterior.AutoSize = true;
-            this.lbl_NumExterior.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_NumExterior.Location = new System.Drawing.Point(496, 407);
-            this.lbl_NumExterior.Name = "lbl_NumExterior";
-            this.lbl_NumExterior.Size = new System.Drawing.Size(115, 18);
-            this.lbl_NumExterior.TabIndex = 31;
-            this.lbl_NumExterior.Text = "Número Interior:";
-            // 
-            // txt_NumInt
-            // 
-            this.txt_NumInt.Location = new System.Drawing.Point(499, 428);
-            this.txt_NumInt.Name = "txt_NumInt";
-            this.txt_NumInt.Size = new System.Drawing.Size(176, 20);
-            this.txt_NumInt.TabIndex = 30;
-            // 
-            // lbl_Calle
-            // 
-            this.lbl_Calle.AutoSize = true;
-            this.lbl_Calle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_Calle.Location = new System.Drawing.Point(18, 407);
-            this.lbl_Calle.Name = "lbl_Calle";
-            this.lbl_Calle.Size = new System.Drawing.Size(45, 18);
-            this.lbl_Calle.TabIndex = 29;
-            this.lbl_Calle.Text = "Calle:";
-            // 
-            // txt_Calle
-            // 
-            this.txt_Calle.Location = new System.Drawing.Point(21, 428);
-            this.txt_Calle.Name = "txt_Calle";
-            this.txt_Calle.Size = new System.Drawing.Size(176, 20);
-            this.txt_Calle.TabIndex = 28;
-            // 
-            // CB_Ciudad
-            // 
-            this.CB_Ciudad.FormattingEnabled = true;
-            this.CB_Ciudad.ItemHeight = 23;
-            this.CB_Ciudad.Location = new System.Drawing.Point(497, 364);
-            this.CB_Ciudad.Name = "CB_Ciudad";
-            this.CB_Ciudad.Size = new System.Drawing.Size(174, 29);
-            this.CB_Ciudad.TabIndex = 27;
-            this.CB_Ciudad.UseSelectable = true;
-            // 
-            // CB_Estado
-            // 
-            this.CB_Estado.FormattingEnabled = true;
-            this.CB_Estado.ItemHeight = 23;
-            this.CB_Estado.Location = new System.Drawing.Point(263, 364);
-            this.CB_Estado.Name = "CB_Estado";
-            this.CB_Estado.Size = new System.Drawing.Size(174, 29);
-            this.CB_Estado.TabIndex = 26;
-            this.CB_Estado.UseSelectable = true;
-            // 
-            // CB_Pais
-            // 
-            this.CB_Pais.FormattingEnabled = true;
-            this.CB_Pais.ItemHeight = 23;
-            this.CB_Pais.Location = new System.Drawing.Point(21, 364);
-            this.CB_Pais.Name = "CB_Pais";
-            this.CB_Pais.Size = new System.Drawing.Size(174, 29);
-            this.CB_Pais.TabIndex = 25;
-            this.CB_Pais.UseSelectable = true;
-            // 
-            // lbl_Ciudad
-            // 
-            this.lbl_Ciudad.AutoSize = true;
-            this.lbl_Ciudad.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_Ciudad.Location = new System.Drawing.Point(496, 343);
-            this.lbl_Ciudad.Name = "lbl_Ciudad";
-            this.lbl_Ciudad.Size = new System.Drawing.Size(58, 18);
-            this.lbl_Ciudad.TabIndex = 24;
-            this.lbl_Ciudad.Text = "Ciudad:";
-            // 
-            // lbl_Estado
-            // 
-            this.lbl_Estado.AutoSize = true;
-            this.lbl_Estado.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_Estado.Location = new System.Drawing.Point(262, 343);
-            this.lbl_Estado.Name = "lbl_Estado";
-            this.lbl_Estado.Size = new System.Drawing.Size(59, 18);
-            this.lbl_Estado.TabIndex = 23;
-            this.lbl_Estado.Text = "Estado:";
-            // 
-            // lbl_Pais
-            // 
-            this.lbl_Pais.AutoSize = true;
-            this.lbl_Pais.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_Pais.Location = new System.Drawing.Point(18, 343);
-            this.lbl_Pais.Name = "lbl_Pais";
-            this.lbl_Pais.Size = new System.Drawing.Size(41, 18);
-            this.lbl_Pais.TabIndex = 22;
-            this.lbl_Pais.Text = "País:";
             // 
             // lbl_RFC
             // 
@@ -663,28 +517,18 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
-            // btn_Add
-            // 
-            this.btn_Add.Location = new System.Drawing.Point(498, 705);
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(154, 36);
-            this.btn_Add.TabIndex = 59;
-            this.btn_Add.Text = "Agregar";
-            this.btn_Add.UseVisualStyleBackColor = true;
-            // 
             // ClientesAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 834);
+            this.ClientSize = new System.Drawing.Size(734, 729);
             this.Controls.Add(this.metroPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ClientesAdd";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Resizable = false;
+            this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "Agregar Cliente";
-            this.TransparencyKey = System.Drawing.Color.Lavender;
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -712,28 +556,10 @@
         private System.Windows.Forms.TextBox txt_TelCelular;
         private System.Windows.Forms.Label lbl_Telefono;
         private System.Windows.Forms.TextBox txt_Telefono;
-        private System.Windows.Forms.Label lbl_CP;
-        private System.Windows.Forms.TextBox txt_CP;
-        private System.Windows.Forms.Label lbl_Colonia;
-        private System.Windows.Forms.TextBox txt_Colonia;
-        private System.Windows.Forms.Label lbl_Exterior;
-        private System.Windows.Forms.TextBox txt_NumExt;
-        private System.Windows.Forms.Label lbl_NumExterior;
-        private System.Windows.Forms.TextBox txt_NumInt;
-        private System.Windows.Forms.Label lbl_Calle;
-        private System.Windows.Forms.TextBox txt_Calle;
-        private MetroFramework.Controls.MetroComboBox CB_Ciudad;
-        private MetroFramework.Controls.MetroComboBox CB_Estado;
-        private MetroFramework.Controls.MetroComboBox CB_Pais;
-        private System.Windows.Forms.Label lbl_Ciudad;
-        private System.Windows.Forms.Label lbl_Estado;
-        private System.Windows.Forms.Label lbl_Pais;
         private System.Windows.Forms.Label lbl_RFC;
         private System.Windows.Forms.TextBox txt_RFC;
         private System.Windows.Forms.Label lbl_CURP;
         private System.Windows.Forms.TextBox txt_CURP;
-        private System.Windows.Forms.Label lbl_GMaps;
-        private System.Windows.Forms.TextBox txt_Gmaps;
         private System.Windows.Forms.Label lbl_Profesion;
         private System.Windows.Forms.TextBox txt_Profesion;
         private System.Windows.Forms.Label lbl_EstadoCivil;
@@ -747,11 +573,15 @@
         private System.Windows.Forms.Label lbl_NumPat;
         private System.Windows.Forms.TextBox txt_NumPat;
         private MetroFramework.Controls.MetroComboBox CB_Banco;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label lbl_NumClave;
+        private System.Windows.Forms.TextBox txt_NumClave;
         private System.Windows.Forms.Label lbl_NumCatPago;
         private System.Windows.Forms.TextBox txt_NumCatPago;
         private System.Windows.Forms.Label lbl_Banco;
         private System.Windows.Forms.Button btn_Add;
+        private System.Windows.Forms.Label lbl_ClaveBanc;
+        private System.Windows.Forms.TextBox txt_ClaveBanc;
+        private System.Windows.Forms.Label lbl_Beneficiario;
+        private System.Windows.Forms.TextBox txt_Beneficiario;
     }
 }
