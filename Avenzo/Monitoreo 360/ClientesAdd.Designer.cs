@@ -230,9 +230,9 @@
             this.lbl_NumCatPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.lbl_NumCatPago.Location = new System.Drawing.Point(259, 458);
             this.lbl_NumCatPago.Name = "lbl_NumCatPago";
-            this.lbl_NumCatPago.Size = new System.Drawing.Size(102, 18);
+            this.lbl_NumCatPago.Size = new System.Drawing.Size(144, 18);
             this.lbl_NumCatPago.TabIndex = 55;
-            this.lbl_NumCatPago.Text = "NumCatPago:";
+            this.lbl_NumCatPago.Text = "Num. CTA. de Pago:";
             // 
             // txt_NumCatPago
             // 

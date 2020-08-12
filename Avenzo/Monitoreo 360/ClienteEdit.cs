@@ -14,8 +14,9 @@ namespace Monitoreo_360
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         Models.Clientes cliente = new Models.Clientes();
-        Guid Id = new Guid();
+        Guid Id = new Guid();//IdUsario
         Guid IdUsuario = Guid.NewGuid();
+
         List<Bancos> bancos = new List<Bancos>();
         List<Catalogos> catalogo = new List<Catalogos>();
         delegate void setCliente();
@@ -79,7 +80,7 @@ namespace Monitoreo_360
             setTextBoxValue(this.TextBox_Beneficiario, cliente.Beneficiario);            
             setComboBoxBancoValue(cliente.Banco);            
         }
-        //Bunifu.Framework.UI.BunifuMaterialTextbox field 
+
         public void setTextBoxValue(System.Windows.Forms.TextBox field , string value) {
             if (field.InvokeRequired) {
                 field.Invoke(new MethodInvoker(delegate{ field.Text = value; }));
@@ -130,12 +131,36 @@ namespace Monitoreo_360
         private void metroButton1_Click(object sender, EventArgs e)
         {
             //agregar procedimiento de guardar
+            string IdProveedor=Convert.ToString( cliente.IdProveedor);
+            string PClave = Convert.ToString(cliente.PalabraClave);
+            string PClaveS = Convert.ToString(cliente.PalabraClaveSilenciosa);
+            string Calle = Convert.ToString(cliente.Calle);
+            string NumInt = Convert.ToString(cliente.NoInterior);
+            string NumExt = Convert.ToString(cliente.NoExterior);
+            string Colonia = Convert.ToString(cliente.Colonia);
+            string CP = Convert.ToString(cliente.CodigoPostal);
+            string Referencia = Convert.ToString(cliente.Referencias);
+            string Color = Convert.ToString(cliente.ColorEstablecimiento);
+            string Entre = Convert.ToString(cliente.EntreCalles);
+            string google = Convert.ToString(cliente.GoogleMaps);
+            string descripcion = Convert.ToString(cliente.Descripcion);
+            string TelAlarma = Convert.ToString(cliente.NumeroTelefonoAlarma);
+            string foto = Convert.ToString(cliente.Foto);
+            string Estado = Convert.ToString(cliente.Estado);
+            string Pais = Convert.ToString(cliente.Pais);
+            string Ciudad = Convert.ToString(cliente.Ciudad);
+            string TAfiliacion = Convert.ToString(cliente.TipoAfilacion);
+            //seguirle
+            db.UpdateClientes(Id,IdProveedor,TextBox_NumeroDeCuenta.Text.Trim(),TelAlarma,PClave,
+                PClaveS,TextBox_Nombre.Text.Trim(),TextBox_ApellidoPaterno.Text.Trim(),TextBox_ApellidoMaterno.Text.Trim(),Calle,
+                NumInt,NumExt,Colonia,CP,Referencia,Color,Entre,google,descripcion,TextBox_TelefonoCasa.Text,
+                TextBox_TelefonoTrabajo.Text,TextBox_Celular.Text,TextBox_Email.Text,foto,Estado,Pais,Ciudad,TAfiliacion);
         }
 
         private void metroButton_Contactos_Click(object sender, EventArgs e)
         {
             ClienteContacto form = new ClienteContacto(cliente.IdCliente);
-            //form.MdiParent = this.MdiParent;
+            form.MdiParent = this.MdiParent;
             form.Text = "Editar Contactos de "+cliente.Nombres+" "+cliente.ApellidoPaterno+" "+cliente.ApellidoMaterno;
             form.ShowDialog();
         }
