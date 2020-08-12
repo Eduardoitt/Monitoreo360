@@ -126,7 +126,7 @@
             this.textBox_Password.PasswordChar = '*';
             this.textBox_Password.Size = new System.Drawing.Size(215, 24);
             this.textBox_Password.TabIndex = 2;
-            this.textBox_Password.Text = "Prueba";
+            this.textBox_Password.Text = "prueba";
             this.textBox_Password.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox_Email
@@ -139,6 +139,7 @@
             this.textBox_Email.Name = "textBox_Email";
             this.textBox_Email.Size = new System.Drawing.Size(215, 24);
             this.textBox_Email.TabIndex = 1;
+            this.textBox_Email.Text = "prueba@gmail.com";
             this.textBox_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // panel1

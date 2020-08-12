@@ -16,12 +16,37 @@ namespace Monitoreo_360
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         private Guid IdUsuario;
+        List<Bancos> bancos = new List<Bancos>();
         public ClientesAdd( Guid IdUsuario)
         {
             this.IdUsuario = IdUsuario;
             InitializeComponent();
         }
+        async void Data()
+        {
+            await Task.Run(() => {
+                 getData();
+            });     
+        }
+        public bool getData()
+        {
+            bancos = db.Bancos.ToList();
+            ValBanco();
+            return true;
+        }
 
+        public void ValBanco()
+        {
+            if (this.CB_Banco.InvokeRequired)
+            {
+                this.CB_Banco.Invoke(new MethodInvoker(delegate {
+                    this.CB_Banco.DataSource = bancos;
+                    this.CB_Banco.ValueMember = "c_Banco";
+                    this.CB_Banco.DisplayMember = "Descripcion";
+                    
+                }));
+            }
+        }
         private void btn_Add_Click(object sender, EventArgs e)
         {
             //Aqui hacer el insert
@@ -52,12 +77,18 @@ namespace Monitoreo_360
                     txt_ApPat.Text.Trim(), txt_ApMat.Text.Trim(), txt_NoCuenta.Text.Trim(), null, null, null, null, null, null, null,
                     null, null, null, null, null, txt_Telefono.Text.Trim(), txt_Telefono.Text.Trim(), txt_TelCelular.Text.Trim(), txt_Correo.Text.Trim(),
                     null, null, null, null, null, txt_NumPat.Text, txt_FechaNac.Text, txt_LugNac.Text, txt_Sexo.Text, txt_EstadoCivil.Text,
-                    txt_Profesion.Text, txt_CURP.Text.Trim(), txt_RFC.Text.Trim(), CB_Banco.Text, txt_NumCatPago.Text,
+                    txt_Profesion.Text, txt_CURP.Text.Trim(), txt_RFC.Text.Trim(), CB_Banco.SelectedValue.ToString(), txt_NumCatPago.Text,
                     txt_ClaveBanc.Text.Trim(), txt_NumClave.Text, txt_Beneficiario.Text,fechaC , IdUsuario, true);
-                MetroMessageBox.Show(this, "El campo Sexo no puede ir vacio, favor de ingresar Femenino o Masculino", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Question);
 
                 ClientesAdd.ActiveForm.Close();
+                MetroMessageBox.Show(this, "El Cliente fue registrado con exito", "Cliente Registrado", MessageBoxButtons.OK, MessageBoxIcon.Question);
+
             }
+        }
+
+        private void ClientesAdd_Shown(object sender, EventArgs e)
+        {
+            Data();
         }
     }
 }
