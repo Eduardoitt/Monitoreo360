@@ -655,6 +655,7 @@
             this.metroButton1.TabIndex = 97;
             this.metroButton1.Text = "Guardar";
             this.metroButton1.UseSelectable = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click_1);
             // 
             // pictureBox1
             // 

@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Monitoreo_360.Models;
+using MetroFramework;
 namespace Monitoreo_360
 {
     public partial class ClienteEdit : MetroFramework.Forms.MetroForm
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         Models.Clientes cliente = new Models.Clientes();
-        Guid Id = new Guid();//IdUsario
+        Guid Id = new Guid();//IdCliente
         Guid IdUsuario = Guid.NewGuid();
 
         List<Bancos> bancos = new List<Bancos>();
@@ -98,8 +99,11 @@ namespace Monitoreo_360
             if (this.metroComboBox_Afiliacion.InvokeRequired)
             {
                 this.metroComboBox_Afiliacion.Invoke(new MethodInvoker(delegate {
-                    foreach (var c in catalogo)
-                        this.metroComboBox_Afiliacion.Items.Add(c.Descripcion);
+                    //foreach (var c in catalogo)
+                    //this.metroComboBox_Afiliacion.Items.Add(c.Descripcion);
+                    metroComboBox_Afiliacion.DataSource = catalogo;
+                    metroComboBox_Afiliacion.ValueMember = "IdCatalogo";
+                    metroComboBox_Afiliacion.DisplayMember = "Descripcion";
                     if(db.Catalogos.Where(x => x.IdCatalogo == value).Any())
                         this.metroComboBox_Afiliacion.Text = db.Catalogos.Where(x => x.IdCatalogo == value).FirstOrDefault().Descripcion;
                 }));
@@ -120,42 +124,17 @@ namespace Monitoreo_360
             if (this.metroComboBox_Banco.InvokeRequired)
             {
                 this.metroComboBox_Banco.Invoke(new MethodInvoker(delegate {
-                    foreach (var b in bancos)
-                        this.metroComboBox_Banco.Items.Add(b.Descripcion);
+                    //foreach (var b in bancos)
+                    ///  this.metroComboBox_Banco.Items.Add(b.Descripcion);
+                    this.metroComboBox_Banco.DataSource = bancos;
+                    this.metroComboBox_Banco.ValueMember = "c_Banco";
+                    this.metroComboBox_Banco.DisplayMember = "Descripcion";
                     if (value != null)
                         this.metroComboBox_Banco.Text = db.Bancos.Where(x => x.c_Banco == value).FirstOrDefault().Descripcion; 
                 }));
             }
         }
 
-        private void metroButton1_Click(object sender, EventArgs e)
-        {
-            //agregar procedimiento de guardar
-            string IdProveedor=Convert.ToString( cliente.IdProveedor);
-            string PClave = Convert.ToString(cliente.PalabraClave);
-            string PClaveS = Convert.ToString(cliente.PalabraClaveSilenciosa);
-            string Calle = Convert.ToString(cliente.Calle);
-            string NumInt = Convert.ToString(cliente.NoInterior);
-            string NumExt = Convert.ToString(cliente.NoExterior);
-            string Colonia = Convert.ToString(cliente.Colonia);
-            string CP = Convert.ToString(cliente.CodigoPostal);
-            string Referencia = Convert.ToString(cliente.Referencias);
-            string Color = Convert.ToString(cliente.ColorEstablecimiento);
-            string Entre = Convert.ToString(cliente.EntreCalles);
-            string google = Convert.ToString(cliente.GoogleMaps);
-            string descripcion = Convert.ToString(cliente.Descripcion);
-            string TelAlarma = Convert.ToString(cliente.NumeroTelefonoAlarma);
-            string foto = Convert.ToString(cliente.Foto);
-            string Estado = Convert.ToString(cliente.Estado);
-            string Pais = Convert.ToString(cliente.Pais);
-            string Ciudad = Convert.ToString(cliente.Ciudad);
-            string TAfiliacion = Convert.ToString(cliente.TipoAfilacion);
-            //seguirle
-            db.UpdateClientes(Id,IdProveedor,TextBox_NumeroDeCuenta.Text.Trim(),TelAlarma,PClave,
-                PClaveS,TextBox_Nombre.Text.Trim(),TextBox_ApellidoPaterno.Text.Trim(),TextBox_ApellidoMaterno.Text.Trim(),Calle,
-                NumInt,NumExt,Colonia,CP,Referencia,Color,Entre,google,descripcion,TextBox_TelefonoCasa.Text,
-                TextBox_TelefonoTrabajo.Text,TextBox_Celular.Text,TextBox_Email.Text,foto,Estado,Pais,Ciudad,TAfiliacion);
-        }
 
         private void metroButton_Contactos_Click(object sender, EventArgs e)
         {
@@ -201,6 +180,52 @@ namespace Monitoreo_360
             Data();
         }
 
+        private void metroButton1_Click_1(object sender, EventArgs e)
+        {
+            //agregar procedimiento de guardar
 
+            Guid? IdProveedor = Guid.NewGuid();
+            IdProveedor = cliente.IdProveedor;
+            string PClave = Convert.ToString(cliente.PalabraClave);
+            string PClaveS = Convert.ToString(cliente.PalabraClaveSilenciosa);
+            string Calle = Convert.ToString(cliente.Calle);
+            string NumInt = Convert.ToString(cliente.NoInterior);
+            string NumExt = Convert.ToString(cliente.NoExterior);
+            string Colonia = Convert.ToString(cliente.Colonia);
+            string CP = Convert.ToString(cliente.CodigoPostal);
+            string Referencia = Convert.ToString(cliente.Referencias);
+            string Color = Convert.ToString(cliente.ColorEstablecimiento);
+            string Entre = Convert.ToString(cliente.EntreCalles);
+            string google = Convert.ToString(cliente.GoogleMaps);
+            string descripcion = Convert.ToString(cliente.Descripcion);
+            string TelAlarma = Convert.ToString(cliente.NumeroTelefonoAlarma);
+            string foto = Convert.ToString(cliente.Foto);
+            string Estado = Convert.ToString(cliente.Estado);
+            string Pais = Convert.ToString(cliente.Pais);
+            string Ciudad = Convert.ToString(cliente.Ciudad);
+            string Patrocinador = Convert.ToString(cliente.NumeroPatrocinador);
+            string NumClabe = Convert.ToString(cliente.NumeroCLABE);
+            DateTime FechaC = Convert.ToDateTime(cliente.FechaCreacion);
+            Guid? UsuarioCreacion = Guid.NewGuid();
+            UsuarioCreacion = cliente.UsuarioCreacion;
+            bool Activo = Convert.ToBoolean(cliente.Activo);
+            Guid? IdUs = Guid.NewGuid();
+            IdUs = cliente.IdUsuario;
+
+            //Tipo de afiliacion
+            Guid Afiliacion = Guid.NewGuid();
+            Afiliacion = Guid.Parse(metroComboBox_Afiliacion.SelectedValue.ToString());
+            //seguirle
+            db.UpdateClientes(Id, IdProveedor, TextBox_NumeroDeCuenta.Text.Trim(), TelAlarma, PClave,
+                PClaveS, TextBox_Nombre.Text.Trim(), TextBox_ApellidoPaterno.Text.Trim(), TextBox_ApellidoMaterno.Text.Trim(), Calle,
+                NumInt, NumExt, Colonia, CP, Referencia, Color, Entre, google, descripcion, TextBox_TelefonoCasa.Text,
+                TextBox_TelefonoTrabajo.Text, TextBox_Celular.Text, TextBox_Email.Text, foto, Estado, Pais, Ciudad, Afiliacion,
+                Patrocinador, metroDateTime_FechaNacimiento.Text, bunifuMaterialTextbox3.Text, metroComboBox_Sexo.SelectedItem.ToString(),
+                TextBox_EstadoCivil.Text, TextBox_Profesion.Text, TextBox_CURP.Text, TextBox_RFC.Text,
+                TextBox_NumCTAPago.Text, TextBox_ClaveBancaria.Text, metroComboBox_Banco.SelectedValue.ToString(),
+                NumClabe, TextBox_Beneficiario.Text, FechaC, UsuarioCreacion, Activo, IdUs);
+            MetroMessageBox.Show(this, "Se actualizo la informacion del cliente", "Actualizar Cliente", MessageBoxButtons.OK, MessageBoxIcon.Question);
+
+        }
     }
 }

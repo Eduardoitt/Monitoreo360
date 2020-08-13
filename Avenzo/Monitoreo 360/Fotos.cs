@@ -20,6 +20,7 @@ namespace Monitoreo_360
         {
             InitializeComponent();
             this.NumeroDeCuenta = NumeroDeCuenta;
+            //Carga la ruta de donde se encuentran las imagenes (bd)
             string path = String.Format(@"{0}\Fotos\" + this.NumeroDeCuenta, Application.StartupPath);
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
@@ -41,7 +42,59 @@ namespace Monitoreo_360
 
 
         }
+        //acomoda las fotos en el panel
+        public void AgregarImagen(string file, int x, int y, string Name)
+        {
+            Panel panel = new System.Windows.Forms.Panel();
+            //Bunifu.Framework.UI.BunifuImageButton Button_Close = new Bunifu.Framework.UI.BunifuImageButton();
+            System.Windows.Forms.Button Button_Close = new System.Windows.Forms.Button();
+            PictureBox pictureBox = new System.Windows.Forms.PictureBox();
+            panel.SuspendLayout();
+            //((System.ComponentModel.ISupportInitialize)(Button_Close)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(pictureBox)).BeginInit();
+            this.panel_Galeria.Controls.Add(panel);
 
+            // 
+            // panel
+            // 
+            //panel.Controls.Add(Button_Close);
+            panel.Controls.Add(pictureBox);
+            panel.Location = new System.Drawing.Point(x, y);
+            //panel.Name = "panel";
+            panel.Size = new System.Drawing.Size(170, 185);
+            panel.TabIndex = 0;
+            // 
+            // Button_Close
+            // 
+            Button_Close.BackColor = System.Drawing.Color.Firebrick;
+            Button_Close.Image = global::Monitoreo_360.Properties.Resources.Delete_96px;
+            //Button_Close.ImageActive = null;
+            Button_Close.Location = new System.Drawing.Point(152, 0);
+            Button_Close.Name = "Button_Close";
+            Button_Close.Size = new System.Drawing.Size(18, 18);
+            //Button_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            Button_Close.TabIndex = 1;
+            Button_Close.TabStop = false;
+            // Button_Close.Zoom = 10;
+            // 
+            // pictureBox
+            // 
+            pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            pictureBox.Image = Image.FromFile(file);
+            pictureBox.InitialImage = null;
+            pictureBox.Location = new System.Drawing.Point(0, 0);
+            pictureBox.Name = Name;
+            pictureBox.Size = new System.Drawing.Size(170, 185);
+            pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            pictureBox.TabIndex = 0;
+            pictureBox.DoubleClick += new System.EventHandler(this.pictureBox_DoubleClick);
+            pictureBox.TabStop = false;
+
+
+            panel.ResumeLayout(false);
+            //((System.ComponentModel.ISupportInitialize)(Button_Close)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(pictureBox)).EndInit();
+        }
         private void Button_AgregarFotos_Click(object sender, EventArgs e)
         {
             OpenFileDialog result =new OpenFileDialog();
@@ -52,7 +105,8 @@ namespace Monitoreo_360
                     Console.WriteLine("Nombre:"+fileName);
                     Guid Id = Guid.NewGuid();
                     string Name = Id + "." + fileName.Split('.')[fileName.Split('.').Length - 1];
-                    string path = String.Format(@"{0}\Fotos\"+this.NumeroDeCuenta, Application.StartupPath);
+                    string path = String.Format(@"{0}\Fotos\"+this.NumeroDeCuenta, Application.StartupPath);//genero la ruta pero del servidor
+                    //Si no esxiste direcorio lo crea
                     if (!Directory.Exists(path))
                         Directory.CreateDirectory(path);
                     Console.WriteLine("path:" + path + " otro path:" + Application.StartupPath);
@@ -77,59 +131,9 @@ namespace Monitoreo_360
             //System.IO.File.WriteAllBytes();
             
         }
-        public void AgregarImagen(string file,int x ,int y,string Name) {
-            Panel panel = new System.Windows.Forms.Panel();
-           // Bunifu.Framework.UI.BunifuImageButton Button_Close = new Bunifu.Framework.UI.BunifuImageButton();
-            System.Windows.Forms.Button Button_Close = new System.Windows.Forms.Button();
-            PictureBox pictureBox = new System.Windows.Forms.PictureBox();
-            panel.SuspendLayout();
-            //((System.ComponentModel.ISupportInitialize)(Button_Close)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(pictureBox)).BeginInit();
-            this.panel_Galeria.Controls.Add(panel);
-
-            // 
-            // panel
-            // 
-            //panel.Controls.Add(Button_Close);
-            panel.Controls.Add(pictureBox);
-            panel.Location = new System.Drawing.Point(x, y);
-            //panel.Name = "panel";
-            panel.Size = new System.Drawing.Size(170, 185);
-            panel.TabIndex = 0;
-            // 
-            // Button_Close
-            // 
-           // Button_Close.BackColor = System.Drawing.Color.Firebrick;
-           // Button_Close.Image = global::Monitoreo_360.Properties.Resources.Delete_96px;
-           // //Button_Close.ImageActive = null;
-           // Button_Close.Location = new System.Drawing.Point(152, 0);
-           // //Button_Close.Name = "Button_Close";
-           // Button_Close.Size = new System.Drawing.Size(18, 18);
-           //// Button_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-           // Button_Close.TabIndex = 1;
-           // Button_Close.TabStop = false;
-            //Button_Close.Zoom = 10;
-            // 
-            // pictureBox
-            // 
-            pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            pictureBox.Image = Image.FromFile(file);
-            pictureBox.InitialImage = null;
-            pictureBox.Location = new System.Drawing.Point(0, 0);
-            pictureBox.Name = Name;
-            pictureBox.Size = new System.Drawing.Size(170, 185);
-            pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            pictureBox.TabIndex = 0;
-            pictureBox.DoubleClick += new System.EventHandler(this.pictureBox_DoubleClick);
-            pictureBox.TabStop = false;
-            
-
-            panel.ResumeLayout(false);
-            //((System.ComponentModel.ISupportInitialize)(Button_Close)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(pictureBox)).EndInit();
-        }
+  
         public void pictureBox_DoubleClick(object sender, EventArgs e) {
-            
+            //Al dar doble click abre la foto seleccionada en un visor de windows
             string path = String.Format(@"{0}\Fotos\" + this.NumeroDeCuenta, Application.StartupPath);
             PictureBox picture = (PictureBox)sender;
             DirectoryInfo di = new DirectoryInfo(path);

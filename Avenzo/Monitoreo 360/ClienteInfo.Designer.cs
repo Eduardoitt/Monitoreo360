@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.textBox_PalabraClave = new MetroFramework.Controls.MetroTextBox();
             this.textBox_Fecha = new MetroFramework.Controls.MetroTextBox();
@@ -95,7 +95,7 @@
             this.groupBox.Controls.Add(this.textBox_TelefonoAlarma);
             this.groupBox.Controls.Add(this.label3);
             this.groupBox.Controls.Add(this.pictureBox_Photo);
-            this.groupBox.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox.ForeColor = System.Drawing.Color.Black;
             this.groupBox.Location = new System.Drawing.Point(27, 57);
             this.groupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -197,7 +197,7 @@
             this.textBox_PalabraClaveSilenciosa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox_PalabraClaveSilenciosa.Name = "textBox_PalabraClaveSilenciosa";
             this.textBox_PalabraClaveSilenciosa.ReadOnly = true;
-            this.textBox_PalabraClaveSilenciosa.Size = new System.Drawing.Size(209, 26);
+            this.textBox_PalabraClaveSilenciosa.Size = new System.Drawing.Size(209, 24);
             this.textBox_PalabraClaveSilenciosa.TabIndex = 34;
             // 
             // label9
@@ -250,7 +250,7 @@
             this.textBox_Cliente.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox_Cliente.Name = "textBox_Cliente";
             this.textBox_Cliente.ReadOnly = true;
-            this.textBox_Cliente.Size = new System.Drawing.Size(209, 26);
+            this.textBox_Cliente.Size = new System.Drawing.Size(209, 24);
             this.textBox_Cliente.TabIndex = 29;
             // 
             // textBox_Estado
@@ -262,7 +262,7 @@
             this.textBox_Estado.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox_Estado.Name = "textBox_Estado";
             this.textBox_Estado.ReadOnly = true;
-            this.textBox_Estado.Size = new System.Drawing.Size(209, 26);
+            this.textBox_Estado.Size = new System.Drawing.Size(209, 24);
             this.textBox_Estado.TabIndex = 27;
             // 
             // textBox_Pais
@@ -274,7 +274,7 @@
             this.textBox_Pais.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox_Pais.Name = "textBox_Pais";
             this.textBox_Pais.ReadOnly = true;
-            this.textBox_Pais.Size = new System.Drawing.Size(209, 26);
+            this.textBox_Pais.Size = new System.Drawing.Size(209, 24);
             this.textBox_Pais.TabIndex = 24;
             // 
             // textBox_Ciudad
@@ -286,7 +286,7 @@
             this.textBox_Ciudad.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox_Ciudad.Name = "textBox_Ciudad";
             this.textBox_Ciudad.ReadOnly = true;
-            this.textBox_Ciudad.Size = new System.Drawing.Size(209, 26);
+            this.textBox_Ciudad.Size = new System.Drawing.Size(209, 24);
             this.textBox_Ciudad.TabIndex = 23;
             // 
             // textBox_Telefono
@@ -298,7 +298,7 @@
             this.textBox_Telefono.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox_Telefono.Name = "textBox_Telefono";
             this.textBox_Telefono.ReadOnly = true;
-            this.textBox_Telefono.Size = new System.Drawing.Size(209, 26);
+            this.textBox_Telefono.Size = new System.Drawing.Size(209, 24);
             this.textBox_Telefono.TabIndex = 22;
             // 
             // textBox_Correo
@@ -310,7 +310,7 @@
             this.textBox_Correo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox_Correo.Name = "textBox_Correo";
             this.textBox_Correo.ReadOnly = true;
-            this.textBox_Correo.Size = new System.Drawing.Size(209, 26);
+            this.textBox_Correo.Size = new System.Drawing.Size(209, 24);
             this.textBox_Correo.TabIndex = 21;
             // 
             // label15
@@ -319,7 +319,7 @@
             this.label15.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(688, 174);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(36, 21);
+            this.label15.Size = new System.Drawing.Size(35, 21);
             this.label15.TabIndex = 14;
             this.label15.Text = "Pais";
             // 
@@ -339,7 +339,7 @@
             this.label13.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(264, 255);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(100, 21);
+            this.label13.Size = new System.Drawing.Size(99, 21);
             this.label13.TabIndex = 12;
             this.label13.Text = "Palabre Clave";
             // 
@@ -369,7 +369,7 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(651, 39);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 21);
+            this.label4.Size = new System.Drawing.Size(65, 21);
             this.label4.TabIndex = 3;
             this.label4.Text = "Telefono";
             // 
@@ -382,7 +382,7 @@
             this.textBox_TelefonoAlarma.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox_TelefonoAlarma.Name = "textBox_TelefonoAlarma";
             this.textBox_TelefonoAlarma.ReadOnly = true;
-            this.textBox_TelefonoAlarma.Size = new System.Drawing.Size(209, 26);
+            this.textBox_TelefonoAlarma.Size = new System.Drawing.Size(209, 24);
             this.textBox_TelefonoAlarma.TabIndex = 2;
             // 
             // label3
@@ -391,7 +391,7 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(218, 46);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(138, 21);
+            this.label3.Size = new System.Drawing.Size(135, 21);
             this.label3.TabIndex = 1;
             this.label3.Text = "Telefono de alarma";
             // 
@@ -447,14 +447,14 @@
             this.dataGridView_Contactos.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_Contactos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_Contactos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_Contactos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_Contactos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_Contactos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Contactos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -469,14 +469,14 @@
             this.dataGridView_Contactos.Name = "dataGridView_Contactos";
             this.dataGridView_Contactos.ReadOnly = true;
             this.dataGridView_Contactos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_Contactos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_Contactos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView_Contactos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView_Contactos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_Contactos.Size = new System.Drawing.Size(976, 119);
@@ -529,7 +529,6 @@
             this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "Alerta";
             this.TransparencyKey = System.Drawing.Color.Red;
-            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClienteInfo_FormClosing);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).EndInit();

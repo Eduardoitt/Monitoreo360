@@ -49,9 +49,7 @@
             this.lbl_Sexo = new System.Windows.Forms.Label();
             this.txt_Sexo = new System.Windows.Forms.TextBox();
             this.lbl_Lugnaci = new System.Windows.Forms.Label();
-            this.txt_LugNac = new System.Windows.Forms.TextBox();
             this.lbl_FechaNac = new System.Windows.Forms.Label();
-            this.txt_FechaNac = new System.Windows.Forms.TextBox();
             this.lbl_NumPat = new System.Windows.Forms.Label();
             this.txt_NumPat = new System.Windows.Forms.TextBox();
             this.lbl_RFC = new System.Windows.Forms.Label();
@@ -73,6 +71,8 @@
             this.lbl_ApPat = new System.Windows.Forms.Label();
             this.txt_ApPat = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.DT_FechaNac = new MetroFramework.Controls.MetroDateTime();
+            this.txt_LugNac = new System.Windows.Forms.TextBox();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -97,6 +97,7 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.Color.White;
+            this.metroPanel1.Controls.Add(this.DT_FechaNac);
             this.metroPanel1.Controls.Add(this.lbl_Beneficiario);
             this.metroPanel1.Controls.Add(this.txt_Beneficiario);
             this.metroPanel1.Controls.Add(this.lbl_ClaveBanc);
@@ -117,7 +118,6 @@
             this.metroPanel1.Controls.Add(this.lbl_Lugnaci);
             this.metroPanel1.Controls.Add(this.txt_LugNac);
             this.metroPanel1.Controls.Add(this.lbl_FechaNac);
-            this.metroPanel1.Controls.Add(this.txt_FechaNac);
             this.metroPanel1.Controls.Add(this.lbl_NumPat);
             this.metroPanel1.Controls.Add(this.txt_NumPat);
             this.metroPanel1.Controls.Add(this.lbl_RFC);
@@ -312,13 +312,6 @@
             this.lbl_Lugnaci.TabIndex = 45;
             this.lbl_Lugnaci.Text = "Lugar de Nacimiento:";
             // 
-            // txt_LugNac
-            // 
-            this.txt_LugNac.Location = new System.Drawing.Point(497, 366);
-            this.txt_LugNac.Name = "txt_LugNac";
-            this.txt_LugNac.Size = new System.Drawing.Size(176, 20);
-            this.txt_LugNac.TabIndex = 44;
-            // 
             // lbl_FechaNac
             // 
             this.lbl_FechaNac.AutoSize = true;
@@ -328,13 +321,6 @@
             this.lbl_FechaNac.Size = new System.Drawing.Size(152, 18);
             this.lbl_FechaNac.TabIndex = 43;
             this.lbl_FechaNac.Text = "Fecha de Nacimiento:";
-            // 
-            // txt_FechaNac
-            // 
-            this.txt_FechaNac.Location = new System.Drawing.Point(261, 366);
-            this.txt_FechaNac.Name = "txt_FechaNac";
-            this.txt_FechaNac.Size = new System.Drawing.Size(176, 20);
-            this.txt_FechaNac.TabIndex = 42;
             // 
             // lbl_NumPat
             // 
@@ -517,6 +503,21 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // DT_FechaNac
+            // 
+            this.DT_FechaNac.Location = new System.Drawing.Point(263, 366);
+            this.DT_FechaNac.MinimumSize = new System.Drawing.Size(0, 29);
+            this.DT_FechaNac.Name = "DT_FechaNac";
+            this.DT_FechaNac.Size = new System.Drawing.Size(200, 29);
+            this.DT_FechaNac.TabIndex = 3;
+            // 
+            // txt_LugNac
+            // 
+            this.txt_LugNac.Location = new System.Drawing.Point(497, 366);
+            this.txt_LugNac.Name = "txt_LugNac";
+            this.txt_LugNac.Size = new System.Drawing.Size(176, 20);
+            this.txt_LugNac.TabIndex = 44;
+            // 
             // ClientesAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -568,9 +569,7 @@
         private System.Windows.Forms.Label lbl_Sexo;
         private System.Windows.Forms.TextBox txt_Sexo;
         private System.Windows.Forms.Label lbl_Lugnaci;
-        private System.Windows.Forms.TextBox txt_LugNac;
         private System.Windows.Forms.Label lbl_FechaNac;
-        private System.Windows.Forms.TextBox txt_FechaNac;
         private System.Windows.Forms.Label lbl_NumPat;
         private System.Windows.Forms.TextBox txt_NumPat;
         private MetroFramework.Controls.MetroComboBox CB_Banco;
@@ -584,5 +583,7 @@
         private System.Windows.Forms.TextBox txt_ClaveBanc;
         private System.Windows.Forms.Label lbl_Beneficiario;
         private System.Windows.Forms.TextBox txt_Beneficiario;
+        private MetroFramework.Controls.MetroDateTime DT_FechaNac;
+        private System.Windows.Forms.TextBox txt_LugNac;
     }
 }

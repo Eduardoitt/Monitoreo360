@@ -76,7 +76,7 @@ namespace Monitoreo_360
                 db.InsertClientes(IdCliente, IdProveedor, null, txt_TelAlarma.Text.Trim(), txt_Nombres.Text.Trim(),
                     txt_ApPat.Text.Trim(), txt_ApMat.Text.Trim(), txt_NoCuenta.Text.Trim(), null, null, null, null, null, null, null,
                     null, null, null, null, null, txt_Telefono.Text.Trim(), txt_Telefono.Text.Trim(), txt_TelCelular.Text.Trim(), txt_Correo.Text.Trim(),
-                    null, null, null, null, null, txt_NumPat.Text, txt_FechaNac.Text, txt_LugNac.Text, txt_Sexo.Text, txt_EstadoCivil.Text,
+                    null, null, null, null, null, txt_NumPat.Text, DT_FechaNac.Value.ToString(), txt_LugNac.Text, txt_Sexo.Text, txt_EstadoCivil.Text,
                     txt_Profesion.Text, txt_CURP.Text.Trim(), txt_RFC.Text.Trim(), CB_Banco.SelectedValue.ToString(), txt_NumCatPago.Text,
                     txt_ClaveBanc.Text.Trim(), txt_NumClave.Text, txt_Beneficiario.Text,fechaC , IdUsuario, true);
 
