@@ -23,6 +23,7 @@ namespace Monitoreo_360.Models
             this.HorarioOperaciones = new HashSet<HorarioOperaciones>();
             this.Incidentes = new HashSet<Incidentes>();
             this.Sensores = new HashSet<Sensores>();
+            this.FotosCliente = new HashSet<FotosCliente>();
         }
     
         public System.Guid IdCliente { get; set; }
@@ -90,5 +91,7 @@ namespace Monitoreo_360.Models
         public virtual ICollection<Incidentes> Incidentes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sensores> Sensores { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FotosCliente> FotosCliente { get; set; }
     }
 }

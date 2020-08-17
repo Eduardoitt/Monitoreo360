@@ -101,6 +101,7 @@ namespace Monitoreo_360.Models
         public virtual DbSet<Mensajes> Mensajes { get; set; }
         public virtual DbSet<Pagos> Pagos { get; set; }
         public virtual DbSet<Saldos> Saldos { get; set; }
+        public virtual DbSet<FotosCliente> FotosCliente { get; set; }
     
         public virtual int DisabledPAC(Nullable<System.Guid> id)
         {
@@ -2771,7 +2772,7 @@ namespace Monitoreo_360.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertUsuario", idParameter, usuarioParameter, contraseñaParameter, tipoUsuarioParameter, rolesParameter, activoParameter, timbresParameter, timbresUsadosParameter, timbresCanceladosParameter, primeraVezParameter);
         }
     
-        public virtual int UpdateAdeudosInstalaciones(Nullable<System.Guid> id, Nullable<System.Guid> idProveedor, Nullable<System.Guid> idCliente, Nullable<System.Guid> idPaquete, Nullable<System.DateTime> fechaContrato, Nullable<bool> pagoComision, Nullable<System.DateTime> fechaPago, Nullable<System.Guid> idAsesor, Nullable<System.Guid> idMensualidad, Nullable<int> cantidad, string concepto, string descripcion, string unidad, Nullable<double> total, string claveProdServ, Nullable<System.DateTime> fechaInstalacion, Nullable<System.Guid> idInstalador, string comentarios, Nullable<double> anticipo, Nullable<bool> pagado, Nullable<bool> instalacion, Nullable<bool> requiereFacturacion, Nullable<bool> requiereCancelacion, Nullable<bool> requiereEnvio, Nullable<bool> revisoRobot, Nullable<bool> activo)
+        public virtual int UpdateAdeudosInstalaciones(Nullable<System.Guid> id, Nullable<System.Guid> idProveedor, Nullable<System.Guid> idCliente, string c_FormaPago, string c_MetodoPago, string c_UsoCFDI, string c_Moneda, Nullable<double> iVA, Nullable<double> tipoCambio, Nullable<System.DateTime> fechaPago, Nullable<double> total, Nullable<System.DateTime> fechaInstalacion, string comentarios, Nullable<bool> pagado, Nullable<bool> requiereFacturacion, Nullable<bool> requiereCorreo)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -2785,99 +2786,59 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("IdCliente", idCliente) :
                 new ObjectParameter("IdCliente", typeof(System.Guid));
     
-            var idPaqueteParameter = idPaquete.HasValue ?
-                new ObjectParameter("IdPaquete", idPaquete) :
-                new ObjectParameter("IdPaquete", typeof(System.Guid));
+            var c_FormaPagoParameter = c_FormaPago != null ?
+                new ObjectParameter("c_FormaPago", c_FormaPago) :
+                new ObjectParameter("c_FormaPago", typeof(string));
     
-            var fechaContratoParameter = fechaContrato.HasValue ?
-                new ObjectParameter("FechaContrato", fechaContrato) :
-                new ObjectParameter("FechaContrato", typeof(System.DateTime));
+            var c_MetodoPagoParameter = c_MetodoPago != null ?
+                new ObjectParameter("c_MetodoPago", c_MetodoPago) :
+                new ObjectParameter("c_MetodoPago", typeof(string));
     
-            var pagoComisionParameter = pagoComision.HasValue ?
-                new ObjectParameter("PagoComision", pagoComision) :
-                new ObjectParameter("PagoComision", typeof(bool));
+            var c_UsoCFDIParameter = c_UsoCFDI != null ?
+                new ObjectParameter("c_UsoCFDI", c_UsoCFDI) :
+                new ObjectParameter("c_UsoCFDI", typeof(string));
+    
+            var c_MonedaParameter = c_Moneda != null ?
+                new ObjectParameter("c_Moneda", c_Moneda) :
+                new ObjectParameter("c_Moneda", typeof(string));
+    
+            var iVAParameter = iVA.HasValue ?
+                new ObjectParameter("IVA", iVA) :
+                new ObjectParameter("IVA", typeof(double));
+    
+            var tipoCambioParameter = tipoCambio.HasValue ?
+                new ObjectParameter("TipoCambio", tipoCambio) :
+                new ObjectParameter("TipoCambio", typeof(double));
     
             var fechaPagoParameter = fechaPago.HasValue ?
                 new ObjectParameter("FechaPago", fechaPago) :
                 new ObjectParameter("FechaPago", typeof(System.DateTime));
     
-            var idAsesorParameter = idAsesor.HasValue ?
-                new ObjectParameter("IdAsesor", idAsesor) :
-                new ObjectParameter("IdAsesor", typeof(System.Guid));
-    
-            var idMensualidadParameter = idMensualidad.HasValue ?
-                new ObjectParameter("IdMensualidad", idMensualidad) :
-                new ObjectParameter("IdMensualidad", typeof(System.Guid));
-    
-            var cantidadParameter = cantidad.HasValue ?
-                new ObjectParameter("Cantidad", cantidad) :
-                new ObjectParameter("Cantidad", typeof(int));
-    
-            var conceptoParameter = concepto != null ?
-                new ObjectParameter("Concepto", concepto) :
-                new ObjectParameter("Concepto", typeof(string));
-    
-            var descripcionParameter = descripcion != null ?
-                new ObjectParameter("Descripcion", descripcion) :
-                new ObjectParameter("Descripcion", typeof(string));
-    
-            var unidadParameter = unidad != null ?
-                new ObjectParameter("Unidad", unidad) :
-                new ObjectParameter("Unidad", typeof(string));
-    
             var totalParameter = total.HasValue ?
                 new ObjectParameter("Total", total) :
                 new ObjectParameter("Total", typeof(double));
-    
-            var claveProdServParameter = claveProdServ != null ?
-                new ObjectParameter("ClaveProdServ", claveProdServ) :
-                new ObjectParameter("ClaveProdServ", typeof(string));
     
             var fechaInstalacionParameter = fechaInstalacion.HasValue ?
                 new ObjectParameter("FechaInstalacion", fechaInstalacion) :
                 new ObjectParameter("FechaInstalacion", typeof(System.DateTime));
     
-            var idInstaladorParameter = idInstalador.HasValue ?
-                new ObjectParameter("IdInstalador", idInstalador) :
-                new ObjectParameter("IdInstalador", typeof(System.Guid));
-    
             var comentariosParameter = comentarios != null ?
                 new ObjectParameter("Comentarios", comentarios) :
                 new ObjectParameter("Comentarios", typeof(string));
-    
-            var anticipoParameter = anticipo.HasValue ?
-                new ObjectParameter("Anticipo", anticipo) :
-                new ObjectParameter("Anticipo", typeof(double));
     
             var pagadoParameter = pagado.HasValue ?
                 new ObjectParameter("Pagado", pagado) :
                 new ObjectParameter("Pagado", typeof(bool));
     
-            var instalacionParameter = instalacion.HasValue ?
-                new ObjectParameter("Instalacion", instalacion) :
-                new ObjectParameter("Instalacion", typeof(bool));
-    
             var requiereFacturacionParameter = requiereFacturacion.HasValue ?
                 new ObjectParameter("RequiereFacturacion", requiereFacturacion) :
                 new ObjectParameter("RequiereFacturacion", typeof(bool));
     
-            var requiereCancelacionParameter = requiereCancelacion.HasValue ?
-                new ObjectParameter("RequiereCancelacion", requiereCancelacion) :
-                new ObjectParameter("RequiereCancelacion", typeof(bool));
+            var requiereCorreoParameter = requiereCorreo.HasValue ?
+                new ObjectParameter("RequiereCorreo", requiereCorreo) :
+                new ObjectParameter("RequiereCorreo", typeof(bool));
     
-            var requiereEnvioParameter = requiereEnvio.HasValue ?
-                new ObjectParameter("RequiereEnvio", requiereEnvio) :
-                new ObjectParameter("RequiereEnvio", typeof(bool));
-    
-            var revisoRobotParameter = revisoRobot.HasValue ?
-                new ObjectParameter("RevisoRobot", revisoRobot) :
-                new ObjectParameter("RevisoRobot", typeof(bool));
-    
-            var activoParameter = activo.HasValue ?
-                new ObjectParameter("Activo", activo) :
-                new ObjectParameter("Activo", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateAdeudosInstalaciones", idParameter, idProveedorParameter, idClienteParameter, idPaqueteParameter, fechaContratoParameter, pagoComisionParameter, fechaPagoParameter, idAsesorParameter, idMensualidadParameter, cantidadParameter, conceptoParameter, descripcionParameter, unidadParameter, totalParameter, claveProdServParameter, fechaInstalacionParameter, idInstaladorParameter, comentariosParameter, anticipoParameter, pagadoParameter, instalacionParameter, requiereFacturacionParameter, requiereCancelacionParameter, requiereEnvioParameter, revisoRobotParameter, activoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateAdeudosInstalaciones", idParameter, idProveedorParameter, idClienteParameter, c_FormaPagoParameter, c_MetodoPagoParameter, c_UsoCFDIParameter, c_MonedaParameter, iVAParameter, tipoCambioParameter, fechaPagoParameter, totalParameter, fechaInstalacionParameter, comentariosParameter, pagadoParameter, requiereFacturacionParameter, requiereCorreoParameter);
         }
     
         public virtual int UpdateCFDI(Nullable<System.Guid> id, string tipo, Nullable<int> folio, byte[] xML, string ruta, Nullable<System.Guid> idCliente, Nullable<System.Guid> idEmpleado, Nullable<System.Guid> idProveedor, Nullable<bool> cancelado)
@@ -3909,6 +3870,23 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("PrimeraVez", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateUsuarios", idParameter, usuarioParameter, contrasenaParameter, tipoUsuarioParameter, rolesParameter, activoParameter, timbresParameter, timbresUsadosParameter, timbresCanceladosParameter, primeraVezParameter);
+        }
+    
+        public virtual int InsertClienteFoto(Nullable<System.Guid> idFotoCliente, Nullable<System.Guid> idCliente, byte[] rutaFoto)
+        {
+            var idFotoClienteParameter = idFotoCliente.HasValue ?
+                new ObjectParameter("IdFotoCliente", idFotoCliente) :
+                new ObjectParameter("IdFotoCliente", typeof(System.Guid));
+    
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(System.Guid));
+    
+            var rutaFotoParameter = rutaFoto != null ?
+                new ObjectParameter("RutaFoto", rutaFoto) :
+                new ObjectParameter("RutaFoto", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertClienteFoto", idFotoClienteParameter, idClienteParameter, rutaFotoParameter);
         }
     }
 }

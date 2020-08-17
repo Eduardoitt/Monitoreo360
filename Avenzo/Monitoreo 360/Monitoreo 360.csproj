@@ -407,6 +407,9 @@
     <Compile Include="Models\FormaDePago.cs">
       <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FotosCliente.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetAdeudosInstalacionesById_Result.cs">
       <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
     </Compile>

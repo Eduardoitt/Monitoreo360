@@ -18,6 +18,7 @@ namespace Monitoreo_360.Models
         public CFDI()
         {
             this.CFDIEnDeuda = new HashSet<CFDIEnDeuda>();
+            this.CFDIPorOperacion = new HashSet<CFDIPorOperacion>();
         }
     
         public System.Guid Id { get; set; }
@@ -39,5 +40,7 @@ namespace Monitoreo_360.Models
         public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CFDIEnDeuda> CFDIEnDeuda { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CFDIPorOperacion> CFDIPorOperacion { get; set; }
     }
 }

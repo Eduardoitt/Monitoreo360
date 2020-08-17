@@ -18,5 +18,11 @@ namespace Monitoreo_360.Models
         public Nullable<System.Guid> IdNominaHistorial { get; set; }
         public Nullable<System.Guid> IdAdeudosInstalaciones { get; set; }
         public Nullable<System.Guid> IdCFDI { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public Nullable<System.Guid> UsuarioCreacion { get; set; }
+    
+        public virtual AdeudosInstalaciones AdeudosInstalaciones { get; set; }
+        public virtual CFDI CFDI { get; set; }
+        public virtual NominaHistorial NominaHistorial { get; set; }
     }
 }

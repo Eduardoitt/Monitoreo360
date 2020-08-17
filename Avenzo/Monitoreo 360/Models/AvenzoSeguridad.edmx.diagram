@@ -164,6 +164,11 @@
         <AssociationConnector Association="AvenzoSeguridadModel.FK_NominaPercepciones_NominaSeparacionIndemnizacion" ManuallyRouted="false" />
         <AssociationConnector Association="AvenzoSeguridadModel.FK_IncidentesComentarios_Usuarios" ManuallyRouted="false" />
         <AssociationConnector Association="AvenzoSeguridadModel.FK_Sensores_Usuarios" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.FotosCliente" Width="1.5" PointX="13.5" PointY="74" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CFDIPorOperacion_AdeudosInstalaciones" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CFDIPorOperacion_CFDI" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK_CFDIPorOperacion_NominaHistorial" />
+        <AssociationConnector Association="AvenzoSeguridadModel.FK__FotosClie__IdCli__41AE9EFA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

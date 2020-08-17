@@ -806,7 +806,7 @@
             //this.Button_Fotos.ActiveLineColor = System.Drawing.Color.Firebrick;
             this.Button_Fotos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.Button_Fotos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Button_Fotos.BackgroundImage")));
-            //this.Button_Fotos.ButtonText = "Fotos";
+            this.Button_Fotos.Text = "Fotos";
             this.Button_Fotos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Button_Fotos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button_Fotos.ForeColor = System.Drawing.Color.Firebrick;

@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+using Monitoreo_360.Models;
 
 namespace Monitoreo_360
 {
@@ -16,6 +18,7 @@ namespace Monitoreo_360
     {
         private string NumeroDeCuenta;
         private int x = 36, y = 14, i = 0;
+        AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         public Fotos(string NumeroDeCuenta)
         {
             InitializeComponent();
@@ -46,21 +49,18 @@ namespace Monitoreo_360
         public void AgregarImagen(string file, int x, int y, string Name)
         {
             Panel panel = new System.Windows.Forms.Panel();
-            //Bunifu.Framework.UI.BunifuImageButton Button_Close = new Bunifu.Framework.UI.BunifuImageButton();
             System.Windows.Forms.Button Button_Close = new System.Windows.Forms.Button();
             PictureBox pictureBox = new System.Windows.Forms.PictureBox();
             panel.SuspendLayout();
-            //((System.ComponentModel.ISupportInitialize)(Button_Close)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(pictureBox)).BeginInit();
             this.panel_Galeria.Controls.Add(panel);
 
             // 
             // panel
             // 
-            //panel.Controls.Add(Button_Close);
+            panel.Controls.Add(Button_Close);
             panel.Controls.Add(pictureBox);
             panel.Location = new System.Drawing.Point(x, y);
-            //panel.Name = "panel";
             panel.Size = new System.Drawing.Size(170, 185);
             panel.TabIndex = 0;
             // 
@@ -68,14 +68,12 @@ namespace Monitoreo_360
             // 
             Button_Close.BackColor = System.Drawing.Color.Firebrick;
             Button_Close.Image = global::Monitoreo_360.Properties.Resources.Delete_96px;
-            //Button_Close.ImageActive = null;
             Button_Close.Location = new System.Drawing.Point(152, 0);
             Button_Close.Name = "Button_Close";
             Button_Close.Size = new System.Drawing.Size(18, 18);
-            //Button_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             Button_Close.TabIndex = 1;
             Button_Close.TabStop = false;
-            // Button_Close.Zoom = 10;
+
             // 
             // pictureBox
             // 
@@ -92,27 +90,45 @@ namespace Monitoreo_360
 
 
             panel.ResumeLayout(false);
-            //((System.ComponentModel.ISupportInitialize)(Button_Close)).EndInit();
+
             ((System.ComponentModel.ISupportInitialize)(pictureBox)).EndInit();
         }
         private void Button_AgregarFotos_Click(object sender, EventArgs e)
         {
             OpenFileDialog result =new OpenFileDialog();
+            result.Filter = "Archivos jpg(*.jpg)|*.jpg|Archivos png(*.png)|*.png";
+            result.FilterIndex = 1;
+            result.RestoreDirectory = true;
+
             if (result.ShowDialog()==DialogResult.OK) {
                 try {
+                    
                     string fileName = result.FileName;
-                    byte[] file = System.IO.File.ReadAllBytes(fileName);
-                    Console.WriteLine("Nombre:"+fileName);
-                    Guid Id = Guid.NewGuid();
+                    //byte[] file = System.IO.File.ReadAllBytes(fileName);
+                    byte[] fileimage = null;
+                    Stream myStream = result.OpenFile();
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        myStream.CopyTo(ms);
+                        fileimage = ms.ToArray();
+                    }
+                        Console.WriteLine("Nombre:" + fileName);
+                    Guid Id = Guid.NewGuid();//IDClienteFoto
                     string Name = Id + "." + fileName.Split('.')[fileName.Split('.').Length - 1];
-                    string path = String.Format(@"{0}\Fotos\"+this.NumeroDeCuenta, Application.StartupPath);//genero la ruta pero del servidor
+                    Guid? IdCliente = new Guid();
+                    Models.Clientes Client = db.Clientes.Where(x => x.NumeroDeCuenta == NumeroDeCuenta).FirstOrDefault();
+                    IdCliente = Client.IdCliente;
+                    db.InsertClienteFoto(Id,IdCliente,fileimage);
+
+                   // string path = String.Format(@"{0}\Fotos\" + this.NumeroDeCuenta, Application.StartupPath);//genero la ruta pero del servidor
                     //Si no esxiste direcorio lo crea
-                    if (!Directory.Exists(path))
-                        Directory.CreateDirectory(path);
-                    Console.WriteLine("path:" + path + " otro path:" + Application.StartupPath);
-                    File.WriteAllBytes(path+"\\"+Name,file);
-                    //pictureBox.Image = Image.FromFile(path);
-                    AgregarImagen((path+"\\"+Name), x, y,Id.ToString());
+                    //if (!Directory.Exists(path))
+                    //    Directory.CreateDirectory(path);
+                    //Console.WriteLine("path:" + path + " otro path:" + Application.StartupPath);
+                    //File.WriteAllBytes(path + "\\" + Name, file);
+
+                    //AgregarImagen((path + "\\" + Name), x, y, Id.ToString());
+
                     x = x + 170 + ((int)36.6);
                     i = i + 1;
                     if (i == 4)
@@ -131,7 +147,7 @@ namespace Monitoreo_360
             //System.IO.File.WriteAllBytes();
             
         }
-  
+
         public void pictureBox_DoubleClick(object sender, EventArgs e) {
             //Al dar doble click abre la foto seleccionada en un visor de windows
             string path = String.Format(@"{0}\Fotos\" + this.NumeroDeCuenta, Application.StartupPath);
