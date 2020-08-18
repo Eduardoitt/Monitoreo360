@@ -20,10 +20,10 @@ namespace Monitoreo_360.Models
             this.AdeudosInstalaciones = new HashSet<AdeudosInstalaciones>();
             this.CFDI = new HashSet<CFDI>();
             this.ClienteContactos = new HashSet<ClienteContactos>();
+            this.FotosCliente = new HashSet<FotosCliente>();
             this.HorarioOperaciones = new HashSet<HorarioOperaciones>();
             this.Incidentes = new HashSet<Incidentes>();
             this.Sensores = new HashSet<Sensores>();
-            this.FotosCliente = new HashSet<FotosCliente>();
         }
     
         public System.Guid IdCliente { get; set; }
@@ -83,6 +83,8 @@ namespace Monitoreo_360.Models
         public virtual ICollection<CFDI> CFDI { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteContactos> ClienteContactos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FotosCliente> FotosCliente { get; set; }
         public virtual Usuarios Usuarios { get; set; }
         public virtual Usuarios Usuarios1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -91,7 +93,5 @@ namespace Monitoreo_360.Models
         public virtual ICollection<Incidentes> Incidentes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sensores> Sensores { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FotosCliente> FotosCliente { get; set; }
     }
 }

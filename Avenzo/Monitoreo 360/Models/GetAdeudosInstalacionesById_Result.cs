@@ -21,6 +21,7 @@ namespace Monitoreo_360.Models
         public string c_MetodoPago { get; set; }
         public string c_UsoCFDI { get; set; }
         public string c_Moneda { get; set; }
+        public Nullable<double> IVA { get; set; }
         public Nullable<double> TipoCambio { get; set; }
         public Nullable<System.DateTime> FechaPago { get; set; }
         public double Total { get; set; }

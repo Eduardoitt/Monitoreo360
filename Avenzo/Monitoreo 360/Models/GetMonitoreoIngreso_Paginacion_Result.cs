@@ -15,12 +15,21 @@ namespace Monitoreo_360.Models
     {
         public System.Guid Id { get; set; }
         public Nullable<System.Guid> IdAdeudo { get; set; }
+        public Nullable<System.Guid> IdProveedor { get; set; }
         public Nullable<System.Guid> IdNominaHistorial { get; set; }
         public string Cliente { get; set; }
+        public Nullable<System.Guid> IdCliente { get; set; }
         public string Empleado { get; set; }
+        public Nullable<System.Guid> IdEmpleado { get; set; }
         public string Proveedor { get; set; }
+        public Nullable<System.Guid> IdCFDI { get; set; }
         public string c_Moneda { get; set; }
         public string c_FormaPago { get; set; }
+        public string c_UsoCFDI { get; set; }
+        public string c_MetodoPago { get; set; }
+        public Nullable<double> TipoCambio { get; set; }
+        public string Comentarios { get; set; }
+        public string Descripcion_FormaPago { get; set; }
         public string c_ClaveProdServ { get; set; }
         public int Cantidad { get; set; }
         public string c_ClaveUnidad { get; set; }

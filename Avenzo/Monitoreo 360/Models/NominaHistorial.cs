@@ -17,11 +17,11 @@ namespace Monitoreo_360.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NominaHistorial()
         {
+            this.CFDIPorOperacion = new HashSet<CFDIPorOperacion>();
             this.MonitoreoIngresos = new HashSet<MonitoreoIngresos>();
             this.NominaDeduccion = new HashSet<NominaDeduccion>();
             this.NominaIncapacidad = new HashSet<NominaIncapacidad>();
             this.NominaOtrosPago = new HashSet<NominaOtrosPago>();
-            this.CFDIPorOperacion = new HashSet<CFDIPorOperacion>();
         }
     
         public System.Guid Id { get; set; }
@@ -45,6 +45,8 @@ namespace Monitoreo_360.Models
         public virtual PAC PAC { get; set; }
         public virtual PeriodicidadPagos PeriodicidadPagos { get; set; }
         public virtual Regimen Regimen { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CFDIPorOperacion> CFDIPorOperacion { get; set; }
         public virtual Empleados Empleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MonitoreoIngresos> MonitoreoIngresos { get; set; }
@@ -55,7 +57,5 @@ namespace Monitoreo_360.Models
         public virtual ICollection<NominaIncapacidad> NominaIncapacidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NominaOtrosPago> NominaOtrosPago { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CFDIPorOperacion> CFDIPorOperacion { get; set; }
     }
 }

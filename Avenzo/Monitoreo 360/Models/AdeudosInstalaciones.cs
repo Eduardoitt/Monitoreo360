@@ -17,8 +17,8 @@ namespace Monitoreo_360.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AdeudosInstalaciones()
         {
-            this.MonitoreoIngresos = new HashSet<MonitoreoIngresos>();
             this.CFDIPorOperacion = new HashSet<CFDIPorOperacion>();
+            this.MonitoreoIngresos = new HashSet<MonitoreoIngresos>();
         }
     
         public System.Guid Id { get; set; }
@@ -48,10 +48,10 @@ namespace Monitoreo_360.Models
         public virtual PAC PAC { get; set; }
         public virtual UsoCFDI UsoCFDI { get; set; }
         public virtual Usuarios Usuarios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CFDIPorOperacion> CFDIPorOperacion { get; set; }
         public virtual Clientes Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MonitoreoIngresos> MonitoreoIngresos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CFDIPorOperacion> CFDIPorOperacion { get; set; }
     }
 }

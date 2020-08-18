@@ -10,14 +10,12 @@
 namespace Monitoreo_360.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class FotosCliente
+    public partial class GetCargosAbonosByMes_Result
     {
-        public System.Guid IdFotoCliente { get; set; }
-        public Nullable<System.Guid> IdCliente { get; set; }
-        public string RutaFoto { get; set; }
-    
-        public virtual Clientes Clientes { get; set; }
+        public Nullable<System.DateTime> FechaInicial { get; set; }
+        public Nullable<System.DateTime> FechaFinal { get; set; }
+        public Nullable<double> Cargos { get; set; }
+        public Nullable<double> Abonos { get; set; }
     }
 }

@@ -416,6 +416,9 @@
     <Compile Include="Models\GetBancos_Result.cs">
       <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetCargosAbonosByMes_Result.cs">
+      <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetCatalogoByNombreCatalogo_Result.cs">
       <DependentUpon>AvenzoSeguridad.tt</DependentUpon>
     </Compile>

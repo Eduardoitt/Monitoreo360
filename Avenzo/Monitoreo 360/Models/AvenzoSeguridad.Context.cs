@@ -74,6 +74,7 @@ namespace Monitoreo_360.Models
         public virtual DbSet<CompraProductos> CompraProductos { get; set; }
         public virtual DbSet<DispositivosAsignados> DispositivosAsignados { get; set; }
         public virtual DbSet<Empleados> Empleados { get; set; }
+        public virtual DbSet<FotosCliente> FotosCliente { get; set; }
         public virtual DbSet<HorarioOperaciones> HorarioOperaciones { get; set; }
         public virtual DbSet<Incidentes> Incidentes { get; set; }
         public virtual DbSet<Inventario> Inventario { get; set; }
@@ -101,7 +102,6 @@ namespace Monitoreo_360.Models
         public virtual DbSet<Mensajes> Mensajes { get; set; }
         public virtual DbSet<Pagos> Pagos { get; set; }
         public virtual DbSet<Saldos> Saldos { get; set; }
-        public virtual DbSet<FotosCliente> FotosCliente { get; set; }
     
         public virtual int DisabledPAC(Nullable<System.Guid> id)
         {
@@ -743,7 +743,7 @@ namespace Monitoreo_360.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAdeudosInstalacionesById_Result>("GetAdeudosInstalacionesById", idParameter);
         }
     
-        public virtual int GetCargosAbonosByMes(Nullable<System.Guid> idUsuario, Nullable<System.DateTime> fechaInicial)
+        public virtual ObjectResult<GetCargosAbonosByMes_Result> GetCargosAbonosByMes(Nullable<System.Guid> idUsuario, Nullable<System.DateTime> fechaInicial)
         {
             var idUsuarioParameter = idUsuario.HasValue ?
                 new ObjectParameter("IdUsuario", idUsuario) :
@@ -753,7 +753,7 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("FechaInicial", fechaInicial) :
                 new ObjectParameter("FechaInicial", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetCargosAbonosByMes", idUsuarioParameter, fechaInicialParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCargosAbonosByMes_Result>("GetCargosAbonosByMes", idUsuarioParameter, fechaInicialParameter);
         }
     
         public virtual ObjectResult<GetCatalogo_Result> GetCatalogo(Nullable<System.Guid> id, Nullable<int> opcion)
@@ -1611,6 +1611,23 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("Activo", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertClienteContacto", idParameter, idClienteParameter, nombreParameter, direccionParameter, telefonoParameter, prioridadParameter, fechaCreacionParameter, usuarioCreacionParameter, activoParameter);
+        }
+    
+        public virtual int InsertClienteFoto(Nullable<System.Guid> idFotoCliente, Nullable<System.Guid> idCliente, string rutaFoto)
+        {
+            var idFotoClienteParameter = idFotoCliente.HasValue ?
+                new ObjectParameter("IdFotoCliente", idFotoCliente) :
+                new ObjectParameter("IdFotoCliente", typeof(System.Guid));
+    
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(System.Guid));
+    
+            var rutaFotoParameter = rutaFoto != null ?
+                new ObjectParameter("RutaFoto", rutaFoto) :
+                new ObjectParameter("RutaFoto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertClienteFoto", idFotoClienteParameter, idClienteParameter, rutaFotoParameter);
         }
     
         public virtual int InsertClientes(Nullable<System.Guid> id, Nullable<System.Guid> idProveedor, Nullable<System.Guid> idUsuario, string numAlarma, string nombres, string apellidoPaterno, string apellidoMaterno, string numeroDeCuenta, string palabraClave, string palabraClaveSilen, string calle, string noInterior, string noExterior, string colonia, string codigoPostal, string referencias, string colorEstablecimiento, string entreCalles, string googleMaps, string descripcion, string telefono, string telTrabajo, string telCelular, string email, byte[] foto, string estado, string pais, string ciudad, Nullable<System.Guid> tipoAfilacion, string numeroPatrocinador, string fechaNacimiento, string lugarNacimiento, string sexo, string estadoCivil, string profesion, string curp, string rfc, string banco, string numCtaPago, string claveBancaria, string numeroCLABE, string beneficiario, Nullable<System.DateTime> fechaCreacion, Nullable<System.Guid> usuarioCreacion, Nullable<bool> activo)
@@ -3870,23 +3887,6 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("PrimeraVez", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateUsuarios", idParameter, usuarioParameter, contrasenaParameter, tipoUsuarioParameter, rolesParameter, activoParameter, timbresParameter, timbresUsadosParameter, timbresCanceladosParameter, primeraVezParameter);
-        }
-    
-        public virtual int InsertClienteFoto(Nullable<System.Guid> idFotoCliente, Nullable<System.Guid> idCliente, byte[] rutaFoto)
-        {
-            var idFotoClienteParameter = idFotoCliente.HasValue ?
-                new ObjectParameter("IdFotoCliente", idFotoCliente) :
-                new ObjectParameter("IdFotoCliente", typeof(System.Guid));
-    
-            var idClienteParameter = idCliente.HasValue ?
-                new ObjectParameter("IdCliente", idCliente) :
-                new ObjectParameter("IdCliente", typeof(System.Guid));
-    
-            var rutaFotoParameter = rutaFoto != null ?
-                new ObjectParameter("RutaFoto", rutaFoto) :
-                new ObjectParameter("RutaFoto", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertClienteFoto", idFotoClienteParameter, idClienteParameter, rutaFotoParameter);
         }
     }
 }

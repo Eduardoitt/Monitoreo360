@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AvenzoSeguridadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AvenzoSeguridadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bancos">
           <Key>
             <PropertyRef Name="c_Banco" />
@@ -610,7 +610,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.DocumentacionEmpleado' does not
           </Key>
           <Property Name="IdFotoCliente" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IdCliente" Type="uniqueidentifier" />
-          <Property Name="RutaFoto" Type="image" />
+          <Property Name="RutaFoto" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="HorarioOperaciones">
           <Key>
@@ -939,7 +939,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <Property Name="TimbresCancelados" Type="int" Nullable="false" />
           <Property Name="PrimeraVez" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__FotosClie__IdCli__41AE9EFA">
+        <Association Name="FK__FotosClie__IdCli__55B597A7">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
           <End Role="FotosCliente" Type="Self.FotosCliente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2458,7 +2458,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
         <Function Name="InsertClienteFoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
           <Parameter Name="IdFotoCliente" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="RutaFoto" Type="image" Mode="In" />
+          <Parameter Name="RutaFoto" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="InsertClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
@@ -3204,7 +3204,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
     [Saldos].[Saldo] AS [Saldo]
     FROM [AS].[Saldos] AS [Saldos]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__FotosClie__IdCli__41AE9EFA" Association="Self.FK__FotosClie__IdCli__41AE9EFA">
+          <AssociationSet Name="FK__FotosClie__IdCli__55B597A7" Association="Self.FK__FotosClie__IdCli__55B597A7">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="FotosCliente" EntitySet="FotosCliente" />
           </AssociationSet>
@@ -3561,7 +3561,8 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AvenzoSeguridadModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -3906,9 +3907,9 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <NavigationProperty Name="PAC" Relationship="Self.FK_AdeudosInstalaciones_PAC" FromRole="AdeudosInstalaciones" ToRole="PAC" />
           <NavigationProperty Name="UsoCFDI" Relationship="Self.FK_AdeudosInstalaciones_UsoCFDI" FromRole="AdeudosInstalaciones" ToRole="UsoCFDI" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_AdeudosInstalaciones_Usuarios" FromRole="AdeudosInstalaciones" ToRole="Usuarios" />
+          <NavigationProperty Name="CFDIPorOperacion" Relationship="Self.FK_CFDIPorOperacion_AdeudosInstalaciones" FromRole="AdeudosInstalaciones" ToRole="CFDIPorOperacion" />
           <NavigationProperty Name="Clientes" Relationship="Self.FK_Instalaciones_Clientes" FromRole="AdeudosInstalaciones" ToRole="Clientes" />
           <NavigationProperty Name="MonitoreoIngresos" Relationship="Self.FK_MonitoreoIngresos_AdeudosInstalaciones" FromRole="AdeudosInstalaciones" ToRole="MonitoreoIngresos" />
-          <NavigationProperty Name="CFDIPorOperacion" Relationship="AvenzoSeguridadModel.FK_CFDIPorOperacion_AdeudosInstalaciones" FromRole="AdeudosInstalaciones" ToRole="CFDIPorOperacion" />
         </EntityType>
         <EntityType Name="Asociados">
           <Key>
@@ -3969,7 +3970,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <NavigationProperty Name="Empleados" Relationship="Self.FK_CFDI_Empleados" FromRole="CFDI" ToRole="Empleados" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_CFDI_Usuarios" FromRole="CFDI" ToRole="Usuarios" />
           <NavigationProperty Name="CFDIEnDeuda" Relationship="Self.FK_CFDIEnDeuda_CFDI" FromRole="CFDI" ToRole="CFDIEnDeuda" />
-          <NavigationProperty Name="CFDIPorOperacion" Relationship="AvenzoSeguridadModel.FK_CFDIPorOperacion_CFDI" FromRole="CFDI" ToRole="CFDIPorOperacion" />
+          <NavigationProperty Name="CFDIPorOperacion" Relationship="Self.FK_CFDIPorOperacion_CFDI" FromRole="CFDI" ToRole="CFDIPorOperacion" />
         </EntityType>
         <EntityType Name="CFDIEnDeuda">
           <Key>
@@ -3996,9 +3997,9 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <Property Name="IdCFDI" Type="Guid" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioCreacion" Type="Guid" />
-          <NavigationProperty Name="AdeudosInstalaciones" Relationship="AvenzoSeguridadModel.FK_CFDIPorOperacion_AdeudosInstalaciones" FromRole="CFDIPorOperacion" ToRole="AdeudosInstalaciones" />
-          <NavigationProperty Name="CFDI" Relationship="AvenzoSeguridadModel.FK_CFDIPorOperacion_CFDI" FromRole="CFDIPorOperacion" ToRole="CFDI" />
-          <NavigationProperty Name="NominaHistorial" Relationship="AvenzoSeguridadModel.FK_CFDIPorOperacion_NominaHistorial" FromRole="CFDIPorOperacion" ToRole="NominaHistorial" />
+          <NavigationProperty Name="AdeudosInstalaciones" Relationship="Self.FK_CFDIPorOperacion_AdeudosInstalaciones" FromRole="CFDIPorOperacion" ToRole="AdeudosInstalaciones" />
+          <NavigationProperty Name="CFDI" Relationship="Self.FK_CFDIPorOperacion_CFDI" FromRole="CFDIPorOperacion" ToRole="CFDI" />
+          <NavigationProperty Name="NominaHistorial" Relationship="Self.FK_CFDIPorOperacion_NominaHistorial" FromRole="CFDIPorOperacion" ToRole="NominaHistorial" />
         </EntityType>
         <EntityType Name="ClaveProdServHistorial">
           <Key>
@@ -4099,12 +4100,12 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <NavigationProperty Name="AdeudosInstalaciones" Relationship="Self.FK_Instalaciones_Clientes" FromRole="Clientes" ToRole="AdeudosInstalaciones" />
           <NavigationProperty Name="CFDI" Relationship="Self.FK_CFDI_Clientes" FromRole="Clientes" ToRole="CFDI" />
           <NavigationProperty Name="ClienteContactos" Relationship="Self.FK_ClienteContactos_Clientes" FromRole="Clientes" ToRole="ClienteContactos" />
+          <NavigationProperty Name="FotosCliente" Relationship="Self.FK__FotosClie__IdCli__55B597A7" FromRole="Clientes" ToRole="FotosCliente" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_Clientes_IdUsuarios" FromRole="Clientes" ToRole="Usuarios" />
           <NavigationProperty Name="Usuarios1" Relationship="Self.FK_Clientes_UsuarioCreacion" FromRole="Clientes" ToRole="Usuarios" />
           <NavigationProperty Name="HorarioOperaciones" Relationship="Self.FK_HorarioOperaciones_Clientes" FromRole="Clientes" ToRole="HorarioOperaciones" />
           <NavigationProperty Name="Incidentes" Relationship="Self.FK_Incidentes_Clientes" FromRole="Clientes" ToRole="Incidentes" />
           <NavigationProperty Name="Sensores" Relationship="Self.FK_Sensores_Clientes" FromRole="Clientes" ToRole="Sensores" />
-          <NavigationProperty Name="FotosCliente" Relationship="AvenzoSeguridadModel.FK__FotosClie__IdCli__41AE9EFA" FromRole="Clientes" ToRole="FotosCliente" />
         </EntityType>
         <EntityType Name="CodigoEventos">
           <Key>
@@ -4199,6 +4200,15 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <NavigationProperty Name="CFDI" Relationship="Self.FK_CFDI_Empleados" FromRole="Empleados" ToRole="CFDI" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_Empleados_Usuarios" FromRole="Empleados" ToRole="Usuarios" />
           <NavigationProperty Name="NominaHistorial" Relationship="Self.FK_NominaHistorial_Empleados" FromRole="Empleados" ToRole="NominaHistorial" />
+        </EntityType>
+        <EntityType Name="FotosCliente">
+          <Key>
+            <PropertyRef Name="IdFotoCliente" />
+          </Key>
+          <Property Name="IdFotoCliente" Type="Guid" Nullable="false" />
+          <Property Name="IdCliente" Type="Guid" />
+          <Property Name="RutaFoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__FotosClie__IdCli__55B597A7" FromRole="FotosCliente" ToRole="Clientes" />
         </EntityType>
         <EntityType Name="HorarioOperaciones">
           <Key>
@@ -4345,13 +4355,13 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <NavigationProperty Name="PAC" Relationship="Self.FK_NominaHistorial_PAC" FromRole="NominaHistorial" ToRole="PAC" />
           <NavigationProperty Name="PeriodicidadPagos" Relationship="Self.FK_NominaHistorial_PeriodicidadPago" FromRole="NominaHistorial" ToRole="PeriodicidadPagos" />
           <NavigationProperty Name="Regimen" Relationship="Self.FK_NominaHistorial_Regimen" FromRole="NominaHistorial" ToRole="Regimen" />
+          <NavigationProperty Name="CFDIPorOperacion" Relationship="Self.FK_CFDIPorOperacion_NominaHistorial" FromRole="NominaHistorial" ToRole="CFDIPorOperacion" />
           <NavigationProperty Name="Empleados" Relationship="Self.FK_NominaHistorial_Empleados" FromRole="NominaHistorial" ToRole="Empleados" />
           <NavigationProperty Name="MonitoreoIngresos" Relationship="Self.FK_MonitoreoIngresos_NominaHistorial" FromRole="NominaHistorial" ToRole="MonitoreoIngresos" />
           <NavigationProperty Name="NominaDeduccion" Relationship="Self.FK_NominaDeduccion_NominaHistorial" FromRole="NominaHistorial" ToRole="NominaDeduccion" />
           <NavigationProperty Name="NominaPercepciones" Relationship="Self.FK_NominaHistorial_NominaPercepciones" FromRole="NominaHistorial" ToRole="NominaPercepciones" />
           <NavigationProperty Name="NominaIncapacidad" Relationship="Self.FK_NominaIncapacidad_NominaHistorial" FromRole="NominaHistorial" ToRole="NominaIncapacidad" />
           <NavigationProperty Name="NominaOtrosPago" Relationship="Self.FK_NominaOtrosPago_NominaHistorial" FromRole="NominaHistorial" ToRole="NominaOtrosPago" />
-          <NavigationProperty Name="CFDIPorOperacion" Relationship="AvenzoSeguridadModel.FK_CFDIPorOperacion_NominaHistorial" FromRole="NominaHistorial" ToRole="CFDIPorOperacion" />
         </EntityType>
         <EntityType Name="NominaHorasExtras">
           <Key>
@@ -5168,6 +5178,18 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CFDIPorOperacion_AdeudosInstalaciones">
+          <End Role="AdeudosInstalaciones" Type="Self.AdeudosInstalaciones" Multiplicity="0..1" />
+          <End Role="CFDIPorOperacion" Type="Self.CFDIPorOperacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdeudosInstalaciones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CFDIPorOperacion">
+              <PropertyRef Name="IdAdeudosInstalaciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Instalaciones_Clientes">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
           <End Role="AdeudosInstalaciones" Type="Self.AdeudosInstalaciones" Multiplicity="*" />
@@ -5240,6 +5262,18 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CFDIPorOperacion_CFDI">
+          <End Role="CFDI" Type="Self.CFDI" Multiplicity="0..1" />
+          <End Role="CFDIPorOperacion" Type="Self.CFDIPorOperacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CFDI">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CFDIPorOperacion">
+              <PropertyRef Name="IdCFDI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CFDIEnDeuda_Usuarios">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
           <End Role="CFDIEnDeuda" Type="Self.CFDIEnDeuda" Multiplicity="*" />
@@ -5249,6 +5283,18 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             </Principal>
             <Dependent Role="CFDIEnDeuda">
               <PropertyRef Name="UsuarioCreacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CFDIPorOperacion_NominaHistorial">
+          <End Role="NominaHistorial" Type="Self.NominaHistorial" Multiplicity="0..1" />
+          <End Role="CFDIPorOperacion" Type="Self.CFDIPorOperacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NominaHistorial">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CFDIPorOperacion">
+              <PropertyRef Name="IdNominaHistorial" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5309,6 +5355,18 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             </Principal>
             <Dependent Role="ReporteLlamada">
               <PropertyRef Name="IdClienteContacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FotosClie__IdCli__55B597A7">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="FotosCliente" Type="Self.FotosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="FotosCliente">
+              <PropertyRef Name="IdCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5720,6 +5778,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <EntitySet Name="CompraProductos" EntityType="Self.CompraProductos" />
           <EntitySet Name="DispositivosAsignados" EntityType="Self.DispositivosAsignados" />
           <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="FotosCliente" EntityType="Self.FotosCliente" />
           <EntitySet Name="HorarioOperaciones" EntityType="Self.HorarioOperaciones" />
           <EntitySet Name="Incidentes" EntityType="Self.Incidentes" />
           <EntitySet Name="Inventario" EntityType="Self.Inventario" />
@@ -5919,6 +5978,10 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="AdeudosInstalaciones" EntitySet="AdeudosInstalaciones" />
           </AssociationSet>
+          <AssociationSet Name="FK_CFDIPorOperacion_AdeudosInstalaciones" Association="Self.FK_CFDIPorOperacion_AdeudosInstalaciones">
+            <End Role="AdeudosInstalaciones" EntitySet="AdeudosInstalaciones" />
+            <End Role="CFDIPorOperacion" EntitySet="CFDIPorOperacion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Instalaciones_Clientes" Association="Self.FK_Instalaciones_Clientes">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="AdeudosInstalaciones" EntitySet="AdeudosInstalaciones" />
@@ -5943,9 +6006,17 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <End Role="CFDI" EntitySet="CFDI" />
             <End Role="CFDIEnDeuda" EntitySet="CFDIEnDeuda" />
           </AssociationSet>
+          <AssociationSet Name="FK_CFDIPorOperacion_CFDI" Association="Self.FK_CFDIPorOperacion_CFDI">
+            <End Role="CFDI" EntitySet="CFDI" />
+            <End Role="CFDIPorOperacion" EntitySet="CFDIPorOperacion" />
+          </AssociationSet>
           <AssociationSet Name="FK_CFDIEnDeuda_Usuarios" Association="Self.FK_CFDIEnDeuda_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="CFDIEnDeuda" EntitySet="CFDIEnDeuda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CFDIPorOperacion_NominaHistorial" Association="Self.FK_CFDIPorOperacion_NominaHistorial">
+            <End Role="NominaHistorial" EntitySet="NominaHistorial" />
+            <End Role="CFDIPorOperacion" EntitySet="CFDIPorOperacion" />
           </AssociationSet>
           <AssociationSet Name="FK_ClaveProdServHistorial_Usuarios" Association="Self.FK_ClaveProdServHistorial_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
@@ -5966,6 +6037,10 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <AssociationSet Name="FK_IncidentesComentarios_ClienteContactos" Association="Self.FK_IncidentesComentarios_ClienteContactos">
             <End Role="ClienteContactos" EntitySet="ClienteContactos" />
             <End Role="ReporteLlamada" EntitySet="ReporteLlamada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FotosClie__IdCli__55B597A7" Association="Self.FK__FotosClie__IdCli__55B597A7">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="FotosCliente" EntitySet="FotosCliente" />
           </AssociationSet>
           <AssociationSet Name="FK_Clientes_IdUsuarios" Association="Self.FK_Clientes_IdUsuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
@@ -6088,33 +6163,33 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <End Role="Sensores" EntitySet="Sensores" />
           </AssociationSet>
           <FunctionImport Name="DisabledPAC">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetBancos" ReturnType="Collection(AvenzoSeguridadModel.GetBancos_Result)">
-          <Parameter Name="Filtro" Mode="In" Type="String" />
+            <Parameter Name="Filtro" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetCiudadesByEstado" ReturnType="Collection(AvenzoSeguridadModel.GetCiudadesByEstado_Result)">
-          <Parameter Name="Estado" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetColoniasByCodigoPostal" ReturnType="Collection(AvenzoSeguridadModel.GetColoniasByCodigoPostal_Result)">
-          <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetEstadosByPais" ReturnType="Collection(AvenzoSeguridadModel.GetEstadosByPais_Result)">
-          <Parameter Name="Pais" Mode="In" Type="String" />
+            <Parameter Name="Pais" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetFormaDePago" ReturnType="Collection(AvenzoSeguridadModel.GetFormaDePago_Result)" />
           <FunctionImport Name="GetISRBySueldo" ReturnType="Collection(AvenzoSeguridadModel.GetISRBySueldo_Result)">
-          <Parameter Name="Sueldo" Mode="In" Type="Double" />
+            <Parameter Name="Sueldo" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="GetMetodosDePago" ReturnType="Collection(AvenzoSeguridadModel.GetMetodosDePago_Result)">
             <Parameter Name="ID" Mode="In" Type="String" />
             <Parameter Name="Metodo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetMunicipioByEstado" ReturnType="Collection(AvenzoSeguridadModel.GetMunicipioByEstado_Result)">
-          <Parameter Name="c_Estado" Mode="In" Type="String" />
+            <Parameter Name="c_Estado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetPAC" ReturnType="Collection(AvenzoSeguridadModel.GetPAC_Result)">
-          <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="GetPAC_Paginacion" ReturnType="Collection(AvenzoSeguridadModel.GetPAC_Paginacion_Result)">
             <Parameter Name="Activo" Mode="In" Type="Boolean" />
@@ -6123,10 +6198,10 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="PAC" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetPACById" ReturnType="Collection(AvenzoSeguridadModel.GetPACById_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetSubsudioAlEmpleoBySueldo" ReturnType="Collection(AvenzoSeguridadModel.GetSubsudioAlEmpleoBySueldo_Result)">
-          <Parameter Name="Sueldo" Mode="In" Type="Double" />
+            <Parameter Name="Sueldo" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="InsertPAC">
             <Parameter Name="Id" Mode="In" Type="Guid" />
@@ -6177,7 +6252,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="Descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CloseIncidentesComentarios">
-          <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
+            <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="CloseIncidentesManual">
             <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
@@ -6193,7 +6268,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteClaveProdServPorPAC">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteClienteContactos">
             <Parameter Name="op" Mode="In" Type="Int32" />
@@ -6212,51 +6287,51 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="ID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteInventario">
-          <Parameter Name="IdDispositivo" Mode="In" Type="Guid" />
+            <Parameter Name="IdDispositivo" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteMonitoreoIngresos">
             <Parameter Name="IdIngreso" Mode="In" Type="Guid" />
             <Parameter Name="Option" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaDeduccion">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaHistorial">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaHorasExtras">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaIncapacidad">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaJubilacionPensionRetiro">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaOtrosPago">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaPercepcion">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaPercepciones">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaSeparacionIndemnizacion">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteSensores">
             <Parameter Name="Id" Mode="In" Type="Guid" />
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteTipoUsuario">
-          <Parameter Name="ID" Mode="In" Type="Guid" />
+            <Parameter Name="ID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DisabledEmpleado">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DisabledUsuario">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="EditIncidentes">
             <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
@@ -6277,9 +6352,9 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAdeudosInstalacionesById" ReturnType="Collection(AvenzoSeguridadModel.GetAdeudosInstalacionesById_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
-          <FunctionImport Name="GetCargosAbonosByMes">
+          <FunctionImport Name="GetCargosAbonosByMes" ReturnType="Collection(AvenzoSeguridadModel.GetCargosAbonosByMes_Result)">
             <Parameter Name="IdUsuario" Mode="In" Type="Guid" />
             <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -6288,7 +6363,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetCatalogoByNombreCatalogo" ReturnType="Collection(AvenzoSeguridadModel.GetCatalogoByNombreCatalogo_Result)">
-          <Parameter Name="NombreCatalogo" Mode="In" Type="String" />
+            <Parameter Name="NombreCatalogo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetCFDI" ReturnType="Collection(AvenzoSeguridadModel.GetCFDI_Result)">
             <Parameter Name="Id" Mode="In" Type="Guid" />
@@ -6302,32 +6377,32 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="Search" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetCFDIByAdeudo" ReturnType="Collection(AvenzoSeguridadModel.GetCFDIByAdeudo_Result)">
-          <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
+            <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetCFDIByDoctoRelaionado" ReturnType="Collection(AvenzoSeguridadModel.GetCFDIByDoctoRelaionado_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetCFDIPorOperacion" ReturnType="Collection(AvenzoSeguridadModel.GetCFDIPorOperacion_Result)">
             <Parameter Name="Id" Mode="In" Type="Guid" />
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetCFDIPorOperacionByAdeudo" ReturnType="Collection(AvenzoSeguridadModel.GetCFDIPorOperacionByAdeudo_Result)">
-          <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
+            <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClaveProdServByBusqueda" ReturnType="Collection(AvenzoSeguridadModel.GetClaveProdServByBusqueda_Result)">
-          <Parameter Name="Search" Mode="In" Type="String" />
+            <Parameter Name="Search" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetClaveProdServByClase" ReturnType="Collection(AvenzoSeguridadModel.GetClaveProdServByClase_Result)">
-          <Parameter Name="Clave" Mode="In" Type="String" />
+            <Parameter Name="Clave" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetClaveProdServByPAC" ReturnType="Collection(AvenzoSeguridadModel.GetClaveProdServByPAC_Result)">
-          <Parameter Name="IdPAC" Mode="In" Type="Guid" />
+            <Parameter Name="IdPAC" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClaveProdServPorPAC" ReturnType="Collection(AvenzoSeguridadModel.GetClaveProdServPorPAC_Result)">
-          <Parameter Name="IdPAC" Mode="In" Type="Guid" />
+            <Parameter Name="IdPAC" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClienteByClientID" ReturnType="Collection(AvenzoSeguridadModel.GetClienteByClientID_Result)">
-          <Parameter Name="ClientID" Mode="In" Type="Guid" />
+            <Parameter Name="ClientID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClienteByPhoneNumberOrAccountNumber" ReturnType="Collection(AvenzoSeguridadModel.GetClienteByPhoneNumberOrAccountNumber_Result)">
             <Parameter Name="PhoneNumber" Mode="In" Type="String" />
@@ -6338,7 +6413,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClientes" ReturnType="Collection(AvenzoSeguridadModel.GetClientes_Result)">
-          <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="GetClientes_Paginacion" ReturnType="Collection(AvenzoSeguridadModel.GetClientes_Paginacion_Result)">
             <Parameter Name="Activo" Mode="In" Type="Boolean" />
@@ -6347,23 +6422,23 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="Cliente" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetClientesById" ReturnType="Collection(AvenzoSeguridadModel.GetClientesById_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClientesByUserID" ReturnType="Collection(AvenzoSeguridadModel.GetClientesByUserID_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClientesMonitoreo" ReturnType="Collection(AvenzoSeguridadModel.GetClientesMonitoreo_Result)" />
           <FunctionImport Name="GetCorreo" ReturnType="Collection(AvenzoSeguridadModel.GetCorreo_Result)">
-          <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetDoctoRelacionadoByFactura" ReturnType="Collection(AvenzoSeguridadModel.GetDoctoRelacionadoByFactura_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetDoctoRelacionadoByPago10" ReturnType="Collection(AvenzoSeguridadModel.GetDoctoRelacionadoByPago10_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetEmpleados" ReturnType="Collection(AvenzoSeguridadModel.GetEmpleados_Result)">
-          <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="GetEmpleados_Paginacion" ReturnType="Collection(AvenzoSeguridadModel.GetEmpleados_Paginacion_Result)">
             <Parameter Name="Activo" Mode="In" Type="Boolean" />
@@ -6372,16 +6447,16 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="Empleado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetEmpleadosById" ReturnType="Collection(AvenzoSeguridadModel.GetEmpleadosById_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetEmpleadosByPuesto" ReturnType="Collection(AvenzoSeguridadModel.GetEmpleadosByPuesto_Result)">
-          <Parameter Name="Puesto" Mode="In" Type="String" />
+            <Parameter Name="Puesto" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetEmpleadosByUserID" ReturnType="Collection(AvenzoSeguridadModel.GetEmpleadosByUserID_Result)">
-          <Parameter Name="UserID" Mode="In" Type="Guid" />
+            <Parameter Name="UserID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetHorarioOperaciones" ReturnType="Collection(AvenzoSeguridadModel.GetHorarioOperaciones_Result)">
-          <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetIncidentes" ReturnType="Collection(AvenzoSeguridadModel.GetIncidentes_Result)">
             <Parameter Name="selector" Mode="In" Type="Int32" />
@@ -6405,7 +6480,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="IdProveedor" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetMonitoreoIngresoByAdeudo" ReturnType="Collection(AvenzoSeguridadModel.GetMonitoreoIngresoByAdeudo_Result)">
-          <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
+            <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetNominaDeduccion" ReturnType="Collection(AvenzoSeguridadModel.GetNominaDeduccion_Result)">
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
@@ -6426,10 +6501,10 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetNumNivel1" ReturnType="Collection(Int32)">
-          <Parameter Name="ID" Mode="In" Type="Guid" />
+            <Parameter Name="ID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetPaquete" ReturnType="Collection(AvenzoSeguridadModel.GetPaquete_Result)">
-          <Parameter Name="IdPaquete" Mode="In" Type="Guid" />
+            <Parameter Name="IdPaquete" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetSensores" ReturnType="Collection(AvenzoSeguridadModel.GetSensores_Result)">
             <Parameter Name="Id" Mode="In" Type="Guid" />
@@ -6440,7 +6515,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="PalabraClave" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetUsuarioById" ReturnType="Collection(AvenzoSeguridadModel.GetUsuarioById_Result)">
-          <Parameter Name="IdUsuario" Mode="In" Type="Guid" />
+            <Parameter Name="IdUsuario" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetUsuarios_Paginacion" ReturnType="Collection(AvenzoSeguridadModel.GetUsuarios_Paginacion_Result)">
             <Parameter Name="Activo" Mode="In" Type="Boolean" />
@@ -6534,6 +6609,11 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
             <Parameter Name="UsuarioCreacion" Mode="In" Type="Guid" />
             <Parameter Name="Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="InsertClienteFoto">
+            <Parameter Name="IdFotoCliente" Mode="In" Type="Guid" />
+            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="RutaFoto" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InsertClientes">
             <Parameter Name="Id" Mode="In" Type="Guid" />
@@ -7135,28 +7215,6 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="TimbresCancelados" Mode="In" Type="Int32" />
             <Parameter Name="PrimeraVez" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <EntitySet Name="FotosCliente" EntityType="AvenzoSeguridadModel.FotosCliente" />
-          <AssociationSet Name="FK_CFDIPorOperacion_AdeudosInstalaciones" Association="AvenzoSeguridadModel.FK_CFDIPorOperacion_AdeudosInstalaciones">
-            <End Role="AdeudosInstalaciones" EntitySet="AdeudosInstalaciones" />
-            <End Role="CFDIPorOperacion" EntitySet="CFDIPorOperacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CFDIPorOperacion_CFDI" Association="AvenzoSeguridadModel.FK_CFDIPorOperacion_CFDI">
-            <End Role="CFDI" EntitySet="CFDI" />
-            <End Role="CFDIPorOperacion" EntitySet="CFDIPorOperacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CFDIPorOperacion_NominaHistorial" Association="AvenzoSeguridadModel.FK_CFDIPorOperacion_NominaHistorial">
-            <End Role="NominaHistorial" EntitySet="NominaHistorial" />
-            <End Role="CFDIPorOperacion" EntitySet="CFDIPorOperacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__FotosClie__IdCli__41AE9EFA" Association="AvenzoSeguridadModel.FK__FotosClie__IdCli__41AE9EFA">
-            <End Role="Clientes" EntitySet="Clientes" />
-            <End Role="FotosCliente" EntitySet="FotosCliente" />
-          </AssociationSet>
-          <FunctionImport Name="InsertClienteFoto">
-            <Parameter Name="IdFotoCliente" Mode="In" Type="Guid" />
-            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
-            <Parameter Name="RutaFoto" Mode="In" Type="Binary" />
-          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetBancos_Result">
           <Property Type="String" Name="c_Banco" Nullable="false" MaxLength="10" />
@@ -7288,6 +7346,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <Property Type="String" Name="c_MetodoPago" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="c_UsoCFDI" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="c_Moneda" Nullable="true" MaxLength="10" />
+          <Property Type="Double" Name="IVA" Nullable="true" />
           <Property Type="Double" Name="TipoCambio" Nullable="true" />
           <Property Type="DateTime" Name="FechaPago" Nullable="true" Precision="23" />
           <Property Type="Double" Name="Total" Nullable="false" />
@@ -7299,6 +7358,12 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <Property Type="Boolean" Name="Activo" Nullable="true" />
           <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
           <Property Type="Guid" Name="UsuarioCreacion" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetCargosAbonosByMes_Result">
+          <Property Type="DateTime" Name="FechaInicial" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinal" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="Cargos" Nullable="true" />
+          <Property Type="Double" Name="Abonos" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetCatalogo_Result">
           <Property Type="Guid" Name="IdCatalogo" Nullable="false" />
@@ -8059,12 +8124,21 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
         <ComplexType Name="GetMonitoreoIngreso_Paginacion_Result">
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="IdAdeudo" Nullable="true" />
+          <Property Type="Guid" Name="IdProveedor" Nullable="true" />
           <Property Type="Guid" Name="IdNominaHistorial" Nullable="true" />
           <Property Type="String" Name="Cliente" Nullable="true" MaxLength="602" />
+          <Property Type="Guid" Name="IdCliente" Nullable="true" />
           <Property Type="String" Name="Empleado" Nullable="true" MaxLength="602" />
+          <Property Type="Guid" Name="IdEmpleado" Nullable="true" />
           <Property Type="String" Name="Proveedor" Nullable="true" MaxLength="200" />
+          <Property Type="Guid" Name="IdCFDI" Nullable="true" />
           <Property Type="String" Name="c_Moneda" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="c_FormaPago" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="c_UsoCFDI" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="c_MetodoPago" Nullable="true" MaxLength="10" />
+          <Property Type="Double" Name="TipoCambio" Nullable="true" />
+          <Property Type="String" Name="Comentarios" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_FormaPago" Nullable="true" />
           <Property Type="String" Name="c_ClaveProdServ" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="Cantidad" Nullable="false" />
           <Property Type="String" Name="c_ClaveUnidad" Nullable="true" MaxLength="50" />
@@ -8178,63 +8252,6 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <Property Type="Int32" Name="TimbresCancelados" Nullable="false" />
           <Property Type="Boolean" Name="PrimeraVez" Nullable="false" />
         </ComplexType>
-        <EntityType Name="FotosCliente">
-          <Key>
-            <PropertyRef Name="IdFotoCliente" />
-          </Key>
-          <Property Name="IdFotoCliente" Type="Guid" Nullable="false" />
-          <Property Name="IdCliente" Type="Guid" />
-          <Property Name="RutaFoto" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Clientes" Relationship="AvenzoSeguridadModel.FK__FotosClie__IdCli__41AE9EFA" FromRole="FotosCliente" ToRole="Clientes" />
-        </EntityType>
-        <Association Name="FK_CFDIPorOperacion_AdeudosInstalaciones">
-          <End Type="AvenzoSeguridadModel.AdeudosInstalaciones" Role="AdeudosInstalaciones" Multiplicity="0..1" />
-          <End Type="AvenzoSeguridadModel.CFDIPorOperacion" Role="CFDIPorOperacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdeudosInstalaciones">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CFDIPorOperacion">
-              <PropertyRef Name="IdAdeudosInstalaciones" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CFDIPorOperacion_CFDI">
-          <End Type="AvenzoSeguridadModel.CFDI" Role="CFDI" Multiplicity="0..1" />
-          <End Type="AvenzoSeguridadModel.CFDIPorOperacion" Role="CFDIPorOperacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CFDI">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CFDIPorOperacion">
-              <PropertyRef Name="IdCFDI" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CFDIPorOperacion_NominaHistorial">
-          <End Type="AvenzoSeguridadModel.NominaHistorial" Role="NominaHistorial" Multiplicity="0..1" />
-          <End Type="AvenzoSeguridadModel.CFDIPorOperacion" Role="CFDIPorOperacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NominaHistorial">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CFDIPorOperacion">
-              <PropertyRef Name="IdNominaHistorial" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__FotosClie__IdCli__41AE9EFA">
-          <End Type="AvenzoSeguridadModel.Clientes" Role="Clientes" Multiplicity="0..1" />
-          <End Type="AvenzoSeguridadModel.FotosCliente" Role="FotosCliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clientes">
-              <PropertyRef Name="IdCliente" />
-            </Principal>
-            <Dependent Role="FotosCliente">
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8636,12 +8653,12 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <EntitySetMapping Name="CFDIPorOperacion">
             <EntityTypeMapping TypeName="AvenzoSeguridadModel.CFDIPorOperacion">
               <MappingFragment StoreEntitySet="CFDIPorOperacion">
-                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdNominaHistorial" ColumnName="IdNominaHistorial" />
                 <ScalarProperty Name="IdAdeudosInstalaciones" ColumnName="IdAdeudosInstalaciones" />
                 <ScalarProperty Name="IdCFDI" ColumnName="IdCFDI" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8818,6 +8835,15 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FotosCliente">
+            <EntityTypeMapping TypeName="AvenzoSeguridadModel.FotosCliente">
+              <MappingFragment StoreEntitySet="FotosCliente">
+                <ScalarProperty Name="IdFotoCliente" ColumnName="IdFotoCliente" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="RutaFoto" ColumnName="RutaFoto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -9410,6 +9436,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
                 <ScalarProperty Name="c_MetodoPago" ColumnName="c_MetodoPago" />
                 <ScalarProperty Name="c_UsoCFDI" ColumnName="c_UsoCFDI" />
                 <ScalarProperty Name="c_Moneda" ColumnName="c_Moneda" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
                 <ScalarProperty Name="TipoCambio" ColumnName="TipoCambio" />
                 <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
@@ -9424,7 +9451,16 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetCargosAbonosByMes" FunctionName="AvenzoSeguridadModel.Store.GetCargosAbonosByMes" />
+          <FunctionImportMapping FunctionImportName="GetCargosAbonosByMes" FunctionName="AvenzoSeguridadModel.Store.GetCargosAbonosByMes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AvenzoSeguridadModel.GetCargosAbonosByMes_Result">
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="Cargos" ColumnName="Cargos" />
+                <ScalarProperty Name="Abonos" ColumnName="Abonos" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetCatalogo" FunctionName="AvenzoSeguridadModel.Store.GetCatalogo">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AvenzoSeguridadModel.GetCatalogo_Result">
@@ -10315,12 +10351,21 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
               <ComplexTypeMapping TypeName="AvenzoSeguridadModel.GetMonitoreoIngreso_Paginacion_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdAdeudo" ColumnName="IdAdeudo" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
                 <ScalarProperty Name="IdNominaHistorial" ColumnName="IdNominaHistorial" />
                 <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
                 <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
                 <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="IdCFDI" ColumnName="IdCFDI" />
                 <ScalarProperty Name="c_Moneda" ColumnName="c_Moneda" />
                 <ScalarProperty Name="c_FormaPago" ColumnName="c_FormaPago" />
+                <ScalarProperty Name="c_UsoCFDI" ColumnName="c_UsoCFDI" />
+                <ScalarProperty Name="c_MetodoPago" ColumnName="c_MetodoPago" />
+                <ScalarProperty Name="TipoCambio" ColumnName="TipoCambio" />
+                <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
+                <ScalarProperty Name="Descripcion_FormaPago" ColumnName="Descripcion_FormaPago" />
                 <ScalarProperty Name="c_ClaveProdServ" ColumnName="c_ClaveProdServ" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="c_ClaveUnidad" ColumnName="c_ClaveUnidad" />
@@ -10479,6 +10524,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <FunctionImportMapping FunctionImportName="InsertClaveProdServHistorial" FunctionName="AvenzoSeguridadModel.Store.InsertClaveProdServHistorial" />
           <FunctionImportMapping FunctionImportName="InsertClaveProdServPorPAC" FunctionName="AvenzoSeguridadModel.Store.InsertClaveProdServPorPAC" />
           <FunctionImportMapping FunctionImportName="InsertClienteContacto" FunctionName="AvenzoSeguridadModel.Store.InsertClienteContacto" />
+          <FunctionImportMapping FunctionImportName="InsertClienteFoto" FunctionName="AvenzoSeguridadModel.Store.InsertClienteFoto" />
           <FunctionImportMapping FunctionImportName="InsertClientes" FunctionName="AvenzoSeguridadModel.Store.InsertClientes" />
           <FunctionImportMapping FunctionImportName="InsertCorreo" FunctionName="AvenzoSeguridadModel.Store.InsertCorreo" />
           <FunctionImportMapping FunctionImportName="InsertEmpleados" FunctionName="AvenzoSeguridadModel.Store.InsertEmpleados" />
@@ -10526,16 +10572,6 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <FunctionImportMapping FunctionImportName="UpdateTipoUsuario" FunctionName="AvenzoSeguridadModel.Store.UpdateTipoUsuario" />
           <FunctionImportMapping FunctionImportName="UpdateUsuarioContrasena" FunctionName="AvenzoSeguridadModel.Store.UpdateUsuarioContrasena" />
           <FunctionImportMapping FunctionImportName="UpdateUsuarios" FunctionName="AvenzoSeguridadModel.Store.UpdateUsuarios" />
-          <EntitySetMapping Name="FotosCliente">
-            <EntityTypeMapping TypeName="AvenzoSeguridadModel.FotosCliente">
-              <MappingFragment StoreEntitySet="FotosCliente">
-                <ScalarProperty Name="RutaFoto" ColumnName="RutaFoto" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="IdFotoCliente" ColumnName="IdFotoCliente" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="InsertClienteFoto" FunctionName="AvenzoSeguridadModel.Store.InsertClienteFoto" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

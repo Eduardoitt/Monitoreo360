@@ -17,50 +17,138 @@ namespace Monitoreo_360
     public partial class Fotos : MetroFramework.Forms.MetroForm
     {
         private string NumeroDeCuenta;
-        private int x = 36, y = 14, i = 0;
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
+        private string strServer = "avenzo.mx", strUser = "avenzopagina4", strPassword = "Teclado01!", strFileNameLocal = "",strPathFTP="";
         public Fotos(string NumeroDeCuenta)
         {
             InitializeComponent();
             this.NumeroDeCuenta = NumeroDeCuenta;
             //Carga la ruta de donde se encuentran las imagenes (bd)
-            string path = String.Format(@"{0}\Fotos\" + this.NumeroDeCuenta, Application.StartupPath);
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-            else { 
-                DirectoryInfo di = new DirectoryInfo(path);
-                x = 36; y = 14; i=0;
-                foreach (var image in di.GetFiles()) {
-                    AgregarImagen(String.Format(path+@"\{0}",image.Name),x,y,image.Name.Split('.')[0]);
-                    x = x+170 + ((int)36.6);
-                    
-                    i = i+ 1;
-                    if (i == 4) { 
-                        y = y + 185 + 14;
-                        x = 36;
-                        i = 0;
-                    }
+            //string path = String.Format(@"{0}\Fotos\" + this.NumeroDeCuenta, Application.StartupPath);
+            var path = (from f in db.FotosCliente
+                        join c in db.Clientes on f.IdCliente equals c.IdCliente
+                        where c.NumeroDeCuenta == NumeroDeCuenta
+                        select new
+                        {
+                            f.IdFotoCliente,
+                            f.IdCliente,
+                            f.RutaFoto
+                        }).FirstOrDefault();
+            //if (!Directory.Exists(path.RutaFoto))
+            //    Directory.CreateDirectory(path.RutaFoto);
+            //else
+            //{
+            //    DirectoryInfo di = new DirectoryInfo(path.RutaFoto);
+               // x = 36; y = 14; i = 0;
+
+                //foreach (var image in path.RutaFoto)
+                //{
+                //    //AgregarImagen(String.Format(path + @"\{0}", image.Name), x, y, image.Name.Split('.')[0]);
+                //    AgregarImagen(String.Format(path + @"\{0}", image.Name), image.Name.Split('.')[0]);
+
+                //}
+
+            //}
+        }
+
+        
+ 
+        //Guarda la imagen en la bd
+        private void Button_AgregarFotos_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog result = new OpenFileDialog();
+            result.Filter = "Archivos jpg(*.jpg)|*.jpg|Archivos png(*.png)|*.png";
+            result.FilterIndex = 1;
+            result.RestoreDirectory = true;
+
+            if (result.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+
+                    string fileName = result.FileName;
+                    byte[] file = System.IO.File.ReadAllBytes(fileName);
+                    Console.WriteLine("Nombre:" + fileName);
+                    Guid Id = Guid.NewGuid();
+                    string Name = Id + "." + fileName.Split('.')[fileName.Split('.').Length - 1];
+                    string path = String.Format("Fotos/" + this.NumeroDeCuenta);
+                    if (!Directory.Exists(path))
+                        Directory.CreateDirectory(path);
+                    Console.WriteLine("path:" + path + " otro path:" + Application.StartupPath);
+                    File.WriteAllBytes(path + "\\" + Name, file);
+                    SubirFotos(Name,path);
+                    AgregarImagen((path + "\\" + Name), Id.ToString());
+
+
+                   /* Guid? IdCliente = new Guid();
+                    Models.Clientes Client = db.Clientes.Where(x => x.NumeroDeCuenta == NumeroDeCuenta).FirstOrDefault();
+                    IdCliente = Client.IdCliente;
+                    db.InsertClienteFoto(Id, IdCliente, file);*/
+
+                   
+
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
             }
 
+            //System.IO.File.WriteAllBytes();
 
         }
+        public void SubirFotos(string strFileNameLocal, string strPathFTP)
+        {
+            FtpWebRequest ftpRequest;
+
+            // Crea el objeto de conexión del servidor FTP
+            string filename = Path.Combine(strPathFTP + "/", Path.GetFileName(strFileNameLocal));
+            ftpRequest = (FtpWebRequest)WebRequest.Create(string.Format("ftp://{0}/{1}", strServer, filename));
+            // Asigna las credenciales 
+            ftpRequest.Credentials = new NetworkCredential(strUser, strPassword);
+            // Asigna las propiedades
+            ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
+            ftpRequest.UsePassive = true;
+            ftpRequest.UseBinary = true;
+            ftpRequest.KeepAlive = false;
+
+            // Copy the contents of the file to the request stream.
+            byte[] fileContents;
+            using (StreamReader sourceStream = new StreamReader(filename))
+            {
+                fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
+            }
+
+            ftpRequest.ContentLength = fileContents.Length;
+
+            using (Stream requestStream = ftpRequest.GetRequestStream())
+            {
+                requestStream.Write(fileContents, 0, fileContents.Length);
+            }
+
+            using (FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse())
+            {
+                Console.WriteLine($"Upload File Complete, status {response.StatusDescription}");
+            }
+        }
         //acomoda las fotos en el panel
-        public void AgregarImagen(string file, int x, int y, string Name)
+        //public void AgregarImagen(string file, int x, int y, string Name)
+        public void AgregarImagen(string file, string Name)
         {
             Panel panel = new System.Windows.Forms.Panel();
             System.Windows.Forms.Button Button_Close = new System.Windows.Forms.Button();
             PictureBox pictureBox = new System.Windows.Forms.PictureBox();
             panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(pictureBox)).BeginInit();
-            this.panel_Galeria.Controls.Add(panel);
+            this.flowLayoutPanel1.Controls.Add(panel);
 
             // 
             // panel
             // 
             panel.Controls.Add(Button_Close);
             panel.Controls.Add(pictureBox);
-            panel.Location = new System.Drawing.Point(x, y);
+            //panel.Location = new System.Drawing.Point(x, y);
             panel.Size = new System.Drawing.Size(170, 185);
             panel.TabIndex = 0;
             // 
@@ -82,7 +170,10 @@ namespace Monitoreo_360
             pictureBox.InitialImage = null;
             pictureBox.Location = new System.Drawing.Point(0, 0);
             pictureBox.Name = Name;
-            pictureBox.Size = new System.Drawing.Size(170, 185);
+            //pictureBox.Size = new System.Drawing.Size(170, 185);
+            pictureBox.Height = 100;
+            pictureBox.Width = 185;
+            pictureBox.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             pictureBox.TabIndex = 0;
             pictureBox.DoubleClick += new System.EventHandler(this.pictureBox_DoubleClick);
@@ -93,73 +184,19 @@ namespace Monitoreo_360
 
             ((System.ComponentModel.ISupportInitialize)(pictureBox)).EndInit();
         }
-        private void Button_AgregarFotos_Click(object sender, EventArgs e)
+        public void pictureBox_DoubleClick(object sender, EventArgs e)
         {
-            OpenFileDialog result =new OpenFileDialog();
-            result.Filter = "Archivos jpg(*.jpg)|*.jpg|Archivos png(*.png)|*.png";
-            result.FilterIndex = 1;
-            result.RestoreDirectory = true;
-
-            if (result.ShowDialog()==DialogResult.OK) {
-                try {
-                    
-                    string fileName = result.FileName;
-                    //byte[] file = System.IO.File.ReadAllBytes(fileName);
-                    byte[] fileimage = null;
-                    Stream myStream = result.OpenFile();
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        myStream.CopyTo(ms);
-                        fileimage = ms.ToArray();
-                    }
-                        Console.WriteLine("Nombre:" + fileName);
-                    Guid Id = Guid.NewGuid();//IDClienteFoto
-                    string Name = Id + "." + fileName.Split('.')[fileName.Split('.').Length - 1];
-                    Guid? IdCliente = new Guid();
-                    Models.Clientes Client = db.Clientes.Where(x => x.NumeroDeCuenta == NumeroDeCuenta).FirstOrDefault();
-                    IdCliente = Client.IdCliente;
-                    db.InsertClienteFoto(Id,IdCliente,fileimage);
-
-                   // string path = String.Format(@"{0}\Fotos\" + this.NumeroDeCuenta, Application.StartupPath);//genero la ruta pero del servidor
-                    //Si no esxiste direcorio lo crea
-                    //if (!Directory.Exists(path))
-                    //    Directory.CreateDirectory(path);
-                    //Console.WriteLine("path:" + path + " otro path:" + Application.StartupPath);
-                    //File.WriteAllBytes(path + "\\" + Name, file);
-
-                    //AgregarImagen((path + "\\" + Name), x, y, Id.ToString());
-
-                    x = x + 170 + ((int)36.6);
-                    i = i + 1;
-                    if (i == 4)
-                    {
-                        y = y + 185 + 14;
-                        x = 36;
-                        i = 0;
-                    }
-
-                } catch (Exception ex) {
-                    Console.WriteLine(ex.Message);
-                }
-                
-            }
-            
-            //System.IO.File.WriteAllBytes();
-            
-        }
-
-        public void pictureBox_DoubleClick(object sender, EventArgs e) {
             //Al dar doble click abre la foto seleccionada en un visor de windows
             string path = String.Format(@"{0}\Fotos\" + this.NumeroDeCuenta, Application.StartupPath);
             PictureBox picture = (PictureBox)sender;
             DirectoryInfo di = new DirectoryInfo(path);
-            foreach (var file in di.GetFiles().Where(x=>x.Name.Contains(picture.Name)))
+            foreach (var file in di.GetFiles().Where(x => x.Name.Contains(picture.Name)))
             {
                 Process photoViewer = new Process();
                 photoViewer.StartInfo.FileName = file.FullName;
                 photoViewer.Start();
             }
-            
+
         }
 
     }
