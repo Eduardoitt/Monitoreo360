@@ -1613,7 +1613,7 @@ namespace Monitoreo_360.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertClienteContacto", idParameter, idClienteParameter, nombreParameter, direccionParameter, telefonoParameter, prioridadParameter, fechaCreacionParameter, usuarioCreacionParameter, activoParameter);
         }
     
-        public virtual int InsertClienteFoto(Nullable<System.Guid> idFotoCliente, Nullable<System.Guid> idCliente, string rutaFoto)
+        public virtual int InsertClienteFoto(Nullable<System.Guid> idFotoCliente, Nullable<System.Guid> idCliente, string rutaFoto, string nombre)
         {
             var idFotoClienteParameter = idFotoCliente.HasValue ?
                 new ObjectParameter("IdFotoCliente", idFotoCliente) :
@@ -1627,7 +1627,11 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("RutaFoto", rutaFoto) :
                 new ObjectParameter("RutaFoto", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertClienteFoto", idFotoClienteParameter, idClienteParameter, rutaFotoParameter);
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertClienteFoto", idFotoClienteParameter, idClienteParameter, rutaFotoParameter, nombreParameter);
         }
     
         public virtual int InsertClientes(Nullable<System.Guid> id, Nullable<System.Guid> idProveedor, Nullable<System.Guid> idUsuario, string numAlarma, string nombres, string apellidoPaterno, string apellidoMaterno, string numeroDeCuenta, string palabraClave, string palabraClaveSilen, string calle, string noInterior, string noExterior, string colonia, string codigoPostal, string referencias, string colorEstablecimiento, string entreCalles, string googleMaps, string descripcion, string telefono, string telTrabajo, string telCelular, string email, byte[] foto, string estado, string pais, string ciudad, Nullable<System.Guid> tipoAfilacion, string numeroPatrocinador, string fechaNacimiento, string lugarNacimiento, string sexo, string estadoCivil, string profesion, string curp, string rfc, string banco, string numCtaPago, string claveBancaria, string numeroCLABE, string beneficiario, Nullable<System.DateTime> fechaCreacion, Nullable<System.Guid> usuarioCreacion, Nullable<bool> activo)

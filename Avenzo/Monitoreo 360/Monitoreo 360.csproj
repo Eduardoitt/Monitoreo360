@@ -910,6 +910,7 @@
     <Content Include="Resources\user.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="FotosDescarga\" />
     <Folder Include="Fotos\" />
   </ItemGroup>
   <ItemGroup>
