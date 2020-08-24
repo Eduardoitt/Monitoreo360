@@ -41,13 +41,13 @@ namespace Monitoreo_360
             foreach (var image in path)
             {
 
-                string strFileNameLocal = "FotosDescarga/" + NumeroDeCuenta+"/Foto."+ image.RutaFoto.Split('.')[image.RutaFoto.Split('.').Length-1];
-                //string strFileNameLocal = "FotosDescarga/" + NumeroDeCuenta + "/" + image.Nombre;
+                //string strFileNameLocal = "FotosDescarga/" + NumeroDeCuenta+"/Foto."+ image.RutaFoto.Split('.')[image.RutaFoto.Split('.').Length-1];
+                string strFileNameLocal = "FotosDescarga/" + NumeroDeCuenta + "/" + image.Nombre;
                 if (!Directory.Exists("FotosDescarga/" + NumeroDeCuenta))
                     Directory.CreateDirectory("FotosDescarga/" + NumeroDeCuenta);
 
 
-                //Download(image.RutaFoto, strFileNameLocal);
+                Download(image.RutaFoto, strFileNameLocal);
                 //AgregarImagen(String.Format(image.RutaFoto), image.Nombre);
 
             }
@@ -70,7 +70,7 @@ namespace Monitoreo_360
             { // Obtiene el stream sobre la comunicación FTP
                 using (Stream responseStream = ((FtpWebResponse)ftpRequest.GetResponse()).GetResponseStream())
                 {
-                    int cnstIntLengthBuffer = 0;
+                    int cnstIntLengthBuffer = 10240;
                     byte[] arrBytBuffer = new byte[cnstIntLengthBuffer];
                     int intRead;
 

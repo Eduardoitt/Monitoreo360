@@ -75,7 +75,7 @@ namespace Monitoreo_360
                 Textbox_EntreCalles.Text.Trim(), Textbox_Google.Text.Trim(),comboBox_Estado.SelectedValue.ToString(),
                 comboBox_Ciudad.SelectedValue.ToString());
 
-            MetroFramework.MetroMessageBox.Show(this,"Se ha Guardado correctamente", "",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MetroMessageBox.Show(this,"Se ha Guardado correctamente", "",MessageBoxButtons.OK,MessageBoxIcon.Information);
             
         }
 
