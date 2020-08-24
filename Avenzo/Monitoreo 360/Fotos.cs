@@ -19,8 +19,8 @@ namespace Monitoreo_360
     {
         private string NumeroDeCuenta;
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
-        private string strServer = "avenzo.mx", strUser = "avenzopagina4", strPassword = "Teclado01!", strFileNameLocal = "",strPathFTP="";
-        string rutacompleta="";
+        private string strServer = "avenzo.mx", strUser = "avenzopagina4", strPassword = "Teclado01!", strFileNameLocal = "", strPathFTP = "";
+        string rutacompleta = "";
         public Fotos(string NumeroDeCuenta)
         {
             InitializeComponent();
@@ -38,57 +38,101 @@ namespace Monitoreo_360
                             f.Nombre
                         }).ToList();
 
-            //if (!Directory.Exists(path.RutaFoto))
-            //    Directory.CreateDirectory(path.RutaFoto);
-            //else
-            //{
-            //    DirectoryInfo di = new DirectoryInfo(path.RutaFoto);
-            // x = 36; y = 14; i = 0;
-
             foreach (var image in path)
             {
-                //AgregarImagen(String.Format(path + @"\{0}", image.Name), x, y, image.Name.Split('.')[0]);
-                AgregarImagen(String.Format(image.RutaFoto), image.Nombre);
+
+                string strFileNameLocal = "FotosDescarga/" + NumeroDeCuenta+"/Foto."+ image.RutaFoto.Split('.')[image.RutaFoto.Split('.').Length-1];
+                //string strFileNameLocal = "FotosDescarga/" + NumeroDeCuenta + "/" + image.Nombre;
+                if (!Directory.Exists("FotosDescarga/" + NumeroDeCuenta))
+                    Directory.CreateDirectory("FotosDescarga/" + NumeroDeCuenta);
+
+
+                //Download(image.RutaFoto, strFileNameLocal);
+                //AgregarImagen(String.Format(image.RutaFoto), image.Nombre);
 
             }
-
-            //}
         }
-        public static void descargarFic(string strServer, string strUser, string strPassword, string dirLocal)
+        public void Download(string strFileNameFTP, string strFileNameLocal)
         {
+            FtpWebRequest ftpRequest;
+            //Crea el objeto de conexión del servidor FTP
+            ftpRequest = (FtpWebRequest)WebRequest.Create(string.Format(strFileNameFTP));
+            // Asigna las credenciales
+            ftpRequest.Credentials = new NetworkCredential(strUser, strPassword);
+            // Asigna las propiedades
+            ftpRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+            ftpRequest.UsePassive = true;
+            ftpRequest.UseBinary = true;
+            ftpRequest.KeepAlive = false;
+            // Descarga el archivo y lo graba
 
-            FtpWebRequest dirFtp = ((FtpWebRequest)FtpWebRequest.Create(ficFTP));
+            using (FileStream stmFile = File.OpenWrite(strFileNameLocal))//ruta de acceso denegado
+            { // Obtiene el stream sobre la comunicación FTP
+                using (Stream responseStream = ((FtpWebResponse)ftpRequest.GetResponse()).GetResponseStream())
+                {
+                    int cnstIntLengthBuffer = 0;
+                    byte[] arrBytBuffer = new byte[cnstIntLengthBuffer];
+                    int intRead;
 
-            // Los datos del usuario (credenciales)
-            NetworkCredential cr = new NetworkCredential(user, pass);
-            dirFtp.Credentials = cr;
+                    // Lee los datos del stream y los graba en el archivo
+                    while ((intRead = responseStream.Read(arrBytBuffer, 0, cnstIntLengthBuffer)) != 0)
+                        stmFile.Write(arrBytBuffer, 0, intRead);
+                    // Cierra el stream FTP	
+                    responseStream.Close();
+                }
+                // Cierra el archivo de salida
+                stmFile.Flush();
+                stmFile.Close();
+            }
+        }
+        public void SubirFotos(string strFileNameLocal, string strPathFTP)
+        {
+            try
+            {
+                FtpWebRequest ftpRequest;
 
-            // El comando a ejecutar usando la enumeración de WebRequestMethods.Ftp
-            dirFtp.Method = WebRequestMethods.Ftp.DownloadFile;
+                // Crea el objeto de conexión del servidor FTP
+                string filename = Path.Combine(strPathFTP + "/", Path.GetFileName(strFileNameLocal));
+                ftpRequest = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("ftp://{0}/{1}", strServer, filename)));
+                rutacompleta = string.Format("ftp://{0}/{1}", strServer, filename);
+                // Asigna las credenciales 
+                ftpRequest.Credentials = new NetworkCredential(strUser, strPassword);
+                // Asigna las propiedades
+                ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
+                ftpRequest.UsePassive = true;
+                ftpRequest.UseBinary = true;
+                ftpRequest.KeepAlive = false;
 
-            // Obtener el resultado del comando
-            StreamReader reader =
-                new StreamReader(dirFtp.GetResponse().GetResponseStream());
+                // Copy the contents of the file to the request stream.
+                byte[] fileContents;
+                fileContents = File.ReadAllBytes(filename);
+                //using (StreamReader sourceStream = new StreamReader(filename))
+                //{
+                //    fileContents = Encoding.Default.GetBytes(sourceStream.ReadToEnd());
+                //    //fileContents = File.ReadAllBytes(sourceStream.ReadToEnd());
+                //}
 
-            // Leer el stream
-            string res = reader.ReadToEnd();
+                ftpRequest.ContentLength = fileContents.Length;
 
-            // Mostrarlo.
-            //Console.WriteLine(res);
+                using (Stream requestStream = ftpRequest.GetRequestStream())
+                {
+                    requestStream.Write(fileContents, 0, fileContents.Length);
+                }
 
-            // Guardarlo localmente con la extensión .txt
-            string ficLocal = Path.Combine(dirLocal, Path.GetFileName(ficFTP) + ".txt");
-            StreamWriter sw = new StreamWriter(ficLocal, false, Encoding.UTF8);
-            sw.Write(res);
-            sw.Close();
-
-            // Cerrar el stream abierto.
-            reader.Close();
+                using (FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse())
+                {
+                    Console.WriteLine($"Upload File Complete, status {response.StatusDescription}");
+                }
+            }
+            catch (WebException e)
+            {
+                String status = ((FtpWebResponse)e.Response).StatusDescription;
+            }
         }
 
-            //acomoda las fotos en el panel
-            //public void AgregarImagen(string file, int x, int y, string Name)
-            public void AgregarImagen(string file, string Name)
+        //acomoda las fotos en el panel
+        //public void AgregarImagen(string file, int x, int y, string Name)
+        public void AgregarImagen(string file, string Name)
         {
             Panel panel = new System.Windows.Forms.Panel();
             System.Windows.Forms.Button Button_Close = new System.Windows.Forms.Button();
@@ -138,8 +182,8 @@ namespace Monitoreo_360
 
             ((System.ComponentModel.ISupportInitialize)(pictureBox)).EndInit();
         }
-        
- 
+
+
         //Guarda la imagen en la bd
         private void Button_AgregarFotos_Click(object sender, EventArgs e)
         {
@@ -164,20 +208,18 @@ namespace Monitoreo_360
                         Directory.CreateDirectory(path);
                     Console.WriteLine("path:" + path + " otro path:" + Application.StartupPath);
                     File.WriteAllBytes(path + "\\" + Name, file);
-                    SubirFotos(Name,path);
+                    SubirFotos(Name, path);
                     //ingreso a la base de datos
                     Guid? IdCliente = new Guid();
                     Models.Clientes Client = db.Clientes.Where(x => x.NumeroDeCuenta == NumeroDeCuenta).FirstOrDefault();
                     IdCliente = Client.IdCliente;
-                    db.InsertClienteFoto(Id, IdCliente, rutacompleta,Name);
+                    db.InsertClienteFoto(Id, IdCliente, rutacompleta, Name, "ftp://avenzo.mx/Fotos/" + NumeroDeCuenta + "/");
                     //AgregarImagen((path + "\\" + Name), Id.ToString());
                     //File.Delete(@"\Users\crist\OneDrive\Escritorio\Proyecto\Monitoreo360\Avenzo\Monitoreo 360\bin\Debug\"+path + "\\" + Name);
 
                     rutacompleta = string.Empty;
 
                     MetroMessageBox.Show(this, "Se guardo exitosamento la foto", "Foto agregada", MessageBoxButtons.OK, MessageBoxIcon.Question);
-
-
                 }
                 catch (Exception ex)
                 {
@@ -187,49 +229,7 @@ namespace Monitoreo_360
             }
 
         }
-        public void SubirFotos(string strFileNameLocal, string strPathFTP)
-        {
-            try
-            {
-                FtpWebRequest ftpRequest;
 
-                // Crea el objeto de conexión del servidor FTP
-                string filename = Path.Combine(strPathFTP + "/", Path.GetFileName(strFileNameLocal));
-                ftpRequest = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("ftp://{0}/{1}", strServer, filename)));
-                rutacompleta = string.Format("ftp://{0}/{1}", strServer, filename);
-                // Asigna las credenciales 
-                ftpRequest.Credentials = new NetworkCredential(strUser, strPassword);
-                // Asigna las propiedades
-                ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
-                ftpRequest.UsePassive = true;
-                ftpRequest.UseBinary = true;
-                ftpRequest.KeepAlive = false;
-
-                // Copy the contents of the file to the request stream.
-                byte[] fileContents;
-                using (StreamReader sourceStream = new StreamReader(filename))
-                {
-                    fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-                }
-
-                ftpRequest.ContentLength = fileContents.Length;
-
-                using (Stream requestStream = ftpRequest.GetRequestStream())
-                {
-                    requestStream.Write(fileContents, 0, fileContents.Length);
-                }
-
-                using (FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse())
-                {
-                    Console.WriteLine($"Upload File Complete, status {response.StatusDescription}");
-                }
-            }
-            catch (WebException e)
-            {
-                String status = ((FtpWebResponse)e.Response).StatusDescription;
-            }
-        }
-        
         public void pictureBox_DoubleClick(object sender, EventArgs e)
         {
             //Al dar doble click abre la foto seleccionada en un visor de windows

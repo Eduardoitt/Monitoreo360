@@ -23,10 +23,7 @@ namespace Monitoreo_360
         {
             InitializeComponent();
 
-            List<Estados> estados = db.Estados.Where(x=>x.c_Pais== "MEX").ToList();
-            /*List<Ciudad> ciudades = db.Ciudad.ToList();
-            comboBox_Ciudad.Items.AddRange(ciudades.Select(x => x.Ciudad1).ToArray());*/
-            //comboBox_Estado.Items.AddRange(estados.Select(x => x.NombreEstado).ToArray());            
+            List<Estados> estados = db.Estados.Where(x=>x.c_Pais== "MEX").ToList();           
             this.IdUsuario = IdUsuario;
             this.cliente = db.Clientes.Where(x => x.IdCliente == IdCliente).FirstOrDefault();
             this.Textbox_Colonia.Text = cliente.Colonia;
@@ -38,9 +35,7 @@ namespace Monitoreo_360
             this.Textbox_Color.Text = cliente.ColorEstablecimiento;
             this.Textbox_EntreCalles.Text = cliente.EntreCalles;
             this.Textbox_Google.Text = cliente.GoogleMaps;
-            //comboBox_Estado.SelectedItem = cliente.Estado;
             Data();
-            comboBox_Ciudad.SelectedItem = cliente.Ciudad;
             if (cliente.GoogleMaps != null)
             {
                 webBrowser.ScriptErrorsSuppressed = true;
@@ -75,14 +70,11 @@ namespace Monitoreo_360
         }
         private void Button_Guardar_Click(object sender, EventArgs e)
         {
-            this.webBrowser.Url = new Uri(this.Textbox_Google.Text);
-            db.UpdateClientes(cliente.IdCliente, cliente.IdProveedor, cliente.NumeroDeCuenta, cliente.NumeroTelefonoAlarma,
-                cliente.PalabraClave, cliente.PalabraClaveSilenciosa, cliente.Nombres, cliente.ApellidoPaterno, cliente.ApellidoMaterno,
-                this.Textbox_Calle.Text, this.Textbox_NoInterior.Text, this.Textbox_NoExterior.Text, this.Textbox_Colonia.Text, this.Textbox_CodigoPostal.Text, this.Textbox_Referencias.Text,
-                this.Textbox_Color.Text, this.Textbox_EntreCalles.Text, this.Textbox_Google.Text, "", cliente.Telefono, cliente.TelefonoTrabajo,
-                cliente.TelefonoCelular, cliente.Email, cliente.Foto, this.comboBox_Estado.SelectedValue.ToString(), cliente.Pais, this.comboBox_Ciudad.SelectedValue.ToString(), cliente.TipoAfilacion,
-                cliente.NumeroPatrocinador, cliente.FechaNacimiento, cliente.LugarNacimiento, cliente.Sexo, cliente.EstadoCivil, cliente.Profesion,
-                cliente.CURP, cliente.RFC, cliente.NumCtaPago, cliente.ClaveBancaria, cliente.Banco, cliente.NumeroCLABE, cliente.Beneficiario, cliente.FechaCreacion, IdUsuario, true, cliente.IdUsuario);
+            db.UpdateDireccion(cliente.IdCliente, Textbox_Colonia.Text.Trim(), Textbox_Calle.Text.Trim(), Textbox_NoInterior.Text.Trim(),
+                Textbox_NoExterior.Text.Trim(), Textbox_CodigoPostal.Text.Trim(), Textbox_Referencias.Text.Trim(), Textbox_Color.Text.Trim(),
+                Textbox_EntreCalles.Text.Trim(), Textbox_Google.Text.Trim(),comboBox_Estado.SelectedValue.ToString(),
+                comboBox_Ciudad.SelectedValue.ToString());
+
             MetroFramework.MetroMessageBox.Show(this,"Se ha Guardado correctamente", "",MessageBoxButtons.OK,MessageBoxIcon.Information);
             
         }

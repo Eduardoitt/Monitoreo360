@@ -33,7 +33,7 @@ namespace Monitoreo_360
         public async void setInfoAsync(Guid id)
         {
             cliente = db.Clientes.Where(x => x.IdCliente == id).FirstOrDefault();
-            if (cliente.IdUsuario != null)
+            if (cliente.IdUsuario != null)//|| cliente.IdUsuario != Guid.Empty
             {               
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCjNHR6PHEqCbUj_Of7Mx2NxePvoXwkvAM"));
                 try {

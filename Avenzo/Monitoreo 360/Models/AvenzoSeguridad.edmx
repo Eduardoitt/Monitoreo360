@@ -612,6 +612,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.DocumentacionEmpleado' does not
           <Property Name="IdCliente" Type="uniqueidentifier" />
           <Property Name="RutaFoto" Type="varchar(max)" />
           <Property Name="Nombre" Type="varchar(max)" />
+          <Property Name="Ruta" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="HorarioOperaciones">
           <Key>
@@ -2461,37 +2462,20 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="RutaFoto" Type="varchar(max)" Mode="In" />
           <Parameter Name="Nombre" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Ruta" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="InsertClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="IdProveedor" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="IdUsuario" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="numAlarma" Type="varchar" Mode="In" />
           <Parameter Name="nombres" Type="varchar" Mode="In" />
           <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
           <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
           <Parameter Name="NumeroDeCuenta" Type="varchar" Mode="In" />
-          <Parameter Name="PalabraClave" Type="varchar" Mode="In" />
-          <Parameter Name="PalabraClaveSilen" Type="varchar" Mode="In" />
-          <Parameter Name="calle" Type="varchar" Mode="In" />
-          <Parameter Name="NoInterior" Type="varchar" Mode="In" />
-          <Parameter Name="NoExterior" Type="varchar" Mode="In" />
-          <Parameter Name="Colonia" Type="varchar" Mode="In" />
-          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
-          <Parameter Name="Referencias" Type="varchar" Mode="In" />
-          <Parameter Name="ColorEstablecimiento" Type="varchar" Mode="In" />
-          <Parameter Name="entreCalles" Type="varchar" Mode="In" />
-          <Parameter Name="GoogleMaps" Type="varchar" Mode="In" />
-          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="telefono" Type="varchar" Mode="In" />
           <Parameter Name="telTrabajo" Type="varchar" Mode="In" />
           <Parameter Name="telCelular" Type="varchar" Mode="In" />
           <Parameter Name="email" Type="varchar" Mode="In" />
-          <Parameter Name="foto" Type="varbinary(max)" Mode="In" />
-          <Parameter Name="estado" Type="varchar" Mode="In" />
-          <Parameter Name="pais" Type="varchar" Mode="In" />
-          <Parameter Name="ciudad" Type="varchar" Mode="In" />
-          <Parameter Name="tipoAfilacion" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="numeroPatrocinador" Type="varchar" Mode="In" />
           <Parameter Name="fechaNacimiento" Type="varchar" Mode="In" />
           <Parameter Name="lugarNacimiento" Type="varchar" Mode="In" />
@@ -2815,34 +2799,15 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
         </Function>
         <Function Name="UpdateClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
           <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="IdProveedor" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="NumeroDeCuenta" Type="varchar" Mode="In" />
-          <Parameter Name="NumeroTelefonoAlarma" Type="varchar" Mode="In" />
-          <Parameter Name="PalabraClave" Type="varchar" Mode="In" />
-          <Parameter Name="PalabraClaveSilenciosa" Type="varchar" Mode="In" />
           <Parameter Name="Nombres" Type="varchar" Mode="In" />
           <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
           <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
-          <Parameter Name="Calle" Type="varchar" Mode="In" />
-          <Parameter Name="NoInterior" Type="varchar" Mode="In" />
-          <Parameter Name="NoExterior" Type="varchar" Mode="In" />
-          <Parameter Name="Colonia" Type="varchar" Mode="In" />
-          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
-          <Parameter Name="Referencias" Type="varchar" Mode="In" />
-          <Parameter Name="ColorEstablecimiento" Type="varchar" Mode="In" />
-          <Parameter Name="entreCalles" Type="varchar" Mode="In" />
-          <Parameter Name="GoogleMaps" Type="varchar" Mode="In" />
-          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
           <Parameter Name="TelefonoTrabajo" Type="varchar" Mode="In" />
           <Parameter Name="TelefonoCelular" Type="varchar" Mode="In" />
           <Parameter Name="Email" Type="varchar" Mode="In" />
-          <Parameter Name="Foto" Type="varchar(max)" Mode="In" />
-          <Parameter Name="Estado" Type="varchar" Mode="In" />
-          <Parameter Name="Pais" Type="varchar" Mode="In" />
-          <Parameter Name="Ciudad" Type="varchar" Mode="In" />
           <Parameter Name="TipoAfilacion" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="NumeroPatrocinador" Type="varchar" Mode="In" />
           <Parameter Name="FechaNacimiento" Type="varchar" Mode="In" />
           <Parameter Name="LugarNacimiento" Type="varchar" Mode="In" />
           <Parameter Name="Sexo" Type="varchar" Mode="In" />
@@ -2853,16 +2818,25 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <Parameter Name="NumCtaPago" Type="varchar" Mode="In" />
           <Parameter Name="ClaveBancaria" Type="varchar" Mode="In" />
           <Parameter Name="Banco" Type="varchar" Mode="In" />
-          <Parameter Name="NumeroCLABE" Type="varchar" Mode="In" />
           <Parameter Name="Beneficiario" Type="varchar" Mode="In" />
-          <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
-          <Parameter Name="UsuarioCreacion" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="Activo" Type="bit" Mode="In" />
-          <Parameter Name="Usuario" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="UpdateClientesUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
           <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="Usuario" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="UpdateDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Colononia" Type="varchar" Mode="In" />
+          <Parameter Name="Calle" Type="varchar" Mode="In" />
+          <Parameter Name="NoInterior" Type="varchar" Mode="In" />
+          <Parameter Name="NoExterior" Type="varchar" Mode="In" />
+          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
+          <Parameter Name="Referencias" Type="varchar" Mode="In" />
+          <Parameter Name="ColorEstablecimiento" Type="varchar" Mode="In" />
+          <Parameter Name="EntreCalles" Type="varchar" Mode="In" />
+          <Parameter Name="GoogleMaps" Type="varchar" Mode="In" />
+          <Parameter Name="Estado" Type="varchar" Mode="In" />
+          <Parameter Name="Ciudad" Type="varchar" Mode="In" />
         </Function>
         <Function Name="UpdateEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
@@ -4211,6 +4185,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <Property Name="RutaFoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Clientes" Relationship="Self.FK__FotosClie__IdCli__55B597A7" FromRole="FotosCliente" ToRole="Clientes" />
           <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Ruta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="HorarioOperaciones">
           <Key>
@@ -6617,37 +6592,20 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="IdCliente" Mode="In" Type="Guid" />
             <Parameter Name="RutaFoto" Mode="In" Type="String" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Ruta" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InsertClientes">
             <Parameter Name="Id" Mode="In" Type="Guid" />
             <Parameter Name="IdProveedor" Mode="In" Type="Guid" />
-            <Parameter Name="IdUsuario" Mode="In" Type="Guid" />
             <Parameter Name="numAlarma" Mode="In" Type="String" />
             <Parameter Name="nombres" Mode="In" Type="String" />
             <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
             <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
             <Parameter Name="NumeroDeCuenta" Mode="In" Type="String" />
-            <Parameter Name="PalabraClave" Mode="In" Type="String" />
-            <Parameter Name="PalabraClaveSilen" Mode="In" Type="String" />
-            <Parameter Name="calle" Mode="In" Type="String" />
-            <Parameter Name="NoInterior" Mode="In" Type="String" />
-            <Parameter Name="NoExterior" Mode="In" Type="String" />
-            <Parameter Name="Colonia" Mode="In" Type="String" />
-            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
-            <Parameter Name="Referencias" Mode="In" Type="String" />
-            <Parameter Name="ColorEstablecimiento" Mode="In" Type="String" />
-            <Parameter Name="entreCalles" Mode="In" Type="String" />
-            <Parameter Name="GoogleMaps" Mode="In" Type="String" />
-            <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="telefono" Mode="In" Type="String" />
             <Parameter Name="telTrabajo" Mode="In" Type="String" />
             <Parameter Name="telCelular" Mode="In" Type="String" />
             <Parameter Name="email" Mode="In" Type="String" />
-            <Parameter Name="foto" Mode="In" Type="Binary" />
-            <Parameter Name="estado" Mode="In" Type="String" />
-            <Parameter Name="pais" Mode="In" Type="String" />
-            <Parameter Name="ciudad" Mode="In" Type="String" />
-            <Parameter Name="tipoAfilacion" Mode="In" Type="Guid" />
             <Parameter Name="numeroPatrocinador" Mode="In" Type="String" />
             <Parameter Name="fechaNacimiento" Mode="In" Type="String" />
             <Parameter Name="lugarNacimiento" Mode="In" Type="String" />
@@ -6971,34 +6929,15 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           </FunctionImport>
           <FunctionImport Name="UpdateClientes">
             <Parameter Name="IdCliente" Mode="In" Type="Guid" />
-            <Parameter Name="IdProveedor" Mode="In" Type="Guid" />
             <Parameter Name="NumeroDeCuenta" Mode="In" Type="String" />
-            <Parameter Name="NumeroTelefonoAlarma" Mode="In" Type="String" />
-            <Parameter Name="PalabraClave" Mode="In" Type="String" />
-            <Parameter Name="PalabraClaveSilenciosa" Mode="In" Type="String" />
             <Parameter Name="Nombres" Mode="In" Type="String" />
             <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
             <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
-            <Parameter Name="Calle" Mode="In" Type="String" />
-            <Parameter Name="NoInterior" Mode="In" Type="String" />
-            <Parameter Name="NoExterior" Mode="In" Type="String" />
-            <Parameter Name="Colonia" Mode="In" Type="String" />
-            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
-            <Parameter Name="Referencias" Mode="In" Type="String" />
-            <Parameter Name="ColorEstablecimiento" Mode="In" Type="String" />
-            <Parameter Name="entreCalles" Mode="In" Type="String" />
-            <Parameter Name="GoogleMaps" Mode="In" Type="String" />
-            <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
             <Parameter Name="TelefonoTrabajo" Mode="In" Type="String" />
             <Parameter Name="TelefonoCelular" Mode="In" Type="String" />
             <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Foto" Mode="In" Type="String" />
-            <Parameter Name="Estado" Mode="In" Type="String" />
-            <Parameter Name="Pais" Mode="In" Type="String" />
-            <Parameter Name="Ciudad" Mode="In" Type="String" />
             <Parameter Name="TipoAfilacion" Mode="In" Type="Guid" />
-            <Parameter Name="NumeroPatrocinador" Mode="In" Type="String" />
             <Parameter Name="FechaNacimiento" Mode="In" Type="String" />
             <Parameter Name="LugarNacimiento" Mode="In" Type="String" />
             <Parameter Name="Sexo" Mode="In" Type="String" />
@@ -7009,12 +6948,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="NumCtaPago" Mode="In" Type="String" />
             <Parameter Name="ClaveBancaria" Mode="In" Type="String" />
             <Parameter Name="Banco" Mode="In" Type="String" />
-            <Parameter Name="NumeroCLABE" Mode="In" Type="String" />
             <Parameter Name="Beneficiario" Mode="In" Type="String" />
-            <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
-            <Parameter Name="UsuarioCreacion" Mode="In" Type="Guid" />
-            <Parameter Name="Activo" Mode="In" Type="Boolean" />
-            <Parameter Name="Usuario" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="UpdateClientesUsuario">
             <Parameter Name="IdCliente" Mode="In" Type="Guid" />
@@ -7217,6 +7151,20 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="TimbresUsados" Mode="In" Type="Int32" />
             <Parameter Name="TimbresCancelados" Mode="In" Type="Int32" />
             <Parameter Name="PrimeraVez" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateDireccion">
+            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="Colononia" Mode="In" Type="String" />
+            <Parameter Name="Calle" Mode="In" Type="String" />
+            <Parameter Name="NoInterior" Mode="In" Type="String" />
+            <Parameter Name="NoExterior" Mode="In" Type="String" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="Referencias" Mode="In" Type="String" />
+            <Parameter Name="ColorEstablecimiento" Mode="In" Type="String" />
+            <Parameter Name="EntreCalles" Mode="In" Type="String" />
+            <Parameter Name="GoogleMaps" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
+            <Parameter Name="Ciudad" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetBancos_Result">
@@ -8844,6 +8792,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <EntitySetMapping Name="FotosCliente">
             <EntityTypeMapping TypeName="AvenzoSeguridadModel.FotosCliente">
               <MappingFragment StoreEntitySet="FotosCliente">
+                <ScalarProperty Name="Ruta" ColumnName="Ruta" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdFotoCliente" ColumnName="IdFotoCliente" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
@@ -10576,6 +10525,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <FunctionImportMapping FunctionImportName="UpdateTipoUsuario" FunctionName="AvenzoSeguridadModel.Store.UpdateTipoUsuario" />
           <FunctionImportMapping FunctionImportName="UpdateUsuarioContrasena" FunctionName="AvenzoSeguridadModel.Store.UpdateUsuarioContrasena" />
           <FunctionImportMapping FunctionImportName="UpdateUsuarios" FunctionName="AvenzoSeguridadModel.Store.UpdateUsuarios" />
+          <FunctionImportMapping FunctionImportName="UpdateDireccion" FunctionName="AvenzoSeguridadModel.Store.UpdateDireccion" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

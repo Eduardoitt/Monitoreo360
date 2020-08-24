@@ -18,6 +18,7 @@ namespace Monitoreo_360.Models
         public Nullable<System.Guid> IdCliente { get; set; }
         public string RutaFoto { get; set; }
         public string Nombre { get; set; }
+        public string Ruta { get; set; }
     
         public virtual Clientes Clientes { get; set; }
     }

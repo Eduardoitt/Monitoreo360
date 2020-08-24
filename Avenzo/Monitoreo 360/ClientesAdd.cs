@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MetroFramework;
 using Monitoreo_360.Models;
 
+
 namespace Monitoreo_360
 {
     public partial class ClientesAdd : MetroFramework.Forms.MetroForm
@@ -73,10 +74,9 @@ namespace Monitoreo_360
                 DateTime fechaC = DateTime.Now;
 
                 Guid IdProveedor = Guid.Parse("9B13AFBB-1455-483E-84D5-CF339DC7FF16");
-                db.InsertClientes(IdCliente, IdProveedor, null, txt_TelAlarma.Text.Trim(), txt_Nombres.Text.Trim(),
-                    txt_ApPat.Text.Trim(), txt_ApMat.Text.Trim(), txt_NoCuenta.Text.Trim(), null, null, null, null, null, null, null,
-                    null, null, null, null, null, txt_Telefono.Text.Trim(), txt_Telefono.Text.Trim(), txt_TelCelular.Text.Trim(), txt_Correo.Text.Trim(),
-                    null, null, null, null, null, txt_NumPat.Text, DT_FechaNac.Value.ToString(), txt_LugNac.Text, txt_Sexo.Text, txt_EstadoCivil.Text,
+                db.InsertClientes(IdCliente, IdProveedor, txt_TelAlarma.Text.Trim(), txt_Nombres.Text.Trim(),
+                    txt_ApPat.Text.Trim(), txt_ApMat.Text.Trim(), txt_NoCuenta.Text.Trim(), txt_Telefono.Text.Trim(), txt_Telefono.Text.Trim(), txt_TelCelular.Text.Trim(), txt_Correo.Text.Trim(),
+                     txt_NumPat.Text, DT_FechaNac.Value.ToString(), txt_LugNac.Text, txt_Sexo.Text, txt_EstadoCivil.Text,
                     txt_Profesion.Text, txt_CURP.Text.Trim(), txt_RFC.Text.Trim(), CB_Banco.SelectedValue.ToString(), txt_NumCatPago.Text,
                     txt_ClaveBanc.Text.Trim(), txt_NumClave.Text, txt_Beneficiario.Text,fechaC , IdUsuario, true);
 
