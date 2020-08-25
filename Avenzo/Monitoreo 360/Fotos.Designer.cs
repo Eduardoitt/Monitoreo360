@@ -82,6 +82,7 @@
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "Fotos";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Fotos_FormClosed);
             this.ResumeLayout(false);
 
         }
