@@ -21,12 +21,12 @@ namespace Monitoreo_360
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         private string strServer = "avenzo.mx", strUser = "avenzopagina4", strPassword = "Teclado01!", strFileNameLocal = "", strPathFTP = "";
         string rutacompleta = "";
+        private delegate void CargarImagenesDL();
         public Fotos(string NumeroDeCuenta)
         {
             InitializeComponent();
             this.NumeroDeCuenta = NumeroDeCuenta;
-            //Carga la ruta de donde se encuentran las imagenes (bd)
-            
+
             var path = (from f in db.FotosCliente
                         join c in db.Clientes on f.IdCliente equals c.IdCliente
                         where c.NumeroDeCuenta == NumeroDeCuenta
@@ -37,73 +37,18 @@ namespace Monitoreo_360
                             f.RutaFoto,
                             f.Nombre
                         }).ToList();
-      
-                foreach (var image in path)
-                {
-                    string strFileNameLocal = "FotosDescarga/" + NumeroDeCuenta + "/" + image.Nombre;
-                    if (!Directory.Exists("FotosDescarga/" + NumeroDeCuenta))
-                        Directory.CreateDirectory("FotosDescarga/" + NumeroDeCuenta);
-                    Download(image.RutaFoto, strFileNameLocal);
-                    string pathh = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta, Application.StartupPath);
-                    AgregarImagen(String.Format(pathh), image.Nombre);
-                }
-            
 
-        }
-        public void Download(string strFileNameFTP, string strFileNameLocal)
-        {
-            FtpWebRequest ftpRequest;
-            //Crea el objeto de conexión del servidor FTP
-            ftpRequest = (FtpWebRequest)WebRequest.Create(string.Format(strFileNameFTP));
-            // Asigna las credenciales
-            ftpRequest.Credentials = new NetworkCredential(strUser, strPassword);
-            // Asigna las propiedades
-            ftpRequest.Method = WebRequestMethods.Ftp.DownloadFile;
-            ftpRequest.UsePassive = true;
-            ftpRequest.UseBinary = true;
-            ftpRequest.KeepAlive = false;
-            // Descarga el archivo y lo graba
-
-            using (FileStream stmFile = File.OpenWrite(strFileNameLocal))//ruta de acceso denegado
-            { // Obtiene el stream sobre la comunicación FTP
-                using (Stream responseStream = ((FtpWebResponse)ftpRequest.GetResponse()).GetResponseStream())
-                {
-                    int cnstIntLengthBuffer = 10240;
-                    byte[] arrBytBuffer = new byte[cnstIntLengthBuffer];
-                    int intRead;
-
-                    // Lee los datos del stream y los graba en el archivo
-                    while ((intRead = responseStream.Read(arrBytBuffer, 0, cnstIntLengthBuffer)) != 0)
-                        stmFile.Write(arrBytBuffer, 0, intRead);
-                    // Cierra el stream FTP	
-                    responseStream.Close();
-                }
-                // Cierra el archivo de salida
-                stmFile.Flush();
-                stmFile.Close();
-            }
-        }
-
-        private void Fotos_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            var path = (from f in db.FotosCliente
-                        join c in db.Clientes on f.IdCliente equals c.IdCliente
-                        where c.NumeroDeCuenta == NumeroDeCuenta
-                        select new
-                        {
-                            f.IdFotoCliente,
-                            f.IdCliente,
-                            f.RutaFoto,
-                            f.Nombre
-                        }).ToList();
             foreach (var image in path)
             {
-                File.Delete(@"\Users\crist\OneDrive\Escritorio\Proyecto\Monitoreo360\Avenzo\Monitoreo 360\bin\Debug\FotosDescarga\" + NumeroDeCuenta + "\\" + image.Nombre);
+                string strFileNameLocal = "FotosDescarga/" + NumeroDeCuenta + "/" + image.Nombre;
+                if (!Directory.Exists("FotosDescarga/" + NumeroDeCuenta))
+                    Directory.CreateDirectory("FotosDescarga/" + NumeroDeCuenta);
+                Download(image.RutaFoto, strFileNameLocal);
+                string cargar = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta , Application.StartupPath);
+                AgregarImagen(String.Format(cargar+@"\{0}",image.Nombre), image.Nombre);
             }
         }
-
         //acomoda las fotos en el panel
-        //public void AgregarImagen(string file, int x, int y, string Name)
         public void AgregarImagen(string file, string Name)
         {
             Panel panel = new System.Windows.Forms.Panel();
@@ -118,7 +63,6 @@ namespace Monitoreo_360
             // 
             panel.Controls.Add(Button_Close);
             panel.Controls.Add(pictureBox);
-            //panel.Location = new System.Drawing.Point(x, y);
             panel.Size = new System.Drawing.Size(170, 185);
             panel.TabIndex = 0;
             // 
@@ -140,7 +84,6 @@ namespace Monitoreo_360
             pictureBox.InitialImage = null;
             pictureBox.Location = new System.Drawing.Point(0, 0);
             pictureBox.Name = Name;
-            //pictureBox.Size = new System.Drawing.Size(170, 185);
             pictureBox.Height = 100;
             pictureBox.Width = 185;
             pictureBox.BackgroundImageLayout = ImageLayout.Stretch;
@@ -155,7 +98,27 @@ namespace Monitoreo_360
             ((System.ComponentModel.ISupportInitialize)(pictureBox)).EndInit();
         }
 
-        public void SubirFotos(string strFileNameLocal, string strPathFTP)
+  
+        private void Fotos_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            var path = (from f in db.FotosCliente
+                        join c in db.Clientes on f.IdCliente equals c.IdCliente
+                        where c.NumeroDeCuenta == NumeroDeCuenta
+                        select new
+                        {
+                            f.IdFotoCliente,
+                            f.IdCliente,
+                            f.RutaFoto,
+                            f.Nombre
+                        }).ToList();
+            foreach (var image in path)
+            {
+                File.Delete(@"\Users\crist\OneDrive\Escritorio\Proyecto\Monitoreo360\Avenzo\Monitoreo 360\bin\Debug\FotosDescarga\" + NumeroDeCuenta + "\\" + image.Nombre);
+            }
+        }
+
+
+        public bool SubirFotos(string strFileNameLocal, string strPathFTP)
         {
             try
             {
@@ -172,15 +135,8 @@ namespace Monitoreo_360
                 ftpRequest.UsePassive = true;
                 ftpRequest.UseBinary = true;
                 ftpRequest.KeepAlive = false;
-
-                // Copy the contents of the file to the request stream.
                 byte[] fileContents;
                 fileContents = File.ReadAllBytes(filename);
-                //using (StreamReader sourceStream = new StreamReader(filename))
-                //{
-                //    fileContents = Encoding.Default.GetBytes(sourceStream.ReadToEnd());
-                //    //fileContents = File.ReadAllBytes(sourceStream.ReadToEnd());
-                //}
 
                 ftpRequest.ContentLength = fileContents.Length;
 
@@ -191,16 +147,16 @@ namespace Monitoreo_360
 
                 using (FtpWebResponse response = (FtpWebResponse)ftpRequest.GetResponse())
                 {
-                    Console.WriteLine($"Upload File Complete, status {response.StatusDescription}");
+                    Console.WriteLine($"Se cargo la imagen, status {response.StatusDescription}");
                 }
+                return true;
             }
             catch (WebException e)
             {
                 String status = ((FtpWebResponse)e.Response).StatusDescription;
+                return false;
             }
         }
-
-        
 
         //Guarda la imagen en la bd
         private void Button_AgregarFotos_Click(object sender, EventArgs e)
@@ -214,9 +170,8 @@ namespace Monitoreo_360
             {
                 try
                 {
-
+                    /******************************************** Sube imagen a servidor ftp ************************************************************/
                     string fileName = result.FileName;
-
                     byte[] file = System.IO.File.ReadAllBytes(fileName);
                     Console.WriteLine("Nombre:" + fileName);
                     Guid Id = Guid.NewGuid();
@@ -226,19 +181,27 @@ namespace Monitoreo_360
                         Directory.CreateDirectory(path);
                     Console.WriteLine("path:" + path + " otro path:" + Application.StartupPath);
                     File.WriteAllBytes(path + "\\" + Name, file);
-                    SubirFotos(Name, path);
-                    //ingreso a la base de datos
-                    Guid? IdCliente = new Guid();
-                    Models.Clientes Client = db.Clientes.Where(x => x.NumeroDeCuenta == NumeroDeCuenta).FirstOrDefault();
-                    IdCliente = Client.IdCliente;
-                    db.InsertClienteFoto(Id, IdCliente, rutacompleta, Name, "ftp://avenzo.mx/Fotos/" + NumeroDeCuenta + "/");
-                    //AgregarImagen((path + "\\" + Name), Id.ToString());
-                    File.Delete(@"\Users\crist\OneDrive\Escritorio\Proyecto\Monitoreo360\Avenzo\Monitoreo 360\bin\Debug\"+path + "\\" + Name);
-                    //string pathh = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta, Application.StartupPath);
-                    //File.Delete(@"{0}/"+path+"/"+Name);
-                    rutacompleta = string.Empty;
+                    bool respuesta =SubirFotos(Name, path);
+                    /************************************************************************************************************************************/
+                    /****************************************** ingreso a la base de datos **************************************************************/
+                    if( respuesta == true)
+                    {
 
-                    MetroMessageBox.Show(this, "Se guardo exitosamento la foto", "Foto agregada", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        Guid? IdCliente = new Guid();
+                        Models.Clientes Client = db.Clientes.Where(x => x.NumeroDeCuenta == NumeroDeCuenta).FirstOrDefault();
+                        IdCliente = Client.IdCliente;
+                        db.InsertClienteFoto(Id, IdCliente, rutacompleta, Name, "ftp://avenzo.mx/Fotos/" + NumeroDeCuenta + "/");
+                        Agregar();
+                        File.Delete(@"\Users\crist\OneDrive\Escritorio\Proyecto\Monitoreo360\Avenzo\Monitoreo 360\bin\Debug\" + path + "\\" + Name);
+                        rutacompleta = string.Empty;
+
+                        MetroMessageBox.Show(this, "Se guardo exitosamento la foto", "Foto agregada", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "No se pudo guardar la imagen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -247,6 +210,71 @@ namespace Monitoreo_360
 
             }
 
+        }
+        public void Agregar()
+        {
+            try
+            {
+
+                var path = (from f in db.FotosCliente
+                            join c in db.Clientes on f.IdCliente equals c.IdCliente
+                            where c.NumeroDeCuenta == NumeroDeCuenta orderby f.IdFotoCliente descending
+                            select new
+                            {
+                                f.IdFotoCliente,
+                                f.IdCliente,
+                                f.RutaFoto,
+                                f.Nombre
+                            }).FirstOrDefault();
+
+
+                string strFileNameLocal = "FotosDescarga/" + NumeroDeCuenta + "/" + path.Nombre;
+                if (!Directory.Exists("FotosDescarga/" + NumeroDeCuenta))
+                    Directory.CreateDirectory("FotosDescarga/" + NumeroDeCuenta);
+                Download(path.RutaFoto, strFileNameLocal);
+                string cargar = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta, Application.StartupPath);
+                AgregarImagen(String.Format(cargar + @"\{0}", path.Nombre), path.Nombre);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+        }
+
+        public void Download(string strFileNameFTP, string strFileNameLocal)
+        {
+            
+            FtpWebRequest ftpRequest;
+            //Crea el objeto de conexión del servidor FTP
+            ftpRequest = (FtpWebRequest)WebRequest.Create(string.Format(strFileNameFTP));
+            // Asigna las credenciales
+            ftpRequest.Credentials = new NetworkCredential(strUser, strPassword);
+            // Asigna las propiedades
+            ftpRequest.Method = WebRequestMethods.Ftp.DownloadFile;
+            ftpRequest.UsePassive = true;
+            ftpRequest.UseBinary = true;
+            ftpRequest.KeepAlive = false;
+            // Descarga el archivo y lo graba
+            /* cuando cargo una nueva imagen me marca error de que no se puede acceder a la ruta porque esta ciendo utilizado por otro porceso*/
+            using (FileStream stmFile = File.OpenWrite(strFileNameLocal))
+            { // Obtiene el stream sobre la comunicación FTP
+                using (Stream responseStream = ((FtpWebResponse)ftpRequest.GetResponse()).GetResponseStream())
+                {
+                    int cnstIntLengthBuffer = 10240;
+                    byte[] arrBytBuffer = new byte[cnstIntLengthBuffer];
+                    int intRead;
+
+                    // Lee los datos del stream y los graba en el archivo
+                    while ((intRead = responseStream.Read(arrBytBuffer, 0, cnstIntLengthBuffer)) != 0)
+                        stmFile.Write(arrBytBuffer, 0, intRead);
+                    // Cierra el stream FTP	
+                    responseStream.Close();
+                }
+                // Cierra el archivo de salida
+                stmFile.Flush();
+                stmFile.Close();
+                
+            }
         }
 
         public void pictureBox_DoubleClick(object sender, EventArgs e)
@@ -263,7 +291,7 @@ namespace Monitoreo_360
             }
 
         }
-   
+
 
     }
 }

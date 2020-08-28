@@ -191,6 +191,7 @@
     <Compile Include="Cadena_.Designer.cs">
       <DependentUpon>Cadena_.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClasesFirebase\AccesosFb.cs" />
     <Compile Include="Cliente.cs">
       <SubType>Form</SubType>
     </Compile>

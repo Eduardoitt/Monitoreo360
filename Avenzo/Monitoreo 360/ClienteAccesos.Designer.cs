@@ -41,6 +41,7 @@
             this.label_Contrasena = new System.Windows.Forms.Label();
             this.metroTextBox_Password = new MetroFramework.Controls.MetroTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.metroToggle1 = new MetroFramework.Controls.MetroToggle();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,7 +99,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(59, 160);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 21);
+            this.label2.Size = new System.Drawing.Size(89, 21);
             this.label2.TabIndex = 4;
             this.label2.Text = "Pagina Web";
             // 
@@ -256,11 +257,22 @@
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
+            // metroToggle1
+            // 
+            this.metroToggle1.AutoSize = true;
+            this.metroToggle1.Location = new System.Drawing.Point(615, 101);
+            this.metroToggle1.Name = "metroToggle1";
+            this.metroToggle1.Size = new System.Drawing.Size(80, 17);
+            this.metroToggle1.TabIndex = 13;
+            this.metroToggle1.Text = "Off";
+            this.metroToggle1.UseSelectable = true;
+            // 
             // ClienteAccesos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(798, 294);
+            this.Controls.Add(this.metroToggle1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label_Contrasena);
             this.Controls.Add(this.metroTextBox_Password);
@@ -278,7 +290,7 @@
             this.MinimizeBox = false;
             this.Name = "ClienteAccesos";
             this.Style = MetroFramework.MetroColorStyle.Red;
-            this.Text = "Accesos para Cristian Santiago Rosas";
+            this.Load += new System.EventHandler(this.ClienteAccesos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -300,5 +312,6 @@
         private System.Windows.Forms.Label label_Contrasena;
         private MetroFramework.Controls.MetroTextBox metroTextBox_Password;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private MetroFramework.Controls.MetroToggle metroToggle1;
     }
 }
