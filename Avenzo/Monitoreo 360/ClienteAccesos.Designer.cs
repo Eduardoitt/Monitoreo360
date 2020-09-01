@@ -41,14 +41,12 @@
             this.label_Contrasena = new System.Windows.Forms.Label();
             this.metroTextBox_Password = new MetroFramework.Controls.MetroTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.metroToggle1 = new MetroFramework.Controls.MetroToggle();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // metroToggle_Android
             // 
             this.metroToggle_Android.AutoSize = true;
-            this.metroToggle_Android.Enabled = false;
             this.metroToggle_Android.Location = new System.Drawing.Point(63, 122);
             this.metroToggle_Android.Name = "metroToggle_Android";
             this.metroToggle_Android.Size = new System.Drawing.Size(80, 17);
@@ -61,7 +59,6 @@
             // metroToggle_Web
             // 
             this.metroToggle_Web.AutoSize = true;
-            this.metroToggle_Web.Enabled = false;
             this.metroToggle_Web.Location = new System.Drawing.Point(63, 184);
             this.metroToggle_Web.Name = "metroToggle_Web";
             this.metroToggle_Web.Size = new System.Drawing.Size(80, 17);
@@ -81,6 +78,7 @@
             this.metroButton_CambiarContrasena.TabIndex = 2;
             this.metroButton_CambiarContrasena.Text = "Cambiar Contraseña";
             this.metroButton_CambiarContrasena.UseSelectable = true;
+            this.metroButton_CambiarContrasena.Visible = false;
             this.metroButton_CambiarContrasena.Click += new System.EventHandler(this.metroButton_CambiarContrasena_Click);
             // 
             // label1
@@ -117,11 +115,13 @@
             this.metroTextBox_Email.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTextBox_Email.CustomButton.UseSelectable = true;
             this.metroTextBox_Email.CustomButton.Visible = false;
+            this.metroTextBox_Email.Enabled = false;
             this.metroTextBox_Email.Lines = new string[0];
             this.metroTextBox_Email.Location = new System.Drawing.Point(324, 122);
             this.metroTextBox_Email.MaxLength = 32767;
             this.metroTextBox_Email.Name = "metroTextBox_Email";
             this.metroTextBox_Email.PasswordChar = '\0';
+            this.metroTextBox_Email.ReadOnly = true;
             this.metroTextBox_Email.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.metroTextBox_Email.SelectedText = "";
             this.metroTextBox_Email.SelectionLength = 0;
@@ -257,22 +257,11 @@
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
-            // metroToggle1
-            // 
-            this.metroToggle1.AutoSize = true;
-            this.metroToggle1.Location = new System.Drawing.Point(615, 101);
-            this.metroToggle1.Name = "metroToggle1";
-            this.metroToggle1.Size = new System.Drawing.Size(80, 17);
-            this.metroToggle1.TabIndex = 13;
-            this.metroToggle1.Text = "Off";
-            this.metroToggle1.UseSelectable = true;
-            // 
             // ClienteAccesos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(798, 294);
-            this.Controls.Add(this.metroToggle1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label_Contrasena);
             this.Controls.Add(this.metroTextBox_Password);
@@ -312,6 +301,5 @@
         private System.Windows.Forms.Label label_Contrasena;
         private MetroFramework.Controls.MetroTextBox metroTextBox_Password;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private MetroFramework.Controls.MetroToggle metroToggle1;
     }
 }

@@ -12,6 +12,6 @@ namespace Monitoreo_360.ClasesFirebase
         public bool Movil { get; set; }
         public string Password { get; set; }
         public bool Web { get; set; }
-    
+        public string Nocuenta { get; set; }
     }
 }

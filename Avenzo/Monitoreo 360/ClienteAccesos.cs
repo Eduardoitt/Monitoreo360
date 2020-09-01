@@ -36,27 +36,16 @@ namespace Monitoreo_360
             InitializeComponent();
             this.formEdit = formEdit;
         }
-
-        IFirebaseConfig config = new FireSharp.Config.FirebaseConfig
-        {
-            AuthSecret = "AIzaSyCjNHR6PHEqCbUj_Of7Mx2NxePvoXwkvAM",
-            BasePath = "https://monitoreo-360.firebaseio.com/",
-
-        };
-        IFirebaseClient client;
-
         private void ClienteAccesos_Load(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    client = new FireSharp.FirebaseClient(config);
-            //}
-
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex);
-            //}
+            client = new FireSharp.FirebaseClient(config);
         }
+        IFirebaseConfig config = new FireSharp.Config.FirebaseConfig
+        {
+            AuthSecret = "y9qo73rzWLMhKRHqAsgXpbO53XvE1GK0tf0Pm9O2",
+            BasePath = "https://monitoreo-360.firebaseio.com/",
+        };
+        IFirebaseClient client;
 
         public async void setInfoAsync(Guid id)
         {
@@ -67,9 +56,10 @@ namespace Monitoreo_360
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCjNHR6PHEqCbUj_Of7Mx2NxePvoXwkvAM"));
                 try
                 {
+                    //Autentificacion si el usuario existe en firebase
                     Auth = await Task.Run(() => authProvider.SignInWithEmailAndPasswordAsync(cliente.NumeroDeCuenta + "@avenzo.mx", cliente.NumeroDeCuenta));
                     User = Auth.User;
-                    client = new FireSharp.FirebaseClient(config);
+                    
                 }
                 catch (Firebase.Auth.FirebaseAuthException ex)
                 {
@@ -79,38 +69,29 @@ namespace Monitoreo_360
                 }
                 if (User == null)
                 {
+                    //Entra si el usuario tiene usuario en sql pero no esta autenticado
+                    //Si no esta autenticado bloquar o no permitir la entrada a esta ventana
+                    formEdit.Text="Cliente no cuenta con acceso a aplicacion web ni movil";
                     metroToggle_Android.Checked = false;
                     metroToggle_Web.Checked = true;
                 }
                 else
                 {
-
+                    //Select para traer los datos de firebase
                     try
                     {
-
-                        //FirebaseResponse query = await client.GetAsync("Accesos", FireSharp.QueryBuilder.New().OrderBy("ID").LimitToLast(1));
-
-                        //FirebaseResponse res = await client.GetAsync("Accesos", FireSharp.QueryBuilder.New().OrderBy("Mail").LimitToLast(1));
-                        //query.Equals(cliente.);
-                        //FirebaseResponse res = await client.Get(@"Accesos/"+ cliente.Email);
-                        var res = client.Get(@"Accesos/" + cliente.Email.ToString());
+                        var res = client.Get(@"Accesos/" + cliente.NumeroDeCuenta.ToString());
                         AccesosFb acc = res.ResultAs<AccesosFb>();
                         metroTextBox_Email.Text = acc.Mail;
                         metroToggle_Android.Checked = acc.Movil;
                         metroToggle_Web.Checked = acc.Web;
-
-
-                        MessageBox.Show("data retrieved sucessfully!");
-                    }catch (FirebaseAuthException ex)
+                       
+                    }
+                    catch (FirebaseAuthException ex)
                     {
                         Console.WriteLine(ex);
                     }
 
-                    // FireSharp.FirebaseClient client = new FireSharp.FirebaseClient(config);
-                    //FirebaseResponse response = await client.GetAsync("Monitoreo-360/Accesos/");
-                    //var myJson = response.Body;
-                    //Firebase.Database.Query query = new Firebase.Database.Query.FirebaseQuery();
-               
                 }
             }
             else
@@ -119,13 +100,20 @@ namespace Monitoreo_360
                 metroToggle_Android.Checked = false;
                 metroToggle_Web.Checked = false;
             }
-           // metroTextBox_Email.Text = cliente.Email;
-            //metroTextBox_Password.Visible = false;
-            //metroTextBox_Password_Repeat.Visible = false;
         }
         private void metroButton_Guardar_Click(object sender, EventArgs e)
         {
+            AccesosFb acc = new AccesosFb()
+            {
+                Web=metroToggle_Web.Checked,
+                Movil=metroToggle_Android.Checked,
+                Mail= metroTextBox_Email.Text
+            };
 
+            var set = client.Update(@"Accesos/" + cliente.NumeroDeCuenta.ToString(), acc);
+            if(set.StatusCode==HttpStatusCode.OK)
+                MetroMessageBox.Show(this, "", "Los cambios fueron guardados exitosamente", MessageBoxButtons.OK, MessageBoxIcon.Question);
+            //var set = client.Set(@"Accesos/" + numCuenta, std);
             /*string Email = metroTextBox_Email.Text;
             string Password = "santiago01";
             string Name = cliente.Nombres + " " + cliente.ApellidoPaterno + " " + cliente.ApellidoMaterno;
@@ -152,6 +140,7 @@ namespace Monitoreo_360
 
         private void metroButton_CambiarContrasena_Click(object sender, EventArgs e)
         {
+
             metroTextBox_Password.Visible = true;
             metroTextBox_Password_Repeat.Visible = true;
             label_Contrasena.Visible = true;
@@ -168,5 +157,6 @@ namespace Monitoreo_360
 
         }
 
+ 
     }
 }

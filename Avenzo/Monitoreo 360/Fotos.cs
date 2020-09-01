@@ -40,15 +40,18 @@ namespace Monitoreo_360
 
             foreach (var image in path)
             {
+                //Descarga las imagenes en una carpeta local
                 string strFileNameLocal = "FotosDescarga/" + NumeroDeCuenta + "/" + image.Nombre;
                 if (!Directory.Exists("FotosDescarga/" + NumeroDeCuenta))
                     Directory.CreateDirectory("FotosDescarga/" + NumeroDeCuenta);
                 Download(image.RutaFoto, strFileNameLocal);
+
+                //Carga las imagenes en el panel
                 string cargar = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta , Application.StartupPath);
                 AgregarImagen(String.Format(cargar+@"\{0}",image.Nombre), image.Nombre);
             }
         }
-        //acomoda las fotos en el panel
+        //Agrega las imagenes en el panel
         public void AgregarImagen(string file, string Name)
         {
             Panel panel = new System.Windows.Forms.Panel();
@@ -62,7 +65,7 @@ namespace Monitoreo_360
             // panel
             // 
             panel.Controls.Add(Button_Close);
-            panel.Controls.Add(pictureBox);
+            
             panel.Size = new System.Drawing.Size(170, 185);
             panel.TabIndex = 0;
             // 
@@ -79,26 +82,34 @@ namespace Monitoreo_360
             // 
             // pictureBox
             // 
-            pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            pictureBox.Image = Image.FromFile(file);
-            pictureBox.InitialImage = null;
-            pictureBox.Location = new System.Drawing.Point(0, 0);
-            pictureBox.Name = Name;
-            pictureBox.Height = 100;
-            pictureBox.Width = 185;
-            pictureBox.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            pictureBox.TabIndex = 0;
-            pictureBox.DoubleClick += new System.EventHandler(this.pictureBox_DoubleClick);
-            pictureBox.TabStop = false;
+            using (FileStream strm = new FileStream(file,FileMode.Open,FileAccess.Read))
+            {
+                panel.Controls.Add(pictureBox);
+                pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+                //pictureBox.Image = Image.FromFile(file);
+                pictureBox.Image = Image.FromStream(strm);
+                pictureBox.InitialImage = null;
+                pictureBox.Location = new System.Drawing.Point(0, 0);
+                pictureBox.Name = Name;
+                pictureBox.Height = 100;
+                pictureBox.Width = 185;
+                pictureBox.BackgroundImageLayout = ImageLayout.Stretch;
+                pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+                pictureBox.TabIndex = 0;
+                pictureBox.DoubleClick += new System.EventHandler(this.pictureBox_DoubleClick);
+                pictureBox.TabStop = false;
+                ((System.ComponentModel.ISupportInitialize)(pictureBox)).EndInit();
+                strm.Dispose();
+            }
+                
 
 
             panel.ResumeLayout(false);
 
-            ((System.ComponentModel.ISupportInitialize)(pictureBox)).EndInit();
+            
         }
 
-  
+        //Elimina las imagenes de la carpeta al cerra la ventana
         private void Fotos_FormClosed(object sender, FormClosedEventArgs e)
         {
             var path = (from f in db.FotosCliente
@@ -113,11 +124,12 @@ namespace Monitoreo_360
                         }).ToList();
             foreach (var image in path)
             {
-                File.Delete(@"\Users\crist\OneDrive\Escritorio\Proyecto\Monitoreo360\Avenzo\Monitoreo 360\bin\Debug\FotosDescarga\" + NumeroDeCuenta + "\\" + image.Nombre);
+                string pathdelete = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta+"\\"+image.Nombre, Application.StartupPath);
+                File.Delete(pathdelete);
             }
         }
 
-
+        //Sube las imagenes al servidor
         public bool SubirFotos(string strFileNameLocal, string strPathFTP)
         {
             try
@@ -179,9 +191,9 @@ namespace Monitoreo_360
                     string path = String.Format("Fotos/" + this.NumeroDeCuenta);
                     if (!Directory.Exists(path))
                         Directory.CreateDirectory(path);
-                    Console.WriteLine("path:" + path + " otro path:" + Application.StartupPath);
                     File.WriteAllBytes(path + "\\" + Name, file);
                     bool respuesta =SubirFotos(Name, path);
+
                     /************************************************************************************************************************************/
                     /****************************************** ingreso a la base de datos **************************************************************/
                     if( respuesta == true)
@@ -191,8 +203,10 @@ namespace Monitoreo_360
                         Models.Clientes Client = db.Clientes.Where(x => x.NumeroDeCuenta == NumeroDeCuenta).FirstOrDefault();
                         IdCliente = Client.IdCliente;
                         db.InsertClienteFoto(Id, IdCliente, rutacompleta, Name, "ftp://avenzo.mx/Fotos/" + NumeroDeCuenta + "/");
-                        Agregar();
-                        File.Delete(@"\Users\crist\OneDrive\Escritorio\Proyecto\Monitoreo360\Avenzo\Monitoreo 360\bin\Debug\" + path + "\\" + Name);
+                        AgregarDeNuevo(Name);
+                        string pathdelete2 = String.Format(@"{0}/"+path+"/"+Name, Application.StartupPath);
+                        File.Delete(pathdelete2);
+                        //File.Delete(@"\Users\crist\OneDrive\Escritorio\Proyecto\Monitoreo360\Avenzo\Monitoreo 360\bin\Debug\" + path + "\\" + Name);
                         rutacompleta = string.Empty;
 
                         MetroMessageBox.Show(this, "Se guardo exitosamento la foto", "Foto agregada", MessageBoxButtons.OK, MessageBoxIcon.Question);
@@ -211,14 +225,14 @@ namespace Monitoreo_360
             }
 
         }
-        public void Agregar()
+        public void AgregarDeNuevo(string Name)
         {
             try
             {
 
                 var path = (from f in db.FotosCliente
                             join c in db.Clientes on f.IdCliente equals c.IdCliente
-                            where c.NumeroDeCuenta == NumeroDeCuenta orderby f.IdFotoCliente descending
+                            where c.NumeroDeCuenta == NumeroDeCuenta && f.Nombre==Name
                             select new
                             {
                                 f.IdFotoCliente,
@@ -234,11 +248,12 @@ namespace Monitoreo_360
                 Download(path.RutaFoto, strFileNameLocal);
                 string cargar = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta, Application.StartupPath);
                 AgregarImagen(String.Format(cargar + @"\{0}", path.Nombre), path.Nombre);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            
+
         }
 
         public void Download(string strFileNameFTP, string strFileNameLocal)
@@ -271,9 +286,11 @@ namespace Monitoreo_360
                     responseStream.Close();
                 }
                 // Cierra el archivo de salida
+                
                 stmFile.Flush();
                 stmFile.Close();
-                
+                stmFile.Dispose();
+
             }
         }
 
@@ -291,7 +308,6 @@ namespace Monitoreo_360
             }
 
         }
-
 
     }
 }
