@@ -223,6 +223,7 @@ namespace Monitoreo_360
             {
                 Button.Text = "1";
                 Button.Visible = true;
+
             }
             else
             {
