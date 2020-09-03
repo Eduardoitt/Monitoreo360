@@ -13,10 +13,13 @@ using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Database.Query;
+using FireSharp;
+using FireSharp.Extensions;
+using FireSharp.Interfaces;
+using FireSharp.Response;
 using Google.Apis.Auth.OAuth2;
-//using Model;
-//using Monitoreo_360.Properties;
 using Monitoreo_360.Models;
+using Monitoreo_360.ClasesFirebase;
 
 namespace Monitoreo_360
 {
@@ -33,6 +36,7 @@ namespace Monitoreo_360
         Panel panel;
         Guid IdUsuario;
         private bool close = false;
+
         public ClienteAlerta(Guid IdUsuario,Guid IdIncidente)
         {
             if (this.InvokeRequired) {
@@ -113,9 +117,21 @@ namespace Monitoreo_360
             }
             else
             {
-                Button_Android.Enabled = true;
-                label_Android_Disponible.Text = "Disponible";
-                label_Android_Disponible.BackColor = Color.LimeGreen;
+                var select = client.Get(@"Accesos/"+cliente.NumeroDeCuenta.ToString());
+                AccesosFb acc = select.ResultAs<AccesosFb>();
+                if (acc.Movil == true)
+                {
+
+                    Button_Android.Enabled = true;
+                    label_Android_Disponible.Text = "Disponible";
+                    label_Android_Disponible.BackColor = Color.LimeGreen;
+                }
+                else
+                {
+                    Button_Android.Enabled = false;
+                    label_Android_Disponible.Text = "Disponible";
+                    label_Android_Disponible.BackColor = Color.Red;
+                }
 
             }
         }
@@ -174,9 +190,7 @@ namespace Monitoreo_360
             form.ShowDialog();
         }
 
-        private void ClienteAlerta_Load(object sender, EventArgs e)
-        {   
-        }        
+            
         private void setBrowseMap()
         {
             try
@@ -190,7 +204,17 @@ namespace Monitoreo_360
             }
         }
 
-        
+        private void ClienteAlerta_Load(object sender, EventArgs e)
+        {
+            client = new FireSharp.FirebaseClient(config);
+        }
+        IFirebaseClient client;
+
+        IFirebaseConfig config = new FireSharp.Config.FirebaseConfig
+        {
+            AuthSecret = "y9qo73rzWLMhKRHqAsgXpbO53XvE1GK0tf0Pm9O2",
+            BasePath = "https://monitoreo-360.firebaseio.com/"
+        };
         private void Button_Guardar_Click(object sender, EventArgs e)
         {
             Models.Incidentes incidentes = db.Incidentes.Where(x=>x.Id==IdIncidente).FirstOrDefault();
@@ -262,15 +286,11 @@ namespace Monitoreo_360
                 MetroFramework.MetroMessageBox.Show(this, "No se puede cerrar hasta dar seguimiento a la alerta", "Monitoreo 360", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
             }*/
         }
-
+        
+        
         private async void Button_Android_ClickAsync(object sender, EventArgs e)
         {
-            FireSharp.Interfaces.IFirebaseConfig config = new FireSharp.Config.FirebaseConfig
-            {
-                AuthSecret = "y9qo73rzWLMhKRHqAsgXpbO53XvE1GK0tf0Pm9O2",
-                BasePath = "https://monitoreo-360.firebaseio.com/"
-            };
-            FireSharp.Interfaces.IFirebaseClient client = new FireSharp.FirebaseClient(config);
+            
             DateTime now = DateTime.Now;
             foreach (DataGridViewRow row in dataGridView_Eventos.Rows)
             {
