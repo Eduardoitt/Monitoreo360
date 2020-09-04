@@ -43,18 +43,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel_Header = new System.Windows.Forms.Panel();
             this.label_title = new System.Windows.Forms.Label();
+            this.button_Maximize = new System.Windows.Forms.Button();
+            this.Button_Close = new System.Windows.Forms.Button();
+            this.Button_Notificacion = new System.Windows.Forms.Button();
             this.panel_Controls = new System.Windows.Forms.Panel();
             this.panel_Content = new System.Windows.Forms.Panel();
             this.panel_divider = new System.Windows.Forms.Panel();
             this.label_Nombre = new System.Windows.Forms.Label();
+            this.pictureBox_Profile = new System.Windows.Forms.PictureBox();
             this.bunifuElipse_Profile = new System.Windows.Forms.Button();
             this.panel_Notificaciones = new System.Windows.Forms.Panel();
             this.bunifuElipse_PanelNotificaciones = new System.Windows.Forms.Panel();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_Profile = new System.Windows.Forms.PictureBox();
-            this.button_Maximize = new System.Windows.Forms.Button();
-            this.Button_Close = new System.Windows.Forms.Button();
-            this.Button_Notificacion = new System.Windows.Forms.Button();
             this.panel_Menu.SuspendLayout();
             this.panel_Header.SuspendLayout();
             this.panel_divider.SuspendLayout();
@@ -222,6 +222,45 @@
             this.label_title.TabIndex = 11;
             this.label_title.Text = "Dashboard";
             // 
+            // button_Maximize
+            // 
+            this.button_Maximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Maximize.BackColor = System.Drawing.Color.Transparent;
+            this.button_Maximize.Image = global::Monitoreo_360.Properties.Resources.Maximize_Window_100px;
+            this.button_Maximize.Location = new System.Drawing.Point(755, 8);
+            this.button_Maximize.Name = "button_Maximize";
+            this.button_Maximize.Size = new System.Drawing.Size(21, 20);
+            this.button_Maximize.TabIndex = 7;
+            this.button_Maximize.UseVisualStyleBackColor = false;
+            this.button_Maximize.Click += new System.EventHandler(this.button_Maximize_Click);
+            // 
+            // Button_Close
+            // 
+            this.Button_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_Close.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Close.Image = global::Monitoreo_360.Properties.Resources.Delete_50px;
+            this.Button_Close.Location = new System.Drawing.Point(782, 8);
+            this.Button_Close.Name = "Button_Close";
+            this.Button_Close.Size = new System.Drawing.Size(21, 20);
+            this.Button_Close.TabIndex = 6;
+            this.Button_Close.TabStop = false;
+            this.Button_Close.UseVisualStyleBackColor = false;
+            this.Button_Close.Click += new System.EventHandler(this.Button_Close_Click);
+            // 
+            // Button_Notificacion
+            // 
+            this.Button_Notificacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_Notificacion.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Notificacion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Button_Notificacion.Image = global::Monitoreo_360.Properties.Resources.Notification__Gray_48px;
+            this.Button_Notificacion.Location = new System.Drawing.Point(776, 56);
+            this.Button_Notificacion.Name = "Button_Notificacion";
+            this.Button_Notificacion.Size = new System.Drawing.Size(27, 29);
+            this.Button_Notificacion.TabIndex = 6;
+            this.Button_Notificacion.TabStop = false;
+            this.Button_Notificacion.UseVisualStyleBackColor = false;
+            this.Button_Notificacion.Click += new System.EventHandler(this.Button_Notificacion_Click);
+            // 
             // panel_Controls
             // 
             this.panel_Controls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -266,6 +305,16 @@
             this.label_Nombre.Text = "Cristian Santiago rosas";
             this.label_Nombre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pictureBox_Profile
+            // 
+            this.pictureBox_Profile.BackgroundImage = global::Monitoreo_360.Properties.Resources.user;
+            this.pictureBox_Profile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_Profile.Location = new System.Drawing.Point(23, 4);
+            this.pictureBox_Profile.Name = "pictureBox_Profile";
+            this.pictureBox_Profile.Size = new System.Drawing.Size(36, 38);
+            this.pictureBox_Profile.TabIndex = 0;
+            this.pictureBox_Profile.TabStop = false;
+            // 
             // bunifuElipse_Profile
             // 
             this.bunifuElipse_Profile.Location = new System.Drawing.Point(0, 0);
@@ -295,55 +344,6 @@
             // 
             this.timer.Interval = 60000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // pictureBox_Profile
-            // 
-            this.pictureBox_Profile.BackgroundImage = global::Monitoreo_360.Properties.Resources.user;
-            this.pictureBox_Profile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_Profile.Location = new System.Drawing.Point(23, 4);
-            this.pictureBox_Profile.Name = "pictureBox_Profile";
-            this.pictureBox_Profile.Size = new System.Drawing.Size(36, 38);
-            this.pictureBox_Profile.TabIndex = 0;
-            this.pictureBox_Profile.TabStop = false;
-            // 
-            // button_Maximize
-            // 
-            this.button_Maximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Maximize.BackColor = System.Drawing.Color.Transparent;
-            this.button_Maximize.Image = global::Monitoreo_360.Properties.Resources.Maximize_Window_100px;
-            this.button_Maximize.Location = new System.Drawing.Point(755, 8);
-            this.button_Maximize.Name = "button_Maximize";
-            this.button_Maximize.Size = new System.Drawing.Size(21, 20);
-            this.button_Maximize.TabIndex = 7;
-            this.button_Maximize.UseVisualStyleBackColor = false;
-            this.button_Maximize.Click += new System.EventHandler(this.button_Maximize_Click);
-            // 
-            // Button_Close
-            // 
-            this.Button_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button_Close.BackColor = System.Drawing.Color.Transparent;
-            this.Button_Close.Image = global::Monitoreo_360.Properties.Resources.Delete_50px;
-            this.Button_Close.Location = new System.Drawing.Point(782, 8);
-            this.Button_Close.Name = "Button_Close";
-            this.Button_Close.Size = new System.Drawing.Size(21, 20);
-            this.Button_Close.TabIndex = 6;
-            this.Button_Close.TabStop = false;
-            this.Button_Close.UseVisualStyleBackColor = false;
-            this.Button_Close.Click += new System.EventHandler(this.Button_Close_Click);
-            // 
-            // Button_Notificacion
-            // 
-            this.Button_Notificacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Button_Notificacion.BackColor = System.Drawing.Color.Transparent;
-            this.Button_Notificacion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Button_Notificacion.Image = global::Monitoreo_360.Properties.Resources.Notification__Gray_48px;
-            this.Button_Notificacion.Location = new System.Drawing.Point(776, 56);
-            this.Button_Notificacion.Name = "Button_Notificacion";
-            this.Button_Notificacion.Size = new System.Drawing.Size(27, 29);
-            this.Button_Notificacion.TabIndex = 6;
-            this.Button_Notificacion.TabStop = false;
-            this.Button_Notificacion.UseVisualStyleBackColor = false;
-            this.Button_Notificacion.Click += new System.EventHandler(this.Button_Notificacion_Click);
             // 
             // Menu
             // 

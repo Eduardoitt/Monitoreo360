@@ -18,6 +18,8 @@ namespace Monitoreo_360
         public int y = 0;
         private Guid IdUsuario;
         Login login;
+        public System.Windows.Forms.Button Button_Alerta;
+
         public Menu(Guid IdUsuario,Login login)
         {
             this.IdUsuario = IdUsuario;
@@ -39,39 +41,20 @@ namespace Monitoreo_360
                     Button_Badge.Visible = true;
                 }
                 System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
-                System.Windows.Forms.Button Button_Alerta = new System.Windows.Forms.Button();
-               // Button_Alerta.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(151)))), ((int)(((byte)(203)))));
+                Button_Alerta = new System.Windows.Forms.Button();
                 Button_Alerta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
                 Button_Alerta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-               // Button_Alerta.BorderRadius = 0;
                 string text=incidente.Clientes.Nombres + " " + incidente.Clientes.ApellidoPaterno + " : " + incidente.FechaHoraInicio.Day + "/" + incidente.FechaHoraInicio.Month + "/" + incidente.FechaHoraInicio.Year+" "+incidente.FechaHoraInicio.Hour+":"+incidente.FechaHoraInicio.Minute;
                 Button_Alerta.Text = text;
                 Button_Alerta.Cursor = System.Windows.Forms.Cursors.Hand;
                 Button_Alerta.Click += new EventHandler(Button_Alerta_Click);
-                //Button_Alerta.DisabledColor = System.Drawing.Color.Gray;
-                //Button_Alerta.Iconcolor = System.Drawing.Color.Transparent;
-                //Button_Alerta.Iconimage = ((System.Drawing.Image)(resources.GetObject("Button_Alerta.Iconimage")));
-                /*Button_Alerta.Iconimage_right = null;
-                Button_Alerta.Iconimage_right_Selected = null;
-                Button_Alerta.Iconimage_Selected = null;
-                Button_Alerta.IconMarginLeft = 0;
-                Button_Alerta.IconMarginRight = 0;
-                Button_Alerta.IconRightVisible = true;
-                Button_Alerta.IconRightZoom = 0D;
-                Button_Alerta.IconVisible = true;
-                Button_Alerta.IconZoom = 90D;
-                Button_Alerta.IsTab = false;*/
                 Button_Alerta.Location = new System.Drawing.Point(-7, y);
                 Button_Alerta.Name = incidente.Id.ToString();
-               /* Button_Alerta.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(92)))), ((int)(((byte)(166)))));
-                Button_Alerta.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(44)))), ((int)(((byte)(100)))));
-                Button_Alerta.OnHoverTextColor = System.Drawing.Color.White;
-                Button_Alerta.selected = false;*/
                 Button_Alerta.Size = new System.Drawing.Size(265, 48);
                 Button_Alerta.TabIndex = 0;
                 Button_Alerta.Text = text;
                 Button_Alerta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-                //Button_Alerta.Textcolor = System.Drawing.Color.White;
+                Button_Alerta.ForeColor = System.Drawing.Color.White;
                 Button_Alerta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.panel_Notificaciones.Controls.Add(Button_Alerta);                
                 y += 48;
@@ -365,22 +348,27 @@ namespace Monitoreo_360
 
         private void Button_Monitor_Click(object sender, EventArgs e)
         {
-            int width = this.panel_Content.Width;
-            int height = this.panel_Content.Height;
-            this.panel_Content.Controls.Clear();
-            this.panel_Controls.Controls.Clear();
-            Button_Clientes.Enabled = true;
-            Button_Incidentes.Enabled = true;
-            Button_Cadena.Enabled = true; 
-            Button_Monitor.Enabled = false;
-            Button_Usuarios.Enabled = true;
-            Monitor form = new Monitor();
-            form.Width = width - 40;
-            form.Height = height - 40;
+
+            //int width = this.panel_Content.Width;
+            //int height = this.panel_Content.Height;
+            //this.panel_Content.Controls.Clear();
+            //this.panel_Controls.Controls.Clear();
+            //Button_Clientes.Enabled = true;
+            //Button_Incidentes.Enabled = true;
+            //Button_Cadena.Enabled = true; 
+            //Button_Monitor.Enabled = false;
+            //Button_Usuarios.Enabled = true;           
+            Monitor_ form = new Monitor_();
+            //form.Width = width - 40;
+            //form.Height = height - 40;
+            //form.Width = width ;
+            //form.Height = height;
             form.Location = new Point(20, 20);
             form.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top;
-            form.Data();
-            this.panel_Content.Controls.Add(form);
+            //form.Data();
+            form.Show();
+            //ShowDialog(form);
+            //this.panel_Content.Controls.Add(form);
             
         }
 

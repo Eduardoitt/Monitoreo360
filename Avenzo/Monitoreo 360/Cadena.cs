@@ -22,6 +22,8 @@ namespace Monitoreo_360
         public Cadena(Guid IdUsuario, System.Windows.Forms.Button Button,Panel panel)
         {
             InitializeComponent();
+            this.Button = Button;
+            this.panel = panel;
             List<LogMonitoreo360> logs = db.LogMonitoreo360.OrderBy(x => x.FechaCreacion).OrderByDescending(x => x.FechaCreacion).ToList();
             foreach (var log in logs.OrderBy(x => x.FechaCreacion))
             {

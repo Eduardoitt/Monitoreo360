@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Monitor_));
             this.panel_Clientes = new System.Windows.Forms.Panel();
             this.bunifuElipse = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
@@ -36,17 +37,14 @@
             // 
             // panel_Clientes
             // 
-            this.panel_Clientes.AutoScroll = true;
+            resources.ApplyResources(this.panel_Clientes, "panel_Clientes");
             this.panel_Clientes.BackColor = System.Drawing.Color.Transparent;
-            this.panel_Clientes.Location = new System.Drawing.Point(17, 51);
             this.panel_Clientes.Name = "panel_Clientes";
-            this.panel_Clientes.Size = new System.Drawing.Size(1160, 560);
-            this.panel_Clientes.TabIndex = 1;
             // 
             // bunifuElipse
             // 
-           /* this.bunifuElipse.ElipseRadius = 15;
-            this.bunifuElipse.TargetControl = this;*/
+            resources.ApplyResources(this.bunifuElipse, "bunifuElipse");
+            this.bunifuElipse.Name = "bunifuElipse";
             // 
             // timer
             // 
@@ -54,16 +52,14 @@
             this.timer.Interval = 30000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // Monitor
+            // Monitor_
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 634);
             this.Controls.Add(this.panel_Clientes);
             this.MinimizeBox = false;
-            this.Name = "Monitor";
+            this.Name = "Monitor_";
             this.Style = MetroFramework.MetroColorStyle.Red;
-            this.Text = "Monitor";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Load += new System.EventHandler(this.Monitor_Load);
             this.ResumeLayout(false);

@@ -36,7 +36,7 @@ namespace Monitoreo_360
         Panel panel;
         Guid IdUsuario;
         private bool close = false;
-
+        int y = 48;
         public ClienteAlerta(Guid IdUsuario,Guid IdIncidente)
         {
             if (this.InvokeRequired) {
@@ -94,6 +94,7 @@ namespace Monitoreo_360
         public void setButton(System.Windows.Forms.Button Button,Panel panel) {
             this.Button = Button;
             this.panel = panel;
+
         }
         public async void VerifyAsync(string email, string password)
         {
@@ -129,7 +130,7 @@ namespace Monitoreo_360
                 else
                 {
                     Button_Android.Enabled = false;
-                    label_Android_Disponible.Text = "Disponible";
+                    label_Android_Disponible.Text = "No Disponible";
                     label_Android_Disponible.BackColor = Color.Red;
                 }
 
@@ -243,6 +244,7 @@ namespace Monitoreo_360
 
         private void ClienteAlerta_FormClosing_1(object sender, FormClosingEventArgs e)
         {
+            
             if (string.IsNullOrEmpty(Button.Text))
             {
                 Button.Text = "1";
@@ -254,33 +256,21 @@ namespace Monitoreo_360
                 Button.Text = (int.Parse(Button.Text) + 1) + "";
                 Button.Visible = true;
             }
-            //Bunifu.Framework.UI.BunifuThinButton2 Notificacion = new Bunifu.Framework.UI.BunifuThinButton2();
             System.Windows.Forms.Button Notificacion = new System.Windows.Forms.Button();
-            //Notificacion.ActiveBorderThickness = 1;
-            //Notificacion.ActiveCornerRadius = 20;
-            //Notificacion.ActiveFillColor = System.Drawing.Color.SeaGreen;
-            //Notificacion.ActiveForecolor = System.Drawing.Color.White;
-            //Notificacion.ActiveLineColor = System.Drawing.Color.SeaGreen;
             Notificacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
             //Notificacion.BackgroundImage = ((System.Drawing.Image)(Resources.GetObject("Notificacion.BackgroundImage")));
-           // Notificacion.ButtonText = label_Nombres.Text;
             Notificacion.Text = label_Nombres.Text;
             Notificacion.Cursor = System.Windows.Forms.Cursors.Hand;
             Notificacion.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             Notificacion.ForeColor = System.Drawing.Color.SeaGreen;
-            //Notificacion.IdleBorderThickness = 1;
-            //Notificacion.IdleCornerRadius = 20;
-            //Notificacion.IdleFillColor = System.Drawing.Color.White;
-            //Notificacion.IdleForecolor = System.Drawing.Color.SeaGreen;
-            //Notificacion.IdleLineColor = System.Drawing.Color.SeaGreen;
-            Notificacion.Location = new System.Drawing.Point(0, 0);
+            Notificacion.Location = new System.Drawing.Point(0, y);
             Notificacion.Margin = new System.Windows.Forms.Padding(5);
             Notificacion.Name = "Notificacion";
             Notificacion.Size = new System.Drawing.Size(203, 54);
             Notificacion.TabIndex = 0;
             Notificacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             panel.Controls.Add(Notificacion);
-
+            y += 48;
             /*if (!close) { 
                 e.Cancel = true ;
                 MetroFramework.MetroMessageBox.Show(this, "No se puede cerrar hasta dar seguimiento a la alerta", "Monitoreo 360", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);

@@ -38,6 +38,7 @@ namespace Monitoreo_360
                 //buttonStatus.ImageActive = null;
                 buttonStatus.Location = new System.Drawing.Point(x, y);
                 buttonStatus.Name = cliente.NumeroDeCuenta;
+                buttonStatus.Text = cliente.NumeroDeCuenta;
                 buttonStatus.FlatStyle = FlatStyle.Flat;
                 buttonStatus.Font = new System.Drawing.Font("Century Gothic",5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));                
                 buttonStatus.Size = new System.Drawing.Size(30, 30);
