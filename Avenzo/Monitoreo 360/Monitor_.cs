@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 using Monitoreo_360.Models;
-
+using System.Net;
+using System.Net.Sockets;
+using System.Net.WebSockets;
 namespace Monitoreo_360
 {
     public partial class Monitor_ : MetroFramework.Forms.MetroForm
@@ -20,6 +22,79 @@ namespace Monitoreo_360
         public Monitor_()
         {
             InitializeComponent();
+            SK_Cliente();
+        }
+
+
+        private static void SK_Cliente()
+        {
+            byte[] bytes = new byte[1024];
+            try
+            {
+                //listening
+                //IPHostEntry iphost = Dns.GetHostEntry("DESKTOP-SRPL3UH");//192.168.0.254
+                IPHostEntry iphost = Dns.GetHostEntry("DESKTOP-SRPL3UH");//192.168.0.254
+                IPAddress ipAddress = IPAddress.Parse("192.168.0.200");//ip de receptora
+                IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 1024);//aqui poner el puerto que se utiliza en la receptora 1024 o 69
+                Socket sender = new Socket(ipAddress.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
+                try
+                {
+                    sender.Bind(localEndPoint);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error {0}",ex.ToString());
+                }
+                sender.Listen(100);//numeros de clientes permitidos
+                //fin listening
+
+                //Solicitudes
+                Console.WriteLine("En espera de la conexion");
+                Socket handler = sender.Accept();
+                String data = null;
+                while (true)
+                {
+                    byte [] bt = new byte[1024];
+                    int bytesRec = handler.Receive(bytes);
+                    data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    if (data.IndexOf("<EOF>") > -1)
+                    {
+                        break;
+                    }
+                }
+
+                try
+                {
+                    sender.Connect(localEndPoint);
+                    Console.WriteLine("Text received : {0}", data);
+                    Console.WriteLine("Socket conectado a {0}", sender.RemoteEndPoint.ToString());
+                    byte[] msg = Encoding.ASCII.GetBytes(data);
+                    handler.Send(msg);
+
+                    handler.Receive(bytes);
+
+                    handler.Shutdown(SocketShutdown.Both);
+                    handler.Close();
+
+                }
+                catch (ArgumentNullException ane)
+                {
+                    Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
+                }
+                catch (SocketException se)
+                {
+                    Console.WriteLine("SocketException : {0}", se.ToString());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         private void Monitor_Load(object sender, EventArgs e)
