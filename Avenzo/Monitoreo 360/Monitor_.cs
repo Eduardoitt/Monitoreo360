@@ -25,27 +25,28 @@ namespace Monitoreo_360
             SK_Cliente();
         }
 
-
         private static void SK_Cliente()
         {
             byte[] bytes = new byte[1024];
             try
             {
                 //listening
-                //IPHostEntry iphost = Dns.GetHostEntry("DESKTOP-SRPL3UH");//192.168.0.254
+                
                 IPHostEntry iphost = Dns.GetHostEntry("DESKTOP-SRPL3UH");//192.168.0.254
-                IPAddress ipAddress = IPAddress.Parse("192.168.0.200");//ip de receptora
+                IPAddress ipAddress = IPAddress.Parse("192.168.0.200");//192.168.0.200 ip de receptora del moden al que esta conectada
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 1024);//aqui poner el puerto que se utiliza en la receptora 1024 o 69
                 Socket sender = new Socket(ipAddress.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
                 try
                 {
+                    sender.Connect(localEndPoint);
                     sender.Bind(localEndPoint);
+                    
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Error {0}",ex.ToString());
                 }
-                sender.Listen(100);//numeros de clientes permitidos
+                sender.Listen(1);//numeros de clientes permitidos
                 //fin listening
 
                 //Solicitudes
@@ -65,7 +66,7 @@ namespace Monitoreo_360
 
                 try
                 {
-                    sender.Connect(localEndPoint);
+                    
                     Console.WriteLine("Text received : {0}", data);
                     Console.WriteLine("Socket conectado a {0}", sender.RemoteEndPoint.ToString());
                     byte[] msg = Encoding.ASCII.GetBytes(data);
@@ -117,7 +118,7 @@ namespace Monitoreo_360
                 buttonStatus.FlatStyle = FlatStyle.Flat;
                 buttonStatus.Font = new System.Drawing.Font("Century Gothic",5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));                
                 buttonStatus.Size = new System.Drawing.Size(30, 30);
-                //buttonStatus.Anchor = (AnchorStyles.Bottom&AnchorStyles.Top& AnchorStyles.Left&AnchorStyles.Right);
+                buttonStatus.Anchor = (AnchorStyles.Top & AnchorStyles.Bottom & AnchorStyles.Right&AnchorStyles.Left);
                 //buttonStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
                 buttonStatus.TabIndex = 3;
                 buttonStatus.TabStop = false;

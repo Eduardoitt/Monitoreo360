@@ -33,6 +33,7 @@
             this.panel_Clientes = new System.Windows.Forms.Panel();
             this.bunifuElipse = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // panel_Clientes
@@ -52,10 +53,18 @@
             this.timer.Interval = 30000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // ProgressBar
+            // 
+            resources.ApplyResources(this.ProgressBar, "ProgressBar");
+            this.ProgressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Value = 5;
+            // 
             // Monitor_
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.panel_Clientes);
             this.MinimizeBox = false;
             this.Name = "Monitor_";
@@ -70,5 +79,6 @@
         private System.Windows.Forms.Panel panel_Clientes;
         private System.Windows.Forms.Button bunifuElipse;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.ProgressBar ProgressBar;
     }
 }

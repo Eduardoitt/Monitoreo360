@@ -18,12 +18,13 @@ namespace Monitoreo_360
         Models.Clientes cliente;
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         List<Estados> Estados =new List<Estados>();
-        List<Municipios> Municipio = new List<Municipios>();
+        List<Municipios> Municipios = new List<Municipios>();
         public Direccion(Guid IdCliente, Guid IdUsuario)
         {
             InitializeComponent();
 
-            List<Estados> estados = db.Estados.Where(x=>x.c_Pais== "MEX").ToList();           
+            List<Estados> estados = db.Estados.Where(x=>x.c_Pais== "MEX").ToList();
+            List<Municipios> mun = db.Municipios.ToList();
             this.IdUsuario = IdUsuario;
             this.cliente = db.Clientes.Where(x => x.IdCliente == IdCliente).FirstOrDefault();
             this.Textbox_Colonia.Text = cliente.Colonia;
@@ -53,10 +54,25 @@ namespace Monitoreo_360
         }
         private bool getData() {
             Estados = db.Estados.ToList();
-            setEstados();
+            setEstados(cliente.Estado);
+            setCiudad(cliente.Ciudad);
             return true;
         }
-        public void setEstados()
+        public void setCiudad(string valor)
+        {
+            if (this.comboBox_Ciudad.InvokeRequired)
+            {
+                this.comboBox_Ciudad.Invoke(new MethodInvoker(delegate
+                {
+                    this.comboBox_Ciudad.DataSource = Municipios;
+                    this.comboBox_Ciudad.ValueMember = "c_Estado";
+                    this.comboBox_Ciudad.DisplayMember = "Descripcion";
+                    if (valor != null)
+                        this.comboBox_Ciudad.Text = db.Municipios.Where(x => x.Descripcion == valor).FirstOrDefault().Descripcion;
+                }));
+            }
+        }
+        public void setEstados(string valor)
         {
             if (this.comboBox_Estado.InvokeRequired)
             {
@@ -65,6 +81,8 @@ namespace Monitoreo_360
                     this.comboBox_Estado.DataSource = Estados;
                     this.comboBox_Estado.ValueMember = "c_Estados";
                     this.comboBox_Estado.DisplayMember = "NombreEstado";
+                    if (valor != null)
+                        this.comboBox_Estado.Text = db.Estados.Where(x => x.c_Estados == valor).FirstOrDefault().NombreEstado;
                 }));
             }
         }
@@ -88,8 +106,8 @@ namespace Monitoreo_360
         private void comboBox_Estado_SelectedIndexChanged(object sender, EventArgs e)
         {
             string value = comboBox_Estado.SelectedValue.ToString();
-            Municipio = db.Municipios.Where(x=> x.c_Estado==value).ToList();
-            this.comboBox_Ciudad.DataSource=Municipio;
+            Municipios = db.Municipios.Where(x=> x.c_Estado==value).ToList();
+            this.comboBox_Ciudad.DataSource=Municipios;
             this.comboBox_Ciudad.ValueMember = "c_Estado";
             this.comboBox_Ciudad.DisplayMember = "Descripcion";
 
