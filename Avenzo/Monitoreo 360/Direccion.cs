@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using MetroFramework;
 using System.Windows.Forms;
 using Monitoreo_360.Models;
+using System.Threading;
 
 namespace Monitoreo_360
 {
@@ -19,6 +20,7 @@ namespace Monitoreo_360
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         List<Estados> Estados =new List<Estados>();
         List<Municipios> Municipios = new List<Municipios>();
+
         public Direccion(Guid IdCliente, Guid IdUsuario)
         {
             InitializeComponent();
@@ -35,15 +37,23 @@ namespace Monitoreo_360
             this.Textbox_Referencias.Text = cliente.Referencias;
             this.Textbox_Color.Text = cliente.ColorEstablecimiento;
             this.Textbox_EntreCalles.Text = cliente.EntreCalles;
-            this.Textbox_Google.Text = cliente.GoogleMaps;
+           
             Data();
-            if (cliente.GoogleMaps != null)
+            if (!String.IsNullOrEmpty(cliente.GoogleMaps))
             {
-                webBrowser.ScriptErrorsSuppressed = true;
-                //this.webBrowser.Url = new Uri(cliente.GoogleMaps);
-                this.webBrowser.Navigate(new Uri(cliente.GoogleMaps));               
+                this.Textbox_Google.Text = cliente.GoogleMaps;
+                Thread t = new Thread(CargaMapa);
+                t.SetApartmentState(ApartmentState.STA);
+                t.Start();
             }
                
+        }
+        public void CargaMapa()
+        {
+            webBrowser.ScriptErrorsSuppressed = true;
+            //this.webBrowser.Url = new Uri(cliente.GoogleMaps);
+            this.webBrowser.Navigate(new Uri(cliente.GoogleMaps));
+         
         }
         async void Data()
         {

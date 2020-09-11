@@ -93,9 +93,7 @@ namespace Monitoreo_360
             {
                 if (eventos.Count() > 1)
                 {
-                    //List<Sensores> clienteSensores = db.GetSensores(cliente.IdCliente, 2).ToList();
                     List<GetSensores_Result> clienteSensores = db.GetSensores(cliente.IdCliente, 2).ToList();
-                    //HorarioOperaciones Horario = db.GetHorarioOperaciones(cliente.IdCliente).FirstOrDefault();
                     GetHorarioOperaciones_Result Horario = db.GetHorarioOperaciones(cliente.IdCliente).FirstOrDefault();
                     List<CodigoEventos> CodigosEventos = db.CodigoEventos.ToList();
                     foreach (var evento in eventos)
@@ -320,7 +318,6 @@ namespace Monitoreo_360
         {
             login.Show();
             this.Hide();
-            //this.Close();
         }
 
         private void Button_Incidentes_Click(object sender, EventArgs e)
@@ -626,6 +623,7 @@ namespace Monitoreo_360
             int height = this.panel_Content.Height;
             Button_Cadena.Enabled = true;
             this.panel_Content.Controls.Clear();
+            this.panel_Controls.Controls.Clear();
             Button_Clientes.Enabled = true;
             Button_Usuarios.Enabled = false;
             Button_Incidentes.Enabled = true;

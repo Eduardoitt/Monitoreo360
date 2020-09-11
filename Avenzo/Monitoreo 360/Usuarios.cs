@@ -87,7 +87,7 @@ namespace Monitoreo_360
                 DataGrid_Usuarios.Rows[n].Cells[1].Value = usuario.Usuario;
                 DataGrid_Usuarios.Rows[n].Cells[2].Value = usuario.TipoUsuario;
                 DataGrid_Usuarios.Rows[n].Cells[3].Value = usuario.Roles;
-                DataGrid_Usuarios.Rows[n].Cells[4].Value = usuario.Activo;
+                DataGrid_Usuarios.Rows[n].Cells[4].Value = usuario.Activo==true?"Si":"No" ;
             }
         }
 

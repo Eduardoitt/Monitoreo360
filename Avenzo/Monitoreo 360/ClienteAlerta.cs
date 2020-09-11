@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Media;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -44,7 +43,6 @@ namespace Monitoreo_360
             }
             else { 
                 InitializeComponent();
-                
                 this.IdUsuario = IdUsuario;
                 this.IdIncidente = IdIncidente;
                 TiempoInicio = DateTime.Now;
@@ -63,11 +61,7 @@ namespace Monitoreo_360
             label_Colonia.Text = "Col. " + cliente.Colonia + ", Calle " + cliente.Calle;
             label_NoInterior.Text = " No Interior " + cliente.NoInterior + " No Exterior " + cliente.NoExterior;
             label_Entre_Calles.Text = cliente.EntreCalles;
-            //textBox_Direccion.Text = "Colonia " + cliente.Colonia + ", Calle " + cliente.Calle + " No Interior " + cliente.NoInterior + " No Exterior " + cliente.NoExterior + "\n Entre calles:" + cliente.EntreCalles + ", Color de Establecimiento:" + cliente.ColorEstablecimiento;
-            //textBox_Estado.Text = cliente.Estado;
-            //textBox_Ciudad.Text = cliente.Estado;
             label_Correo.Text = cliente.Email;
-            //textBox_Pais.Text = cliente.Pais;
             label_PalabraClave.Text = cliente.PalabraClave;
             label_PalabraClaveSilenciosa.Text = cliente.PalabraClaveSilenciosa;
             label_ColorEstablecimiento.Text = cliente.ColorEstablecimiento;
@@ -83,7 +77,6 @@ namespace Monitoreo_360
                 this.dataGridView_Contactos.Rows[n].Cells[3].Value = "";
                 this.dataGridView_Contactos.Rows[n].Cells[4].Value = contacto.Telefono;
             }
-            //pictureBox_Photo.BackgroundImage=
             if (!string.IsNullOrEmpty(cliente.GoogleMaps))
             {
                 var t = new Thread(setBrowseMap);
@@ -258,7 +251,6 @@ namespace Monitoreo_360
             }
             System.Windows.Forms.Button Notificacion = new System.Windows.Forms.Button();
             Notificacion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
-            //Notificacion.BackgroundImage = ((System.Drawing.Image)(Resources.GetObject("Notificacion.BackgroundImage")));
             Notificacion.Text = label_Nombres.Text;
             Notificacion.Cursor = System.Windows.Forms.Cursors.Hand;
             Notificacion.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

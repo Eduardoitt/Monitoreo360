@@ -35,7 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cliente));
-            this.dataGridView_Clientes = new MetroFramework.Controls.MetroGrid();
+            this.dataGridView_Clientes = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumeroDeCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,8 +107,8 @@
             this.dataGridView_Clientes.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView_Clientes.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView_Clientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Clientes.Style = MetroFramework.MetroColorStyle.Red;
-            this.dataGridView_Clientes.Theme = MetroFramework.MetroThemeStyle.Light;
+            //this.dataGridView_Clientes.Style = MetroFramework.MetroColorStyle.Red;
+            //this.dataGridView_Clientes.Theme = MetroFramework.MetroThemeStyle.Light;
             this.dataGridView_Clientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Clientes_CellContentDoubleClick);
             // 
             // Id
@@ -191,7 +191,7 @@
         }
 
         #endregion
-        private MetroFramework.Controls.MetroGrid dataGridView_Clientes;
+        private System.Windows.Forms.DataGridView dataGridView_Clientes;
         private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumeroDeCuenta;
@@ -201,7 +201,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Panel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn CorreoElectronico;
-        //private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
         private System.Windows.Forms.Button bunifuElipse;
     }
 }

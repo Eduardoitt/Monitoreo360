@@ -19,12 +19,157 @@ namespace Monitoreo_360
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         private readonly BackgroundWorker worker = new BackgroundWorker();
+        delegate void setMaximunD(int max);
+        delegate void setDataList(Models.Clientes cliente);
+        delegate void setVisiblePanel(bool visible);
+        private int x = 5; int y = 5;
+        private int count = 0;
+        private int width = 0;
+        private int ClientesRow = 0;
         public Monitor_()
         {
             InitializeComponent();
+            this.ProgressBar.Value = 5;
             SK_Cliente();
+            Data();
         }
 
+        #region carga de datos
+        public async void Data()
+        {
+            await Task.Run(() =>
+            {
+                x = 5;
+                y = 5;
+                count = 0;
+                width = this.panel_Clientes.Width;
+                ClientesRow = ((int)(width / 35));
+                var finallyDB = getData();
+                if (finallyDB)
+                    setVisibleDataPanel(true);
+            });
+        }
+        public bool getData()
+        {
+            List<Models.Clientes> clientes = new List<Models.Clientes>();
+
+            clientes = db.Clientes.Where(model => model.Activo == true && !string.IsNullOrEmpty(model.NumeroTelefonoAlarma) && !string.IsNullOrEmpty(model.NumeroDeCuenta)).ToList();
+            // this.ProgressBar.Maximum = clientes.Count() + 5;
+            int max = clientes.Count() + 5;
+            setMaximo(max);
+            foreach (var cliente in clientes)
+            {
+                setDataPanel(cliente);
+            }
+            return true;
+        }
+        public void setMaximo(int max)
+        {
+            if (panel_Clientes.InvokeRequired)
+            {
+                setMaximunD d = new setMaximunD(setMaximo);
+                this.Invoke(d, new object[] { max });
+            }
+            else
+            {
+                ProgressBar.Maximum = max;
+            }
+        }
+        public void setVisibleDataPanel(bool visible)
+        {
+            if (panel_Clientes.InvokeRequired)
+            {
+                setVisiblePanel d = new setVisiblePanel(setVisibleDataPanel);
+                this.Invoke(d, new object[] { visible });
+            }
+            else
+            {
+                this.panel_Clientes.Visible = visible;
+                ProgressBar.Visible = !visible;
+            }
+        }
+        public void setDataPanel(Models.Clientes cliente)
+        {
+            if (panel_Clientes.InvokeRequired)
+            {
+                setDataList d = new setDataList(setDataPanel);
+                try
+                {
+                    this.Invoke(d, new object[] { cliente });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+                
+            }
+            else
+            {
+                this.ProgressBar.Value += 1;
+                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Monitor_));
+                Button buttonStatus = new Button();
+                buttonStatus.BackColor = System.Drawing.Color.LightGray;
+                buttonStatus.Location = new System.Drawing.Point(x, y);
+                buttonStatus.Name = cliente.NumeroDeCuenta;
+                buttonStatus.Text = cliente.NumeroDeCuenta;
+                buttonStatus.FlatStyle = FlatStyle.Flat;
+                buttonStatus.Font = new System.Drawing.Font("Century Gothic", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                buttonStatus.Size = new System.Drawing.Size(30, 30);
+                buttonStatus.Anchor = (AnchorStyles.Top & AnchorStyles.Bottom & AnchorStyles.Right & AnchorStyles.Left);
+                buttonStatus.TabIndex = 3;
+                buttonStatus.TabStop = false;
+                buttonStatus.Click += new EventHandler(buttonStatus_Click);
+                this.panel_Clientes.Controls.Add(buttonStatus);
+                this.panel_Clientes.Location = new System.Drawing.Point(20, 60);
+                this.panel_Clientes.Name = "panel_" + cliente.NumeroDeCuenta;
+                this.panel_Clientes.TabIndex = 1;
+
+                List<LogMonitoreo360> logs = db.LogMonitoreo360.Where(model => cliente.NumeroDeCuenta.Contains(model.Log.Substring(61, 4)) && cliente.NumeroTelefonoAlarma.Contains(model.Log.Substring(54, 6).Replace("-", ""))).ToList();
+                foreach (var log in logs.OrderBy(model => model.FechaCreacion))
+                {
+                    string report = log.Log.Substring(66, log.Log.Length - 66);
+                    string[] eventos = report.Split('-')[1].Split('/');
+                    if (eventos.Count() > 1)
+                    {
+                        List<CodigoEventos> CodigosEventos = db.CodigoEventos.ToList();
+                        foreach (var evento in eventos)
+                        {
+                            if (evento.Substring(0, 2).Contains("OP"))
+                            {
+                                buttonStatus.BackColor = System.Drawing.Color.SeaGreen;
+
+                            }
+                            else if (evento.Substring(0, 2).Contains("CL"))
+                            {
+                                buttonStatus.BackColor = System.Drawing.Color.GreenYellow;
+
+                            }
+                            else if (evento.Substring(0, 2).Contains("CR"))
+                            {
+                                buttonStatus.BackColor = System.Drawing.Color.IndianRed;
+
+                            }
+                            else if (evento.Substring(0, 2).Contains("OR"))
+                            {
+                                buttonStatus.BackColor = System.Drawing.Color.BlueViolet;
+
+                            }
+                        }
+                    }
+                }
+                x = x + 35;
+                count = count + 1;
+                if ((x + 30) > width)
+                {
+                    y = y + 35;
+                    x = 5;
+                    count = 0;
+                }
+            }
+        }
+        #endregion
+
+        #region Socket
         private static void SK_Cliente()
         {
             byte[] bytes = new byte[1024];
@@ -32,7 +177,7 @@ namespace Monitoreo_360
             {
                 //listening
                 
-                IPHostEntry iphost = Dns.GetHostEntry("DESKTOP-SRPL3UH");//192.168.0.254
+                IPHostEntry iphost = Dns.GetHostEntry("192.168.0.200");//192.168.0.254
                 IPAddress ipAddress = IPAddress.Parse("192.168.0.200");//192.168.0.200 ip de receptora del moden al que esta conectada
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 1024);//aqui poner el puerto que se utiliza en la receptora 1024 o 69
                 Socket sender = new Socket(ipAddress.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
@@ -97,82 +242,8 @@ namespace Monitoreo_360
                 Console.WriteLine(ex);
             }
         }
-
-        private void Monitor_Load(object sender, EventArgs e)
-        {
-            List<Models.Clientes> Clientes = db.Clientes.Where(model => model.Activo == true && !string.IsNullOrEmpty(model.NumeroTelefonoAlarma)&&!string.IsNullOrEmpty(model.NumeroDeCuenta)).ToList();
-            int width = this.panel_Clientes.Width;
-            int ClientesRow = ((int)(width / 35));
-            int x = 5; int y = 5;
-            int count = 0;
-            foreach (var cliente in Clientes.OrderBy(model => model.Nombres))
-            {
-                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Monitor_));
-                Button buttonStatus = new Button();
-                buttonStatus.BackColor = System.Drawing.Color.LightGray;
-                //buttonStatus.Image = ((System.Drawing.Image)(resources.GetObject(cliente.NumeroDeCuenta + ".Image")));
-                //buttonStatus.ImageActive = null;
-                buttonStatus.Location = new System.Drawing.Point(x, y);
-                buttonStatus.Name = cliente.NumeroDeCuenta;
-                buttonStatus.Text = cliente.NumeroDeCuenta;
-                buttonStatus.FlatStyle = FlatStyle.Flat;
-                buttonStatus.Font = new System.Drawing.Font("Century Gothic",5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));                
-                buttonStatus.Size = new System.Drawing.Size(30, 30);
-                buttonStatus.Anchor = (AnchorStyles.Top & AnchorStyles.Bottom & AnchorStyles.Right&AnchorStyles.Left);
-                //buttonStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-                buttonStatus.TabIndex = 3;
-                buttonStatus.TabStop = false;
-                //buttonStatus.Zoom = 10;
-                buttonStatus.Click += new EventHandler(buttonStatus_Click);
-                this.panel_Clientes.Controls.Add(buttonStatus);                
-                this.panel_Clientes.Location = new System.Drawing.Point(20, 60);
-                this.panel_Clientes.Name = "panel_" + cliente.NumeroDeCuenta;                
-                this.panel_Clientes.TabIndex = 1;
-                
-                List<LogMonitoreo360> logs = db.LogMonitoreo360.Where(model => cliente.NumeroDeCuenta.Contains(model.Log.Substring(61, 4)) && cliente.NumeroTelefonoAlarma.Contains(model.Log.Substring(54, 6).Replace("-", ""))).ToList();
-                foreach (var log in logs.OrderBy(model => model.FechaCreacion))
-                {
-                    string report = log.Log.Substring(66, log.Log.Length - 66);
-                    string[] eventos = report.Split('-')[1].Split('/');
-                    if (eventos.Count() > 1)
-                    {
-                        List<CodigoEventos> CodigosEventos = db.CodigoEventos.ToList();
-                        foreach (var evento in eventos)
-                        {
-                            if (evento.Substring(0, 2).Contains("OP"))
-                            {
-                                buttonStatus.BackColor = System.Drawing.Color.SeaGreen;
-                                
-                            }
-                            else if (evento.Substring(0, 2).Contains("CL"))
-                            {
-                                buttonStatus.BackColor = System.Drawing.Color.GreenYellow;
-                                
-                            }
-                            else if (evento.Substring(0, 2).Contains("CR"))
-                            {
-                                buttonStatus.BackColor = System.Drawing.Color.IndianRed;
-                                
-                            }
-                            else if (evento.Substring(0, 2).Contains("OR"))
-                            {
-                                buttonStatus.BackColor = System.Drawing.Color.BlueViolet;
-                                
-                            }
-                        }
-                    }
-                }
-                x = x + 35;
-                count = count + 1;
-                if ((x+30)>width )
-                {
-                    y = y +  35;
-                    x = 5;
-                    count = 0;
-                }
-            }
-        }
-
+        #endregion
+        #region Boton
         private void buttonStatus_Click(object sender, EventArgs e)
         {
             Button button = ((Button)sender);
@@ -182,7 +253,8 @@ namespace Monitoreo_360
             form.setInfo(cliente);
             form.ShowDialog();
         }
-
+        #endregion
+        #region timer
         private void timer_Tick(object sender, EventArgs e)
         {
             this.timer.Stop();
@@ -345,6 +417,13 @@ namespace Monitoreo_360
                 }
             }
             this.timer.Start();
+        }
+        #endregion
+
+        private void Monitor__FormClosed(object sender, FormClosedEventArgs e)
+        {
+            setDataList d = new setDataList(setDataPanel);
+            this.Dispose();
         }
     }
 }

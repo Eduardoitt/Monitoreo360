@@ -135,6 +135,9 @@
   <data name="panel_Clientes.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="panel_Clientes.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;panel_Clientes.Name" xml:space="preserve">
     <value>panel_Clientes</value>
   </data>

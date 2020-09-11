@@ -54,9 +54,12 @@
             // DataGrid_Clientes
             // 
             this.DataGrid_Clientes.AllowUserToAddRows = false;
+            this.DataGrid_Clientes.AllowUserToDeleteRows = false;
             this.DataGrid_Clientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGrid_Clientes.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DataGrid_Clientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DataGrid_Clientes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.DataGrid_Clientes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -65,6 +68,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DataGrid_Clientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.DataGrid_Clientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DataGrid_Clientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdCliente,
             this.NumeroDeCuentaa,
@@ -77,14 +81,14 @@
             this.DataGrid_Clientes.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DataGrid_Clientes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGrid_Clientes.EnableHeadersVisualStyles = false;
-            this.DataGrid_Clientes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.DataGrid_Clientes.Location = new System.Drawing.Point(0, 0);
             this.DataGrid_Clientes.Name = "DataGrid_Clientes";
             this.DataGrid_Clientes.ReadOnly = true;
-            this.DataGrid_Clientes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.DataGrid_Clientes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.DataGrid_Clientes.RowHeadersVisible = false;
+            this.DataGrid_Clientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGrid_Clientes.Size = new System.Drawing.Size(841, 414);
-            this.DataGrid_Clientes.TabIndex = 4;
+            this.DataGrid_Clientes.TabIndex = 1;
             this.DataGrid_Clientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGrid_Clientes_CellContentClick);
             // 
             // IdCliente

@@ -70,7 +70,7 @@
             this.Name = "Monitor_";
             this.Style = MetroFramework.MetroColorStyle.Red;
             this.Theme = MetroFramework.MetroThemeStyle.Default;
-            this.Load += new System.EventHandler(this.Monitor_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Monitor__FormClosed);
             this.ResumeLayout(false);
 
         }
