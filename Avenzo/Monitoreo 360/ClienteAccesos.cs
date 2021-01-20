@@ -112,30 +112,7 @@ namespace Monitoreo_360
 
             var set = client.Update(@"Accesos/" + cliente.NumeroDeCuenta.ToString(), acc);
             if(set.StatusCode==HttpStatusCode.OK)
-                MetroMessageBox.Show(this, "", "Los cambios fueron guardados exitosamente", MessageBoxButtons.OK, MessageBoxIcon.Question);
-            //var set = client.Set(@"Accesos/" + numCuenta, std);
-            /*string Email = metroTextBox_Email.Text;
-            string Password = "santiago01";
-            string Name = cliente.Nombres + " " + cliente.ApellidoPaterno + " " + cliente.ApellidoMaterno;
-            if (metroToggle_Android.Checked)
-            {
-                if (User != null)
-                {
-                }
-                else
-                {
-                    var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCjNHR6PHEqCbUj_Of7Mx2NxePvoXwkvAM"));                    
-                    authProvider.CreateUserWithEmailAndPasswordAsync(Email, Password, Name, true);
-                    formEdit.setEmail(Email);
-                    this.Close();
-                }
-            }
-            else {
-                if (User!=null) {
-                    var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCjNHR6PHEqCbUj_Of7Mx2NxePvoXwkvAM"));
-                    authProvider.DeleteUser(Auth.FirebaseToken);
-                }
-            }*/
+                MetroMessageBox.Show(this, "", "Los cambios fueron guardados exitosamente", MessageBoxButtons.OK, MessageBoxIcon.Question); 
         }
 
         private void metroButton_CambiarContrasena_Click(object sender, EventArgs e)

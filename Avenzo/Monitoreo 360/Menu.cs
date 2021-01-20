@@ -346,26 +346,12 @@ namespace Monitoreo_360
         private void Button_Monitor_Click(object sender, EventArgs e)
         {
 
-            //int width = this.panel_Content.Width;
-            //int height = this.panel_Content.Height;
-            //this.panel_Content.Controls.Clear();
-            //this.panel_Controls.Controls.Clear();
-            //Button_Clientes.Enabled = true;
-            //Button_Incidentes.Enabled = true;
-            //Button_Cadena.Enabled = true; 
-            //Button_Monitor.Enabled = false;
-            //Button_Usuarios.Enabled = true;           
-            Monitor_ form = new Monitor_();
-            //form.Width = width - 40;
-            //form.Height = height - 40;
-            //form.Width = width ;
-            //form.Height = height;
+        
+            Monitor_ form = new Monitor_(this.IdUsuario,  this.panel_Notificaciones, this.Button_Badge);
             form.Location = new Point(20, 20);
             form.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top;
-            //form.Data();
             form.Show();
-            //ShowDialog(form);
-            //this.panel_Content.Controls.Add(form);
+
             
         }
 
