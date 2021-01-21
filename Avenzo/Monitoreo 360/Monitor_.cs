@@ -21,7 +21,6 @@ namespace Monitoreo_360
     public partial class Monitor_ : MetroFramework.Forms.MetroForm
     {
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
-        //private readonly BackgroundWorker worker = new BackgroundWorker();
         delegate void setMaximunD(int max);
         delegate void setDataList(Models.Clientes cliente);
         delegate void setVisiblePanel(bool visible);
@@ -31,18 +30,20 @@ namespace Monitoreo_360
         private int ClientesRow = 0;
         Guid IdUsuario;
         Panel panel;
-        System.Windows.Forms.Button Button;
+        private System.Windows.Forms.Button Button;
 
         public Monitor_(Guid IdUsuario, Panel panel, System.Windows.Forms.Button Button)
         {
             InitializeComponent();
             this.ProgressBar.Value = 5;
-         //   SK_Cliente();
+
             Data();
             this.IdUsuario = IdUsuario;
-            
+            this.panel = panel;
+            this.Button = Button;
+            // SK_Cliente();
         }
- 
+
 
         #region carga de datos
         public async void Data()
@@ -91,7 +92,7 @@ namespace Monitoreo_360
             {
                 setVisiblePanel d = new setVisiblePanel(setVisibleDataPanel);
                 this.Invoke(d, new object[] { visible });
-                IngresarCadena("29 Jan 2018 11:28:41   29 Jan 2018-11:28:40-01/01-SG -81-459-0163--Nri0/RR0000 - Acknowledged by User 00");
+                SK_Cliente();
             }
             else
             {
@@ -112,7 +113,6 @@ namespace Monitoreo_360
                 {
                     Console.WriteLine(e.ToString());
                 }
-
             }
             else
             {
@@ -205,8 +205,7 @@ namespace Monitoreo_360
                     // Lee el mensaje y sentraduce
                     Int32 bytes = stream.Read(data, 0, data.Length);
                     responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-                    
-                    if (responseData.Length>30)
+                    if (responseData.Length > 30)
                     {
                         IngresarCadena(responseData);
                     }
@@ -222,8 +221,35 @@ namespace Monitoreo_360
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
-   
+
         }
+        public void Colorboton(string NumCuenta)//17060133
+        {
+            bool found = false;
+            
+            foreach (Control buttonStatus in this.panel_Clientes.Controls)
+            {
+                if (buttonStatus.Name == NumCuenta)
+                {
+                    for (int r = 0; r <= 4; r++)
+                    {
+                        buttonStatus.BackColor = Color.Yellow;
+                        Thread.Sleep(1000);
+                        buttonStatus.BackColor = Color.Red;
+                        Thread.Sleep(1000);
+                    }
+                    found = true;
+                    goto aqui;
+                }
+                aqui:
+                if (found != false)
+                {
+             
+                    break;
+                }                
+            }
+        }
+
         public void IngresarCadena(string Data)
         {
             if (Data.Length > 30)
@@ -241,6 +267,7 @@ namespace Monitoreo_360
                     Models.Clientes cliente = db.Clientes.Where(x => x.NumeroDeCuenta.Contains(NumeroCuenta) && x.NumeroTelefonoAlarma.Contains(NumeroTelefono)).FirstOrDefault();
                     bool ParticionZona = false;
                     List<ClienteEventos> Eventos = new List<ClienteEventos>();
+                    Colorboton(NumeroCuenta);
                     string Zona = "1";
                     if (cliente != null)
                     {
@@ -560,6 +587,6 @@ namespace Monitoreo_360
             this.Dispose();
         }
 
-     
+
     }
 }

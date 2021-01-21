@@ -237,12 +237,11 @@ namespace Monitoreo_360
 
         private void ClienteAlerta_FormClosing_1(object sender, FormClosingEventArgs e)
         {
-            
+
             if (string.IsNullOrEmpty(Button.Text))
             {
                 Button.Text = "1";
                 Button.Visible = true;
-
             }
             else
             {

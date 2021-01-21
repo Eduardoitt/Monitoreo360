@@ -201,13 +201,7 @@ namespace Monitoreo_360
                             db.InsertIncidentes(IdIncidente, cliente.IdCliente, IdLog, "", DateTime.Now, null, null, true, DateTime.Now, Guid.Parse("8BEAD89F-B0CA-4CA9-9268-4DE6C727E3A2"));
                             form.setEventos(Eventos);
                             form.setButton(this.Button,this.panel);
-                            //form.MdiParent = this.MdiParent;
-                            form.ShowDialog();
-                            //ClienteInfo form = new ClienteInfo();
-                            /*form.MdiParent = this.MdiParent;
-                            form.Show();
-                            form.setInfo(cliente);
-                            form.setEventos(Eventos);*/
+                            form.ShowDialog();                           
                         }
                     }
                 }

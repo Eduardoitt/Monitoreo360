@@ -359,7 +359,6 @@ namespace Monitoreo_360
         {
             this.panel_Notificaciones.Visible = !panel_Notificaciones.Visible;
         }
-
         private void Button_Cadena_Click(object sender, EventArgs e)
         {
             int width = this.panel_Content.Width;
