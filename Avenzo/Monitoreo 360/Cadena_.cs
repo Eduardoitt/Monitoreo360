@@ -193,12 +193,12 @@ namespace Monitoreo_360
                             }
                             this.TextBox_Log.AppendText(this.textBox1.Text + Environment.NewLine);
                             Guid IdLog = Guid.NewGuid();
-                            db.InsertLogMonitoreo360(IdLog, this.textBox1.Text, Guid.Parse("8BEAD89F-B0CA-4CA9-9268-4DE6C727E3A2"), DateTime.Now);
+                            db.InsertLogMonitoreo360(IdLog, this.textBox1.Text, IdUsuario, DateTime.Now);
                             this.textBox1.Text = "";
                             Guid IdIncidente = Guid.NewGuid();
                             ClienteAlerta form = new ClienteAlerta(IdUsuario,IdIncidente);
                             form.setInfo(cliente, IdLog);
-                            db.InsertIncidentes(IdIncidente, cliente.IdCliente, IdLog, "", DateTime.Now, null, null, true, DateTime.Now, Guid.Parse("8BEAD89F-B0CA-4CA9-9268-4DE6C727E3A2"));
+                            db.InsertIncidentes(IdIncidente, cliente.IdCliente, IdLog, "", DateTime.Now, null, null, true, DateTime.Now, IdUsuario);
                             form.setEventos(Eventos);
                             form.setButton(this.Button,this.panel);
                             form.ShowDialog();                           

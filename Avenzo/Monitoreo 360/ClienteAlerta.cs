@@ -173,7 +173,7 @@ namespace Monitoreo_360
             if (e.RowIndex >= 0)
             {
                 Guid id = Guid.Parse(this.dataGridView_Contactos.Rows[e.RowIndex].Cells[0].Value.ToString());
-                ReporteContacto reporteContatcto = new ReporteContacto(IdIncidente, id);
+                ReporteContacto reporteContatcto = new ReporteContacto(IdIncidente, id,IdUsuario);
                 reporteContatcto.ShowDialog();
             }
         }

@@ -20,10 +20,12 @@ namespace Monitoreo_360
     {
         private AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         private Guid IdIncidente;
+        private Guid IdUsuario;
         Models.Clientes cliente = new Models.Clientes();
-        public ClienteInfo()
+        public ClienteInfo(Guid IdUsuario)
         {
             InitializeComponent();
+            this.IdUsuario = IdUsuario;
         }
         public void setInfo(Models.Clientes cliente)
         {            
@@ -59,7 +61,7 @@ namespace Monitoreo_360
             if (e.RowIndex >= 0)
             {
                 Guid id = Guid.Parse(this.dataGridView_Contactos.Rows[e.RowIndex].Cells[0].Value.ToString());
-                ReporteContacto reporteContatcto = new ReporteContacto(IdIncidente, id);
+                ReporteContacto reporteContatcto = new ReporteContacto(IdIncidente, id,IdUsuario);
                 reporteContatcto.ShowDialog();
             }                     
         }

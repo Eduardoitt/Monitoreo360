@@ -19,10 +19,11 @@ namespace Monitoreo_360
         delegate void setVisibleGridView(bool visible);
         delegate void setpreviewValue(int max);
         Guid prove = Guid.Parse("9b13afbb-1455-483e-84d5-cf339dc7ff16");
-        public Clientes()
+        private Guid IdUsuario;
+        public Clientes(Guid IdUsuario)
         {
             InitializeComponent();
-
+            this.IdUsuario = IdUsuario;
             this.ProgressBar.Minimum = 5;
             this.ProgressBar.Value = 5;
 
@@ -108,7 +109,7 @@ namespace Monitoreo_360
         {
 
             var senderGrid = (DataGridView)sender;
-            new ClienteEdit(Guid.Parse(DataGrid_Clientes.Rows[e.RowIndex].Cells[0].Value.ToString()), Guid.Parse("8bead89f-b0ca-4ca9-9268-4de6c727e3a2")).ShowDialog();
+            new ClienteEdit(Guid.Parse(DataGrid_Clientes.Rows[e.RowIndex].Cells[0].Value.ToString()), IdUsuario).ShowDialog();
         }
          
 

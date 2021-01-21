@@ -17,10 +17,11 @@ namespace Monitoreo_360
         private int RowIndex;
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         private Guid IdCliente;
-        public ClienteSensores()
+        private Guid IdUsuario;
+        public ClienteSensores(Guid IdUsuario)
         {
             InitializeComponent();
-
+            this.IdUsuario = IdUsuario;
         }
 
         private void eliminarSensorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -112,11 +113,11 @@ namespace Monitoreo_360
             {
                 try
                 {
-                    db.InsertSensores(Id, IdCliente,Numero,TipoSensor,Ubicacion,  DateTime.Now, Guid.Parse("8bead89f-b0ca-4ca9-9268-4de6c727e3a2"), true);
+                    db.InsertSensores(Id, IdCliente,Numero,TipoSensor,Ubicacion,  DateTime.Now, IdUsuario, true);
                 }
                 catch (Exception ex)
                 {
-                    db.UpdateSensores(Id, IdCliente,Numero,TipoSensor,Ubicacion, DateTime.Now, Guid.Parse("8bead89f-b0ca-4ca9-9268-4de6c727e3a2"), true);
+                    db.UpdateSensores(Id, IdCliente,Numero,TipoSensor,Ubicacion, DateTime.Now, IdUsuario, true);
                 }
             }
         }

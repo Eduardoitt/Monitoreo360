@@ -17,17 +17,19 @@ namespace Monitoreo_360
         Guid IdIncidente;
         Guid IdContacto;
         DateTime inicio;
-        public ReporteContacto(Guid IdIncidente,Guid IdContacto)
+        private Guid IdUsuario;
+        public ReporteContacto(Guid IdIncidente,Guid IdContacto,Guid IdUsuario)
         {
             InitializeComponent();
             inicio = DateTime.Now;
             this.IdContacto = IdContacto;
             this.IdIncidente = IdIncidente;
+            this.IdUsuario = IdUsuario;
         }
 
         private void metroButton_Guardar_Click(object sender, EventArgs e)
         {
-            db.InsertReporteLlamada(Guid.NewGuid(), IdIncidente, IdContacto, metroTextBox_Comentarios.Text, inicio, DateTime.Now, metroComboBox_Llamada.Text, metroComboBox_Estatus.Text, true, DateTime.Now, Guid.Parse("8BEAD89F-B0CA-4CA9-9268-4DE6C727E3A2"));
+            db.InsertReporteLlamada(Guid.NewGuid(), IdIncidente, IdContacto, metroTextBox_Comentarios.Text, inicio, DateTime.Now, metroComboBox_Llamada.Text, metroComboBox_Estatus.Text, true, DateTime.Now, IdUsuario);
             this.Close();
         }
     }

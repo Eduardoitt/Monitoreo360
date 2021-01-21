@@ -41,7 +41,7 @@ namespace Monitoreo_360
             this.IdUsuario = IdUsuario;
             this.panel = panel;
             this.Button = Button;
-            // SK_Cliente();
+            //SK_Cliente();
         }
 
 
@@ -223,30 +223,29 @@ namespace Monitoreo_360
             }
 
         }
+       
         public void Colorboton(string NumCuenta)//17060133
         {
             bool found = false;
-            
             foreach (Control buttonStatus in this.panel_Clientes.Controls)
             {
                 if (buttonStatus.Name == NumCuenta)
                 {
-                    for (int r = 0; r <= 4; r++)
-                    {
+                    //for (int r = 0; r <= 4; r++)
+                    //{
                         buttonStatus.BackColor = Color.Yellow;
-                        Thread.Sleep(1000);
+                        Thread.Sleep(2000);
                         buttonStatus.BackColor = Color.Red;
-                        Thread.Sleep(1000);
-                    }
+                        Thread.Sleep(2000);
+                    //}
                     found = true;
-                    goto aqui;
+                    goto terminarrecorrido;
                 }
-                aqui:
+            terminarrecorrido:
                 if (found != false)
                 {
-             
                     break;
-                }                
+                }
             }
         }
 
@@ -376,12 +375,12 @@ namespace Monitoreo_360
                             }
                             //this.TextBox_Log.AppendText(this.textBox1.Text + Environment.NewLine);
                             Guid IdLog = Guid.NewGuid();
-                            db.InsertLogMonitoreo360(IdLog, Data, Guid.Parse("8BEAD89F-B0CA-4CA9-9268-4DE6C727E3A2"), DateTime.Now);
+                            db.InsertLogMonitoreo360(IdLog, Data, IdUsuario, DateTime.Now);
                             Data = String.Empty;
                             Guid IdIncidente = Guid.NewGuid();
                             ClienteAlerta form = new ClienteAlerta(IdUsuario, IdIncidente);
                             form.setInfo(cliente, IdLog);
-                            db.InsertIncidentes(IdIncidente, cliente.IdCliente, IdLog, "", DateTime.Now, null, null, true, DateTime.Now, Guid.Parse("8BEAD89F-B0CA-4CA9-9268-4DE6C727E3A2"));
+                            db.InsertIncidentes(IdIncidente, cliente.IdCliente, IdLog, "", DateTime.Now, null, null, true, DateTime.Now, IdUsuario);
                             form.setEventos(Eventos);
                             form.setButton(this.Button, this.panel);
 
@@ -407,7 +406,7 @@ namespace Monitoreo_360
         {
             Button button = ((Button)sender);
             Models.Clientes cliente = db.Clientes.Where(x => x.NumeroDeCuenta == button.Name).FirstOrDefault();
-            ClienteInfo form = new ClienteInfo();
+            ClienteInfo form = new ClienteInfo(IdUsuario);
             form.Text = "Cliente " + cliente.Nombres + " " + cliente.ApellidoPaterno + " " + cliente.ApellidoMaterno;
             form.setInfo(cliente);
             form.ShowDialog();

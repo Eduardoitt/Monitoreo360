@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClienteAlerta));
             this.bunifuElipse = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -76,19 +75,19 @@
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Parentesco = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bunifuFlatButton1 = new System.Windows.Forms.Button();//Bunifu.Framework.UI.BunifuFlatButton();
-            this.bunifuFlatButton2 = new System.Windows.Forms.Button();//Bunifu.Framework.UI.BunifuFlatButton();
+            this.bunifuFlatButton1 = new System.Windows.Forms.Button();
+            this.bunifuFlatButton2 = new System.Windows.Forms.Button();
             this.groupBox_Mapa = new System.Windows.Forms.GroupBox();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.label16 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.Button_Guardar = new System.Windows.Forms.Button();//Bunifu.Framework.UI.BunifuFlatButton();
-            this.Button_Android = new System.Windows.Forms.Button();//Bunifu.Framework.UI.BunifuFlatButton();
+            this.Button_Guardar = new System.Windows.Forms.Button();
+            this.Button_Android = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.TextBox_Comentarios = new System.Windows.Forms.TextBox();//Bunifu.Framework.UI.BunifuMetroTextbox();
+            this.TextBox_Comentarios = new System.Windows.Forms.TextBox();
             this.label_Android_Disponible = new System.Windows.Forms.Label();
-            this.Button_Fotos = new System.Windows.Forms.Button();//Bunifu.Framework.UI.BunifuThinButton2();
+            this.Button_Fotos = new System.Windows.Forms.Button();
             this.IdI = new System.Windows.Forms.Label();
             this.groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).BeginInit();
@@ -103,8 +102,10 @@
             // 
             // bunifuElipse
             // 
-            //this.bunifuElipse.ElipseRadius = 15;
-            //this.bunifuElipse.TargetControl = this;
+            this.bunifuElipse.Location = new System.Drawing.Point(0, 0);
+            this.bunifuElipse.Name = "bunifuElipse";
+            this.bunifuElipse.Size = new System.Drawing.Size(75, 23);
+            this.bunifuElipse.TabIndex = 0;
             // 
             // label1
             // 
@@ -402,14 +403,14 @@
             this.dataGridView_Eventos.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_Eventos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_Eventos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_Eventos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_Eventos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_Eventos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Eventos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo,
@@ -425,16 +426,16 @@
             this.dataGridView_Eventos.Name = "dataGridView_Eventos";
             this.dataGridView_Eventos.ReadOnly = true;
             this.dataGridView_Eventos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_Eventos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridView_Eventos.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_Eventos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridView_Eventos.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_Eventos.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridView_Eventos.Size = new System.Drawing.Size(841, 128);
             this.dataGridView_Eventos.TabIndex = 14;
@@ -494,14 +495,14 @@
             this.dataGridView_Contactos.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView_Contactos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_Contactos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_Contactos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_Contactos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView_Contactos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Contactos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -516,14 +517,14 @@
             this.dataGridView_Contactos.Name = "dataGridView_Contactos";
             this.dataGridView_Contactos.ReadOnly = true;
             this.dataGridView_Contactos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_Contactos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(31)))), ((int)(((byte)(61)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_Contactos.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView_Contactos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView_Contactos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_Contactos.Size = new System.Drawing.Size(567, 91);
@@ -563,73 +564,31 @@
             // 
             // bunifuFlatButton1
             // 
-            //this.bunifuFlatButton1.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
             this.bunifuFlatButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
             this.bunifuFlatButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-           // this.bunifuFlatButton1.BorderRadius = 0;
-            //this.bunifuFlatButton1.ButtonText = "bunifuFlatButton1";
             this.bunifuFlatButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-           // this.bunifuFlatButton1.DisabledColor = System.Drawing.Color.Gray;
-            //this.bunifuFlatButton1.Iconcolor = System.Drawing.Color.Transparent;
-            //this.bunifuFlatButton1.Iconimage = ((System.Drawing.Image)(resources.GetObject("bunifuFlatButton1.Iconimage")));
-            //this.bunifuFlatButton1.Iconimage_right = null;
-            //this.bunifuFlatButton1.Iconimage_right_Selected = null;
-           // this.bunifuFlatButton1.Iconimage_Selected = null;
-           // this.bunifuFlatButton1.IconMarginLeft = 0;
-        //    this.bunifuFlatButton1.IconMarginRight = 0;
-          //  this.bunifuFlatButton1.IconRightVisible = true;
-          //  this.bunifuFlatButton1.IconRightZoom = 0D;
-          //  this.bunifuFlatButton1.IconVisible = true;
-           // this.bunifuFlatButton1.IconZoom = 90D;
-           // this.bunifuFlatButton1.IsTab = false;
             this.bunifuFlatButton1.Location = new System.Drawing.Point(1252, 1183);
             this.bunifuFlatButton1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bunifuFlatButton1.Name = "bunifuFlatButton1";
-           // this.bunifuFlatButton1.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            //this.bunifuFlatButton1.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(129)))), ((int)(((byte)(77)))));
-            //this.bunifuFlatButton1.OnHoverTextColor = System.Drawing.Color.White;
-            //this.bunifuFlatButton1.selected = false;
             this.bunifuFlatButton1.Size = new System.Drawing.Size(362, 74);
             this.bunifuFlatButton1.TabIndex = 14;
             this.bunifuFlatButton1.Text = "bunifuFlatButton1";
             this.bunifuFlatButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //this.bunifuFlatButton1.Textcolor = System.Drawing.Color.White;
-            //this.bunifuFlatButton1.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuFlatButton1.UseVisualStyleBackColor = false;
             // 
             // bunifuFlatButton2
             // 
-           // this.bunifuFlatButton2.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
             this.bunifuFlatButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
             this.bunifuFlatButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            //this.bunifuFlatButton2.BorderRadius = 0;
-           // this.bunifuFlatButton2.ButtonText = "bunifuFlatButton2";
             this.bunifuFlatButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            //this.bunifuFlatButton2.DisabledColor = System.Drawing.Color.Gray;
-            //this.bunifuFlatButton2.Iconcolor = System.Drawing.Color.Transparent;
-            //this.bunifuFlatButton2.Iconimage = ((System.Drawing.Image)(resources.GetObject("bunifuFlatButton2.Iconimage")));
-            //this.bunifuFlatButton2.Iconimage_right = null;
-            //this.bunifuFlatButton2.Iconimage_right_Selected = null;
-            //this.bunifuFlatButton2.Iconimage_Selected = null;
-            //this.bunifuFlatButton2.IconMarginLeft = 0;
-            //this.bunifuFlatButton2.IconMarginRight = 0;
-            //this.bunifuFlatButton2.IconRightVisible = true;
-            //this.bunifuFlatButton2.IconRightZoom = 0D;
-            //this.bunifuFlatButton2.IconVisible = true;
-            //this.bunifuFlatButton2.IconZoom = 90D;
-            //this.bunifuFlatButton2.IsTab = false;
             this.bunifuFlatButton2.Location = new System.Drawing.Point(1252, 1183);
             this.bunifuFlatButton2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bunifuFlatButton2.Name = "bunifuFlatButton2";
-            //this.bunifuFlatButton2.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            //this.bunifuFlatButton2.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(129)))), ((int)(((byte)(77)))));
-            //this.bunifuFlatButton2.OnHoverTextColor = System.Drawing.Color.White;
-            //this.bunifuFlatButton2.selected = false;
             this.bunifuFlatButton2.Size = new System.Drawing.Size(362, 74);
             this.bunifuFlatButton2.TabIndex = 15;
             this.bunifuFlatButton2.Text = "bunifuFlatButton2";
             this.bunifuFlatButton2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-           // this.bunifuFlatButton2.Textcolor = System.Drawing.Color.White;
-            //this.bunifuFlatButton2.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuFlatButton2.UseVisualStyleBackColor = false;
             // 
             // groupBox_Mapa
             // 
@@ -685,72 +644,30 @@
             // 
             // Button_Guardar
             // 
-            //this.Button_Guardar.Activecolor = System.Drawing.Color.Firebrick;
             this.Button_Guardar.BackColor = System.Drawing.Color.Firebrick;
             this.Button_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            //this.Button_Guardar.BorderRadius = 0;
-           // this.Button_Guardar.ButtonText = "Realizar reporte";
             this.Button_Guardar.Cursor = System.Windows.Forms.Cursors.Hand;
-            //this.Button_Guardar.DisabledColor = System.Drawing.Color.Gray;
-            //this.Button_Guardar.Iconcolor = System.Drawing.Color.Transparent;
-            //this.Button_Guardar.Iconimage = ((System.Drawing.Image)(resources.GetObject("Button_Guardar.Iconimage")));
-            //this.Button_Guardar.Iconimage_right = null;
-            //this.Button_Guardar.Iconimage_right_Selected = null;
-            //this.Button_Guardar.Iconimage_Selected = null;
-            //this.Button_Guardar.IconMarginLeft = 0;
-            //this.Button_Guardar.IconMarginRight = 0;
-            //this.Button_Guardar.IconRightVisible = true;
-            //this.Button_Guardar.IconRightZoom = 0D;
-            //this.Button_Guardar.IconVisible = true;
-            //this.Button_Guardar.IconZoom = 90D;
-            //this.Button_Guardar.IsTab = false;
             this.Button_Guardar.Location = new System.Drawing.Point(850, 720);
             this.Button_Guardar.Name = "Button_Guardar";
-            //this.Button_Guardar.Normalcolor = System.Drawing.Color.Firebrick;
-            //this.Button_Guardar.OnHovercolor = System.Drawing.Color.Maroon;
-            //this.Button_Guardar.OnHoverTextColor = System.Drawing.Color.White;
-            //this.Button_Guardar.selected = false;
             this.Button_Guardar.Size = new System.Drawing.Size(241, 48);
             this.Button_Guardar.TabIndex = 22;
             this.Button_Guardar.Text = "Realizar reporte";
             this.Button_Guardar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //this.Button_Guardar.Textcolor = System.Drawing.Color.White;
-            //this.Button_Guardar.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Guardar.UseVisualStyleBackColor = false;
             this.Button_Guardar.Click += new System.EventHandler(this.Button_Guardar_Click);
             // 
             // Button_Android
             // 
-            //this.Button_Android.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
             this.Button_Android.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
             this.Button_Android.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            //this.Button_Android.BorderRadius = 0;
-            //this.Button_Android.ButtonText = "Enviar";
             this.Button_Android.Cursor = System.Windows.Forms.Cursors.Hand;
-            //this.Button_Android.DisabledColor = System.Drawing.Color.Gray;
-            //this.Button_Android.Iconcolor = System.Drawing.Color.Transparent;
-            //this.Button_Android.Iconimage = ((System.Drawing.Image)(resources.GetObject("Button_Android.Iconimage")));
-            //this.Button_Android.Iconimage_right = null;
-            //this.Button_Android.Iconimage_right_Selected = null;
-            //this.Button_Android.Iconimage_Selected = null;
-            //this.Button_Android.IconMarginLeft = 0;
-            //this.Button_Android.IconMarginRight = 0;
-            //this.Button_Android.IconRightVisible = true;
-            //this.Button_Android.IconRightZoom = 0D;
-            //this.Button_Android.IconVisible = true;
-            //this.Button_Android.IconZoom = 90D;
-            //this.Button_Android.IsTab = false;
             this.Button_Android.Location = new System.Drawing.Point(105, 340);
             this.Button_Android.Name = "Button_Android";
-            //this.Button_Android.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            //this.Button_Android.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(129)))), ((int)(((byte)(77)))));
-            //this.Button_Android.OnHoverTextColor = System.Drawing.Color.White;
-            //this.Button_Android.selected = false;
             this.Button_Android.Size = new System.Drawing.Size(109, 30);
             this.Button_Android.TabIndex = 23;
             this.Button_Android.Text = "Enviar";
             this.Button_Android.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //this.Button_Android.Textcolor = System.Drawing.Color.White;
-            //this.Button_Android.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Android.UseVisualStyleBackColor = false;
             this.Button_Android.Click += new System.EventHandler(this.Button_Android_ClickAsync);
             // 
             // pictureBox2
@@ -768,21 +685,14 @@
             // 
             // TextBox_Comentarios
             // 
-            //this.TextBox_Comentarios.AutoScroll = true;
-            //this.TextBox_Comentarios.BorderColorFocused = System.Drawing.Color.Firebrick;
-            //this.TextBox_Comentarios.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //this.TextBox_Comentarios.BorderColorMouseHover = System.Drawing.Color.Firebrick;
-            //this.TextBox_Comentarios.BorderThickness = 1;
             this.TextBox_Comentarios.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TextBox_Comentarios.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.TextBox_Comentarios.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-           // this.TextBox_Comentarios.isPassword = false;
             this.TextBox_Comentarios.Location = new System.Drawing.Point(509, 621);
             this.TextBox_Comentarios.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox_Comentarios.Name = "TextBox_Comentarios";
-            this.TextBox_Comentarios.Size = new System.Drawing.Size(579, 90);
+            this.TextBox_Comentarios.Size = new System.Drawing.Size(579, 23);
             this.TextBox_Comentarios.TabIndex = 25;
-            this.TextBox_Comentarios.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // label_Android_Disponible
             // 
@@ -799,28 +709,18 @@
             // 
             // Button_Fotos
             // 
-            //this.Button_Fotos.ActiveBorderThickness = 1;
-            //this.Button_Fotos.ActiveCornerRadius = 10;
-            //this.Button_Fotos.ActiveFillColor = System.Drawing.Color.Firebrick;
-            //this.Button_Fotos.ActiveForecolor = System.Drawing.Color.White;
-            //this.Button_Fotos.ActiveLineColor = System.Drawing.Color.Firebrick;
             this.Button_Fotos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.Button_Fotos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Button_Fotos.BackgroundImage")));
-            this.Button_Fotos.Text = "Fotos";
             this.Button_Fotos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Button_Fotos.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button_Fotos.ForeColor = System.Drawing.Color.Firebrick;
-            //this.Button_Fotos.IdleBorderThickness = 1;
-            //this.Button_Fotos.IdleCornerRadius = 10;
-            //this.Button_Fotos.IdleFillColor = System.Drawing.Color.White;
-            //this.Button_Fotos.IdleForecolor = System.Drawing.Color.Firebrick;
-            //this.Button_Fotos.IdleLineColor = System.Drawing.Color.Firebrick;
             this.Button_Fotos.Location = new System.Drawing.Point(516, 720);
             this.Button_Fotos.Margin = new System.Windows.Forms.Padding(5);
             this.Button_Fotos.Name = "Button_Fotos";
             this.Button_Fotos.Size = new System.Drawing.Size(181, 41);
             this.Button_Fotos.TabIndex = 27;
-            this.Button_Fotos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Button_Fotos.Text = "Fotos";
+            this.Button_Fotos.UseVisualStyleBackColor = false;
             this.Button_Fotos.Click += new System.EventHandler(this.Button_Fotos_Click);
             // 
             // IdI
@@ -830,6 +730,7 @@
             this.IdI.Name = "IdI";
             this.IdI.Size = new System.Drawing.Size(0, 13);
             this.IdI.TabIndex = 28;
+            this.IdI.Visible = false;
             // 
             // ClienteAlerta
             // 

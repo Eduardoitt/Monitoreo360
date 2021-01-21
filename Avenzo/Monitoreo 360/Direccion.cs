@@ -51,9 +51,7 @@ namespace Monitoreo_360
         public void CargaMapa()
         {
             webBrowser.ScriptErrorsSuppressed = true;
-            //this.webBrowser.Url = new Uri(cliente.GoogleMaps);
             this.webBrowser.Navigate(new Uri(cliente.GoogleMaps));
-         
         }
         async void Data()
         {

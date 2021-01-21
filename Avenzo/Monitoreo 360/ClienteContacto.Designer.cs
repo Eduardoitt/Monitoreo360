@@ -36,7 +36,7 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Parentesco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            //this.Parentesco = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Prioridad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip_Contactos = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -68,7 +68,7 @@
             this.Id,
             this.Nombre,
             this.Telefono,
-            this.Parentesco,
+            //this.Parentesco,
             this.Prioridad});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -122,8 +122,8 @@
             // 
             // Parentesco
             // 
-            this.Parentesco.HeaderText = "Parentesco";
-            this.Parentesco.Name = "Parentesco";
+           // this.Parentesco.HeaderText = "Parentesco";
+           // this.Parentesco.Name = "Parentesco";
             // 
             // Prioridad
             // 
@@ -179,7 +179,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Parentesco;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn Parentesco;
         private System.Windows.Forms.DataGridViewTextBoxColumn Prioridad;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_Contactos;
         private System.Windows.Forms.ToolStripMenuItem eliminarContactoToolStripMenuItem;

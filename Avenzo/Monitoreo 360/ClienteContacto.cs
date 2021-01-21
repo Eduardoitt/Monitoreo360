@@ -17,10 +17,12 @@ namespace Monitoreo_360
         AvenzoSeguridadEntities db = new AvenzoSeguridadEntities();
         private Guid IdCliente;
         private int RowIndex;
-        public ClienteContacto(Guid IdCliente)
+        private Guid IdUsuario;
+        public ClienteContacto(Guid IdCliente, Guid IdUsuario)
         {
             InitializeComponent();
             this.IdCliente = IdCliente;
+            this.IdUsuario = IdUsuario;
             List<GetClienteContactos_Result> contactos= db.GetClienteContactos(2, IdCliente).ToList();
             int n;
             foreach (var contacto in contactos.OrderBy(x=>x.Prioridad)) {
@@ -28,11 +30,10 @@ namespace Monitoreo_360
                 metroGrid_Contactos.Rows[n].Cells[0].Value = contacto.Id;
                 metroGrid_Contactos.Rows[n].Cells[1].Value = contacto.Nombre;
                 metroGrid_Contactos.Rows[n].Cells[2].Value = contacto.Telefono;
-                metroGrid_Contactos.Rows[n].Cells[3].Value = "";
-                metroGrid_Contactos.Rows[n].Cells[4].Value = contacto.Prioridad;
+               // metroGrid_Contactos.Rows[n].Cells[3].Value = "";
+                metroGrid_Contactos.Rows[n].Cells[3].Value = contacto.Prioridad;
             }
         }
-
 
         private void metroGrid1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -51,6 +52,7 @@ namespace Monitoreo_360
             {
                 Id=Guid.Parse(metroGrid_Contactos.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
+            //Nombre
             if (metroGrid_Contactos.Rows[e.RowIndex].Cells[1].Value!=null) {                
                 Name = metroGrid_Contactos.Rows[e.RowIndex].Cells[1].Value.ToString();               
                 N = true;
@@ -59,15 +61,7 @@ namespace Monitoreo_360
                 metroGrid_Contactos.Rows[e.RowIndex].Cells[1].ErrorText = "Escribe un Nombre";
                 N = false;
             }
-            if (metroGrid_Contactos.Rows[e.RowIndex].Cells[3].Value != null)
-            {
-                R = true;
-                Relationship = metroGrid_Contactos.Rows[e.RowIndex].Cells[3].Value.ToString();
-            }
-            else {
-                R = false;
-                metroGrid_Contactos.Rows[e.RowIndex].Cells[3].ErrorText = "Ingresa Relacion con el cliente";
-            }
+            //Telefono
             if (metroGrid_Contactos.Rows[e.RowIndex].Cells[2].Value != null)
             {
                 P = true;
@@ -78,28 +72,26 @@ namespace Monitoreo_360
                 P = false;
                 metroGrid_Contactos.Rows[e.RowIndex].Cells[2].ErrorText = "Escribe un numero de telefono";
             }
-            if (metroGrid_Contactos.Rows[e.RowIndex].Cells[4].EditedFormattedValue != null && metroGrid_Contactos.Rows[e.RowIndex].Cells[4].EditedFormattedValue !="")
+            //Prioridad
+            if (metroGrid_Contactos.Rows[e.RowIndex].Cells[3].EditedFormattedValue != null && metroGrid_Contactos.Rows[e.RowIndex].Cells[3].EditedFormattedValue !="")
             {
                 PR = true;
-                Priority = int.Parse(metroGrid_Contactos.Rows[e.RowIndex].Cells[4].EditedFormattedValue.ToString());
+                Priority = int.Parse(metroGrid_Contactos.Rows[e.RowIndex].Cells[3].EditedFormattedValue.ToString());
             }
             else {
                 PR = false;
-                metroGrid_Contactos.Rows[e.RowIndex].Cells[4].ErrorText = "Escribe la prioridad";
+                metroGrid_Contactos.Rows[e.RowIndex].Cells[3].ErrorText = "Escribe la prioridad";
             }
-            if (N && R && P && PR)
+            if (N &&  P && PR)
             {
                 try {
-                    db.InsertClienteContacto(Id, IdCliente, Name, "", Phone, Priority, DateTime.Now, Guid.Parse("8bead89f-b0ca-4ca9-9268-4de6c727e3a2"), true);
+                    db.InsertClienteContacto(Id, IdCliente, Name, "", Phone, Priority, DateTime.Now, IdUsuario, true);
                 } catch (Exception ex)
                 {
-                    db.UpdateClienteContactos(Id, IdCliente, Name,"", Phone, Priority, DateTime.Now, Guid.Parse("8bead89f-b0ca-4ca9-9268-4de6c727e3a2"), true);
+                    db.UpdateClienteContactos(Id, IdCliente, Name,"", Phone, Priority, DateTime.Now, IdUsuario, true);
                 }
             }
         }
-        
-
-        
 
         private void metroGrid_Contactos_MouseClick(object sender, MouseEventArgs e)
         {

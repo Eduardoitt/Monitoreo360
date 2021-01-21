@@ -138,7 +138,8 @@ namespace Monitoreo_360
 
         private void metroButton_Contactos_Click(object sender, EventArgs e)
         {
-            ClienteContacto form = new ClienteContacto(cliente.IdCliente);
+            var IDCliente = Id;
+            ClienteContacto form = new ClienteContacto(IDCliente,IdUsuario);
             form.MdiParent = this.MdiParent;
             form.Text = "Editar Contactos de "+cliente.Nombres+" "+cliente.ApellidoPaterno+" "+cliente.ApellidoMaterno;
             form.ShowDialog();
@@ -162,7 +163,7 @@ namespace Monitoreo_360
 
         private void metroButton_Sensores_Click(object sender, EventArgs e)
         {
-            ClienteSensores sensores = new ClienteSensores();
+            ClienteSensores sensores = new ClienteSensores(IdUsuario);
             sensores.setInfo(cliente.IdCliente);
             sensores.ShowDialog();
 

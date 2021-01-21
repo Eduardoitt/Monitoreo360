@@ -243,7 +243,7 @@ namespace Monitoreo_360
                 Button_Clientes.Enabled = true;
                 Button_Incidentes.Enabled = true;
                 Button_Monitor.Enabled = false;
-                Monitor form = new Monitor();
+                Monitor form = new Monitor(IdUsuario);
                 form.Width = width - 40;
                 form.Height = height - 40;
                 form.Location = new Point(20, 20);
@@ -264,7 +264,7 @@ namespace Monitoreo_360
                 Button_Incidentes.Enabled = true;
                 Button_Monitor.Enabled = true;
                 Button_Usuarios.Enabled = true;
-                Clientes form = new Clientes();
+                Clientes form = new Clientes(IdUsuario);
                 form.Width = width - 40;
                 form.Height = height - 40;
                 form.Location = new Point(20, 20);

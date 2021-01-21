@@ -22,10 +22,12 @@ namespace Monitoreo_360
         private int ClientesRow = 0;
         private int x = 5; int y = 5;
         private int count = 0;
-        public Monitor()
+        private Guid IdUsuario;
+        public Monitor(Guid IdUsuario)
         {
             InitializeComponent();
             this.ProgressBar.Value = 5;
+            this.IdUsuario = IdUsuario;
         }
         public async void Data()
         {
@@ -150,7 +152,7 @@ namespace Monitoreo_360
         {
             Button button = ((Button)sender);
             Models.Clientes cliente = db.Clientes.Where(x => x.NumeroDeCuenta == button.Name).FirstOrDefault();
-            ClienteInfo form = new ClienteInfo();
+            ClienteInfo form = new ClienteInfo(IdUsuario);
             form.Text = "Cliente " + cliente.Nombres + " " + cliente.ApellidoPaterno + " " + cliente.ApellidoMaterno;
             form.setInfo(cliente);
             form.ShowDialog();
