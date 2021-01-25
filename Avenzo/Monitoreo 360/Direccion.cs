@@ -51,7 +51,8 @@ namespace Monitoreo_360
         public void CargaMapa()
         {
             webBrowser.ScriptErrorsSuppressed = true;
-            this.webBrowser.Navigate(new Uri(cliente.GoogleMaps));
+            webBrowser.Navigate(new Uri(cliente.GoogleMaps));
+           
         }
         async void Data()
         {
@@ -99,18 +100,14 @@ namespace Monitoreo_360
             db.UpdateDireccion(cliente.IdCliente, Textbox_Colonia.Text.Trim(), Textbox_Calle.Text.Trim(), Textbox_NoInterior.Text.Trim(),
                 Textbox_NoExterior.Text.Trim(), Textbox_CodigoPostal.Text.Trim(), Textbox_Referencias.Text.Trim(), Textbox_Color.Text.Trim(),
                 Textbox_EntreCalles.Text.Trim(), Textbox_Google.Text.Trim(),comboBox_Estado.SelectedValue.ToString(),
-                comboBox_Ciudad.SelectedValue.ToString());
-
-            MetroMessageBox.Show(this,"Se ha Guardado correctamente", "",MessageBoxButtons.OK,MessageBoxIcon.Information);
-            
+                comboBox_Ciudad.Text.ToString());
+            MetroMessageBox.Show(this,"Se ha Guardado correctamente", "",MessageBoxButtons.OK,MessageBoxIcon.Information);           
         }
-
         private void bunifuThinButton21_Click(object sender, EventArgs e)
         {            
             Fotos form = new Fotos(this.cliente.NumeroDeCuenta);
             form.ShowDialog();
         }
-
         private void comboBox_Estado_SelectedIndexChanged(object sender, EventArgs e)
         {
             string value = comboBox_Estado.SelectedValue.ToString();
@@ -119,6 +116,10 @@ namespace Monitoreo_360
             this.comboBox_Ciudad.ValueMember = "c_Estado";
             this.comboBox_Ciudad.DisplayMember = "Descripcion";
 
+        }
+        private void Direccion_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            webBrowser.Dispose();
         }
     }
 }

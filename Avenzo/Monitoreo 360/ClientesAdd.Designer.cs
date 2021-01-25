@@ -31,6 +31,7 @@
             this.txt_Nombres = new System.Windows.Forms.TextBox();
             this.lbl_Nombre = new System.Windows.Forms.Label();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.DT_FechaNac = new MetroFramework.Controls.MetroDateTime();
             this.lbl_Beneficiario = new System.Windows.Forms.Label();
             this.txt_Beneficiario = new System.Windows.Forms.TextBox();
             this.lbl_ClaveBanc = new System.Windows.Forms.Label();
@@ -49,6 +50,7 @@
             this.lbl_Sexo = new System.Windows.Forms.Label();
             this.txt_Sexo = new System.Windows.Forms.TextBox();
             this.lbl_Lugnaci = new System.Windows.Forms.Label();
+            this.txt_LugNac = new System.Windows.Forms.TextBox();
             this.lbl_FechaNac = new System.Windows.Forms.Label();
             this.lbl_NumPat = new System.Windows.Forms.Label();
             this.txt_NumPat = new System.Windows.Forms.TextBox();
@@ -71,8 +73,6 @@
             this.lbl_ApPat = new System.Windows.Forms.Label();
             this.txt_ApPat = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.DT_FechaNac = new MetroFramework.Controls.MetroDateTime();
-            this.txt_LugNac = new System.Windows.Forms.TextBox();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -153,11 +153,19 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
+            // DT_FechaNac
+            // 
+            this.DT_FechaNac.Location = new System.Drawing.Point(263, 366);
+            this.DT_FechaNac.MinimumSize = new System.Drawing.Size(0, 29);
+            this.DT_FechaNac.Name = "DT_FechaNac";
+            this.DT_FechaNac.Size = new System.Drawing.Size(200, 29);
+            this.DT_FechaNac.TabIndex = 3;
+            // 
             // lbl_Beneficiario
             // 
             this.lbl_Beneficiario.AutoSize = true;
             this.lbl_Beneficiario.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_Beneficiario.Location = new System.Drawing.Point(250, 523);
+            this.lbl_Beneficiario.Location = new System.Drawing.Point(261, 523);
             this.lbl_Beneficiario.Name = "lbl_Beneficiario";
             this.lbl_Beneficiario.Size = new System.Drawing.Size(89, 18);
             this.lbl_Beneficiario.TabIndex = 63;
@@ -165,7 +173,7 @@
             // 
             // txt_Beneficiario
             // 
-            this.txt_Beneficiario.Location = new System.Drawing.Point(253, 544);
+            this.txt_Beneficiario.Location = new System.Drawing.Point(264, 544);
             this.txt_Beneficiario.Name = "txt_Beneficiario";
             this.txt_Beneficiario.Size = new System.Drawing.Size(176, 20);
             this.txt_Beneficiario.TabIndex = 62;
@@ -228,7 +236,7 @@
             // 
             this.lbl_NumCatPago.AutoSize = true;
             this.lbl_NumCatPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.lbl_NumCatPago.Location = new System.Drawing.Point(259, 458);
+            this.lbl_NumCatPago.Location = new System.Drawing.Point(261, 458);
             this.lbl_NumCatPago.Name = "lbl_NumCatPago";
             this.lbl_NumCatPago.Size = new System.Drawing.Size(144, 18);
             this.lbl_NumCatPago.TabIndex = 55;
@@ -236,7 +244,7 @@
             // 
             // txt_NumCatPago
             // 
-            this.txt_NumCatPago.Location = new System.Drawing.Point(262, 479);
+            this.txt_NumCatPago.Location = new System.Drawing.Point(264, 479);
             this.txt_NumCatPago.Name = "txt_NumCatPago";
             this.txt_NumCatPago.Size = new System.Drawing.Size(176, 20);
             this.txt_NumCatPago.TabIndex = 54;
@@ -311,6 +319,13 @@
             this.lbl_Lugnaci.Size = new System.Drawing.Size(148, 18);
             this.lbl_Lugnaci.TabIndex = 45;
             this.lbl_Lugnaci.Text = "Lugar de Nacimiento:";
+            // 
+            // txt_LugNac
+            // 
+            this.txt_LugNac.Location = new System.Drawing.Point(497, 366);
+            this.txt_LugNac.Name = "txt_LugNac";
+            this.txt_LugNac.Size = new System.Drawing.Size(176, 20);
+            this.txt_LugNac.TabIndex = 44;
             // 
             // lbl_FechaNac
             // 
@@ -502,21 +517,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
-            // 
-            // DT_FechaNac
-            // 
-            this.DT_FechaNac.Location = new System.Drawing.Point(263, 366);
-            this.DT_FechaNac.MinimumSize = new System.Drawing.Size(0, 29);
-            this.DT_FechaNac.Name = "DT_FechaNac";
-            this.DT_FechaNac.Size = new System.Drawing.Size(200, 29);
-            this.DT_FechaNac.TabIndex = 3;
-            // 
-            // txt_LugNac
-            // 
-            this.txt_LugNac.Location = new System.Drawing.Point(497, 366);
-            this.txt_LugNac.Name = "txt_LugNac";
-            this.txt_LugNac.Size = new System.Drawing.Size(176, 20);
-            this.txt_LugNac.TabIndex = 44;
             // 
             // ClientesAdd
             // 

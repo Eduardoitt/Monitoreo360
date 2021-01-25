@@ -47,12 +47,12 @@ namespace Monitoreo_360
                 Download(image.RutaFoto, strFileNameLocal);
 
                 //Carga las imagenes en el panel
-                string cargar = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta , Application.StartupPath);
-                AgregarImagen(String.Format(cargar+@"\{0}",image.Nombre), image.Nombre);
+                string cargar = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta, Application.StartupPath);
+                AgregarImagen(String.Format(cargar + @"\{0}", image.Nombre), image.Nombre, image.RutaFoto);
             }
         }
         //Agrega las imagenes en el panel
-        public void AgregarImagen(string file, string Name)
+        public void AgregarImagen(string file, string Name, string RutaFoto)
         {
             Panel panel = new System.Windows.Forms.Panel();
             System.Windows.Forms.Button Button_Close = new System.Windows.Forms.Button();
@@ -64,29 +64,17 @@ namespace Monitoreo_360
             // 
             // panel
             // 
-            panel.Controls.Add(Button_Close);
-            
+            //panel.Controls.Add(Button_Close);
+
             panel.Size = new System.Drawing.Size(170, 185);
             panel.TabIndex = 0;
             // 
-            // Button_Close
-            // 
-            Button_Close.BackColor = System.Drawing.Color.Firebrick;
-            Button_Close.Image = global::Monitoreo_360.Properties.Resources.Delete_96px;
-            Button_Close.Location = new System.Drawing.Point(152, 0);
-            Button_Close.Name = "Button_Close";
-            Button_Close.Size = new System.Drawing.Size(18, 18);
-            Button_Close.TabIndex = 1;
-            Button_Close.TabStop = false;
-
-            // 
             // pictureBox
             // 
-            using (FileStream strm = new FileStream(file,FileMode.Open,FileAccess.Read))
+            using (FileStream strm = new FileStream(file, FileMode.Open, FileAccess.Read))
             {
                 panel.Controls.Add(pictureBox);
                 pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-                //pictureBox.Image = Image.FromFile(file);
                 pictureBox.Image = Image.FromStream(strm);
                 pictureBox.InitialImage = null;
                 pictureBox.Location = new System.Drawing.Point(0, 0);
@@ -96,17 +84,51 @@ namespace Monitoreo_360
                 pictureBox.BackgroundImageLayout = ImageLayout.Stretch;
                 pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
                 pictureBox.TabIndex = 0;
+                pictureBox.Tag = RutaFoto;
                 pictureBox.DoubleClick += new System.EventHandler(this.pictureBox_DoubleClick);
+                pictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseClick);
                 pictureBox.TabStop = false;
                 ((System.ComponentModel.ISupportInitialize)(pictureBox)).EndInit();
                 strm.Dispose();
             }
-                
-
-
             panel.ResumeLayout(false);
+        }
+        public void pictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                DialogResult result = MessageBox.Show("Desea eliminar la imagen?", "Eliminar Imgagen", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    string path = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta, Application.StartupPath);
+                    PictureBox picture = (PictureBox)sender;
+                    DirectoryInfo di = new DirectoryInfo(path);
+                    foreach (var file in di.GetFiles().Where(x => x.Name.Contains(picture.Name)))
+                    {
+                        var RutaAEliminar =Convert.ToString(picture.Tag);
+                        DeleteFile(RutaAEliminar);
+                        File.Delete(path+"\\"+picture.Name);
+                        this.Close();
+                    }
+                }
+            }
+        }
+        public void DeleteFile(string fileName)
+        {
+            bool bandera = false;
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(fileName);
+            request.Method = WebRequestMethods.Ftp.DeleteFile;
+            request.Credentials = new NetworkCredential(strUser, strPassword);
+            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+            {
+                Console.WriteLine($"Se elimino la imagen, status {response.StatusDescription}");
+                bandera= true;
+            }
+            if (bandera == true)
+            {
+                db.DeleteFotoCliente(fileName);
 
-            
+            }
         }
 
         //Elimina las imagenes de la carpeta al cerra la ventana
@@ -124,7 +146,7 @@ namespace Monitoreo_360
                         }).ToList();
             foreach (var image in path)
             {
-                string pathdelete = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta+"\\"+image.Nombre, Application.StartupPath);
+                string pathdelete = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta + "\\" + image.Nombre, Application.StartupPath);
                 File.Delete(pathdelete);
             }
         }
@@ -134,10 +156,11 @@ namespace Monitoreo_360
         {
             try
             {
+
                 FtpWebRequest ftpRequest;
 
                 // Crea el objeto de conexión del servidor FTP
-                string filename = Path.Combine(strPathFTP + "/", Path.GetFileName(strFileNameLocal));
+                string filename = Path.Combine(strPathFTP, Path.GetFileName(strFileNameLocal));
                 ftpRequest = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("ftp://{0}/{1}", strServer, filename)));
                 rutacompleta = string.Format("ftp://{0}/{1}", strServer, filename);
                 // Asigna las credenciales 
@@ -146,7 +169,7 @@ namespace Monitoreo_360
                 ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
                 ftpRequest.UsePassive = true;
                 ftpRequest.UseBinary = true;
-                ftpRequest.KeepAlive = false;
+                ftpRequest.KeepAlive = true;
                 byte[] fileContents;
                 fileContents = File.ReadAllBytes(filename);
 
@@ -170,6 +193,7 @@ namespace Monitoreo_360
             }
         }
 
+
         //Guarda la imagen en la bd
         private void Button_AgregarFotos_Click(object sender, EventArgs e)
         {
@@ -177,7 +201,6 @@ namespace Monitoreo_360
             result.Filter = "Archivos jpg(*.jpg)|*.jpg|Archivos png(*.png)|*.png";
             result.FilterIndex = 1;
             result.RestoreDirectory = true;
-
             if (result.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -188,25 +211,25 @@ namespace Monitoreo_360
                     Console.WriteLine("Nombre:" + fileName);
                     Guid Id = Guid.NewGuid();
                     string Name = Id + "." + fileName.Split('.')[fileName.Split('.').Length - 1];
-                    string path = String.Format("Fotos/" + this.NumeroDeCuenta);
+                    string path = String.Format("Fotos/");
                     if (!Directory.Exists(path))
                         Directory.CreateDirectory(path);
                     File.WriteAllBytes(path + "\\" + Name, file);
-                    bool respuesta =SubirFotos(Name, path);
+                    bool respuesta = SubirFotos(Name, path);
 
                     /************************************************************************************************************************************/
                     /****************************************** ingreso a la base de datos **************************************************************/
-                    if( respuesta == true)
+                    if (respuesta == true)
                     {
 
                         Guid? IdCliente = new Guid();
                         Models.Clientes Client = db.Clientes.Where(x => x.NumeroDeCuenta == NumeroDeCuenta).FirstOrDefault();
                         IdCliente = Client.IdCliente;
-                        db.InsertClienteFoto(Id, IdCliente, rutacompleta, Name, "ftp://avenzo.mx/Fotos/" + NumeroDeCuenta + "/");
+                        db.InsertClienteFoto(Id, IdCliente, rutacompleta, Name, "ftp://avenzo.mx/Fotos/");
                         AgregarDeNuevo(Name);
-                        string pathdelete2 = String.Format(@"{0}/"+path+"/"+Name, Application.StartupPath);
+                        string pathdelete2 = String.Format(@"{0}/" + path + "/" + Name, Application.StartupPath);
                         File.Delete(pathdelete2);
-                        //File.Delete(@"\Users\crist\OneDrive\Escritorio\Proyecto\Monitoreo360\Avenzo\Monitoreo 360\bin\Debug\" + path + "\\" + Name);
+
                         rutacompleta = string.Empty;
 
                         MetroMessageBox.Show(this, "Se guardo exitosamento la foto", "Foto agregada", MessageBoxButtons.OK, MessageBoxIcon.Question);
@@ -221,18 +244,15 @@ namespace Monitoreo_360
                 {
                     Console.WriteLine(ex.Message);
                 }
-
             }
-
         }
         public void AgregarDeNuevo(string Name)
         {
             try
             {
-
                 var path = (from f in db.FotosCliente
                             join c in db.Clientes on f.IdCliente equals c.IdCliente
-                            where c.NumeroDeCuenta == NumeroDeCuenta && f.Nombre==Name
+                            where c.NumeroDeCuenta == NumeroDeCuenta && f.Nombre == Name
                             select new
                             {
                                 f.IdFotoCliente,
@@ -241,24 +261,21 @@ namespace Monitoreo_360
                                 f.Nombre
                             }).FirstOrDefault();
 
-
                 string strFileNameLocal = "FotosDescarga/" + NumeroDeCuenta + "/" + path.Nombre;
                 if (!Directory.Exists("FotosDescarga/" + NumeroDeCuenta))
                     Directory.CreateDirectory("FotosDescarga/" + NumeroDeCuenta);
                 Download(path.RutaFoto, strFileNameLocal);
                 string cargar = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta, Application.StartupPath);
-                AgregarImagen(String.Format(cargar + @"\{0}", path.Nombre), path.Nombre);
+                AgregarImagen(String.Format(cargar + @"\{0}", path.Nombre), path.Nombre, path.RutaFoto);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
 
         public void Download(string strFileNameFTP, string strFileNameLocal)
         {
-            
             FtpWebRequest ftpRequest;
             //Crea el objeto de conexión del servidor FTP
             ftpRequest = (FtpWebRequest)WebRequest.Create(string.Format(strFileNameFTP));
@@ -286,7 +303,7 @@ namespace Monitoreo_360
                     responseStream.Close();
                 }
                 // Cierra el archivo de salida
-                
+
                 stmFile.Flush();
                 stmFile.Close();
                 stmFile.Dispose();
@@ -297,7 +314,7 @@ namespace Monitoreo_360
         public void pictureBox_DoubleClick(object sender, EventArgs e)
         {
             //Al dar doble click abre la foto seleccionada en un visor de windows
-            string path = String.Format(@"{0}\Fotos\" + this.NumeroDeCuenta, Application.StartupPath);
+            string path = String.Format(@"{0}\FotosDescarga\" + this.NumeroDeCuenta, Application.StartupPath);
             PictureBox picture = (PictureBox)sender;
             DirectoryInfo di = new DirectoryInfo(path);
             foreach (var file in di.GetFiles().Where(x => x.Name.Contains(picture.Name)))
@@ -306,8 +323,6 @@ namespace Monitoreo_360
                 photoViewer.StartInfo.FileName = file.FullName;
                 photoViewer.Start();
             }
-
         }
-
     }
 }

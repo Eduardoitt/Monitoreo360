@@ -372,6 +372,7 @@
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Red;
             this.Text = "Direccion";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Direccion_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

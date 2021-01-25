@@ -392,8 +392,8 @@
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AvenzoSeguridad.AS.ClienteComponentes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.ClienteComponentes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="ClienteComponentes">
           <Key>
             <PropertyRef Name="IdClienteComponente" />
@@ -451,7 +451,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.ClienteComponentes' does not ha
           <Property Name="Referencias" Type="varchar" MaxLength="200" />
           <Property Name="ColorEstablecimiento" Type="varchar" MaxLength="50" />
           <Property Name="EntreCalles" Type="varchar" MaxLength="200" />
-          <Property Name="GoogleMaps" Type="varchar" MaxLength="250" />
+          <Property Name="GoogleMaps" Type="varchar" MaxLength="750" />
           <Property Name="TipoAfilacion" Type="uniqueidentifier" />
           <Property Name="NumeroPatrocinador" Type="varchar" MaxLength="50" />
           <Property Name="FechaNacimiento" Type="varchar" MaxLength="20" />
@@ -478,8 +478,8 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.ClienteComponentes' does not ha
           <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Tipo" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AvenzoSeguridad.AS.Componentes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Componentes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Componentes">
           <Key>
             <PropertyRef Name="IdComponente" />
@@ -515,8 +515,8 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Componentes' does not have a pr
           <Property Name="Monto" Type="decimal" Precision="18" Scale="4" />
           <Property Name="FechaDeCompra" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AvenzoSeguridad.AS.Correos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Correos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Correos">
           <Key>
             <PropertyRef Name="IdCorreo" />
@@ -540,8 +540,8 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Correos' does not have a primar
           <Property Name="IdDispositivo" Type="uniqueidentifier" />
           <Property Name="IdEmpleado" Type="uniqueidentifier" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AvenzoSeguridad.AS.DocumentacionEmpleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.DocumentacionEmpleado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="DocumentacionEmpleado">
           <Key>
             <PropertyRef Name="IdDocumentacion" />
@@ -664,8 +664,8 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.DocumentacionEmpleado' does not
           <Property Name="Cantidad" Type="int" />
           <Property Name="PrecioCompra" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AvenzoSeguridad.AS.Llamadas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Llamadas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Llamadas">
           <Key>
             <PropertyRef Name="IdLlamada" />
@@ -687,8 +687,8 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Llamadas' does not have a prima
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
           <Property Name="FechaCreacion" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AvenzoSeguridad.AS.Mensajes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Mensajes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Mensajes">
           <Key>
             <PropertyRef Name="IdUsurioEmisor" />
@@ -858,8 +858,8 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Mensajes' does not have a prima
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AvenzoSeguridad.AS.Pagos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Pagos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Pagos">
           <Key>
             <PropertyRef Name="IdPago" />
@@ -902,8 +902,8 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Pagos' does not have a primary 
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Saldos">
           <Key>
             <PropertyRef Name="IdCliente" />
@@ -2128,6 +2128,9 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
         <Function Name="DeleteEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
           <Parameter Name="Opcion" Type="int" Mode="In" />
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="DeleteFotoCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
+          <Parameter Name="RutaFoto" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="DeleteIncidente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
           <Parameter Name="op" Type="int" Mode="In" />
@@ -4049,7 +4052,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <Property Name="Referencias" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ColorEstablecimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EntreCalles" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="GoogleMaps" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="GoogleMaps" Type="String" MaxLength="750" FixedLength="false" Unicode="false" />
           <Property Name="TipoAfilacion" Type="Guid" />
           <Property Name="NumeroPatrocinador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaNacimiento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -7165,6 +7168,9 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
             <Parameter Name="GoogleMaps" Mode="In" Type="String" />
             <Parameter Name="Estado" Mode="In" Type="String" />
             <Parameter Name="Ciudad" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteFotoCliente">
+          <Parameter Name="RutaFoto" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetBancos_Result">
@@ -10526,6 +10532,7 @@ warning 6002: The table/view 'AvenzoSeguridad.AS.Saldos' does not have a primary
           <FunctionImportMapping FunctionImportName="UpdateUsuarioContrasena" FunctionName="AvenzoSeguridadModel.Store.UpdateUsuarioContrasena" />
           <FunctionImportMapping FunctionImportName="UpdateUsuarios" FunctionName="AvenzoSeguridadModel.Store.UpdateUsuarios" />
           <FunctionImportMapping FunctionImportName="UpdateDireccion" FunctionName="AvenzoSeguridadModel.Store.UpdateDireccion" />
+          <FunctionImportMapping FunctionImportName="DeleteFotoCliente" FunctionName="AvenzoSeguridadModel.Store.DeleteFotoCliente" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
