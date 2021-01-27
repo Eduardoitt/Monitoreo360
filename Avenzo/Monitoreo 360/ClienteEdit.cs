@@ -27,8 +27,6 @@ namespace Monitoreo_360
             this.Id = Id;
             this.IdUsuario=IdUsuario;
             InitializeComponent();
-           
-            
         }
         async void Data() {
             await Task.Run(() => {

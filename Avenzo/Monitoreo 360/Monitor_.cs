@@ -41,7 +41,6 @@ namespace Monitoreo_360
             this.IdUsuario = IdUsuario;
             this.panel = panel;
             this.Button = Button;
-            //SK_Cliente();
         }
 
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Monitoreo_360.Models;
 using System.Globalization;
+using System.Net.Sockets;
 
 namespace Monitoreo_360
 {
@@ -19,6 +20,7 @@ namespace Monitoreo_360
         Panel panel;
         //Bunifu.Framework.UI.BunifuFlatButton Button;
         System.Windows.Forms.Button Button;
+        
         public Cadena(Guid IdUsuario, System.Windows.Forms.Button Button,Panel panel)
         {
             InitializeComponent();
@@ -30,12 +32,65 @@ namespace Monitoreo_360
                 TextBox_Log.Text += log.Log + Environment.NewLine;
             }
             this.IdUsuario = IdUsuario;
+            Data();
+            
         }
+        public async void Data()
+        {
+            await Task.Run(() =>
+            {
+                SK_Cliente();
+            });
+        }
+        #region Socket
+        private void SK_Cliente()
+        {
+            string server = "192.168.0.200";
+            Int32 port = 1027;
+            string message = string.Empty;
+            try
+            {
+                while (true)
+                {
+                    //Se establce conexion
+                    TcpClient client = new TcpClient(server, port);
 
+                    // traduce el mensaje en un array
+                    Byte[] data = System.Text.Encoding.ASCII.GetBytes("Input\n");
+
+                    NetworkStream stream = client.GetStream();
+
+                    data = new Byte[256];
+
+                    // string para guardar mensaje ascii
+                   String responseData = string.Empty;
+
+                    // Lee el mensaje y sentraduce
+                    Int32 bytes = stream.Read(data, 0, data.Length);
+                    responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+                    if (responseData.Length > 30)
+                    {
+
+                        button1.Enabled = true;
+                        textBox1.Text = responseData;
+                    }
+                    stream.Close();
+                    client.Close();
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", e);
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine("SocketException: {0}", e);
+            }
+
+        }
+        #endregion
         private void button1_Click(object sender, EventArgs e)
         {
-
-
             if (this.textBox1.Text.Length > 30)
             {
                 try
@@ -181,6 +236,7 @@ namespace Monitoreo_360
                 catch (Exception ex)
                 {
                     textBox1.Text = "";
+                    button1.Enabled = false;
                     MetroFramework.MetroMessageBox.Show(this, "Error en el formato del texto:\n" + ex.Message + "\n" + ex.InnerException, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 200);
                 }
             }
