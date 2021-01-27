@@ -181,19 +181,50 @@ namespace Monitoreo_360
 
         private void metroButton1_Click_1(object sender, EventArgs e)
         {
+            //agregar procedimiento de guardar
+
+            Guid? IdProveedor = Guid.NewGuid();
+            IdProveedor = cliente.IdProveedor;
+            string PClave = Convert.ToString(cliente.PalabraClave);
+            string PClaveS = Convert.ToString(cliente.PalabraClaveSilenciosa);
+            string Calle = Convert.ToString(cliente.Calle);
+            string NumInt = Convert.ToString(cliente.NoInterior);
+            string NumExt = Convert.ToString(cliente.NoExterior);
+            string Colonia = Convert.ToString(cliente.Colonia);
+            string CP = Convert.ToString(cliente.CodigoPostal);
+            string Referencia = Convert.ToString(cliente.Referencias);
+            string Color = Convert.ToString(cliente.ColorEstablecimiento);
+            string Entre = Convert.ToString(cliente.EntreCalles);
+            string google = Convert.ToString(cliente.GoogleMaps);
+            string descripcion = Convert.ToString(cliente.Descripcion);
+            string TelAlarma = Convert.ToString(cliente.NumeroTelefonoAlarma);
+            string foto = Convert.ToString(cliente.Foto);
+            string Estado = Convert.ToString(cliente.Estado);
+            string Pais = Convert.ToString(cliente.Pais);
+            string Ciudad = Convert.ToString(cliente.Ciudad);
+            string Patrocinador = Convert.ToString(cliente.NumeroPatrocinador);
+            string NumClabe = Convert.ToString(cliente.NumeroCLABE);
+            DateTime FechaC = Convert.ToDateTime(cliente.FechaCreacion);
+            Guid? UsuarioCreacion = Guid.NewGuid();
+            UsuarioCreacion = cliente.UsuarioCreacion;
+            bool Activo = Convert.ToBoolean(cliente.Activo);
+            Guid? IdUs = Guid.NewGuid();
+            IdUs = cliente.IdUsuario;
             //Tipo de afiliacion
             Guid Afiliacion = Guid.NewGuid();
             Afiliacion = Guid.Parse(metroComboBox_Afiliacion.SelectedValue.ToString());
             //seguirle
-            db.UpdateClientes(Id, TextBox_NumeroDeCuenta.Text.Trim(),
-                TextBox_Nombre.Text.Trim(), TextBox_ApellidoPaterno.Text.Trim(), TextBox_ApellidoMaterno.Text.Trim(), TextBox_TelefonoCasa.Text,
-                TextBox_TelefonoTrabajo.Text, TextBox_Celular.Text, TextBox_Email.Text, Afiliacion,
-                metroDateTime_FechaNacimiento.Text, bunifuMaterialTextbox3.Text, metroComboBox_Sexo.SelectedItem.ToString(),
+            db.UpdateClientes(Id, IdProveedor, TextBox_NumeroDeCuenta.Text.Trim(), TelAlarma, PClave,
+                PClaveS, TextBox_Nombre.Text.Trim(), TextBox_ApellidoPaterno.Text.Trim(), TextBox_ApellidoMaterno.Text.Trim(), Calle,
+                NumInt, NumExt, Colonia, CP, Referencia, Color, Entre, google, descripcion, TextBox_TelefonoCasa.Text,
+                TextBox_TelefonoTrabajo.Text, TextBox_Celular.Text, TextBox_Email.Text, foto, Estado, Pais, Ciudad, Afiliacion,
+                Patrocinador, metroDateTime_FechaNacimiento.Text, bunifuMaterialTextbox3.Text, metroComboBox_Sexo.SelectedItem.ToString(),
                 TextBox_EstadoCivil.Text, TextBox_Profesion.Text, TextBox_CURP.Text, TextBox_RFC.Text,
                 TextBox_NumCTAPago.Text, TextBox_ClaveBancaria.Text, metroComboBox_Banco.SelectedValue.ToString(),
-                TextBox_Beneficiario.Text);
+                NumClabe, TextBox_Beneficiario.Text, FechaC, UsuarioCreacion, Activo, IdUs);
             MetroMessageBox.Show(this, "Se actualizo la informacion del cliente", "Actualizar Cliente", MessageBoxButtons.OK, MessageBoxIcon.Question);
 
         }
     }
 }
+ 

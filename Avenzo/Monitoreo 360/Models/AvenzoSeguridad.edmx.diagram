@@ -4,74 +4,74 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="427ea303c6ca4b07bb4189d1026901d1" Name="Diagram1">
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Bancos" Width="1.5" PointX="9" PointY="48.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Ciudades" Width="1.5" PointX="9" PointY="45" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClaveProdServ" Width="1.5" PointX="6" PointY="51.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClaveUnidad" Width="1.5" PointX="5.25" PointY="68.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.CodigosPostales" Width="1.5" PointX="9" PointY="42.125" IsExpanded="true" />
+      <Diagram DiagramId="b3e1bc280ce943b09600463905fa697b" Name="Diagram1">
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Bancos" Width="1.5" PointX="9" PointY="49" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Ciudades" Width="1.5" PointX="9" PointY="45.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClaveProdServ" Width="1.5" PointX="6" PointY="51.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClaveUnidad" Width="1.5" PointX="5.25" PointY="68.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.CodigosPostales" Width="1.5" PointX="9" PointY="42.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.Colonias" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.Complementos" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Contratos" Width="1.5" PointX="12" PointY="41.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Deducciones" Width="1.5" PointX="16.5" PointY="77.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Estados" Width="1.5" PointX="6.75" PointY="44.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.FormaDePago" Width="1.5" PointX="3" PointY="54" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Horas" Width="1.5" PointX="6" PointY="82.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Incapacidades" Width="1.5" PointX="19.5" PointY="67.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Contratos" Width="1.5" PointX="12" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Deducciones" Width="1.5" PointX="16.5" PointY="78" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Estados" Width="1.5" PointX="6.75" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.FormaDePago" Width="1.5" PointX="3" PointY="51.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Horas" Width="1.5" PointX="6" PointY="82.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Incapacidades" Width="1.5" PointX="19.5" PointY="68.125" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.ISR" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Jornadas" Width="1.5" PointX="12" PointY="38.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Localidades" Width="1.5" PointX="9" PointY="38.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.MetodosDePago" Width="1.5" PointX="3" PointY="56.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Monedas" Width="1.5" PointX="3" PointY="58.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Municipios" Width="1.5" PointX="9" PointY="35.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Nominas" Width="1.5" PointX="12" PointY="73.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Jornadas" Width="1.5" PointX="12" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Localidades" Width="1.5" PointX="9" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.MetodosDePago" Width="1.5" PointX="3" PointY="53.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Monedas" Width="1.5" PointX="3" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Municipios" Width="1.5" PointX="9" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Nominas" Width="1.5" PointX="12" PointY="73.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.OrigenRecurso" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.OtrosPagos" Width="1.5" PointX="16.5" PointY="42.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.PAC" Width="1.5" PointX="0.75" PointY="33" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Paises" Width="1.5" PointX="4.5" PointY="45" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Percepciones" Width="1.5" PointX="3" PointY="73.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.PeriodicidadPagos" Width="1.5" PointX="12" PointY="75.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Regimen" Width="1.5" PointX="12" PointY="78.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.OtrosPagos" Width="1.5" PointX="16.5" PointY="43" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.PAC" Width="1.5" PointX="0.75" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Paises" Width="1.5" PointX="4.5" PointY="45.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Percepciones" Width="1.5" PointX="3" PointY="73.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.PeriodicidadPagos" Width="1.5" PointX="12" PointY="76" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Regimen" Width="1.5" PointX="12" PointY="78.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.RegimenFiscal" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.RiesgosPuesto" Width="1.5" PointX="12" PointY="80.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.RiesgosPuesto" Width="1.5" PointX="12" PointY="81" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.SubsudioAlEmpleo" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.UsoCFDI" Width="1.5" PointX="3" PointY="61" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.AdeudosInstalaciones" Width="1.5" PointX="5.25" PointY="55.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.UsoCFDI" Width="1.5" PointX="3" PointY="58.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.AdeudosInstalaciones" Width="1.5" PointX="5.25" PointY="55.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.Asociados" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.CarritoCompras" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.Catalogos" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.CFDI" Width="1.5" PointX="8.25" PointY="56.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.CFDIEnDeuda" Width="1.5" PointX="16.5" PointY="53" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.CFDIPorOperacion" Width="1.5" PointX="16.5" PointY="57.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClaveProdServHistorial" Width="1.5" PointX="8.25" PointY="52.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClaveProdServPorPAC" Width="1.5" PointX="8.25" PointY="62.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClienteContactos" Width="1.5" PointX="13.5" PointY="68.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Clientes" Width="1.5" PointX="11.25" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.CFDI" Width="1.5" PointX="8.25" PointY="56.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.CFDIEnDeuda" Width="1.5" PointX="16.5" PointY="53.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.CFDIPorOperacion" Width="1.5" PointX="16.5" PointY="57.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClaveProdServHistorial" Width="1.5" PointX="8.25" PointY="52.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClaveProdServPorPAC" Width="1.5" PointX="8.25" PointY="62.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ClienteContactos" Width="1.5" PointX="13.5" PointY="68.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Clientes" Width="1.5" PointX="11.25" PointY="52.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.CodigoEventos" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.CompraInventario" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.CompraProductos" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.DispositivosAsignados" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Empleados" Width="1.5" PointX="14.25" PointY="53" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Empleados" Width="1.5" PointX="14.25" PointY="53.125" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.FotosCliente" Width="1.5" PointX="13.5" PointY="65.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.HorarioOperaciones" Width="1.5" PointX="16.5" PointY="65.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Incidentes" Width="1.5" PointX="16.5" PointY="72.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.HorarioOperaciones" Width="1.5" PointX="16.5" PointY="65.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Incidentes" Width="1.5" PointX="16.5" PointY="72.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.Inventario" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.LogMonitoreo360" Width="1.5" PointX="5.25" PointY="79.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.LogMonitoreo360" Width="1.5" PointX="5.25" PointY="79.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.Mensualidades" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.MonitoreoIngresos" Width="1.5" PointX="7.5" PointY="67.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaDeduccion" Width="1.5" PointX="18.75" PointY="63" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaHistorial" Width="1.5" PointX="16.5" PointY="45.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaHorasExtras" Width="1.5" PointX="8.25" PointY="78.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaIncapacidad" Width="1.5" PointX="21.75" PointY="63.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaJubilacionPensionRetiro" Width="1.5" PointX="12" PointY="44.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaOtrosPago" Width="1.5" PointX="18.75" PointY="57.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaPercepcion" Width="1.5" PointX="5.25" PointY="74.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaPercepciones" Width="1.5" PointX="14.25" PointY="46.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaSeparacionIndemnizacion" Width="1.5" PointX="12" PointY="47.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.MonitoreoIngresos" Width="1.5" PointX="7.5" PointY="67.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaDeduccion" Width="1.5" PointX="18.75" PointY="63.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaHistorial" Width="1.5" PointX="16.5" PointY="45.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaHorasExtras" Width="1.5" PointX="8.25" PointY="79" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaIncapacidad" Width="1.5" PointX="21.75" PointY="63.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaJubilacionPensionRetiro" Width="1.5" PointX="12" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaOtrosPago" Width="1.5" PointX="18.75" PointY="57.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaPercepcion" Width="1.5" PointX="5.25" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaPercepciones" Width="1.5" PointX="14.25" PointY="46.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.NominaSeparacionIndemnizacion" Width="1.5" PointX="12" PointY="48.125" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.Paquetes" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.ReporteLlamada" Width="1.5" PointX="18.75" PointY="74.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Sensores" Width="1.5" PointX="16.5" PointY="61.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AvenzoSeguridadModel.Usuarios" Width="1.5" PointX="3" PointY="76.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.ReporteLlamada" Width="1.5" PointX="18.75" PointY="74.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Sensores" Width="1.5" PointX="16.5" PointY="61.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AvenzoSeguridadModel.Usuarios" Width="1.5" PointX="3" PointY="77" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.ClienteComponentes" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.Componentes" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AvenzoSeguridadModel.Correos" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />

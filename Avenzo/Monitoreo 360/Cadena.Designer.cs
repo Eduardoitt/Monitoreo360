@@ -41,7 +41,6 @@
             this.TextBox_Log.Multiline = true;
             this.TextBox_Log.Name = "TextBox_Log";
             this.TextBox_Log.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.TextBox_Log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.TextBox_Log.Size = new System.Drawing.Size(805, 255);
             this.TextBox_Log.TabIndex = 0;
             // 
@@ -53,17 +52,18 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(805, 20);
             this.textBox1.TabIndex = 1;
+            this.textBox1.Visible = false;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(749, 376);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Ingresar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Cadena

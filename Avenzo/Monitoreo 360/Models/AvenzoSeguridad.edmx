@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AvenzoSeguridadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AvenzoSeguridadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bancos">
           <Key>
             <PropertyRef Name="c_Banco" />
@@ -2470,15 +2470,33 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
         <Function Name="InsertClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
           <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="IdProveedor" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IdUsuario" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="numAlarma" Type="varchar" Mode="In" />
           <Parameter Name="nombres" Type="varchar" Mode="In" />
           <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
           <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
           <Parameter Name="NumeroDeCuenta" Type="varchar" Mode="In" />
+          <Parameter Name="PalabraClave" Type="varchar" Mode="In" />
+          <Parameter Name="PalabraClaveSilen" Type="varchar" Mode="In" />
+          <Parameter Name="calle" Type="varchar" Mode="In" />
+          <Parameter Name="NoInterior" Type="varchar" Mode="In" />
+          <Parameter Name="NoExterior" Type="varchar" Mode="In" />
+          <Parameter Name="Colonia" Type="varchar" Mode="In" />
+          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
+          <Parameter Name="Referencias" Type="varchar" Mode="In" />
+          <Parameter Name="ColorEstablecimiento" Type="varchar" Mode="In" />
+          <Parameter Name="entreCalles" Type="varchar" Mode="In" />
+          <Parameter Name="GoogleMaps" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="telefono" Type="varchar" Mode="In" />
           <Parameter Name="telTrabajo" Type="varchar" Mode="In" />
           <Parameter Name="telCelular" Type="varchar" Mode="In" />
           <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="foto" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="estado" Type="varchar" Mode="In" />
+          <Parameter Name="pais" Type="varchar" Mode="In" />
+          <Parameter Name="ciudad" Type="varchar" Mode="In" />
+          <Parameter Name="tipoAfilacion" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="numeroPatrocinador" Type="varchar" Mode="In" />
           <Parameter Name="fechaNacimiento" Type="varchar" Mode="In" />
           <Parameter Name="lugarNacimiento" Type="varchar" Mode="In" />
@@ -2802,15 +2820,34 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
         </Function>
         <Function Name="UpdateClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
           <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="IdProveedor" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="NumeroDeCuenta" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroTelefonoAlarma" Type="varchar" Mode="In" />
+          <Parameter Name="PalabraClave" Type="varchar" Mode="In" />
+          <Parameter Name="PalabraClaveSilenciosa" Type="varchar" Mode="In" />
           <Parameter Name="Nombres" Type="varchar" Mode="In" />
           <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
           <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+          <Parameter Name="Calle" Type="varchar" Mode="In" />
+          <Parameter Name="NoInterior" Type="varchar" Mode="In" />
+          <Parameter Name="NoExterior" Type="varchar" Mode="In" />
+          <Parameter Name="Colonia" Type="varchar" Mode="In" />
+          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
+          <Parameter Name="Referencias" Type="varchar" Mode="In" />
+          <Parameter Name="ColorEstablecimiento" Type="varchar" Mode="In" />
+          <Parameter Name="entreCalles" Type="varchar" Mode="In" />
+          <Parameter Name="GoogleMaps" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="Telefono" Type="varchar" Mode="In" />
           <Parameter Name="TelefonoTrabajo" Type="varchar" Mode="In" />
           <Parameter Name="TelefonoCelular" Type="varchar" Mode="In" />
           <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Foto" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Estado" Type="varchar" Mode="In" />
+          <Parameter Name="Pais" Type="varchar" Mode="In" />
+          <Parameter Name="Ciudad" Type="varchar" Mode="In" />
           <Parameter Name="TipoAfilacion" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="NumeroPatrocinador" Type="varchar" Mode="In" />
           <Parameter Name="FechaNacimiento" Type="varchar" Mode="In" />
           <Parameter Name="LugarNacimiento" Type="varchar" Mode="In" />
           <Parameter Name="Sexo" Type="varchar" Mode="In" />
@@ -2821,7 +2858,12 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <Parameter Name="NumCtaPago" Type="varchar" Mode="In" />
           <Parameter Name="ClaveBancaria" Type="varchar" Mode="In" />
           <Parameter Name="Banco" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroCLABE" Type="varchar" Mode="In" />
           <Parameter Name="Beneficiario" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+          <Parameter Name="UsuarioCreacion" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Usuario" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="UpdateClientesUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="AS">
           <Parameter Name="IdCliente" Type="uniqueidentifier" Mode="In" />
@@ -3540,7 +3582,8 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AvenzoSeguridadModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -4186,9 +4229,9 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <Property Name="IdFotoCliente" Type="Guid" Nullable="false" />
           <Property Name="IdCliente" Type="Guid" />
           <Property Name="RutaFoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK__FotosClie__IdCli__55B597A7" FromRole="FotosCliente" ToRole="Clientes" />
           <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Ruta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__FotosClie__IdCli__55B597A7" FromRole="FotosCliente" ToRole="Clientes" />
         </EntityType>
         <EntityType Name="HorarioOperaciones">
           <Key>
@@ -6143,33 +6186,33 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <End Role="Sensores" EntitySet="Sensores" />
           </AssociationSet>
           <FunctionImport Name="DisabledPAC">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetBancos" ReturnType="Collection(AvenzoSeguridadModel.GetBancos_Result)">
-          <Parameter Name="Filtro" Mode="In" Type="String" />
+            <Parameter Name="Filtro" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetCiudadesByEstado" ReturnType="Collection(AvenzoSeguridadModel.GetCiudadesByEstado_Result)">
-          <Parameter Name="Estado" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetColoniasByCodigoPostal" ReturnType="Collection(AvenzoSeguridadModel.GetColoniasByCodigoPostal_Result)">
-          <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetEstadosByPais" ReturnType="Collection(AvenzoSeguridadModel.GetEstadosByPais_Result)">
-          <Parameter Name="Pais" Mode="In" Type="String" />
+            <Parameter Name="Pais" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetFormaDePago" ReturnType="Collection(AvenzoSeguridadModel.GetFormaDePago_Result)" />
           <FunctionImport Name="GetISRBySueldo" ReturnType="Collection(AvenzoSeguridadModel.GetISRBySueldo_Result)">
-          <Parameter Name="Sueldo" Mode="In" Type="Double" />
+            <Parameter Name="Sueldo" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="GetMetodosDePago" ReturnType="Collection(AvenzoSeguridadModel.GetMetodosDePago_Result)">
             <Parameter Name="ID" Mode="In" Type="String" />
             <Parameter Name="Metodo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetMunicipioByEstado" ReturnType="Collection(AvenzoSeguridadModel.GetMunicipioByEstado_Result)">
-          <Parameter Name="c_Estado" Mode="In" Type="String" />
+            <Parameter Name="c_Estado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetPAC" ReturnType="Collection(AvenzoSeguridadModel.GetPAC_Result)">
-          <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="GetPAC_Paginacion" ReturnType="Collection(AvenzoSeguridadModel.GetPAC_Paginacion_Result)">
             <Parameter Name="Activo" Mode="In" Type="Boolean" />
@@ -6178,10 +6221,10 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="PAC" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetPACById" ReturnType="Collection(AvenzoSeguridadModel.GetPACById_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetSubsudioAlEmpleoBySueldo" ReturnType="Collection(AvenzoSeguridadModel.GetSubsudioAlEmpleoBySueldo_Result)">
-          <Parameter Name="Sueldo" Mode="In" Type="Double" />
+            <Parameter Name="Sueldo" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="InsertPAC">
             <Parameter Name="Id" Mode="In" Type="Guid" />
@@ -6232,7 +6275,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="Descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CloseIncidentesComentarios">
-          <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
+            <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="CloseIncidentesManual">
             <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
@@ -6248,7 +6291,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteClaveProdServPorPAC">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteClienteContactos">
             <Parameter Name="op" Mode="In" Type="Int32" />
@@ -6262,56 +6305,59 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
             <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
+          <FunctionImport Name="DeleteFotoCliente">
+            <Parameter Name="RutaFoto" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="DeleteIncidente">
             <Parameter Name="op" Mode="In" Type="Int32" />
             <Parameter Name="ID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteInventario">
-          <Parameter Name="IdDispositivo" Mode="In" Type="Guid" />
+            <Parameter Name="IdDispositivo" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteMonitoreoIngresos">
             <Parameter Name="IdIngreso" Mode="In" Type="Guid" />
             <Parameter Name="Option" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaDeduccion">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaHistorial">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaHorasExtras">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaIncapacidad">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaJubilacionPensionRetiro">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaOtrosPago">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaPercepcion">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaPercepciones">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteNominaSeparacionIndemnizacion">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DeleteSensores">
             <Parameter Name="Id" Mode="In" Type="Guid" />
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteTipoUsuario">
-          <Parameter Name="ID" Mode="In" Type="Guid" />
+            <Parameter Name="ID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DisabledEmpleado">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="DisabledUsuario">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="EditIncidentes">
             <Parameter Name="IdIncidente" Mode="In" Type="Guid" />
@@ -6332,7 +6378,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAdeudosInstalacionesById" ReturnType="Collection(AvenzoSeguridadModel.GetAdeudosInstalacionesById_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetCargosAbonosByMes" ReturnType="Collection(AvenzoSeguridadModel.GetCargosAbonosByMes_Result)">
             <Parameter Name="IdUsuario" Mode="In" Type="Guid" />
@@ -6343,7 +6389,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetCatalogoByNombreCatalogo" ReturnType="Collection(AvenzoSeguridadModel.GetCatalogoByNombreCatalogo_Result)">
-          <Parameter Name="NombreCatalogo" Mode="In" Type="String" />
+            <Parameter Name="NombreCatalogo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetCFDI" ReturnType="Collection(AvenzoSeguridadModel.GetCFDI_Result)">
             <Parameter Name="Id" Mode="In" Type="Guid" />
@@ -6357,32 +6403,32 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="Search" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetCFDIByAdeudo" ReturnType="Collection(AvenzoSeguridadModel.GetCFDIByAdeudo_Result)">
-          <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
+            <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetCFDIByDoctoRelaionado" ReturnType="Collection(AvenzoSeguridadModel.GetCFDIByDoctoRelaionado_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetCFDIPorOperacion" ReturnType="Collection(AvenzoSeguridadModel.GetCFDIPorOperacion_Result)">
             <Parameter Name="Id" Mode="In" Type="Guid" />
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetCFDIPorOperacionByAdeudo" ReturnType="Collection(AvenzoSeguridadModel.GetCFDIPorOperacionByAdeudo_Result)">
-          <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
+            <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClaveProdServByBusqueda" ReturnType="Collection(AvenzoSeguridadModel.GetClaveProdServByBusqueda_Result)">
-          <Parameter Name="Search" Mode="In" Type="String" />
+            <Parameter Name="Search" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetClaveProdServByClase" ReturnType="Collection(AvenzoSeguridadModel.GetClaveProdServByClase_Result)">
-          <Parameter Name="Clave" Mode="In" Type="String" />
+            <Parameter Name="Clave" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetClaveProdServByPAC" ReturnType="Collection(AvenzoSeguridadModel.GetClaveProdServByPAC_Result)">
-          <Parameter Name="IdPAC" Mode="In" Type="Guid" />
+            <Parameter Name="IdPAC" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClaveProdServPorPAC" ReturnType="Collection(AvenzoSeguridadModel.GetClaveProdServPorPAC_Result)">
-          <Parameter Name="IdPAC" Mode="In" Type="Guid" />
+            <Parameter Name="IdPAC" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClienteByClientID" ReturnType="Collection(AvenzoSeguridadModel.GetClienteByClientID_Result)">
-          <Parameter Name="ClientID" Mode="In" Type="Guid" />
+            <Parameter Name="ClientID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClienteByPhoneNumberOrAccountNumber" ReturnType="Collection(AvenzoSeguridadModel.GetClienteByPhoneNumberOrAccountNumber_Result)">
             <Parameter Name="PhoneNumber" Mode="In" Type="String" />
@@ -6393,7 +6439,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClientes" ReturnType="Collection(AvenzoSeguridadModel.GetClientes_Result)">
-          <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="GetClientes_Paginacion" ReturnType="Collection(AvenzoSeguridadModel.GetClientes_Paginacion_Result)">
             <Parameter Name="Activo" Mode="In" Type="Boolean" />
@@ -6402,23 +6448,23 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="Cliente" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetClientesById" ReturnType="Collection(AvenzoSeguridadModel.GetClientesById_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClientesByUserID" ReturnType="Collection(AvenzoSeguridadModel.GetClientesByUserID_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetClientesMonitoreo" ReturnType="Collection(AvenzoSeguridadModel.GetClientesMonitoreo_Result)" />
           <FunctionImport Name="GetCorreo" ReturnType="Collection(AvenzoSeguridadModel.GetCorreo_Result)">
-          <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetDoctoRelacionadoByFactura" ReturnType="Collection(AvenzoSeguridadModel.GetDoctoRelacionadoByFactura_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetDoctoRelacionadoByPago10" ReturnType="Collection(AvenzoSeguridadModel.GetDoctoRelacionadoByPago10_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetEmpleados" ReturnType="Collection(AvenzoSeguridadModel.GetEmpleados_Result)">
-          <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="GetEmpleados_Paginacion" ReturnType="Collection(AvenzoSeguridadModel.GetEmpleados_Paginacion_Result)">
             <Parameter Name="Activo" Mode="In" Type="Boolean" />
@@ -6427,16 +6473,16 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="Empleado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetEmpleadosById" ReturnType="Collection(AvenzoSeguridadModel.GetEmpleadosById_Result)">
-          <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetEmpleadosByPuesto" ReturnType="Collection(AvenzoSeguridadModel.GetEmpleadosByPuesto_Result)">
-          <Parameter Name="Puesto" Mode="In" Type="String" />
+            <Parameter Name="Puesto" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetEmpleadosByUserID" ReturnType="Collection(AvenzoSeguridadModel.GetEmpleadosByUserID_Result)">
-          <Parameter Name="UserID" Mode="In" Type="Guid" />
+            <Parameter Name="UserID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetHorarioOperaciones" ReturnType="Collection(AvenzoSeguridadModel.GetHorarioOperaciones_Result)">
-          <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetIncidentes" ReturnType="Collection(AvenzoSeguridadModel.GetIncidentes_Result)">
             <Parameter Name="selector" Mode="In" Type="Int32" />
@@ -6460,7 +6506,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="IdProveedor" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetMonitoreoIngresoByAdeudo" ReturnType="Collection(AvenzoSeguridadModel.GetMonitoreoIngresoByAdeudo_Result)">
-          <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
+            <Parameter Name="IdAdeudo" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetNominaDeduccion" ReturnType="Collection(AvenzoSeguridadModel.GetNominaDeduccion_Result)">
             <Parameter Name="Opcion" Mode="In" Type="Int32" />
@@ -6481,10 +6527,10 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="Id" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetNumNivel1" ReturnType="Collection(Int32)">
-          <Parameter Name="ID" Mode="In" Type="Guid" />
+            <Parameter Name="ID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetPaquete" ReturnType="Collection(AvenzoSeguridadModel.GetPaquete_Result)">
-          <Parameter Name="IdPaquete" Mode="In" Type="Guid" />
+            <Parameter Name="IdPaquete" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetSensores" ReturnType="Collection(AvenzoSeguridadModel.GetSensores_Result)">
             <Parameter Name="Id" Mode="In" Type="Guid" />
@@ -6495,7 +6541,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="PalabraClave" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetUsuarioById" ReturnType="Collection(AvenzoSeguridadModel.GetUsuarioById_Result)">
-          <Parameter Name="IdUsuario" Mode="In" Type="Guid" />
+            <Parameter Name="IdUsuario" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetUsuarios_Paginacion" ReturnType="Collection(AvenzoSeguridadModel.GetUsuarios_Paginacion_Result)">
             <Parameter Name="Activo" Mode="In" Type="Boolean" />
@@ -6600,15 +6646,33 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <FunctionImport Name="InsertClientes">
             <Parameter Name="Id" Mode="In" Type="Guid" />
             <Parameter Name="IdProveedor" Mode="In" Type="Guid" />
+            <Parameter Name="IdUsuario" Mode="In" Type="Guid" />
             <Parameter Name="numAlarma" Mode="In" Type="String" />
             <Parameter Name="nombres" Mode="In" Type="String" />
             <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
             <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
             <Parameter Name="NumeroDeCuenta" Mode="In" Type="String" />
+            <Parameter Name="PalabraClave" Mode="In" Type="String" />
+            <Parameter Name="PalabraClaveSilen" Mode="In" Type="String" />
+            <Parameter Name="calle" Mode="In" Type="String" />
+            <Parameter Name="NoInterior" Mode="In" Type="String" />
+            <Parameter Name="NoExterior" Mode="In" Type="String" />
+            <Parameter Name="Colonia" Mode="In" Type="String" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="Referencias" Mode="In" Type="String" />
+            <Parameter Name="ColorEstablecimiento" Mode="In" Type="String" />
+            <Parameter Name="entreCalles" Mode="In" Type="String" />
+            <Parameter Name="GoogleMaps" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="telefono" Mode="In" Type="String" />
             <Parameter Name="telTrabajo" Mode="In" Type="String" />
             <Parameter Name="telCelular" Mode="In" Type="String" />
             <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="foto" Mode="In" Type="Binary" />
+            <Parameter Name="estado" Mode="In" Type="String" />
+            <Parameter Name="pais" Mode="In" Type="String" />
+            <Parameter Name="ciudad" Mode="In" Type="String" />
+            <Parameter Name="tipoAfilacion" Mode="In" Type="Guid" />
             <Parameter Name="numeroPatrocinador" Mode="In" Type="String" />
             <Parameter Name="fechaNacimiento" Mode="In" Type="String" />
             <Parameter Name="lugarNacimiento" Mode="In" Type="String" />
@@ -6932,15 +6996,34 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           </FunctionImport>
           <FunctionImport Name="UpdateClientes">
             <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="IdProveedor" Mode="In" Type="Guid" />
             <Parameter Name="NumeroDeCuenta" Mode="In" Type="String" />
+            <Parameter Name="NumeroTelefonoAlarma" Mode="In" Type="String" />
+            <Parameter Name="PalabraClave" Mode="In" Type="String" />
+            <Parameter Name="PalabraClaveSilenciosa" Mode="In" Type="String" />
             <Parameter Name="Nombres" Mode="In" Type="String" />
             <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
             <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Calle" Mode="In" Type="String" />
+            <Parameter Name="NoInterior" Mode="In" Type="String" />
+            <Parameter Name="NoExterior" Mode="In" Type="String" />
+            <Parameter Name="Colonia" Mode="In" Type="String" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="Referencias" Mode="In" Type="String" />
+            <Parameter Name="ColorEstablecimiento" Mode="In" Type="String" />
+            <Parameter Name="entreCalles" Mode="In" Type="String" />
+            <Parameter Name="GoogleMaps" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="Telefono" Mode="In" Type="String" />
             <Parameter Name="TelefonoTrabajo" Mode="In" Type="String" />
             <Parameter Name="TelefonoCelular" Mode="In" Type="String" />
             <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Foto" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
+            <Parameter Name="Pais" Mode="In" Type="String" />
+            <Parameter Name="Ciudad" Mode="In" Type="String" />
             <Parameter Name="TipoAfilacion" Mode="In" Type="Guid" />
+            <Parameter Name="NumeroPatrocinador" Mode="In" Type="String" />
             <Parameter Name="FechaNacimiento" Mode="In" Type="String" />
             <Parameter Name="LugarNacimiento" Mode="In" Type="String" />
             <Parameter Name="Sexo" Mode="In" Type="String" />
@@ -6951,11 +7034,30 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="NumCtaPago" Mode="In" Type="String" />
             <Parameter Name="ClaveBancaria" Mode="In" Type="String" />
             <Parameter Name="Banco" Mode="In" Type="String" />
+            <Parameter Name="NumeroCLABE" Mode="In" Type="String" />
             <Parameter Name="Beneficiario" Mode="In" Type="String" />
+            <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
+            <Parameter Name="UsuarioCreacion" Mode="In" Type="Guid" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Usuario" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="UpdateClientesUsuario">
             <Parameter Name="IdCliente" Mode="In" Type="Guid" />
             <Parameter Name="Usuario" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateDireccion">
+            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
+            <Parameter Name="Colononia" Mode="In" Type="String" />
+            <Parameter Name="Calle" Mode="In" Type="String" />
+            <Parameter Name="NoInterior" Mode="In" Type="String" />
+            <Parameter Name="NoExterior" Mode="In" Type="String" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="Referencias" Mode="In" Type="String" />
+            <Parameter Name="ColorEstablecimiento" Mode="In" Type="String" />
+            <Parameter Name="EntreCalles" Mode="In" Type="String" />
+            <Parameter Name="GoogleMaps" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
+            <Parameter Name="Ciudad" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UpdateEmpleado">
             <Parameter Name="Id" Mode="In" Type="Guid" />
@@ -7154,23 +7256,6 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
             <Parameter Name="TimbresUsados" Mode="In" Type="Int32" />
             <Parameter Name="TimbresCancelados" Mode="In" Type="Int32" />
             <Parameter Name="PrimeraVez" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="UpdateDireccion">
-            <Parameter Name="IdCliente" Mode="In" Type="Guid" />
-            <Parameter Name="Colononia" Mode="In" Type="String" />
-            <Parameter Name="Calle" Mode="In" Type="String" />
-            <Parameter Name="NoInterior" Mode="In" Type="String" />
-            <Parameter Name="NoExterior" Mode="In" Type="String" />
-            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
-            <Parameter Name="Referencias" Mode="In" Type="String" />
-            <Parameter Name="ColorEstablecimiento" Mode="In" Type="String" />
-            <Parameter Name="EntreCalles" Mode="In" Type="String" />
-            <Parameter Name="GoogleMaps" Mode="In" Type="String" />
-            <Parameter Name="Estado" Mode="In" Type="String" />
-            <Parameter Name="Ciudad" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="DeleteFotoCliente">
-          <Parameter Name="RutaFoto" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetBancos_Result">
@@ -7478,7 +7563,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <Property Type="String" Name="Referencias" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="ColorEstablecimiento" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="EntreCalles" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="GoogleMaps" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="GoogleMaps" Nullable="true" MaxLength="750" />
           <Property Type="Guid" Name="TipoAfilacion" Nullable="true" />
           <Property Type="String" Name="NumeroPatrocinador" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="FechaNacimiento" Nullable="true" MaxLength="20" />
@@ -7569,7 +7654,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <Property Type="String" Name="Referencias" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="ColorEstablecimiento" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="EntreCalles" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="GoogleMaps" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="GoogleMaps" Nullable="true" MaxLength="750" />
           <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="TelefonoTrabajo" Nullable="true" MaxLength="20" />
@@ -7625,7 +7710,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <Property Type="String" Name="Referencias" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="ColorEstablecimiento" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="EntreCalles" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="GoogleMaps" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="GoogleMaps" Nullable="true" MaxLength="750" />
           <Property Type="Guid" Name="TipoAfilacion" Nullable="true" />
           <Property Type="String" Name="NumeroPatrocinador" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="FechaNacimiento" Nullable="true" MaxLength="20" />
@@ -7663,7 +7748,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <Property Type="String" Name="Referencias" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="ColorEstablecimiento" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="EntreCalles" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="GoogleMaps" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="GoogleMaps" Nullable="true" MaxLength="750" />
           <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="TelefonoTrabajo" Nullable="true" MaxLength="20" />
@@ -7710,7 +7795,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <Property Type="String" Name="Referencias" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="ColorEstablecimiento" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="EntreCalles" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="GoogleMaps" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="GoogleMaps" Nullable="true" MaxLength="750" />
           <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="TelefonoTrabajo" Nullable="true" MaxLength="20" />
@@ -8798,11 +8883,11 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <EntitySetMapping Name="FotosCliente">
             <EntityTypeMapping TypeName="AvenzoSeguridadModel.FotosCliente">
               <MappingFragment StoreEntitySet="FotosCliente">
-                <ScalarProperty Name="Ruta" ColumnName="Ruta" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdFotoCliente" ColumnName="IdFotoCliente" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
                 <ScalarProperty Name="RutaFoto" ColumnName="RutaFoto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Ruta" ColumnName="Ruta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -9365,6 +9450,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <FunctionImportMapping FunctionImportName="DeleteClienteContactos" FunctionName="AvenzoSeguridadModel.Store.DeleteClienteContactos" />
           <FunctionImportMapping FunctionImportName="DeleteClientes" FunctionName="AvenzoSeguridadModel.Store.DeleteClientes" />
           <FunctionImportMapping FunctionImportName="DeleteEmpleado" FunctionName="AvenzoSeguridadModel.Store.DeleteEmpleado" />
+          <FunctionImportMapping FunctionImportName="DeleteFotoCliente" FunctionName="AvenzoSeguridadModel.Store.DeleteFotoCliente" />
           <FunctionImportMapping FunctionImportName="DeleteIncidente" FunctionName="AvenzoSeguridadModel.Store.DeleteIncidente" />
           <FunctionImportMapping FunctionImportName="DeleteInventario" FunctionName="AvenzoSeguridadModel.Store.DeleteInventario" />
           <FunctionImportMapping FunctionImportName="DeleteMonitoreoIngresos" FunctionName="AvenzoSeguridadModel.Store.DeleteMonitoreoIngresos" />
@@ -10513,6 +10599,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <FunctionImportMapping FunctionImportName="UpdateClienteContactos" FunctionName="AvenzoSeguridadModel.Store.UpdateClienteContactos" />
           <FunctionImportMapping FunctionImportName="UpdateClientes" FunctionName="AvenzoSeguridadModel.Store.UpdateClientes" />
           <FunctionImportMapping FunctionImportName="UpdateClientesUsuario" FunctionName="AvenzoSeguridadModel.Store.UpdateClientesUsuario" />
+          <FunctionImportMapping FunctionImportName="UpdateDireccion" FunctionName="AvenzoSeguridadModel.Store.UpdateDireccion" />
           <FunctionImportMapping FunctionImportName="UpdateEmpleado" FunctionName="AvenzoSeguridadModel.Store.UpdateEmpleado" />
           <FunctionImportMapping FunctionImportName="UpdateEmpleadosUsuario" FunctionName="AvenzoSeguridadModel.Store.UpdateEmpleadosUsuario" />
           <FunctionImportMapping FunctionImportName="UpdateHorarioOperaciones" FunctionName="AvenzoSeguridadModel.Store.UpdateHorarioOperaciones" />
@@ -10531,8 +10618,6 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
           <FunctionImportMapping FunctionImportName="UpdateTipoUsuario" FunctionName="AvenzoSeguridadModel.Store.UpdateTipoUsuario" />
           <FunctionImportMapping FunctionImportName="UpdateUsuarioContrasena" FunctionName="AvenzoSeguridadModel.Store.UpdateUsuarioContrasena" />
           <FunctionImportMapping FunctionImportName="UpdateUsuarios" FunctionName="AvenzoSeguridadModel.Store.UpdateUsuarios" />
-          <FunctionImportMapping FunctionImportName="UpdateDireccion" FunctionName="AvenzoSeguridadModel.Store.UpdateDireccion" />
-          <FunctionImportMapping FunctionImportName="DeleteFotoCliente" FunctionName="AvenzoSeguridadModel.Store.DeleteFotoCliente" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -10550,7 +10635,7 @@ advertencia 6002: La tabla o vista 'AvenzoSeguridad.AS.Saldos' no tiene definida
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

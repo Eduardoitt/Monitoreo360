@@ -515,6 +515,15 @@ namespace Monitoreo_360.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteEmpleado", opcionParameter, idParameter);
         }
     
+        public virtual int DeleteFotoCliente(string rutaFoto)
+        {
+            var rutaFotoParameter = rutaFoto != null ?
+                new ObjectParameter("RutaFoto", rutaFoto) :
+                new ObjectParameter("RutaFoto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteFotoCliente", rutaFotoParameter);
+        }
+    
         public virtual int DeleteIncidente(Nullable<int> op, Nullable<System.Guid> iD)
         {
             var opParameter = op.HasValue ?
@@ -1638,7 +1647,7 @@ namespace Monitoreo_360.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertClienteFoto", idFotoClienteParameter, idClienteParameter, rutaFotoParameter, nombreParameter, rutaParameter);
         }
     
-        public virtual int InsertClientes(Nullable<System.Guid> id, Nullable<System.Guid> idProveedor, string numAlarma, string nombres, string apellidoPaterno, string apellidoMaterno, string numeroDeCuenta, string telefono, string telTrabajo, string telCelular, string email, string numeroPatrocinador, string fechaNacimiento, string lugarNacimiento, string sexo, string estadoCivil, string profesion, string curp, string rfc, string banco, string numCtaPago, string claveBancaria, string numeroCLABE, string beneficiario, Nullable<System.DateTime> fechaCreacion, Nullable<System.Guid> usuarioCreacion, Nullable<bool> activo)
+        public virtual int InsertClientes(Nullable<System.Guid> id, Nullable<System.Guid> idProveedor, Nullable<System.Guid> idUsuario, string numAlarma, string nombres, string apellidoPaterno, string apellidoMaterno, string numeroDeCuenta, string palabraClave, string palabraClaveSilen, string calle, string noInterior, string noExterior, string colonia, string codigoPostal, string referencias, string colorEstablecimiento, string entreCalles, string googleMaps, string descripcion, string telefono, string telTrabajo, string telCelular, string email, byte[] foto, string estado, string pais, string ciudad, Nullable<System.Guid> tipoAfilacion, string numeroPatrocinador, string fechaNacimiento, string lugarNacimiento, string sexo, string estadoCivil, string profesion, string curp, string rfc, string banco, string numCtaPago, string claveBancaria, string numeroCLABE, string beneficiario, Nullable<System.DateTime> fechaCreacion, Nullable<System.Guid> usuarioCreacion, Nullable<bool> activo)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -1647,6 +1656,10 @@ namespace Monitoreo_360.Models
             var idProveedorParameter = idProveedor.HasValue ?
                 new ObjectParameter("IdProveedor", idProveedor) :
                 new ObjectParameter("IdProveedor", typeof(System.Guid));
+    
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(System.Guid));
     
             var numAlarmaParameter = numAlarma != null ?
                 new ObjectParameter("numAlarma", numAlarma) :
@@ -1668,6 +1681,54 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("NumeroDeCuenta", numeroDeCuenta) :
                 new ObjectParameter("NumeroDeCuenta", typeof(string));
     
+            var palabraClaveParameter = palabraClave != null ?
+                new ObjectParameter("PalabraClave", palabraClave) :
+                new ObjectParameter("PalabraClave", typeof(string));
+    
+            var palabraClaveSilenParameter = palabraClaveSilen != null ?
+                new ObjectParameter("PalabraClaveSilen", palabraClaveSilen) :
+                new ObjectParameter("PalabraClaveSilen", typeof(string));
+    
+            var calleParameter = calle != null ?
+                new ObjectParameter("calle", calle) :
+                new ObjectParameter("calle", typeof(string));
+    
+            var noInteriorParameter = noInterior != null ?
+                new ObjectParameter("NoInterior", noInterior) :
+                new ObjectParameter("NoInterior", typeof(string));
+    
+            var noExteriorParameter = noExterior != null ?
+                new ObjectParameter("NoExterior", noExterior) :
+                new ObjectParameter("NoExterior", typeof(string));
+    
+            var coloniaParameter = colonia != null ?
+                new ObjectParameter("Colonia", colonia) :
+                new ObjectParameter("Colonia", typeof(string));
+    
+            var codigoPostalParameter = codigoPostal != null ?
+                new ObjectParameter("CodigoPostal", codigoPostal) :
+                new ObjectParameter("CodigoPostal", typeof(string));
+    
+            var referenciasParameter = referencias != null ?
+                new ObjectParameter("Referencias", referencias) :
+                new ObjectParameter("Referencias", typeof(string));
+    
+            var colorEstablecimientoParameter = colorEstablecimiento != null ?
+                new ObjectParameter("ColorEstablecimiento", colorEstablecimiento) :
+                new ObjectParameter("ColorEstablecimiento", typeof(string));
+    
+            var entreCallesParameter = entreCalles != null ?
+                new ObjectParameter("entreCalles", entreCalles) :
+                new ObjectParameter("entreCalles", typeof(string));
+    
+            var googleMapsParameter = googleMaps != null ?
+                new ObjectParameter("GoogleMaps", googleMaps) :
+                new ObjectParameter("GoogleMaps", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
             var telefonoParameter = telefono != null ?
                 new ObjectParameter("telefono", telefono) :
                 new ObjectParameter("telefono", typeof(string));
@@ -1683,6 +1744,26 @@ namespace Monitoreo_360.Models
             var emailParameter = email != null ?
                 new ObjectParameter("email", email) :
                 new ObjectParameter("email", typeof(string));
+    
+            var fotoParameter = foto != null ?
+                new ObjectParameter("foto", foto) :
+                new ObjectParameter("foto", typeof(byte[]));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            var paisParameter = pais != null ?
+                new ObjectParameter("pais", pais) :
+                new ObjectParameter("pais", typeof(string));
+    
+            var ciudadParameter = ciudad != null ?
+                new ObjectParameter("ciudad", ciudad) :
+                new ObjectParameter("ciudad", typeof(string));
+    
+            var tipoAfilacionParameter = tipoAfilacion.HasValue ?
+                new ObjectParameter("tipoAfilacion", tipoAfilacion) :
+                new ObjectParameter("tipoAfilacion", typeof(System.Guid));
     
             var numeroPatrocinadorParameter = numeroPatrocinador != null ?
                 new ObjectParameter("numeroPatrocinador", numeroPatrocinador) :
@@ -1748,7 +1829,7 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("Activo", activo) :
                 new ObjectParameter("Activo", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertClientes", idParameter, idProveedorParameter, numAlarmaParameter, nombresParameter, apellidoPaternoParameter, apellidoMaternoParameter, numeroDeCuentaParameter, telefonoParameter, telTrabajoParameter, telCelularParameter, emailParameter, numeroPatrocinadorParameter, fechaNacimientoParameter, lugarNacimientoParameter, sexoParameter, estadoCivilParameter, profesionParameter, curpParameter, rfcParameter, bancoParameter, numCtaPagoParameter, claveBancariaParameter, numeroCLABEParameter, beneficiarioParameter, fechaCreacionParameter, usuarioCreacionParameter, activoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertClientes", idParameter, idProveedorParameter, idUsuarioParameter, numAlarmaParameter, nombresParameter, apellidoPaternoParameter, apellidoMaternoParameter, numeroDeCuentaParameter, palabraClaveParameter, palabraClaveSilenParameter, calleParameter, noInteriorParameter, noExteriorParameter, coloniaParameter, codigoPostalParameter, referenciasParameter, colorEstablecimientoParameter, entreCallesParameter, googleMapsParameter, descripcionParameter, telefonoParameter, telTrabajoParameter, telCelularParameter, emailParameter, fotoParameter, estadoParameter, paisParameter, ciudadParameter, tipoAfilacionParameter, numeroPatrocinadorParameter, fechaNacimientoParameter, lugarNacimientoParameter, sexoParameter, estadoCivilParameter, profesionParameter, curpParameter, rfcParameter, bancoParameter, numCtaPagoParameter, claveBancariaParameter, numeroCLABEParameter, beneficiarioParameter, fechaCreacionParameter, usuarioCreacionParameter, activoParameter);
         }
     
         public virtual int InsertCorreo(string email, Nullable<int> tipoMensaje, Nullable<int> folio)
@@ -2889,15 +2970,31 @@ namespace Monitoreo_360.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClienteContactos", idParameter, idClienteParameter, nombreParameter, direccionParameter, telefonoParameter, prioridadParameter, fechaCreacionParameter, usuarioCreacionParameter, activoParameter);
         }
     
-        public virtual int UpdateClientes(Nullable<System.Guid> idCliente, string numeroDeCuenta, string nombres, string apellidoPaterno, string apellidoMaterno, string telefono, string telefonoTrabajo, string telefonoCelular, string email, Nullable<System.Guid> tipoAfilacion, string fechaNacimiento, string lugarNacimiento, string sexo, string estadoCivil, string profesion, string cURP, string rFC, string numCtaPago, string claveBancaria, string banco, string beneficiario)
+        public virtual int UpdateClientes(Nullable<System.Guid> idCliente, Nullable<System.Guid> idProveedor, string numeroDeCuenta, string numeroTelefonoAlarma, string palabraClave, string palabraClaveSilenciosa, string nombres, string apellidoPaterno, string apellidoMaterno, string calle, string noInterior, string noExterior, string colonia, string codigoPostal, string referencias, string colorEstablecimiento, string entreCalles, string googleMaps, string descripcion, string telefono, string telefonoTrabajo, string telefonoCelular, string email, string foto, string estado, string pais, string ciudad, Nullable<System.Guid> tipoAfilacion, string numeroPatrocinador, string fechaNacimiento, string lugarNacimiento, string sexo, string estadoCivil, string profesion, string cURP, string rFC, string numCtaPago, string claveBancaria, string banco, string numeroCLABE, string beneficiario, Nullable<System.DateTime> fechaCreacion, Nullable<System.Guid> usuarioCreacion, Nullable<bool> activo, Nullable<System.Guid> usuario)
         {
             var idClienteParameter = idCliente.HasValue ?
                 new ObjectParameter("IdCliente", idCliente) :
                 new ObjectParameter("IdCliente", typeof(System.Guid));
     
+            var idProveedorParameter = idProveedor.HasValue ?
+                new ObjectParameter("IdProveedor", idProveedor) :
+                new ObjectParameter("IdProveedor", typeof(System.Guid));
+    
             var numeroDeCuentaParameter = numeroDeCuenta != null ?
                 new ObjectParameter("NumeroDeCuenta", numeroDeCuenta) :
                 new ObjectParameter("NumeroDeCuenta", typeof(string));
+    
+            var numeroTelefonoAlarmaParameter = numeroTelefonoAlarma != null ?
+                new ObjectParameter("NumeroTelefonoAlarma", numeroTelefonoAlarma) :
+                new ObjectParameter("NumeroTelefonoAlarma", typeof(string));
+    
+            var palabraClaveParameter = palabraClave != null ?
+                new ObjectParameter("PalabraClave", palabraClave) :
+                new ObjectParameter("PalabraClave", typeof(string));
+    
+            var palabraClaveSilenciosaParameter = palabraClaveSilenciosa != null ?
+                new ObjectParameter("PalabraClaveSilenciosa", palabraClaveSilenciosa) :
+                new ObjectParameter("PalabraClaveSilenciosa", typeof(string));
     
             var nombresParameter = nombres != null ?
                 new ObjectParameter("Nombres", nombres) :
@@ -2910,6 +3007,46 @@ namespace Monitoreo_360.Models
             var apellidoMaternoParameter = apellidoMaterno != null ?
                 new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
                 new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var calleParameter = calle != null ?
+                new ObjectParameter("Calle", calle) :
+                new ObjectParameter("Calle", typeof(string));
+    
+            var noInteriorParameter = noInterior != null ?
+                new ObjectParameter("NoInterior", noInterior) :
+                new ObjectParameter("NoInterior", typeof(string));
+    
+            var noExteriorParameter = noExterior != null ?
+                new ObjectParameter("NoExterior", noExterior) :
+                new ObjectParameter("NoExterior", typeof(string));
+    
+            var coloniaParameter = colonia != null ?
+                new ObjectParameter("Colonia", colonia) :
+                new ObjectParameter("Colonia", typeof(string));
+    
+            var codigoPostalParameter = codigoPostal != null ?
+                new ObjectParameter("CodigoPostal", codigoPostal) :
+                new ObjectParameter("CodigoPostal", typeof(string));
+    
+            var referenciasParameter = referencias != null ?
+                new ObjectParameter("Referencias", referencias) :
+                new ObjectParameter("Referencias", typeof(string));
+    
+            var colorEstablecimientoParameter = colorEstablecimiento != null ?
+                new ObjectParameter("ColorEstablecimiento", colorEstablecimiento) :
+                new ObjectParameter("ColorEstablecimiento", typeof(string));
+    
+            var entreCallesParameter = entreCalles != null ?
+                new ObjectParameter("entreCalles", entreCalles) :
+                new ObjectParameter("entreCalles", typeof(string));
+    
+            var googleMapsParameter = googleMaps != null ?
+                new ObjectParameter("GoogleMaps", googleMaps) :
+                new ObjectParameter("GoogleMaps", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
     
             var telefonoParameter = telefono != null ?
                 new ObjectParameter("Telefono", telefono) :
@@ -2927,9 +3064,29 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("Email", email) :
                 new ObjectParameter("Email", typeof(string));
     
+            var fotoParameter = foto != null ?
+                new ObjectParameter("Foto", foto) :
+                new ObjectParameter("Foto", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var paisParameter = pais != null ?
+                new ObjectParameter("Pais", pais) :
+                new ObjectParameter("Pais", typeof(string));
+    
+            var ciudadParameter = ciudad != null ?
+                new ObjectParameter("Ciudad", ciudad) :
+                new ObjectParameter("Ciudad", typeof(string));
+    
             var tipoAfilacionParameter = tipoAfilacion.HasValue ?
                 new ObjectParameter("TipoAfilacion", tipoAfilacion) :
                 new ObjectParameter("TipoAfilacion", typeof(System.Guid));
+    
+            var numeroPatrocinadorParameter = numeroPatrocinador != null ?
+                new ObjectParameter("NumeroPatrocinador", numeroPatrocinador) :
+                new ObjectParameter("NumeroPatrocinador", typeof(string));
     
             var fechaNacimientoParameter = fechaNacimiento != null ?
                 new ObjectParameter("FechaNacimiento", fechaNacimiento) :
@@ -2971,11 +3128,31 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("Banco", banco) :
                 new ObjectParameter("Banco", typeof(string));
     
+            var numeroCLABEParameter = numeroCLABE != null ?
+                new ObjectParameter("NumeroCLABE", numeroCLABE) :
+                new ObjectParameter("NumeroCLABE", typeof(string));
+    
             var beneficiarioParameter = beneficiario != null ?
                 new ObjectParameter("Beneficiario", beneficiario) :
                 new ObjectParameter("Beneficiario", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClientes", idClienteParameter, numeroDeCuentaParameter, nombresParameter, apellidoPaternoParameter, apellidoMaternoParameter, telefonoParameter, telefonoTrabajoParameter, telefonoCelularParameter, emailParameter, tipoAfilacionParameter, fechaNacimientoParameter, lugarNacimientoParameter, sexoParameter, estadoCivilParameter, profesionParameter, cURPParameter, rFCParameter, numCtaPagoParameter, claveBancariaParameter, bancoParameter, beneficiarioParameter);
+            var fechaCreacionParameter = fechaCreacion.HasValue ?
+                new ObjectParameter("FechaCreacion", fechaCreacion) :
+                new ObjectParameter("FechaCreacion", typeof(System.DateTime));
+    
+            var usuarioCreacionParameter = usuarioCreacion.HasValue ?
+                new ObjectParameter("UsuarioCreacion", usuarioCreacion) :
+                new ObjectParameter("UsuarioCreacion", typeof(System.Guid));
+    
+            var activoParameter = activo.HasValue ?
+                new ObjectParameter("Activo", activo) :
+                new ObjectParameter("Activo", typeof(bool));
+    
+            var usuarioParameter = usuario.HasValue ?
+                new ObjectParameter("Usuario", usuario) :
+                new ObjectParameter("Usuario", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClientes", idClienteParameter, idProveedorParameter, numeroDeCuentaParameter, numeroTelefonoAlarmaParameter, palabraClaveParameter, palabraClaveSilenciosaParameter, nombresParameter, apellidoPaternoParameter, apellidoMaternoParameter, calleParameter, noInteriorParameter, noExteriorParameter, coloniaParameter, codigoPostalParameter, referenciasParameter, colorEstablecimientoParameter, entreCallesParameter, googleMapsParameter, descripcionParameter, telefonoParameter, telefonoTrabajoParameter, telefonoCelularParameter, emailParameter, fotoParameter, estadoParameter, paisParameter, ciudadParameter, tipoAfilacionParameter, numeroPatrocinadorParameter, fechaNacimientoParameter, lugarNacimientoParameter, sexoParameter, estadoCivilParameter, profesionParameter, cURPParameter, rFCParameter, numCtaPagoParameter, claveBancariaParameter, bancoParameter, numeroCLABEParameter, beneficiarioParameter, fechaCreacionParameter, usuarioCreacionParameter, activoParameter, usuarioParameter);
         }
     
         public virtual int UpdateClientesUsuario(Nullable<System.Guid> idCliente, Nullable<System.Guid> usuario)
@@ -2989,6 +3166,59 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("Usuario", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClientesUsuario", idClienteParameter, usuarioParameter);
+        }
+    
+        public virtual int UpdateDireccion(Nullable<System.Guid> idCliente, string colononia, string calle, string noInterior, string noExterior, string codigoPostal, string referencias, string colorEstablecimiento, string entreCalles, string googleMaps, string estado, string ciudad)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(System.Guid));
+    
+            var colononiaParameter = colononia != null ?
+                new ObjectParameter("Colononia", colononia) :
+                new ObjectParameter("Colononia", typeof(string));
+    
+            var calleParameter = calle != null ?
+                new ObjectParameter("Calle", calle) :
+                new ObjectParameter("Calle", typeof(string));
+    
+            var noInteriorParameter = noInterior != null ?
+                new ObjectParameter("NoInterior", noInterior) :
+                new ObjectParameter("NoInterior", typeof(string));
+    
+            var noExteriorParameter = noExterior != null ?
+                new ObjectParameter("NoExterior", noExterior) :
+                new ObjectParameter("NoExterior", typeof(string));
+    
+            var codigoPostalParameter = codigoPostal != null ?
+                new ObjectParameter("CodigoPostal", codigoPostal) :
+                new ObjectParameter("CodigoPostal", typeof(string));
+    
+            var referenciasParameter = referencias != null ?
+                new ObjectParameter("Referencias", referencias) :
+                new ObjectParameter("Referencias", typeof(string));
+    
+            var colorEstablecimientoParameter = colorEstablecimiento != null ?
+                new ObjectParameter("ColorEstablecimiento", colorEstablecimiento) :
+                new ObjectParameter("ColorEstablecimiento", typeof(string));
+    
+            var entreCallesParameter = entreCalles != null ?
+                new ObjectParameter("EntreCalles", entreCalles) :
+                new ObjectParameter("EntreCalles", typeof(string));
+    
+            var googleMapsParameter = googleMaps != null ?
+                new ObjectParameter("GoogleMaps", googleMaps) :
+                new ObjectParameter("GoogleMaps", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var ciudadParameter = ciudad != null ?
+                new ObjectParameter("Ciudad", ciudad) :
+                new ObjectParameter("Ciudad", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateDireccion", idClienteParameter, colononiaParameter, calleParameter, noInteriorParameter, noExteriorParameter, codigoPostalParameter, referenciasParameter, colorEstablecimientoParameter, entreCallesParameter, googleMapsParameter, estadoParameter, ciudadParameter);
         }
     
         public virtual int UpdateEmpleado(Nullable<System.Guid> id, Nullable<int> noEmpleado, Nullable<System.Guid> idProveedor, string nombre, string apellidoMaterno, string apellidoPaterno, Nullable<System.Guid> idUsuario, string correo, Nullable<System.DateTime> fechaNacimiento, Nullable<System.DateTime> fechaInicioRelLaboral, string rFC, string cURP, byte[] huellaDactilar, string foto, string iNE, string numeroSeguridadSocial, string departamento, string direccion, string puesto, string riesgoPuesto, string tipoContrato, string tipoJornada, string tipoRegimen, Nullable<double> salarioDiario, Nullable<double> diasPagados, string periocidadPago, string lugarExpedicion, string tipoNomina, string banco, string claveEntFed, string gradoEstudios, string telefono, string telefonoEmergencia, byte[] firma, string tipoSangre, string cUIP, string numeroDeLicencia, string numeroDeAutorizacion, Nullable<bool> activo)
@@ -3727,68 +3957,6 @@ namespace Monitoreo_360.Models
                 new ObjectParameter("PrimeraVez", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateUsuarios", idParameter, usuarioParameter, contrasenaParameter, tipoUsuarioParameter, rolesParameter, activoParameter, timbresParameter, timbresUsadosParameter, timbresCanceladosParameter, primeraVezParameter);
-        }
-    
-        public virtual int UpdateDireccion(Nullable<System.Guid> idCliente, string colononia, string calle, string noInterior, string noExterior, string codigoPostal, string referencias, string colorEstablecimiento, string entreCalles, string googleMaps, string estado, string ciudad)
-        {
-            var idClienteParameter = idCliente.HasValue ?
-                new ObjectParameter("IdCliente", idCliente) :
-                new ObjectParameter("IdCliente", typeof(System.Guid));
-    
-            var colononiaParameter = colononia != null ?
-                new ObjectParameter("Colononia", colononia) :
-                new ObjectParameter("Colononia", typeof(string));
-    
-            var calleParameter = calle != null ?
-                new ObjectParameter("Calle", calle) :
-                new ObjectParameter("Calle", typeof(string));
-    
-            var noInteriorParameter = noInterior != null ?
-                new ObjectParameter("NoInterior", noInterior) :
-                new ObjectParameter("NoInterior", typeof(string));
-    
-            var noExteriorParameter = noExterior != null ?
-                new ObjectParameter("NoExterior", noExterior) :
-                new ObjectParameter("NoExterior", typeof(string));
-    
-            var codigoPostalParameter = codigoPostal != null ?
-                new ObjectParameter("CodigoPostal", codigoPostal) :
-                new ObjectParameter("CodigoPostal", typeof(string));
-    
-            var referenciasParameter = referencias != null ?
-                new ObjectParameter("Referencias", referencias) :
-                new ObjectParameter("Referencias", typeof(string));
-    
-            var colorEstablecimientoParameter = colorEstablecimiento != null ?
-                new ObjectParameter("ColorEstablecimiento", colorEstablecimiento) :
-                new ObjectParameter("ColorEstablecimiento", typeof(string));
-    
-            var entreCallesParameter = entreCalles != null ?
-                new ObjectParameter("EntreCalles", entreCalles) :
-                new ObjectParameter("EntreCalles", typeof(string));
-    
-            var googleMapsParameter = googleMaps != null ?
-                new ObjectParameter("GoogleMaps", googleMaps) :
-                new ObjectParameter("GoogleMaps", typeof(string));
-    
-            var estadoParameter = estado != null ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(string));
-    
-            var ciudadParameter = ciudad != null ?
-                new ObjectParameter("Ciudad", ciudad) :
-                new ObjectParameter("Ciudad", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateDireccion", idClienteParameter, colononiaParameter, calleParameter, noInteriorParameter, noExteriorParameter, codigoPostalParameter, referenciasParameter, colorEstablecimientoParameter, entreCallesParameter, googleMapsParameter, estadoParameter, ciudadParameter);
-        }
-    
-        public virtual int DeleteFotoCliente(string rutaFoto)
-        {
-            var rutaFotoParameter = rutaFoto != null ?
-                new ObjectParameter("RutaFoto", rutaFoto) :
-                new ObjectParameter("RutaFoto", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteFotoCliente", rutaFotoParameter);
         }
     }
 }
