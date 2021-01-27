@@ -24,7 +24,6 @@ namespace Monitoreo_360
         public Direccion(Guid IdCliente, Guid IdUsuario)
         {
             InitializeComponent();
-
             List<Estados> estados = db.Estados.Where(x=>x.c_Pais== "MEX").ToList();
             List<Municipios> mun = db.Municipios.ToList();
             this.IdUsuario = IdUsuario;
@@ -37,7 +36,6 @@ namespace Monitoreo_360
             this.Textbox_Referencias.Text = cliente.Referencias;
             this.Textbox_Color.Text = cliente.ColorEstablecimiento;
             this.Textbox_EntreCalles.Text = cliente.EntreCalles;
-           
             Data();
             if (!String.IsNullOrEmpty(cliente.GoogleMaps))
             {
